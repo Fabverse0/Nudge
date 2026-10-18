@@ -1,0 +1,31 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|apply_patch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -NonInteractive -Command \"$projectRoot = git rev-parse --show-toplevel; if ($LASTEXITCODE -ne 0) { exit 1 }; & (Join-Path $projectRoot '.codex/impeccable.cmd') hook; exit $LASTEXITCODE\"",
+            "commandWindows": "powershell -NoProfile -NonInteractive -Command \"$projectRoot = git rev-parse --show-toplevel; if ($LASTEXITCODE -ne 0) { exit 1 }; & (Join-Path $projectRoot '.codex/impeccable.cmd') hook; exit $LASTEXITCODE\"",
+            "timeout": 5,
+            "statusMessage": "Checking UI changes"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -NonInteractive -Command \"$projectRoot = git rev-parse --show-toplevel; if ($LASTEXITCODE -ne 0) { exit 1 }; & (Join-Path $projectRoot '.codex/impeccable.cmd') hook; exit $LASTEXITCODE\"",
+            "commandWindows": "powershell -NoProfile -NonInteractive -Command \"$projectRoot = git rev-parse --show-toplevel; if ($LASTEXITCODE -ne 0) { exit 1 }; & (Join-Path $projectRoot '.codex/impeccable.cmd') hook; exit $LASTEXITCODE\"",
+            "timeout": 30,
+            "statusMessage": "Design deep pass"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+/bin/
+/config.local.json
+/hook.cache.json
+/hook.ndjson
+/cache/
