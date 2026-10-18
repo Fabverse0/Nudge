@@ -7,6 +7,7 @@ Tanggal: 18 Oktober 2026.
 - Sesi, mood, dan feedback hanya di memori. Reload memulai sesi baru. Kembali ke pemilihan dalam aplikasi mempertahankan konteks dan feedback sesi.
 - Filter tujuan dan waktu wajib. Mood cocok bernilai 2, aktivitas yang disukai sesi bernilai 1; urutan katalog menjadi pemecah nilai sama. Penolakan dikecualikan sampai pengguna mengubah konteks atau memulai sesi baru. Feedback positif tetap di memori selama sesi.
 - Pengingat memakai jam lokal perangkat. Pemeriksaan setiap 15 detik dan ketika kembali terlihat. Jadwal yang terlewat tidak dikirim susulan. Catat kejadian terakhir secara lokal agar reload/tab lain tidak mengirim ulang kejadian yang sama.
+- Pemeriksaan jadwal menunggu keputusan izin notifikasi yang masih berstatus `default`. Ketika keputusan berubah, periksa waktu saat itu lagi; jangan menandai pengingat terkirim selama dialog izin masih menunggu, atau mengirim susulan bila waktunya sudah lewat.
 - Service worker tidak menyimpan mood, favorit, respons HTML, atau respons navigasi. Cache hanya aset statis lokal yang diberi versi, dengan halaman offline penjelas. Pembaruan worker menunggu aktivasi berikutnya, tanpa memuat ulang aktivitas secara otomatis.
 - Pengujian otomatis awal: Chromium desktop dan viewport seluler. Pemasangan PWA dari ikon dan perilaku OS pada perangkat fisik tetap memerlukan pemeriksaan manual.
 - Tidak ada deployment atau push tanpa instruksi pengguna.
