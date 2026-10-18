@@ -6,11 +6,11 @@ Read [prd.md](./prd.md) before implementing features, changing behavior, or plan
 
 Before starting or tracking implementation, read [implementation.md](./implementation.md) for task dependencies, acceptance evidence, and current status.
 
-Application code and Nudge assets are not created yet. The selected stack is Next.js App Router, TypeScript, Tailwind CSS, manifest/service worker, localStorage, Vitest, and Playwright. Planned directories: `app/` routes, `components/` UI, `lib/` logic, `public/` assets, and `tests/` browser tests.
+The selected stack is Next.js App Router, TypeScript, Tailwind CSS, manifest/service worker, localStorage, Vitest, and Playwright. Keep routes in `src/app/`, UI in `src/components/`, domain logic in `src/lib/`, static assets in `public/`, and browser tests in `tests/e2e/`. Colocate unit tests. The `@/*` alias resolves into `src/`; do not add a second root `app/` directory.
 
 ## Build, Test, and Development
 
-No package manager, lockfile, or package scripts exist yet. Scaffold only when authorized, then document actual development, build, lint, unit-test, and browser-test commands. Read `package.json` before running scripts; avoid presenting example commands as configured commands.
+Use npm and commit `package-lock.json`. Read `package.json` before running scripts. Implementation is authorized for the full MVP. Document configured commands and actual verification as each stage is completed.
 
 ## Coding Style & Naming
 
@@ -18,7 +18,7 @@ Use two-space indentation, PascalCase components, camelCase functions/variables,
 
 ## Testing Guidelines
 
-Use Vitest (`*.test.ts`, `*.test.tsx`) and Playwright (`tests/*.spec.ts`), selected but not installed. Follow PRD section 12; no coverage percentage is set. Check actual PWA installation and icon launch manually on target devices.
+Use Vitest (`*.test.ts`, `*.test.tsx`) and Playwright (`tests/e2e/*.spec.ts`). Follow PRD section 12; no coverage percentage is set. Check actual PWA installation and icon launch manually on target devices.
 
 ## Commits and Pull Requests
 
