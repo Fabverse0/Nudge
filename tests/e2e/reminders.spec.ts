@@ -1,25 +1,72 @@
 import { expect, test } from "@playwright/test";
 
-test("a due reminder is sent once and missed times are skipped", async ({ page }) => {
-  await page.clock.install({ time: new Date(2026, 9, 19, 15, 59, 50) });
+test("unsupported notifications keep reminder settings and activities usable", async ({
+  page,
+}) => {
   await page.addInitScript(() => {
-    Object.defineProperty(window, "sentReminders", { value: 0, writable: true });
-    class MockNotification {
-      static permission = "granted";
-      constructor() { (window as unknown as { sentReminders: number }).sentReminders++; }
-    }
-    Object.defineProperty(window, "Notification", { value: MockNotification });
-    localStorage.setItem("nudge.reminder.v1", JSON.stringify({ enabled: true, days: [1], time: "16:00" }));
+    Reflect.deleteProperty(window, "Notification");
   });
   await page.goto("/app");
   await page.getByRole("button", { name: "Pengingat", exact: true }).click();
-  await expect(page.getByRole("checkbox", { name: "Aktifkan pengingat", exact: false })).toBeChecked();
+  await expect(
+    page.getByText("Browser ini belum mendukung notifikasi.", { exact: false }),
+  ).toBeVisible();
+  await page
+    .getByRole("checkbox", { name: "Aktifkan pengingat", exact: false })
+    .check();
+  await page.getByRole("button", { name: "Simpan pengingat" }).click();
+  await page.getByRole("button", { name: "Kegiatan", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Cari kegiatan kecil" }),
+  ).toBeVisible();
+});
+
+test("a due reminder is sent once and missed times are skipped", async ({
+  page,
+}) => {
+  await page.clock.install({ time: new Date(2026, 9, 19, 15, 59, 50) });
+  await page.addInitScript(() => {
+    Object.defineProperty(window, "sentReminders", {
+      value: 0,
+      writable: true,
+    });
+    class MockNotification {
+      static permission = "granted";
+      constructor() {
+        (window as unknown as { sentReminders: number }).sentReminders++;
+      }
+    }
+    Object.defineProperty(window, "Notification", { value: MockNotification });
+    localStorage.setItem(
+      "nudge.reminder.v1",
+      JSON.stringify({ enabled: true, days: [1], time: "16:00" }),
+    );
+  });
+  await page.goto("/app");
+  await page.getByRole("button", { name: "Pengingat", exact: true }).click();
+  await expect(
+    page.getByRole("checkbox", { name: "Aktifkan pengingat", exact: false }),
+  ).toBeChecked();
   await page.clock.fastForward(20_000);
-  await expect.poll(() => page.evaluate(() => (window as unknown as { sentReminders: number }).sentReminders)).toBe(1);
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () => (window as unknown as { sentReminders: number }).sentReminders,
+      ),
+    )
+    .toBe(1);
   await page.clock.fastForward(30_000);
-  expect(await page.evaluate(() => (window as unknown as { sentReminders: number }).sentReminders)).toBe(1);
+  expect(
+    await page.evaluate(
+      () => (window as unknown as { sentReminders: number }).sentReminders,
+    ),
+  ).toBe(1);
   await page.clock.fastForward(90_000);
-  expect(await page.evaluate(() => (window as unknown as { sentReminders: number }).sentReminders)).toBe(1);
+  expect(
+    await page.evaluate(
+      () => (window as unknown as { sentReminders: number }).sentReminders,
+    ),
+  ).toBe(1);
 });
 
 test("permission is requested after explicit opt-in, denial remains usable", async ({

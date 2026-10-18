@@ -199,16 +199,22 @@ test("manifest launches selection without starting timer", async ({
   await expect(page.getByRole("timer")).toHaveCount(0);
 });
 
-test("changing mood updates the next selection and changing activity stops the previous timer", async ({ page }) => {
+test("changing mood updates the next selection and changing activity stops the previous timer", async ({
+  page,
+}) => {
   await page.goto("/app");
   await choose(page);
   await page.getByRole("button", { name: "Mulai kegiatan" }).click();
-  await page.getByRole("button", { name: "Ganti kegiatan", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Ganti kegiatan", exact: true })
+    .click();
   await expect(page.getByRole("timer")).toHaveCount(0);
   await page.getByRole("button", { name: "Mulai kegiatan" }).click();
   await page.getByRole("button", { name: "Selesai", exact: true }).click();
   await page.getByRole("button", { name: "Bosan", exact: true }).click();
-  await expect(page.getByRole("radio", { name: "Bosan", exact: true })).toBeChecked();
+  await expect(
+    page.getByRole("radio", { name: "Bosan", exact: true }),
+  ).toBeChecked();
 });
 
 test("layout has no horizontal overflow at 320, 768 and 1440", async ({
@@ -224,4 +230,83 @@ test("layout has no horizontal overflow at 320, 768 and 1440", async ({
       expect(overflow, `${path} at ${width}`).toBe(false);
     }
   }
+});
+
+test("keyboard choices work and every remaining screen has accessible controls", async ({
+  page,
+}, testInfo) => {
+  await page.goto("/app");
+  await page.screenshot({
+    path: `.impeccable/review/app-${testInfo.project.name}.png`,
+    fullPage: true,
+  });
+  await page
+    .getByRole("radio", { name: "Lelah", exact: true })
+    .press("ArrowRight");
+  await expect(
+    page.getByRole("radio", { name: "Bosan", exact: true }),
+  ).toBeChecked();
+  await page
+    .getByRole("group", { name: "Ingin melakukan apa?" })
+    .getByRole("radio", { name: "Bergerak", exact: false })
+    .press("Space");
+  await page.getByRole("radio", { name: "2 menit" }).press("Space");
+  await page
+    .getByRole("button", { name: "Cari kegiatan kecil" })
+    .press("Enter");
+  await page.getByRole("button", { name: "Mulai kegiatan" }).press("Enter");
+  await page.screenshot({
+    path: `.impeccable/review/timer-${testInfo.project.name}.png`,
+    fullPage: true,
+  });
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  await page
+    .getByRole("button", { name: "Selesai", exact: true })
+    .press("Enter");
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  await page
+    .getByRole("button", { name: "Lewati", exact: true })
+    .press("Enter");
+  await page
+    .getByRole("button", { name: "Favorit", exact: true })
+    .press("Enter");
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  await page
+    .getByRole("button", { name: "Pengingat", exact: true })
+    .press("Enter");
+  expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+});
+
+test("large text and reduced motion keep controls inside a narrow viewport", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/app");
+  await page.getByRole("button", { name: "Favorit", exact: true }).click();
+  await expect(
+    page.getByRole("heading", { name: "Belum ada favorit." }),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Kegiatan", exact: true }).click();
+  await page.evaluate(() => {
+    document.documentElement.style.fontSize = "200%";
+  });
+  const overflowing = () =>
+    page.evaluate(() =>
+      [...document.querySelectorAll("main *, nav *")]
+        .filter(
+          (el) => el.getBoundingClientRect().right > window.innerWidth + 1,
+        )
+        .map((el) => ({
+          tag: el.tagName,
+          class: el.className,
+          text: el.textContent?.slice(0, 45),
+        })),
+    );
+  expect(await overflowing()).toEqual([]);
+  await choose(page);
+  await page.getByRole("button", { name: "Mulai kegiatan" }).click();
+  expect(await overflowing()).toEqual([]);
+  await page.getByRole("button", { name: "Selesai", exact: true }).click();
+  expect(await overflowing()).toEqual([]);
 });
