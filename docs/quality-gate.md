@@ -5,7 +5,7 @@
 ## Hard Gate Anti Slop
 
 - R-02 PASS: pencarian pada source dan tulisan baru tidak menemukan em dash.
-- R-03 PASS: Playwright memeriksa overflow 320/768/1440; teks 200% pada pemilihan, timer dan penyelesaian juga diperiksa.
+- R-03 PASS pada cakupan otomatis: Playwright memeriksa overflow 320/768/1440; teks 200% pada seluruh layar utama, judul favorit, dan batas teks navigasi juga diperiksa. Zoom browser nyata masih memerlukan pemeriksaan manual.
 - R-17 PASS: tidak ada statistik pengguna atau manfaat yang diciptakan.
 - R-18 PASS: tidak ada testimoni atau profil fiktif.
 - R-23 PASS untuk tahap kode: ikon sementara didokumentasikan, aset final ditunda pengguna; kandidat gambar tidak diadopsi sebagai logo.
@@ -17,7 +17,7 @@
 - R-32 PASS pada alur yang diperiksa: skip link, radio via keyboard, Enter, fokus dan Axe diperiksa.
 - R-33 PASS: perubahan source ditulis langsung dengan patch; formatter hanya merapikan format.
 - R-34 PASS: MVP hanya tema terang sesuai keputusan produk; tidak ada toggle tema yang belum berfungsi.
-- R-35 PASS untuk tahap kode: aplikasi dijalankan, build berhasil, 38 alur browser dan delapan skenario produksi lulus. Instalasi perangkat fisik masih menunggu.
+- R-35 PASS untuk tahap kode: aplikasi dijalankan, build berhasil, 44 alur browser dan delapan skenario produksi lulus. Instalasi perangkat fisik masih menunggu.
 - R-36 PASS: tidak ada klaim medis, angka manfaat, keamanan bersertifikat atau performa yang dibuat-buat.
 - R-37 PASS: arah visual berasal dari DESIGN.md pengguna; dials tercatat pada keputusan implementasi.
 - R-38 PASS: contoh kegiatan berasal dari katalog nyata dan ditandai contoh pada landing.

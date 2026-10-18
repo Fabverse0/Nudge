@@ -71,7 +71,7 @@ Keputusan yang sudah diterapkan dijelaskan di docs/implementation-decisions.md d
 | P4 | Alur aplikasi utama | P2 komponen, P3 | Alur teruji; pendamping kura-kura masih ikon sementara |
 | P5 | Landing page | P1, P2, P4 | Fungsional; ilustrasi/logo final menunggu |
 | P6 | Favorit dan pengingat opt-in | P3/P4/P7 | Otomatis diuji; notifikasi OS nyata belum diperiksa |
-| P7 | PWA dan integrasi browser/perangkat | P1, P2, P4/P5 | Enam skenario produksi lulus; instalasi nyata menunggu |
+| P7 | PWA dan integrasi browser/perangkat | P1, P2, P4/P5 | Delapan skenario produksi lulus; instalasi nyata menunggu |
 | P8 | Pemeriksaan rilis dan pemolesan | P4 sampai P7 | Dikerjakan; lihat docs/verification.md |
 
 Eksplorasi aset P2 dapat berlangsung sebelum atau bersama fondasi kode. Logika murni P3 tidak harus menunggu logo final. P7 dapat mulai sebelum P6 selesai, lalu keduanya digabungkan untuk memeriksa notifikasi yang membutuhkan service worker. Tabel dependensi tidak memerintahkan penggunaan subagent otomatis.
@@ -189,8 +189,8 @@ Aset sementara boleh membantu pengembangan jika diberi label jujur. Placeholder 
 
 **Kebutuhan terkait:** seluruh FR dan kebutuhan nonfungsional PRD.
 
-- [x] **P8-01:** typecheck, lint, format, build, 17 Vitest, 38 alur browser dan delapan skenario produksi lulus; lihat docs/verification.md untuk batas setiap pemeriksaan.
-- [ ] **P8-02:** periksa keyboard, fokus, label, status, kontras, zoom, teks panjang, lebar sempit, dan reduced motion pada semua layar utama.
+- [x] **P8-01:** typecheck, lint, format, build, 17 Vitest, 44 alur browser dan delapan skenario produksi lulus; lihat docs/verification.md untuk batas setiap pemeriksaan.
+- [ ] **P8-02:** Axe/keyboard, screenshot, teks 200%, seluruh judul katalog, lebar sempit dan reduced motion lulus pemeriksaan otomatis pada layar utama. Zoom browser dan pembaca layar nyata belum diperiksa; bukti otomatis tidak menggantikan penerimaan manual.
 - [x] **P8-03:** konteks menyatakan hook otomatis tidak aktif, sehingga detector dijalankan manual dan hasil/keterbatasannya dicatat; bukan klaim hook otomatis teruji.
 - [ ] **P8-04:** uji alur penggunaan dengan tugas PRD tanpa analitik pribadi. Catat kebingungan, kebutuhan bantuan, dan ketidakcocokan katalog; perbaiki masalah yang menghalangi penggunaan.
 - [ ] **P8-05:** lengkapi bukti, daftar keterbatasan, inventaris aset/lisensi, dan dokumentasi menjalankan proyek. Siapkan hasil review untuk pengguna; deployment/publikasi mengikuti izin yang diberikan.
@@ -320,14 +320,14 @@ Jika muncul kebutuhan baru, catat masalah yang hendak diselesaikan, dampak terha
 ## 13. Ringkasan kesiapan peninjauan rilis
 
 - [ ] Seluruh FR memiliki keluaran implementasi dan bukti penerimaan.
-- [ ] Build serta pemeriksaan yang dikonfigurasi lulus, atau ada keterbatasan yang dinyatakan jelas dan diputuskan sebelum rilis.
-- [ ] Pengguna dapat menyelesaikan satu alur dan memulai lagi tanpa akun.
-- [ ] Mood opsional, penyelesaian manual, dan batas sesi sesuai PRD.
+- [x] Build serta pemeriksaan yang dikonfigurasi lulus, atau ada keterbatasan yang dinyatakan jelas dan diputuskan sebelum rilis.
+- [x] Pengguna dapat menyelesaikan satu alur dan memulai lagi tanpa akun.
+- [x] Mood opsional, penyelesaian manual, dan batas sesi sesuai PRD.
 - [ ] Maskot hadir, aset final tersedia, dan state UI memenuhi DESIGN.md.
-- [ ] Favorit/pengingat menangani kegagalan tanpa memblokir penggunaan manual.
+- [x] Favorit/pengingat menangani kegagalan tanpa memblokir penggunaan manual.
 - [ ] PWA dan notifikasi diperiksa pada lingkungan sasaran; batas dukungan disampaikan.
 - [ ] Catatan uji alur, masalah tersisa, dan lisensi/sumber aset tersedia.
-- [ ] Dokumentasi perintah sesuai konfigurasi aktual; tidak ada rahasia atau data jurnal pada laporan/log.
-- [ ] Tindakan publikasi dan Git dilakukan hanya dalam izin pengguna.
+- [x] Dokumentasi perintah sesuai konfigurasi aktual; tidak ada rahasia atau data jurnal pada laporan/log.
+- [x] Tindakan publikasi dan Git dilakukan hanya dalam izin pengguna.
 
-**Langkah berikutnya setelah rencana ini:** P0 untuk memulai tahap yang diizinkan, kemudian fondasi P1 dan eksplorasi aset P2 sesuai dependensinya. Tidak ada pekerjaan implementasi yang ditandai selesai hanya karena rencananya sudah ditulis.
+**Langkah berikutnya:** pemeriksaan Android Chrome fisik pada P6/P7 dan observasi pengguna pada P8. P2/P5 melanjutkan aset final ketika pengguna membuka kembali tahap tersebut. Seluruh rencana belum selesai selama bukti manual dan aset yang diwajibkan belum tersedia; lihat docs/manual-checks.md dan docs/verification.md.

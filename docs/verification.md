@@ -11,7 +11,7 @@ Windows, Node.js 22.19.0, npm 11.19.0. Next.js 16.4.2, React 19.3.1, TypeScript 
 - Build produksi akhir berhasil untuk `/`, `/app`, manifest, dan ikon.
 - Vitest: 17 test lulus pada 6 berkas. Meliputi seluruh tujuan/waktu, mood, feedback sesi, penolakan/alternatif, timer, data lokal, jadwal, serta adapter notifikasi service worker dan pembatalannya.
 - Typecheck, lint dan format:check berhasil setelah perbaikan.
-- Playwright utama: 38 skenario lulus pada desktop dan viewport Pixel 7. Memuat timer habis tanpa selesai otomatis, mood dipilih/dilewati/diubah, penolakan/kehabisan saran, favorit, journaling, izin ditolak/unsupported, pengingat jatuh tempo, pembatalan jadwal, keyboard, Axe dan teks 200%.
+- Playwright utama: 44 skenario lulus pada desktop dan viewport Pixel 7. Memuat timer habis tanpa selesai otomatis, mood dipilih/dilewati/diubah, penolakan/kehabisan saran, favorit, journaling, izin ditolak/unsupported/tertunda, pengingat jatuh tempo, pembatalan jadwal, keyboard, Axe dan teks 200% pada seluruh layar utama serta judul katalog.
 - Playwright produksi: delapan skenario lulus, mencakup alur lengkap tanpa error browser/hydration, registrasi worker, ikon PNG 192/512, cache tanpa navigasi/data pribadi, fallback offline lalu pemulihan koneksi, serta penerimaan notifikasi oleh API asli Chrome.
 - Pemeriksaan tambahan keyboard dan Axe pada timer, penyelesaian, favorit, dan pengingat sudah lulus di desktop/seluler. Pembesaran teks 200% menemukan overflow pilihan waktu pada 320 px, sudah diperbaiki dan lulus pada keduanya.
 - Enam pengujian terarah terakhir untuk keyboard, teks 200% sesudah hydration, serta izin pengingat juga lulus setelah penyesuaian fokus dan penjelasan pengaturan.
@@ -47,8 +47,8 @@ Target fisik yang dipilih pengguna adalah Android dengan Chrome. Tugas dan lemba
 | Kebutuhan | Bukti otomatis | Sisa pemeriksaan |
 | --- | --- | --- |
 | FR-01 konteks | Validasi, mood/Lewati, keyboard, semua tujuan/waktu pada unit test | Observasi pemahaman pengguna |
-| FR-02 saran | Metadata, ranking mood/feedback, satu saran dan tanpa auto-mulai | Kecocokan aktivitas pada pengguna |
-| FR-03 alternatif | Penolakan, penjelasan filter berbeda, keadaan habis, kosong pada unit test | Kecukupan variasi katalog |
+| FR-02 saran/alternatif | Metadata, satu saran, penolakan, penjelasan filter berbeda, keadaan habis/kosong | Kecocokan aktivitas dan variasi katalog pada pengguna |
+| FR-03 umpan balik | Ranking sesi, Cocok tanpa auto-mulai, Kurang cocok memberi alternatif, reload menghapus feedback | Observasi pemahaman pengguna |
 | FR-04 timer | Deadline, jeda/lanjut, habis, berhenti/ganti, selesai manual | Sleep/resume perangkat nyata |
 | FR-05 siklus mood | Lewati mempertahankan mood/kosong; perubahan mood dan kembali ke aplikasi | Observasi alur pengguna |
 | FR-06 favorit | Reload, tambah/hapus, data rusak/tidak tersedia, deduplikasi | Kehilangan data browser dijelaskan UI |
@@ -69,3 +69,19 @@ Audit pengingat lanjutan: formulir memvalidasi jadwal aktif melalui aturan aplik
 Test produksi tambahan menggunakan izin pada profil Chrome pengujian dan pembungkus observasi yang tetap memanggil `showNotification` asli. Assertion memeriksa judul/tag hanya setelah Promise API tersebut selesai tanpa penolakan. Pemeriksaan awal yang mengharuskan `getNotifications()` mempertahankan entri tidak stabil; probe menunjukkan API asli berhasil meskipun daftar segera kosong. Test akhir membuktikan penerimaan API, bukan tampilan atau retensi notifikasi OS. Pemeriksaan Android tetap diperlukan.
 
 Pada pemeriksaan menyeluruh awal, 37 skenario lulus dan satu skenario tiga audit Axe melewati batas gabungan 30 detik. Batas skenario tersebut diperpanjang menjadi 60 detik tanpa mengurangi assertion. Seluruh 38 skenario kemudian lulus dalam satu pemanggilan; skenario yang sebelumnya timeout selesai sekitar 11 detik pada desktop dan seluler dalam pemanggilan itu. Penyebab perubahan waktu antar-pemanggilan belum dipastikan.
+
+Pemeriksaan izin tertunda mereproduksi pengingat yang hilang ketika jadwal tiba sebelum pengguna menjawab dialog izin. Penanda kejadian tersimpan terlalu awal, sementara adapter belum boleh mengirim. Scheduler kini menunggu keputusan izin dan memeriksa waktu saat itu lagi. Dua skenario pada desktop/seluler membuktikan pengiriman saat masih pada menit jadwal serta tidak mengirim susulan setelah menit itu lewat; suite pengingat berisi 16 skenario dan telah lulus.
+
+Perluasan pemeriksaan teks 200% menemukan ikon judul favorit keluar dari layar 320 px pada Chrome desktop. Header kini dapat membungkus ke baris berikutnya. Regresi reflow mencakup pemilihan, panduan pemasangan terbuka, saran, timer, penyelesaian, favorit kosong/terisi, dan pengingat. Seluruh judul pada katalog juga diperiksa melalui daftar favorit. Bukti ini memeriksa pembesaran teks, bukan seluruh perilaku zoom browser atau pembaca layar nyata.
+
+Tinjauan screenshot menemukan label navigasi bertumpuk meskipun kotak tombol masih berada dalam viewport. Pemeriksaan batas teks dengan DOM Range mereproduksi masalah pada desktop/seluler. Navigasi kini membungkus dan basis flex tombol mengikuti isinya; screenshot ulang menunjukkan label terbaca tanpa tumpang tindih. Gambar teks besar favorit/pengingat tersimpan di `.impeccable/review/large-text-*.png`.
+
+Peringatan hydration lain muncul ketika pengujian mengambil screenshot sebelum interaksi pertama. Diff browser menunjukkan atribut `caret-color: transparent` pada input, sesuai perubahan caret yang dilakukan alat screenshot. Snapshot awal kini diambil setelah pilihan mood merespons keyboard; skenario tersebut juga menangkap `pageerror` serta console error. Ini perubahan setup pengujian, tanpa menekan peringatan pada kode aplikasi.
+
+## Pekerjaan yang memerlukan tahap berikutnya
+
+- P2-01/P2-02/P5-03: logo, ilustrasi, pose maskot, dan ikon final ditunda pengguna.
+- P6-04/P7-03/P7-04: pemasangan, peluncuran ikon, izin OS, sleep/resume, serta notifikasi pada Android Chrome fisik belum dibuktikan. Belum ada URL produksi/preview yang diizinkan dan bisa digunakan pada perangkat tersebut.
+- P8-02: pemeriksaan otomatis dan screenshot tersedia; zoom browser serta pembaca layar nyata belum diperiksa.
+- P8-04: observasi pengguna belum dilakukan. Tidak ada hasil peserta yang boleh diisi dari simulasi agen.
+- P8-05 dan kesiapan rilis bergantung pada bukti manual serta aset final tersebut. Status kode yang dapat ditinjau tidak menyatakan seluruh rencana selesai.
