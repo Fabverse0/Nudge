@@ -1,5 +1,40 @@
 import { expect, test } from "@playwright/test";
 
+test("turning reminders off works with an unfinished time field", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      "nudge.reminder.v1",
+      JSON.stringify({ enabled: true, days: [1], time: "16:00" }),
+    );
+  });
+  await page.goto("/app");
+  await page.getByRole("button", { name: "Pengingat", exact: true }).click();
+  await expect(
+    page.getByRole("checkbox", { name: "Aktifkan pengingat", exact: false }),
+  ).toBeChecked();
+  await page.getByLabel("Waktu lokal perangkat").fill("");
+  await page.getByRole("button", { name: "Simpan pengingat" }).click();
+  await expect(page.getByRole("main").getByRole("alert")).toContainText(
+    "waktu yang valid",
+  );
+  await page
+    .getByRole("checkbox", { name: "Aktifkan pengingat", exact: false })
+    .uncheck();
+  await page.getByRole("button", { name: "Simpan pengingat" }).click();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () => JSON.parse(localStorage.getItem("nudge.reminder.v1")!).enabled,
+      ),
+    )
+    .toBe(false);
+  await expect(
+    page.getByText("Pengingat tersimpan: nonaktif.", { exact: false }),
+  ).toBeVisible();
+});
+
 test("unsupported notifications keep reminder settings and activities usable", async ({
   page,
 }) => {
@@ -19,6 +54,59 @@ test("unsupported notifications keep reminder settings and activities usable", a
   await expect(
     page.getByRole("button", { name: "Cari kegiatan kecil" }),
   ).toBeVisible();
+});
+
+test("visibility recheck delivers once and reload preserves deduplication", async ({
+  page,
+}) => {
+  await page.clock.install({ time: new Date(2026, 9, 19, 15, 59) });
+  await page.addInitScript(() => {
+    Object.defineProperty(window, "sentReminders", {
+      value: 0,
+      writable: true,
+    });
+    class MockNotification {
+      static permission = "granted";
+      constructor() {
+        (window as unknown as { sentReminders: number }).sentReminders++;
+      }
+    }
+    Object.defineProperty(window, "Notification", { value: MockNotification });
+    localStorage.setItem(
+      "nudge.reminder.v1",
+      JSON.stringify({ enabled: true, days: [1], time: "16:00" }),
+    );
+  });
+  await page.goto("/app");
+  await page.getByRole("button", { name: "Pengingat", exact: true }).click();
+  await expect(
+    page.getByRole("checkbox", { name: "Aktifkan pengingat", exact: false }),
+  ).toBeChecked();
+  await page.clock.setSystemTime(new Date(2026, 9, 19, 16, 0, 10));
+  await page.evaluate(() =>
+    document.dispatchEvent(new Event("visibilitychange")),
+  );
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () => (window as unknown as { sentReminders: number }).sentReminders,
+      ),
+    )
+    .toBe(1);
+  await page.reload();
+  await page.getByRole("button", { name: "Pengingat", exact: true }).click();
+  await expect(
+    page.getByRole("checkbox", { name: "Aktifkan pengingat", exact: false }),
+  ).toBeChecked();
+  await page.clock.fastForward(15_000);
+  expect(
+    await page.evaluate(
+      () => (window as unknown as { sentReminders: number }).sentReminders,
+    ),
+  ).toBe(0);
+  expect(
+    await page.evaluate(() => localStorage.getItem("nudge.reminder-sent.v1")),
+  ).toBe("2026-10-19-16:00");
 });
 
 test("a due reminder is sent once and missed times are skipped", async ({

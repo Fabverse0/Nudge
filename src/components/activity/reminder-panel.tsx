@@ -27,16 +27,25 @@ export function ReminderPanel({
         sebentar.
       </p>
       <form
+        noValidate
         onSubmit={async (event) => {
           event.preventDefault();
-          if (!isReminder(draft)) {
+          const next: Reminder = draft.enabled
+            ? draft
+            : {
+                enabled: false,
+                days: draft.days,
+                time: isReminder(draft) ? draft.time : value.time,
+              };
+          if (!isReminder(next)) {
             setError("Pilih setidaknya satu hari dan waktu yang valid.");
             return;
           }
           setError("");
           setSaving(true);
           try {
-            await save(draft);
+            await save(next);
+            setDraft(next);
           } finally {
             setSaving(false);
           }
@@ -88,7 +97,7 @@ export function ReminderPanel({
           Waktu lokal perangkat
           <input
             type="time"
-            required
+            required={draft.enabled}
             value={draft.time}
             onChange={(e) => setDraft({ ...draft, time: e.target.value })}
           />
