@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { activities } from "../../src/lib/activities/catalog";
+import { FAVORITES_KEY } from "../../src/lib/storage/storage";
 
 async function choose(
   page: import("@playwright/test").Page,
@@ -237,17 +239,22 @@ test("layout has no horizontal overflow at 320, 768 and 1440", async ({
 test("keyboard choices work and every remaining screen has accessible controls", async ({
   page,
 }, testInfo) => {
-  await page.goto("/app");
-  await page.screenshot({
-    path: `.impeccable/review/app-${testInfo.project.name}.png`,
-    fullPage: true,
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  page.on("console", (message) => {
+    if (message.type() === "error") errors.push(message.text());
   });
+  await page.goto("/app");
   await page
     .getByRole("radio", { name: "Lelah", exact: true })
     .press("ArrowRight");
   await expect(
     page.getByRole("radio", { name: "Bosan", exact: true }),
   ).toBeChecked();
+  await page.screenshot({
+    path: `.impeccable/review/app-${testInfo.project.name}.png`,
+    fullPage: true,
+  });
   await page
     .getByRole("group", { name: "Ingin melakukan apa?" })
     .getByRole("radio", { name: "Bergerak", exact: false })
@@ -277,11 +284,40 @@ test("keyboard choices work and every remaining screen has accessible controls",
     .getByRole("button", { name: "Pengingat", exact: true })
     .press("Enter");
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
+  expect(errors).toEqual([]);
+});
+
+test("all saved activity titles reflow with enlarged text", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.addInitScript(
+    ({ key, ids }) => localStorage.setItem(key, JSON.stringify(ids)),
+    { key: FAVORITES_KEY, ids: activities.map((activity) => activity.id) },
+  );
+  await page.goto("/app");
+  await page.getByRole("button", { name: "Favorit", exact: true }).click();
+  await expect(page.locator(".favorite-row")).toHaveCount(activities.length);
+  await page.evaluate(() => {
+    document.documentElement.style.fontSize = "200%";
+  });
+  const overflowing = await page
+    .locator(".favorite-row *")
+    .evaluateAll((items) =>
+      items
+        .filter((item) => item.getBoundingClientRect().right > innerWidth + 1)
+        .map((item) => ({
+          tag: item.tagName,
+          text: item.textContent,
+          right: item.getBoundingClientRect().right,
+        })),
+    );
+  expect(overflowing).toEqual([]);
 });
 
 test("large text and reduced motion keep controls inside a narrow viewport", async ({
   page,
-}) => {
+}, testInfo) => {
   await page.setViewportSize({ width: 320, height: 900 });
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/app");
@@ -295,18 +331,64 @@ test("large text and reduced motion keep controls inside a narrow viewport", asy
   });
   const overflowing = () =>
     page.evaluate(() =>
-      [...document.querySelectorAll("main *, nav *")]
+      [
+        ...document.querySelectorAll(
+          "header *, main *, nav *, footer *, .install-guide *",
+        ),
+      ]
         .filter(
           (el) => el.getBoundingClientRect().right > window.innerWidth + 1,
         )
         .map((el) => ({
           tag: el.tagName,
-          class: el.className,
+          class: el.getAttribute("class"),
+          right: el.getBoundingClientRect().right,
           text: el.textContent?.slice(0, 45),
         })),
     );
+  const clippedNavigation = await page
+    .locator(".nav-button")
+    .evaluateAll((buttons) =>
+      buttons.flatMap((button) => {
+        const bounds = button.getBoundingClientRect();
+        return [...button.childNodes]
+          .filter(
+            (node) =>
+              node.nodeType === Node.TEXT_NODE && node.textContent?.trim(),
+          )
+          .filter((node) => {
+            const range = document.createRange();
+            range.selectNodeContents(node);
+            const text = range.getBoundingClientRect();
+            return text.left < bounds.left - 1 || text.right > bounds.right + 1;
+          })
+          .map((node) => node.textContent);
+      }),
+    );
+  expect(clippedNavigation).toEqual([]);
   expect(await overflowing()).toEqual([]);
+  await page.getByText("Buka Nudge dari layar utama", { exact: true }).click();
+  expect(await overflowing()).toEqual([]);
+  await page.getByRole("button", { name: "Favorit", exact: true }).click();
+  expect(await overflowing()).toEqual([]);
+  await page.getByRole("button", { name: "Pengingat", exact: true }).click();
+  expect(await overflowing()).toEqual([]);
+  await page.screenshot({
+    path: `.impeccable/review/large-text-reminders-${testInfo.project.name}.png`,
+    fullPage: true,
+  });
+  await page.getByRole("button", { name: "Kegiatan", exact: true }).click();
   await choose(page);
+  expect(await overflowing()).toEqual([]);
+  await page.getByRole("button", { name: "Simpan ke favorit" }).click();
+  await page.getByRole("button", { name: "Favorit", exact: true }).click();
+  expect(await overflowing()).toEqual([]);
+  await page.screenshot({
+    path: `.impeccable/review/large-text-favorites-${testInfo.project.name}.png`,
+    fullPage: true,
+  });
+  await page.locator(".favorite-row h2 button").click();
+  expect(await overflowing()).toEqual([]);
   await page.getByRole("button", { name: "Mulai kegiatan" }).click();
   expect(await overflowing()).toEqual([]);
   await page.getByRole("button", { name: "Selesai", exact: true }).click();
