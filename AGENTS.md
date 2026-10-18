@@ -22,7 +22,7 @@ Use Vitest (`*.test.ts`, `*.test.tsx`) and Playwright (`tests/*.spec.ts`), selec
 
 ## Commits and Pull Requests
 
-Commit each completed logical addition, modification, or removal using Conventional Commits, such as `feat(timer): add pause control` or `docs: update design guide`. The user has authorized this ongoing commit workflow; keep commits small, focused, and reviewable, with relevant checks recorded. PRs describe behavior, relevant requirements/issues, verification, and UI screenshots. Push only when explicitly requested, including pushes to `main`.
+Commit additions, modifications, and removals incrementally using Conventional Commits, such as `feat(timer): add pause control` or `docs: update design guide`. Small steps and checkpoints may be committed before a feature or work unit is complete. The user authorizes this ongoing workflow; keep each commit focused and reviewable, and state incomplete work or pending checks accurately. PRs describe behavior, relevant requirements/issues, verification, and UI screenshots. Push only when explicitly requested, including pushes to `main`.
 
 ## Configuration and Privacy
 
