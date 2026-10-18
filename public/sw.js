@@ -1,3 +1,4 @@
+// Bump the version when releasing changed static assets.
 const CACHE = "nudge-static-v1";
 const STATIC = ["/offline.html", "/icons/192", "/icons/512"];
 self.addEventListener("install", (event) => { event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(STATIC))); });

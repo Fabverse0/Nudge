@@ -1,11 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  CheckIcon,
-  FootprintsIcon,
-  LeafIcon,
-} from "@phosphor-icons/react";
+import { CheckIcon, FootprintsIcon, LeafIcon } from "@phosphor-icons/react";
 
 const previews = {
   2: {

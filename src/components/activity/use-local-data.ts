@@ -115,7 +115,11 @@ export function useLocalData() {
       const occurrence = reminderOccurrence(reminder, new Date());
       if (!occurrence) return;
       const deliver = async () => {
-        if (cancelled || reminderOccurrence(reminder, new Date()) !== occurrence) return;
+        if (
+          cancelled ||
+          reminderOccurrence(reminder, new Date()) !== occurrence
+        )
+          return;
         if (lastSent.current === occurrence) return;
         try {
           if (window.localStorage.getItem(SENT_KEY) === occurrence) return;
@@ -141,7 +145,9 @@ export function useLocalData() {
         await navigator.locks.request("nudge-reminder", deliver);
       else await deliver();
     }
-    const initialCheck = window.setTimeout(() => { void check(); }, 0);
+    const initialCheck = window.setTimeout(() => {
+      void check();
+    }, 0);
     const interval = window.setInterval(() => {
       void check();
     }, 15_000);

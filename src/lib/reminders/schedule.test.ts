@@ -18,8 +18,12 @@ it("only fires during the chosen local minute and day", () => {
 });
 it("rejects broken schedules and falls back safely", () => {
   expect(isReminder({ ...defaultReminder, time: "25:99" })).toBe(false);
-  expect(isReminder({ ...defaultReminder, enabled: true, days: [] })).toBe(false);
-  expect(isReminder({ ...defaultReminder, enabled: false, days: [] })).toBe(true);
+  expect(isReminder({ ...defaultReminder, enabled: true, days: [] })).toBe(
+    false,
+  );
+  expect(isReminder({ ...defaultReminder, enabled: false, days: [] })).toBe(
+    true,
+  );
   expect(
     readReminder({ getItem: () => "{}", setItem: () => {} }).value.enabled,
   ).toBe(false);

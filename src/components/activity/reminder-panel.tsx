@@ -42,6 +42,10 @@ export function ReminderPanel({
           }
         }}
       >
+        <p className="small muted">
+          Pengingat tersimpan: {value.enabled ? "aktif" : "nonaktif"}. Perubahan
+          berlaku setelah kamu menekan Simpan pengingat.
+        </p>
         <label className="toggle-row">
           <span>
             <strong>Aktifkan pengingat</strong>

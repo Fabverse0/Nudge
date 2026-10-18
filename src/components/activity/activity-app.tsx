@@ -144,14 +144,19 @@ export function ActivityApp({
   const local = useLocalData();
   const suggestion = result?.kind === "suggestion" ? result.suggestion : null;
   const activity = suggestion?.activity;
+  const previousActivity = useRef(activity?.id);
 
   useEffect(() => {
-    if (previousScreen.current !== screen) {
+    if (
+      previousScreen.current !== screen ||
+      (screen === "suggestion" && previousActivity.current !== activity?.id)
+    ) {
       heading.current?.focus({ preventScroll: true });
       window.scrollTo({ top: 0 });
     }
     previousScreen.current = screen;
-  }, [screen]);
+    previousActivity.current = activity?.id;
+  }, [screen, activity?.id]);
   function resetRejected() {
     setFeedback((current) => ({ ...current, rejected: [] }));
   }
@@ -281,7 +286,24 @@ export function ActivityApp({
             </button>
           </div>
         )}
-        <div ref={heading} tabIndex={-1} className="screen-focus">
+        <div
+          ref={heading}
+          tabIndex={-1}
+          className="screen-focus"
+          role="region"
+          aria-label={
+            screen === "suggestion" && activity
+              ? `Saran: ${activity.title}`
+              : {
+                  choose: "Pilihan kegiatan",
+                  suggestion: "Hasil saran",
+                  timer: "Timer kegiatan",
+                  complete: "Mood setelah kegiatan",
+                  favorites: "Favorit",
+                  reminders: "Pengaturan pengingat",
+                }[screen]
+          }
+        >
           {screen === "choose" && (
             <>
               <div className="app-intro">

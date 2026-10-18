@@ -5,6 +5,8 @@ coverage/
 playwright-report/
 test-results/
 .taste-skill/
+.impeccable/review/
+.impeccable/detector-final.json
 .env*
 !.env.example
 *.tsbuildinfo

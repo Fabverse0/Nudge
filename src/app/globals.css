@@ -159,6 +159,12 @@ svg {
 .button:active {
   transform: translateY(1px);
 }
+.button:disabled,
+.button:disabled:hover {
+  background: var(--disabled);
+  color: var(--muted);
+  transform: none;
+}
 .primary {
   background: var(--action);
   color: var(--surface);
@@ -567,6 +573,8 @@ legend {
   gap: 10px;
 }
 .choice {
+  max-width: 100%;
+  overflow-wrap: anywhere;
   border: 2px solid var(--border);
   border-radius: var(--control-radius);
   background: var(--surface);
@@ -633,10 +641,11 @@ legend {
 }
 .duration-options {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
 }
 .duration-choice {
+  min-width: 0;
   justify-content: center;
   min-height: 76px;
   gap: 6px;
@@ -1333,7 +1342,7 @@ input[type="time"] {
     width: 40px;
   }
   .timer-display {
-    font-size: 4rem;
+    font-size: min(4rem, 20vw);
     margin-top: 36px;
   }
   .timer-screen h1 {
