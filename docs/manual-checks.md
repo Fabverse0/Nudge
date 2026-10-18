@@ -44,12 +44,25 @@ Untuk seluler, URL localhost komputer tidak menunjuk komputer tersebut dari pons
 
 Status pemasangan: **belum diperiksa**. Ikon final ditunda pengguna; ikon `n.` saat ini adalah aset pengembangan.
 
+### Pembaruan service worker
+
+Pemeriksaan ini menunggu dua build pada alamat yang sama, dengan perubahan nyata pada berkas worker dan versi cache. Catat commit build lama dan baru.
+
+1. Buka build lama, mulai kegiatan, lalu sediakan build baru pada alamat yang sama.
+2. Periksa bahwa kegiatan yang sedang berlangsung tidak dimuat ulang atau dianggap selesai secara paksa.
+3. Setelah kegiatan selesai, tutup semua tab dan jendela PWA Nudge, lalu buka kembali dengan koneksi tersedia.
+4. Catat versi worker yang aktif dan pastikan jalur `/app`, ikon, serta navigasi masih bekerja. Jika worker baru belum aktif, catat keadaan sebenarnya dan langkah untuk mereproduksinya.
+
+Status pembaruan: **belum diperiksa**. Langkah ini merupakan rencana pemeriksaan, bukan hasil pengujian.
+
 ## Pengingat dan waktu perangkat
 
 | Tugas | Hasil yang diharapkan | Hasil nyata/catatan |
 | --- | --- | --- |
 | Kunjungi aplikasi pertama kali | Tidak ada permintaan izin notifikasi otomatis | |
 | Aktifkan dan simpan hari/waktu | Izin diminta setelah tindakan opt-in; status izin ditampilkan | |
+| Biarkan dialog izin terbuka sampai jadwal tiba, lalu izinkan pada menit jadwal yang sama | Pengingat masih dapat dikirim setelah keputusan izin, sesuai batas browser | |
+| Izinkan setelah menit jadwal sudah berakhir | Jadwal yang sudah lewat tidak dikirim susulan | |
 | Atur pengingat beberapa menit mendatang dan biarkan aplikasi berjalan | Pengiriman mengikuti batas browser, tidak dianggap alarm presisi | |
 | Ubah waktu atau matikan sebelum jadwal lama | Jadwal lama tidak mengirim | |
 | Kosongkan waktu lalu matikan pengingat | Pembatalan tetap tersimpan; waktu valid terakhir dipertahankan | |
