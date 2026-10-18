@@ -22,11 +22,52 @@ Windows, Node.js 22.19.0, npm 11.19.0. Next.js 16.4.2, React 19.3.1, TypeScript 
 
 Render landing sudah diperiksa pada 1440, 768, dan 390 px melalui Taste Skill. Alur aplikasi juga dibuka di browser. Screenshot inspector disimpan dalam cache lokal `.taste-skill/inspect/`.
 
-Inspector terakhir melaporkan tiga FAIL: kuota gambar, ambang elemen dominan, dan kuota gerak. Empat gambar serta delapan elemen bergerak tidak diterapkan karena aset ditunda pengguna dan DESIGN.md menetapkan gerak tenang. Ambang dominasi tipografi inspector juga tidak diadopsi untuk menggantikan skala awal 64 px; hero dibaca bersama demo interaktif. Warna canvas mengikuti palet pengguna. Label demo yang berlebihan telah dihapus. Ini bukan laporan bahwa semua gate Taste Skill lulus.
+Inspector tahap implementasi awal melaporkan tiga FAIL: kuota gambar, ambang elemen dominan, dan kuota gerak. Empat gambar serta delapan elemen bergerak tidak diterapkan karena aset ditunda pengguna dan DESIGN.md menetapkan gerak tenang. Ambang dominasi tipografi inspector juga tidak diadopsi untuk menggantikan skala awal 64 px; hero dibaca bersama demo interaktif. Warna canvas mengikuti palet pengguna. Label demo yang berlebihan telah dihapus. Ini bukan laporan bahwa semua gate Taste Skill lulus.
 
 Penilaian render awal oleh agen: desain 7/10, kegunaan 8/10, kreativitas 5/10, isi 8/10. Ini penilaian internal, bukan hasil riset pengguna. Aset final masih dibutuhkan untuk identitas yang lebih kuat.
 
-Detector Impeccable dijalankan manual karena konteks sesi melaporkan hook otomatis tidak aktif. Laporan terakhir memuat 14 advisory ukuran huruf, 11 advisory radius, dan satu warning nama family font. Family font telah diselaraskan ke nama paket `Nunito Variable`; laporan tersebut belum dijalankan ulang setelah penyelarasan. Kurva panel hero merupakan eksplorasi motif tempurung. Tidak ada klaim semua pemeriksaan engine bersih.
+Detector Impeccable dijalankan manual karena konteks sesi melaporkan hook otomatis tidak aktif. Laporan tahap implementasi memuat 14 advisory ukuran huruf, 11 advisory radius, dan satu warning nama family font. Family font kemudian diselaraskan ke nama paket `Nunito Variable`; hasil pemeriksaan ulang ada pada subbagian polesan di bawah. Kurva panel hero merupakan eksplorasi motif tempurung. Tidak ada klaim semua pemeriksaan engine bersih.
+
+### Polesan landing page, 18 Oktober 2026
+
+Pengguna memilih fokus landing page. Perubahan mencakup padding hero/demo, tanda centang durasi aktif, ikon panah demo, dasar tombol utama, simbol kategori, serta susunan footer. Copy, palet, routing, dan perilaku aplikasi dipertahankan. Alasan perubahan tercatat di [implementation-decisions.md](./implementation-decisions.md#polesan-landing-page).
+
+- `npm run lint`, `npm run typecheck`, pemeriksaan Prettier pada dua source yang berubah, dan `git diff --check` berhasil.
+- Dua percobaan `npm run build`, di sandbox dan di luar sandbox, gagal ketika proses pengolah CSS Turbopack keluar sebelum terhubung dengan exit code 0. Log tidak menjelaskan penyebabnya; belum ada bukti bahwa sandbox merupakan penyebab. Source tidak diubah untuk menyiasati kegagalan ini.
+- `npm run build -- --webpack` berhasil, termasuk TypeScript serta pembuatan halaman. Ini opsi perintah untuk preview kali ini; script build dan konfigurasi Next.js tidak diganti. Kegagalan Turbopack tetap perlu diperiksa bila build default digunakan lagi.
+- Preview produksi terbaru berjalan pada `http://127.0.0.1:3100/`. Inspector membaca build Webpack tersebut pada 1440, 768, dan 390 px: overflow horizontal 0, daftar kontras rendah kosong, Nunito Variable dimuat, serta `consoleErrors` kosong pada ketiganya. Screenshot fold dan lembar seluruh halaman ditinjau langsung.
+- Pemeriksaan interaksi melalui browser: radio 2 menit dengan klik, lalu 5 dan 10 menit dengan tombol panah mengubah contoh serta URL link. Membuka demo pada 10 menit menghasilkan `/app?minutes=10`, dan pilihan 10 menit aktif pada aplikasi. Fokus radio terlihat pada screenshot.
+- Kelima link masuk umum dibuka dan menuju `/app`; link demo, anchor cara pakai, skip link, serta dua link merek juga diperiksa. Anchor menuju `#cara-pakai` dan `#main`; merek menuju beranda. Ini pemeriksaan interaksi landing, bukan pengulangan suite otomatis aplikasi.
+- Vitest dan suite Playwright tidak dijalankan ulang dalam polesan ini. Hasil suite di atas berasal dari tahap implementasi sebelumnya.
+
+Cache lokal sebelum/sesudah: `.taste-skill/polish-before/` dan `.taste-skill/polish-after/`, masing-masing berisi `report.json` dan screenshot. Cache tidak dikomit sebagai aset produk.
+
+Taste source lint melaporkan dua FAIL `shadow`, pada dasar tombol normal dan ditekan. Inspector sesudah melaporkan lima jenis FAIL: `shadow`, `button-fx`, `few-pictures`, `focal-point`, dan `still-page`; dua WARN: `palette-cream` dan `no-footage`. Dasar tombol 3/1 px mengikuti DESIGN.md, canvas mengikuti palet pengguna, hero mengikuti skala awal 64 px, gerak mengikuti MOTION 1, dan aset final ditunda pengguna. Temuan tetap dilaporkan, bukan disembunyikan atau dianggap lulus.
+
+Detector Impeccable dijalankan sekali sesudah perubahan source dengan `.codex/impeccable.cmd detect --json src/app/globals.css src/components/landing/activity-preview.tsx`. Hasil: 14 advisory ukuran huruf dan 11 advisory radius; tidak ada warning family font. Detector membaca seluruh stylesheet, termasuk aturan aplikasi di luar lingkup polesan. Tidak ada perubahan skala/radius global untuk menghapus advisory tersebut.
+
+#### Critique render
+
+ROUND 1, sebelum polesan:
+
+- Seen in one second: judul jeda dan panel biru pilihan waktu.
+- Idea: kurva tempurung menjadi wadah satu pilihan kegiatan kecil.
+- Live thing: pilih 2/5/10 menit untuk melihat contoh dan meneruskan durasi ke aplikasi.
+- Layout words by section: hero=split / cara pakai=alur teks / tujuan=bidang sand dan daftar / kendali=split / penutup=bar / footer=flex.
+- Scores: design 6.5, usability 8, creativity 6, content 8; arithmetic 7.0, overall 6.0 setelah cap.
+- Caps applied: gambar kurang dari empat membatasi design ke 6.5; FAIL inspector membatasi overall ke 6.0.
+- Top three problems: panel demo terlalu berat dibanding isi hero (`polish-before/desktop-page-01.jpg`), simbol refleksi menyatu dengan bidang sand (lembar desktop yang sama), dan keterangan footer terpisah kurang rapi di ponsel (`polish-before/mobile-page-01.jpg`). Perbaikan: padatkan padding, perjelas bidang simbol, lalu kelompokkan footer dengan grid responsif.
+
+ROUND 2, sesudah polesan:
+
+- Seen in one second: ajakan jeda dan pilihan menit dalam bidang tempurung biru.
+- Idea dan live thing: tetap seperti ROUND 1; arah `one-motif`, seed `469094123`, tanpa draw ulang.
+- Layout words by section: hero=split / cara pakai=alur teks / tujuan=bidang sand dan daftar / kendali=split / penutup=bar / footer=grid responsif.
+- Scores: design 6.5, usability 8, creativity 6, content 8; arithmetic 7.0, overall 6.0 setelah cap. Perbaikan detail tidak membenarkan kenaikan nilai satu poin penuh.
+- Caps applied: sama seperti ROUND 1; resting shadow juga memiliki cap 6.5, lebih longgar daripada cap overall 6.0 yang sudah berlaku.
+- Top three remaining problems: identitas visual masih mengandalkan simbol sementara, tanpa ilustrasi maskot final (`polish-after/desktop-page-01.jpg`); hero belum memenuhi ambang dominasi inspector (`polish-after/desktop-fold.jpg`); halaman tidak memenuhi kuota gambar/gerak Taste (`polish-after/mobile-page-01.jpg`). Aset tetap menunggu arahan pengguna; skala dan gerak tidak diperbesar di luar panduan Nudge hanya untuk mengubah angka inspector.
+
+Penilaian ini oleh agen, bukan hasil peserta atau riset pengguna. Tidak ada foto, video, kandidat logo, atau konten contoh baru yang ditambahkan pada polesan ini. Katalog contoh tetap diberi label sebagai contoh kegiatan.
 
 ## Batas yang masih perlu diperiksa
 
