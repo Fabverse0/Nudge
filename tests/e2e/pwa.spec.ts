@@ -1,5 +1,52 @@
 import { expect, test } from "@playwright/test";
 
+test("production reminder is accepted by the native service worker notification API", async ({
+  page,
+  context,
+}) => {
+  await context.grantPermissions(["notifications"]);
+  await page.addInitScript(() => {
+    const accepted: { title: string; tag?: string }[] = [];
+    Object.defineProperty(window, "acceptedNotifications", { value: accepted });
+    const showNotification =
+      ServiceWorkerRegistration.prototype.showNotification;
+    ServiceWorkerRegistration.prototype.showNotification = async function (
+      title,
+      options,
+    ) {
+      await showNotification.call(this, title, options);
+      accepted.push({ title, tag: options?.tag });
+    };
+  });
+  await page.clock.install({ time: new Date(2026, 9, 19, 16, 0, 10) });
+  await page.goto("/app");
+  await page.evaluate(() => navigator.serviceWorker.ready);
+  await page.getByRole("button", { name: "Pengingat", exact: true }).click();
+  await page
+    .getByRole("checkbox", { name: "Aktifkan pengingat", exact: false })
+    .check();
+  await page.getByRole("button", { name: "Simpan pengingat" }).click();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          (
+            window as unknown as {
+              acceptedNotifications: { title: string; tag?: string }[];
+            }
+          ).acceptedNotifications,
+      ),
+    )
+    .toEqual([
+      { title: "Saatnya satu langkah kecil?", tag: "2026-10-19-16:00" },
+    ]);
+  await page.evaluate(async () => {
+    const registration = await navigator.serviceWorker.ready;
+    for (const notification of await registration.getNotifications())
+      notification.close();
+  });
+});
+
 test("production activity flow has no hydration or browser errors", async ({
   page,
 }, testInfo) => {
