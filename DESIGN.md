@@ -110,11 +110,12 @@ components:
 
 # Nudge Design Guide
 
-Catatan implementasi 18 Oktober 2026: Nunito Variable sudah diintegrasikan dari Fontsource dan ikon Phosphor dari paket resminya. Nama family CSS memakai `Nunito Variable`; bentuk huruf tetap Nunito. Logo, ilustrasi, pose maskot, dan ikon final ditunda pengguna agar pengerjaan kode didahulukan. Ikon garis kura-kura serta ikon aplikasi `n.` masih sementara. Angka timer dibatasi lebar viewport pada pembesaran teks agar tetap muat. Status aset pada daftar awal di bawah merupakan kondisi sebelum implementasi.
+Catatan implementasi 18 Oktober 2026: Nunito Variable sudah diintegrasikan dari Fontsource dan ikon Phosphor dari paket resminya. Nama family CSS memakai `Nunito Variable`; bentuk huruf tetap Nunito. Tahap logo, maskot, dan ilustrasi dibuka kembali oleh pengguna setelah pengerjaan kode. Enam kandidat bentuk induk tersedia di [eksplorasi karakter batch 01](./docs/assets/logo-exploration-01/README.md); bentuk terpilih, pose turunan, dan ikon final belum ditetapkan. Ikon garis kura-kura serta ikon aplikasi `n.` masih sementara. Angka timer dibatasi lebar viewport pada pembesaran teks agar tetap muat. Status aset pada daftar awal di bawah merupakan kondisi sebelum implementasi.
 
 ## Overview
 
-Status: spesifikasi desain awal v1, sebelum implementasi.  
+Status: panduan visual v1; kode MVP tersedia dan eksplorasi aset berlangsung.
+
 Tanggal: 18 Oktober 2026.  
 Tema MVP: terang. Bahasa antarmuka: Bahasa Indonesia.
 

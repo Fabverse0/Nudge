@@ -50,4 +50,4 @@ Gunakan [PRD](./prd.md) untuk perilaku, [desain](./DESIGN.md) untuk identitas, [
 
 Tugas dan lembar hasil untuk pemasangan PWA, izin OS, dan observasi pengguna tersedia di [pemeriksaan manual](./docs/manual-checks.md).
 
-Logo final dan ilustrasi maskot ditunda atas arahan pengguna. Ikon kura-kura garis dan ikon aplikasi `n.` adalah aset sementara untuk pengembangan. Nunito dan Phosphor dipakai dari paket resminya; pemberitahuan lisensi tersedia di [docs/licenses](./docs/licenses).
+Tahap logo dan ilustrasi maskot telah dilanjutkan. Enam kandidat bentuk induk tersedia di [eksplorasi karakter](./docs/assets/logo-exploration-01/README.md), menunggu pilihan pengguna sebelum membuat turunan yang konsisten. Ikon kura-kura garis dan ikon aplikasi `n.` masih merupakan aset sementara untuk pengembangan. Nunito dan Phosphor dipakai dari paket resminya; pemberitahuan lisensi tersedia di [docs/licenses](./docs/licenses).

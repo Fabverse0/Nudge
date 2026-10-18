@@ -1,0 +1,56 @@
+[
+  {
+    "id": "A1",
+    "file": "a1.png",
+    "prompt": "a1-prompt.txt",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1363117,
+    "sha256": "cdd9fbef33e9346379a05042b5d35678f0a2e0ac4b514ee9a7eb93b224d91dbd"
+  },
+  {
+    "id": "A2",
+    "file": "a2.png",
+    "prompt": "a2-prompt.txt",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1336518,
+    "sha256": "459071cc6426a014aaa649d8b54af719e557c9f78aa95711bf9be322c4c90f71"
+  },
+  {
+    "id": "B1",
+    "file": "b1.png",
+    "prompt": "b1-prompt.txt",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1355294,
+    "sha256": "adb580826d81ae934f9ca7f8ae456905b4c102943c78a49c332d40daccba5a68"
+  },
+  {
+    "id": "B2",
+    "file": "b2.png",
+    "prompt": "b2-prompt.txt",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1338600,
+    "sha256": "e7628821de18a50d7cf00a846067c796aa9115679be61320c966608ddab4e363"
+  },
+  {
+    "id": "C1",
+    "file": "c1.png",
+    "prompt": "c1-prompt.txt",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1348990,
+    "sha256": "fb80fb705c91f5ee64d68ccb91a677080564f598651af04e7c874c0c8ace5dc7"
+  },
+  {
+    "id": "C2",
+    "file": "c2.png",
+    "prompt": "c2-prompt.txt",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1398370,
+    "sha256": "f2b55c89c059ebde0a2f97e77d8fdaf5f4b8cecf940f28ebf1204a7b61bfc23a"
+  }
+]

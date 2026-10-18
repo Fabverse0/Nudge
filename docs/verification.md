@@ -103,6 +103,14 @@ Audit lanjutan pada 18 Oktober 2026 menggunakan source pada `f980ddf` dan build 
 
 Audit ini tidak mencentang item yang masih memerlukan bukti eksternal. Pekerjaan kode yang diperiksa dapat ditinjau, sedangkan penyelesaian seluruh rencana menunggu dependensi di tabel.
 
+### Eksplorasi logo dan maskot dibuka kembali
+
+Pengguna melanjutkan tahap logo, maskot dan ilustrasi pada 18 Oktober 2026. Persetujuan enam kandidat dan penggunaan tool gambar bawaan dari percakapan sebelumnya digunakan kembali. Tiga arah dipresentasikan: tempurung bulat kompak, kura-kura beristirahat, serta wajah ramah dengan tempurung besar.
+
+Enam generasi independen, A1/A2/B1/B2/C1/C2, menghasilkan enam PNG asli 1254 x 1254. Setiap kandidat dibuat sekali, tanpa memakai kandidat lain sebagai referensi. Gambar dan prompt lengkap tersimpan di [docs/assets/logo-exploration-01](./assets/logo-exploration-01/README.md); metadata dan hash ada pada manifest.json di direktori yang sama. Nama model/provider tidak diekspos oleh hasil tool dan tidak ditebak.
+
+Metadata berkas serta kesamaan hash salinan diperiksa. Sesuai alur satu batch IP as Logo, hasil disampaikan tanpa pemeringkatan, perbaikan gambar, resampling, atau regenerasi otomatis. Belum ada klaim kandidat lulus audit visual, kemiripan merek, atau keterbacaan ukuran kecil. Pengguna perlu memilih bentuk induk sebelum pose dan ilustrasi turunannya diproduksi. Kandidat belum diintegrasikan ke aplikasi dan belum menjadi logo atau ikon PWA final.
+
 ## Batas yang masih perlu diperiksa
 
 Target fisik yang dipilih pengguna adalah Android dengan Chrome. Tugas dan lembar pencatatan tersedia pada [manual-checks.md](./manual-checks.md); seluruh kolom hasil perangkat fisik masih kosong.
@@ -110,7 +118,7 @@ Target fisik yang dipilih pengguna adalah Android dengan Chrome. Tugas dan lemba
 - Pemasangan PWA dari menu browser dan peluncuran dari ikon pada perangkat fisik.
 - Izin OS, pengiriman notifikasi nyata, penundaan saat tidur, dan pembaruan worker pada perangkat sasaran.
 - Pembaca layar nyata dan pengujian alur dengan peserta. Pemeriksaan otomatis tidak membuktikan seluruh aksesibilitas atau kegunaan produk.
-- Logo, ilustrasi, pose maskot, dan ikon final ditunda sesuai arahan pengguna. Ikon sementara tidak dianggap aset final.
+- Tahap logo, ilustrasi, pose maskot, dan ikon final telah dibuka kembali. Enam kandidat tersedia untuk pemilihan bentuk induk; pose serta ilustrasi turunan belum dibuat. Ikon sementara tidak dianggap aset final.
 - Hosting HTTPS belum dipilih; aplikasi belum dipublikasikan.
 
 ## Dependensi
@@ -155,7 +163,7 @@ Peringatan hydration lain muncul ketika pengujian mengambil screenshot sebelum i
 
 ## Pekerjaan yang memerlukan tahap berikutnya
 
-- P2-01/P2-02/P5-03: logo, ilustrasi, pose maskot, dan ikon final ditunda pengguna.
+- P2-01 menghasilkan enam kandidat; P2-02/P5-03 menunggu pilihan bentuk induk sebelum produksi pose, ilustrasi, serta logo dan ikon final.
 - P6-04/P7-03/P7-04: pemasangan, peluncuran ikon, izin OS, sleep/resume, serta notifikasi pada Android Chrome fisik belum dibuktikan. Belum ada URL produksi/preview yang diizinkan dan bisa digunakan pada perangkat tersebut.
 - P8-02: pemeriksaan otomatis dan screenshot tersedia; zoom browser serta pembaca layar nyata belum diperiksa.
 - P8-04: pengguna melaporkan percobaan desktop berjalan lancar, tetapi tugas yang dicoba, lingkungan, serta hasil per langkah belum dicatat. Observasi tugas secara terstruktur belum dilakukan; tidak ada hasil tambahan yang boleh diisi dari simulasi agen.

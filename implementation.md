@@ -1,6 +1,6 @@
 # Rencana Implementasi Nudge
 
-Status: kode MVP dan polesan landing dapat ditinjau; penerimaan menyeluruh menunggu aset final serta pemeriksaan manual. Aset final ditunda atas arahan pengguna.
+Status: kode MVP dan polesan landing dapat ditinjau; penerimaan menyeluruh menunggu aset final serta pemeriksaan manual. Tahap aset dibuka kembali dan enam kandidat bentuk induk tersedia untuk dipilih pengguna.
 Tanggal: 18 Oktober 2026.  
 Cakupan: MVP web responsif dan PWA dalam satu codebase.
 
@@ -66,7 +66,7 @@ Keputusan yang sudah diterapkan dijelaskan di docs/implementation-decisions.md d
 | --- | --- | --- | --- |
 | P0 | Persiapan pelaksanaan dan keputusan awal | Dokumen tersedia dan izin pelaksanaan | Selesai |
 | P1 | Fondasi proyek dan alat pemeriksaan | P0 | Selesai |
-| P2 | Token visual, komponen dasar, dan aset induk | P0; kode komponen memerlukan P1 | Komponen/token tersedia; aset final ditunda pengguna |
+| P2 | Token visual, komponen dasar, dan aset induk | P0; kode komponen memerlukan P1 | Komponen/token dan enam kandidat tersedia; bentuk induk menunggu pilihan pengguna |
 | P3 | Katalog, rekomendasi, state sesi, dan timer | P1 serta keputusan D-03/D-04 | Selesai |
 | P4 | Alur aplikasi utama | P2 komponen, P3 | Alur teruji; pendamping kura-kura masih ikon sementara |
 | P5 | Landing page | P1, P2, P4 | Fungsional dan dipoles; ilustrasi/logo final menunggu |
@@ -107,7 +107,7 @@ Eksplorasi aset P2 dapat berlangsung sebelum atau bersama fondasi kode. Logika m
 
 **Acuan:** DESIGN.md; tidak mengubah kebutuhan FR.
 
-- [ ] **P2-01:** gunakan IP as Logo untuk menawarkan arah simbol kura-kura dan jumlah kandidat. Pastikan kemampuan model tersedia; generasi mengikuti persetujuan pengguna pada tahap aset.
+- [x] **P2-01:** tiga arah dan enam kandidat dihasilkan melalui IP as Logo memakai tool gambar bawaan yang sebelumnya disetujui pengguna. Seluruh PNG asli, prompt lengkap, dan metadata tersedia di docs/assets/logo-exploration-01/README.md. Pemilihan bentuk induk dan turunannya dilanjutkan pada P2-02.
 - [ ] **P2-02:** tetapkan satu bentuk induk, lalu produksi pose ringkas, ekspresi yang dipakai, ilustrasi tiga kelompok aktivitas, logo/wordmark, dan turunan ikon PWA. Catat sumber, lisensi/atribusi, ukuran, serta lokasi berkas nyata.
 - [x] **P2-03:** token, Nunito Variable dan Phosphor diintegrasikan; lisensi ada di docs/licenses.
 - [x] **P2-04:** kontrol, kartu, pilihan, status, fokus dan ikon kura-kura sementara tersedia; diperiksa lewat browser/Axe/keyboard.
@@ -330,4 +330,4 @@ Jika muncul kebutuhan baru, catat masalah yang hendak diselesaikan, dampak terha
 - [x] Dokumentasi perintah sesuai konfigurasi aktual; tidak ada rahasia atau data jurnal pada laporan/log.
 - [x] Tindakan publikasi dan Git dilakukan hanya dalam izin pengguna.
 
-**Langkah berikutnya:** pemeriksaan Android Chrome fisik pada P6/P7 dan observasi pengguna pada P8. P2/P5 melanjutkan aset final ketika pengguna membuka kembali tahap tersebut. Seluruh rencana belum selesai selama bukti manual dan aset yang diwajibkan belum tersedia; lihat docs/manual-checks.md dan docs/verification.md.
+**Langkah berikutnya:** pilih satu bentuk induk dari enam kandidat pada P2, lalu produksi pose, ilustrasi, logo dan ikon turunannya untuk P2/P5. Pemeriksaan Android Chrome fisik pada P6/P7 serta observasi pengguna pada P8 masih menunggu. Seluruh rencana belum selesai selama bukti manual dan aset yang diwajibkan belum tersedia; lihat docs/manual-checks.md dan docs/verification.md.
