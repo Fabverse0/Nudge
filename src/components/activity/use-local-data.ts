@@ -109,7 +109,7 @@ export function useLocalData() {
   }, []);
 
   useEffect(() => {
-    if (!loaded || !reminder.enabled) return;
+    if (!loaded || !reminder.enabled || permission === "default") return;
     let cancelled = false;
     async function check() {
       const occurrence = reminderOccurrence(reminder, new Date());
@@ -161,7 +161,7 @@ export function useLocalData() {
       clearInterval(interval);
       document.removeEventListener("visibilitychange", onVisible);
     };
-  }, [loaded, reminder]);
+  }, [loaded, reminder, permission]);
 
   return {
     favorites,
