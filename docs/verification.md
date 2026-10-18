@@ -69,6 +69,19 @@ ROUND 2, sesudah polesan:
 
 Penilaian ini oleh agen, bukan hasil peserta atau riset pengguna. Tidak ada foto, video, kandidat logo, atau konten contoh baru yang ditambahkan pada polesan ini. Katalog contoh tetap diberi label sebagai contoh kegiatan.
 
+### Pemeriksaan build default lanjutan
+
+18 Oktober 2026, sesudah polesan landing:
+
+- `npm run build` sempat mereproduksi kegagalan worker CSS yang sama dalam sekitar tujuh detik, di luar sandbox.
+- Probe sementara menjalankan worker PostCSS yang dihasilkan Turbopack dengan server TCP localhost. Worker terhubung, mengirim frame siap empat byte, lalu keluar setelah probe menutup koneksi. Ini membuktikan worker dapat mulai berjalan, bukan membuktikan seluruh pemrosesan CSS atau akar kegagalan build.
+- Build dengan pencatatan sementara pada startup/koneksi worker berhasil. Dua worker teramati terhubung ke port lokal masing-masing. Build default berikutnya, tanpa pencatatan, juga berhasil.
+- Setelah seluruh direktori `.next` dipindahkan ke cache sementara, `npm run build` dari keluaran kosong berhasil: kompilasi 10.0 detik, TypeScript, pengumpulan data, dan pembuatan seluruh halaman selesai. Tidak memakai `--webpack` atau preload pada percobaan ini.
+- Script instrumentasi dan cadangan build sementara kemudian dihapus. Package, konfigurasi, dan source aplikasi tidak diubah untuk membuat build lulus. Tidak ada perubahan variabel lingkungan yang dipersistenkan.
+- Preview pada port 3100 dijalankan kembali memakai build Turbopack yang bersih tersebut. Landing dimuat dan pilihan dua menit menuju `/app?minutes=2` diperiksa melalui browser.
+
+Status saat pemeriksaan ini: build default kembali berhasil, termasuk dari direktori keluaran yang bersih. Penyebab kegagalan awal belum dibuktikan; jangan menyebutnya perbaikan akar masalah atau jaminan masalah tidak akan muncul lagi. Jika berulang, gunakan log kegagalan aktual. Suite Vitest/Playwright tidak dijalankan ulang pada pemeriksaan build ini.
+
 ## Batas yang masih perlu diperiksa
 
 Target fisik yang dipilih pengguna adalah Android dengan Chrome. Tugas dan lembar pencatatan tersedia pada [manual-checks.md](./manual-checks.md); seluruh kolom hasil perangkat fisik masih kosong.
@@ -124,5 +137,5 @@ Peringatan hydration lain muncul ketika pengujian mengambil screenshot sebelum i
 - P2-01/P2-02/P5-03: logo, ilustrasi, pose maskot, dan ikon final ditunda pengguna.
 - P6-04/P7-03/P7-04: pemasangan, peluncuran ikon, izin OS, sleep/resume, serta notifikasi pada Android Chrome fisik belum dibuktikan. Belum ada URL produksi/preview yang diizinkan dan bisa digunakan pada perangkat tersebut.
 - P8-02: pemeriksaan otomatis dan screenshot tersedia; zoom browser serta pembaca layar nyata belum diperiksa.
-- P8-04: observasi pengguna belum dilakukan. Tidak ada hasil peserta yang boleh diisi dari simulasi agen.
+- P8-04: pengguna melaporkan percobaan desktop berjalan lancar, tetapi tugas yang dicoba, lingkungan, serta hasil per langkah belum dicatat. Observasi tugas secara terstruktur belum dilakukan; tidak ada hasil tambahan yang boleh diisi dari simulasi agen.
 - P8-05 dan kesiapan rilis bergantung pada bukti manual serta aset final tersebut. Status kode yang dapat ditinjau tidak menyatakan seluruh rencana selesai.

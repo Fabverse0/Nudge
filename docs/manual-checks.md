@@ -1,6 +1,6 @@
 # Pemeriksaan manual Nudge
 
-Status: belum dijalankan pada perangkat fisik. Dokumen ini berisi tugas dan hasil yang diharapkan, bukan bukti kelulusan. Gunakan build produksi, bukan development server, untuk pemeriksaan PWA dan notifikasi.
+Status: pemeriksaan Android Chrome pada perangkat fisik belum dijalankan. Pengguna telah melaporkan percobaan desktop berjalan lancar; rincian tugas dan lingkungan percobaan itu belum tersedia. Tabel berikut tetap berisi tugas dan hasil yang diharapkan, bukan bukti kelulusan. Gunakan build produksi, bukan development server, untuk pemeriksaan PWA dan notifikasi.
 
 Target utama yang dipilih pengguna: **Android dengan Chrome**. Model perangkat, versi Android dan versi Chrome belum dicatat.
 
