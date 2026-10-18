@@ -500,6 +500,7 @@ svg {
 }
 .app-nav {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
   margin: 12px auto 0;
@@ -1396,7 +1397,7 @@ input[type="time"] {
     gap: 0;
   }
   .nav-button {
-    flex: 1;
+    flex: 1 1 auto;
     min-width: 0;
     padding-inline: 6px;
     font-size: 0.875rem;
