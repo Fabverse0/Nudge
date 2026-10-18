@@ -82,6 +82,27 @@ Penilaian ini oleh agen, bukan hasil peserta atau riset pengguna. Tidak ada foto
 
 Status saat pemeriksaan ini: build default kembali berhasil, termasuk dari direktori keluaran yang bersih. Penyebab kegagalan awal belum dibuktikan; jangan menyebutnya perbaikan akar masalah atau jaminan masalah tidak akan muncul lagi. Jika berulang, gunakan log kegagalan aktual. Suite Vitest/Playwright tidak dijalankan ulang pada pemeriksaan build ini.
 
+### Audit penerimaan sesudah build bersih
+
+Audit lanjutan pada 18 Oktober 2026 menggunakan source pada `f980ddf` dan build Turbopack bersih dari pemeriksaan sebelumnya:
+
+- `npm test`: 17 test pada enam berkas lulus, durasi runner 1.49 detik.
+- `npm run test:pwa`: delapan skenario lulus dalam 30.6 detik pada Chrome desktop dan viewport Pixel 7. Konfigurasi menjalankan server produksi baru pada port 3100 dan mengizinkan service worker.
+- Source skenario diperiksa: alur dari landing ke pemilihan, saran, timer, jeda/lanjut, Selesai, dan Lewati; tidak ada pageerror/console error pada skenario alur tersebut; registrasi worker, ikon PNG, cache tanpa navigasi, serta offline/pemulihan koneksi memiliki assertion nyata.
+- Pengujian notifikasi tetap memanggil `showNotification` asli sesudah izin diberikan pada profil pengujian. Kelulusannya membuktikan penerimaan API, bukan tampilan notifikasi atau izin OS Android.
+- Source rekomendasi tetap menyaring tujuan/durasi, mengeluarkan penolakan sesi, memberi bobot mood/feedback, serta menjelaskan perbedaan filter. Timer deadline membedakan elapsed dari completed; fungsi pembaruan mood mempertahankan mood sebelumnya saat skip. Suite unit di atas menguji kontrak modul tersebut.
+- Suite utama 44 skenario tetap merupakan bukti tahap implementasi sebelumnya; tidak dijalankan ulang pada audit ini. Tidak ada perubahan logika aplikasi atau penambahan test pada audit lanjutan.
+
+| Item rencana yang belum selesai | Bukti keadaan saat audit | Dependensi untuk melanjutkan |
+| --- | --- | --- |
+| P2-01/P2-02/P5-03 | Source memakai TurtleIcon serta ikon PNG `n.` sementara; aset final belum tersedia dan ditunda pengguna. | Pengguna membuka kembali tahap aset. |
+| P6-04/P7-03/P7-04 | Uji produksi lokal lulus; kolom lingkungan/hasil Android pada manual-checks.md masih kosong, hosting HTTPS belum ditetapkan. | URL HTTPS yang disepakati serta pemeriksaan pada Android Chrome fisik. |
+| P8-02 | Bukti otomatis dan screenshot tersedia; zoom browser serta pembaca layar nyata belum dicatat. | Pemeriksaan manual dengan alat dan lingkungan sasaran. |
+| P8-04 | Laporan pengguna menyebut desktop lancar, tanpa rincian tugas/perangkat atau catatan observasi terstruktur. | Sesi observasi pengguna dengan tugas PRD. |
+| P8-05 | README, keputusan, laporan, serta lisensi font/ikon tersedia; penerimaan rilis masih bergantung pada item di atas. | Melengkapi bukti manual dan aset sebelum menyatakan seluruh rencana selesai. |
+
+Audit ini tidak mencentang item yang masih memerlukan bukti eksternal. Pekerjaan kode yang diperiksa dapat ditinjau, sedangkan penyelesaian seluruh rencana menunggu dependensi di tabel.
+
 ## Batas yang masih perlu diperiksa
 
 Target fisik yang dipilih pengguna adalah Android dengan Chrome. Tugas dan lembar pencatatan tersedia pada [manual-checks.md](./manual-checks.md); seluruh kolom hasil perangkat fisik masih kosong.

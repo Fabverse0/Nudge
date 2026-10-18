@@ -1,6 +1,6 @@
 # Rencana Implementasi Nudge
 
-Status: implementasi kode MVP berlangsung; aset final ditunda atas arahan pengguna.
+Status: kode MVP dan polesan landing dapat ditinjau; penerimaan menyeluruh menunggu aset final serta pemeriksaan manual. Aset final ditunda atas arahan pengguna.
 Tanggal: 18 Oktober 2026.  
 Cakupan: MVP web responsif dan PWA dalam satu codebase.
 
@@ -69,10 +69,10 @@ Keputusan yang sudah diterapkan dijelaskan di docs/implementation-decisions.md d
 | P2 | Token visual, komponen dasar, dan aset induk | P0; kode komponen memerlukan P1 | Komponen/token tersedia; aset final ditunda pengguna |
 | P3 | Katalog, rekomendasi, state sesi, dan timer | P1 serta keputusan D-03/D-04 | Selesai |
 | P4 | Alur aplikasi utama | P2 komponen, P3 | Alur teruji; pendamping kura-kura masih ikon sementara |
-| P5 | Landing page | P1, P2, P4 | Fungsional; ilustrasi/logo final menunggu |
+| P5 | Landing page | P1, P2, P4 | Fungsional dan dipoles; ilustrasi/logo final menunggu |
 | P6 | Favorit dan pengingat opt-in | P3/P4/P7 | Otomatis diuji; notifikasi OS nyata belum diperiksa |
 | P7 | PWA dan integrasi browser/perangkat | P1, P2, P4/P5 | Delapan skenario produksi lulus; instalasi nyata menunggu |
-| P8 | Pemeriksaan rilis dan pemolesan | P4 sampai P7 | Dikerjakan; lihat docs/verification.md |
+| P8 | Pemeriksaan rilis dan pemolesan | P4 sampai P7 | Bukti otomatis tersedia; penerimaan manual dan aset masih menunggu, lihat docs/verification.md |
 
 Eksplorasi aset P2 dapat berlangsung sebelum atau bersama fondasi kode. Logika murni P3 tidak harus menunggu logo final. P7 dapat mulai sebelum P6 selesai, lalu keduanya digabungkan untuk memeriksa notifikasi yang membutuhkan service worker. Tabel dependensi tidak memerintahkan penggunaan subagent otomatis.
 
