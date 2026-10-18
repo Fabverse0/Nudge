@@ -9,12 +9,13 @@ Windows, Node.js 22.19.0, npm 11.19.0. Next.js 16.4.2, React 19.3.1, TypeScript 
 ## Bukti yang sudah diperoleh
 
 - Build produksi akhir berhasil untuk `/`, `/app`, manifest, dan ikon.
-- Vitest: 14 test lulus pada 5 berkas. Meliputi seluruh tujuan/waktu, mood, feedback sesi, penolakan/alternatif, timer, data lokal, dan jadwal.
+- Vitest: 17 test lulus pada 6 berkas. Meliputi seluruh tujuan/waktu, mood, feedback sesi, penolakan/alternatif, timer, data lokal, jadwal, serta adapter notifikasi service worker dan pembatalannya.
 - Typecheck, lint dan format:check berhasil setelah perbaikan.
-- Playwright utama: 34 skenario lulus pada desktop dan viewport Pixel 7. Memuat timer habis tanpa selesai otomatis, mood dipilih/dilewati/diubah, penolakan/kehabisan saran, favorit, journaling, izin ditolak/unsupported, pengingat jatuh tempo, pembatalan jadwal, keyboard, Axe dan teks 200%.
-- Playwright produksi: enam skenario lulus, mencakup alur lengkap tanpa error browser/hydration, registrasi worker, ikon PNG 192/512, cache tanpa navigasi/data pribadi, dan fallback offline lalu pemulihan koneksi.
+- Playwright utama: 38 skenario lulus pada desktop dan viewport Pixel 7. Memuat timer habis tanpa selesai otomatis, mood dipilih/dilewati/diubah, penolakan/kehabisan saran, favorit, journaling, izin ditolak/unsupported, pengingat jatuh tempo, pembatalan jadwal, keyboard, Axe dan teks 200%.
+- Playwright produksi: delapan skenario lulus, mencakup alur lengkap tanpa error browser/hydration, registrasi worker, ikon PNG 192/512, cache tanpa navigasi/data pribadi, fallback offline lalu pemulihan koneksi, serta penerimaan notifikasi oleh API asli Chrome.
 - Pemeriksaan tambahan keyboard dan Axe pada timer, penyelesaian, favorit, dan pengingat sudah lulus di desktop/seluler. Pembesaran teks 200% menemukan overflow pilihan waktu pada 320 px, sudah diperbaiki dan lulus pada keduanya.
 - Enam pengujian terarah terakhir untuk keyboard, teks 200% sesudah hydration, serta izin pengingat juga lulus setelah penyesuaian fokus dan penjelasan pengaturan.
+- Audit lanjutan menemukan dan memperbaiki pengingat yang tidak bisa dimatikan bila kolom waktu dikosongkan. Test mereproduksi kegagalan pada desktop/seluler sebelum perbaikan. Regresi dalam suite utama membuktikan validasi jadwal aktif tetap berlaku dan deduplikasi bertahan saat visibility kembali aktif serta setelah reload.
 - Screenshot aplikasi/timer dari build produksi tersimpan di `.impeccable/review/`. Laporan dan screenshot merupakan cache lokal, tidak dikomit sebagai aset produk.
 
 ## Visual dan aset
@@ -28,6 +29,8 @@ Penilaian render awal oleh agen: desain 7/10, kegunaan 8/10, kreativitas 5/10, i
 Detector Impeccable dijalankan manual karena konteks sesi melaporkan hook otomatis tidak aktif. Laporan terakhir memuat 14 advisory ukuran huruf, 11 advisory radius, dan satu warning nama family font. Family font telah diselaraskan ke nama paket `Nunito Variable`; laporan tersebut belum dijalankan ulang setelah penyelarasan. Kurva panel hero merupakan eksplorasi motif tempurung. Tidak ada klaim semua pemeriksaan engine bersih.
 
 ## Batas yang masih perlu diperiksa
+
+Target fisik yang dipilih pengguna adalah Android dengan Chrome. Tugas dan lembar pencatatan tersedia pada [manual-checks.md](./manual-checks.md); seluruh kolom hasil perangkat fisik masih kosong.
 
 - Pemasangan PWA dari menu browser dan peluncuran dari ikon pada perangkat fisik.
 - Izin OS, pengiriman notifikasi nyata, penundaan saat tidur, dan pembaruan worker pada perangkat sasaran.
@@ -60,3 +63,9 @@ Review mandiri lima aspek memakai panduan Code Review and Quality: perilaku diba
 Keterbatasan pemeliharaan: komponen ActivityApp masih cukup besar karena memuat beberapa layar. Pemisahan presentasi per layar bisa dilakukan bila iterasi desain selanjutnya membutuhkannya; aturan domain sudah berada pada modul terpisah. Ini review oleh pembuat implementasi, bukan persetujuan reviewer independen.
 
 Peringatan hydration pada pengujian pembesaran teks disebabkan test mengubah atribut HTML sebelum hydration selesai. Setup test disesuaikan untuk menunggu interaksi aplikasi lebih dulu. Alur produksi terpisah menangkap pageerror dan console error, dan keduanya kosong pada skenario tersebut.
+
+Audit pengingat lanjutan: formulir memvalidasi jadwal aktif melalui aturan aplikasi. Saat mematikan pengingat dengan waktu belum lengkap, waktu valid yang terakhir tersimpan dipertahankan sehingga pembatalan tidak tertahan oleh validasi input. Test adapter membuktikan pemakaian showNotification melalui service worker, penghentian setelah pembatalan saat menunggu registrasi, dan tidak mengirim ketika izin ditolak. Ini bukti kontrak API dengan mock, bukan bukti notifikasi OS nyata.
+
+Test produksi tambahan menggunakan izin pada profil Chrome pengujian dan pembungkus observasi yang tetap memanggil `showNotification` asli. Assertion memeriksa judul/tag hanya setelah Promise API tersebut selesai tanpa penolakan. Pemeriksaan awal yang mengharuskan `getNotifications()` mempertahankan entri tidak stabil; probe menunjukkan API asli berhasil meskipun daftar segera kosong. Test akhir membuktikan penerimaan API, bukan tampilan atau retensi notifikasi OS. Pemeriksaan Android tetap diperlukan.
+
+Pada pemeriksaan menyeluruh awal, 37 skenario lulus dan satu skenario tiga audit Axe melewati batas gabungan 30 detik. Batas skenario tersebut diperpanjang menjadi 60 detik tanpa mengurangi assertion. Seluruh 38 skenario kemudian lulus dalam satu pemanggilan; skenario yang sebelumnya timeout selesai sekitar 11 detik pada desktop dan seluler dalam pemanggilan itu. Penyebab perubahan waktu antar-pemanggilan belum dipastikan.

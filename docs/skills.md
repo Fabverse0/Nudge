@@ -8,7 +8,7 @@ Panduan ini mencakup sembilan skill UI/desain tambahan dan pemilihan skill penge
 
 Sembilan skill UI/desain dipasang sebagai salinan folder lengkap di `.agents/skills/` milik proyek Nudge. Folder skill yang sudah ada dipertahankan. Tidak ada pemasangan skill global, perubahan pengaturan mode global Anti Slop, atau pemasangan plugin. Engine dan hook Impeccable ditambahkan secara lokal atas instruksi pengguna berikutnya.
 
-Pemasangan skill memakai helper `skill-installer` dengan `--dest` eksplisit ke folder proyek dan metode download/copy. Script, referensi, library, serta konfigurasi agen yang berada di dalam folder sumber ikut disalin. Engine Impeccable telah dijalankan untuk mengaktifkan dan memeriksa hook lokal; script desain Taste Skill belum dijalankan.
+Pemasangan skill memakai helper `skill-installer` dengan `--dest` eksplisit ke folder proyek dan metode download/copy. Script, referensi, library, serta konfigurasi agen yang berada di dalam folder sumber ikut disalin. Engine Impeccable telah dijalankan untuk mengaktifkan dan memeriksa hook lokal; Taste Skill juga sudah digunakan pada landing page. Hasil pemeriksaan implementasi dan batasnya dicatat di [verification.md](./verification.md).
 
 ## Paket dan sumber
 
@@ -34,7 +34,7 @@ Metode penyalinan mengikuti distribusi berbasis folder yang dijelaskan repositor
 2. Gunakan Impeccable untuk perancangan layar aplikasi, alur, dan penyempurnaan desain. Bedakan kebutuhan landing page dan layar operasi aplikasi menurut mode skill tersebut.
 3. Gunakan Taste Skill untuk landing page yang memang memerlukan eksplorasi arah visual. Skill ini mengecualikan layar aplikasi; jangan memaksakannya pada pemilihan mood atau timer.
 4. Muat inti Anti Slop beserta skill khusus yang sesuai tugas. Tetapkan mode `during` atau `after` mengikuti instruksi inti ketika mulai memakainya; pemasangan ini belum memilih mode.
-5. Gunakan [DESIGN.md](../DESIGN.md) yang sudah tersedia sebagai spesifikasi visual awal. Keputusan tetap, nilai awal, dan ruang eksplorasi dibedakan di dalamnya. Logo, maskot, ilustrasi, font, dan ikon Nudge belum diproduksi atau diintegrasikan; statusnya tercantum pada daftar aset, bukan dianggap selesai karena panduannya sudah ada.
+5. Gunakan [DESIGN.md](../DESIGN.md) sebagai spesifikasi visual awal. Keputusan tetap, nilai awal, dan ruang eksplorasi dibedakan di dalamnya. Font Nunito Variable dan ikon antarmuka Phosphor telah diintegrasikan. Simbol kura-kura dan ikon pemasangan masih sementara; logo, ilustrasi, dan pose maskot final ditunda oleh pengguna. Periksa inventaris aset untuk status setiap keluaran.
 6. Gunakan `ip-as-logo` saat eksplorasi simbol maskot. Presentasikan arah dan jumlah kandidat sebelum generasi sesuai skill. Pemasangan belum memberi izin membuat gambar; penulisan nama Nudge, versi vektor, dan turunan ikon memerlukan pekerjaan tersendiri.
 
 ## Prioritas dokumen dan instruksi

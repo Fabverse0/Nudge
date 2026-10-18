@@ -48,4 +48,6 @@ Pengingat default nonaktif, meminta izin hanya setelah opt-in, dan membutuhkan a
 
 Gunakan [PRD](./prd.md) untuk perilaku, [desain](./DESIGN.md) untuk identitas, [rencana implementasi](./implementation.md) untuk progres, dan [keputusan implementasi](./docs/implementation-decisions.md) untuk rincian teknis. Ikuti [panduan kontribusi](./AGENTS.md) sebelum mengubah proyek.
 
+Tugas dan lembar hasil untuk pemasangan PWA, izin OS, dan observasi pengguna tersedia di [pemeriksaan manual](./docs/manual-checks.md).
+
 Logo final dan ilustrasi maskot ditunda atas arahan pengguna. Ikon kura-kura garis dan ikon aplikasi `n.` adalah aset sementara untuk pengembangan. Nunito dan Phosphor dipakai dari paket resminya; pemberitahuan lisensi tersedia di [docs/licenses](./docs/licenses).

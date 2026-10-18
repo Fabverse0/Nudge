@@ -17,7 +17,7 @@
 - R-32 PASS pada alur yang diperiksa: skip link, radio via keyboard, Enter, fokus dan Axe diperiksa.
 - R-33 PASS: perubahan source ditulis langsung dengan patch; formatter hanya merapikan format.
 - R-34 PASS: MVP hanya tema terang sesuai keputusan produk; tidak ada toggle tema yang belum berfungsi.
-- R-35 PASS untuk tahap kode: aplikasi dijalankan, build berhasil, 34 alur browser dan enam skenario produksi lulus. Instalasi perangkat fisik masih menunggu.
+- R-35 PASS untuk tahap kode: aplikasi dijalankan, build berhasil, 38 alur browser dan delapan skenario produksi lulus. Instalasi perangkat fisik masih menunggu.
 - R-36 PASS: tidak ada klaim medis, angka manfaat, keamanan bersertifikat atau performa yang dibuat-buat.
 - R-37 PASS: arah visual berasal dari DESIGN.md pengguna; dials tercatat pada keputusan implementasi.
 - R-38 PASS: contoh kegiatan berasal dari katalog nyata dan ditandai contoh pada landing.

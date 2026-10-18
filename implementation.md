@@ -55,7 +55,7 @@ Perbarui status, tanggal, hasil verifikasi, dan keputusan terkait setelah menyel
 | D-04 | Tujuan/waktu wajib; ranking mood 2 dan aktivitas disukai 1; urutan katalog memecah nilai sama. | P3 | Ditetapkan dan diuji |
 | D-05 | Jam lokal, pemeriksaan 15 detik/visibility, deduplikasi lokal dan Web Locks bila tersedia, tanpa susulan jadwal terlewat. | P6 | Kode dan simulasi diperiksa; perangkat nyata menunggu |
 | D-06 | Cache aset statis lokal dan halaman offline, tanpa cache navigasi/data pribadi. Worker baru tidak memaksa reload sesi. | P7 | Implementasi dan uji produksi otomatis lulus |
-| D-07 | Chrome Windows, viewport desktop dan Pixel 7. Perangkat seluler fisik dan instalasi ikon belum diperiksa. | Sebelum pemeriksaan P6/P7 | Otomatis tersedia; manual menunggu |
+| D-07 | Chrome Windows dan viewport Pixel 7 untuk otomatis. Pengguna memilih Android dengan Chrome untuk pemeriksaan fisik; model dan versi perangkat belum dicatat. | Sebelum pemeriksaan P6/P7 | Otomatis tersedia; manual menunggu perangkat dan URL HTTPS |
 | D-08 | Hosting HTTPS dan distribusi preview. Pilih berdasarkan kebutuhan deploy Next.js serta PWA; publikasi mengikuti instruksi pengguna. | Sebelum pemeriksaan deployment | Belum ditetapkan |
 
 Keputusan yang sudah diterapkan dijelaskan di docs/implementation-decisions.md dan dibuktikan di docs/verification.md. Pilihan rutin mengikuti izin implementasi yang diberikan. Keputusan yang memperluas perilaku produk, pengumpulan data, atau layanan eksternal tetap membutuhkan pembahasan pengguna.
@@ -71,7 +71,7 @@ Keputusan yang sudah diterapkan dijelaskan di docs/implementation-decisions.md d
 | P4 | Alur aplikasi utama | P2 komponen, P3 | Alur teruji; pendamping kura-kura masih ikon sementara |
 | P5 | Landing page | P1, P2, P4 | Fungsional; ilustrasi/logo final menunggu |
 | P6 | Favorit dan pengingat opt-in | P3/P4/P7 | Otomatis diuji; notifikasi OS nyata belum diperiksa |
-| P7 | PWA dan integrasi browser/perangkat | P1, P2, P4/P5 | Empat skenario produksi lulus; instalasi nyata menunggu |
+| P7 | PWA dan integrasi browser/perangkat | P1, P2, P4/P5 | Enam skenario produksi lulus; instalasi nyata menunggu |
 | P8 | Pemeriksaan rilis dan pemolesan | P4 sampai P7 | Dikerjakan; lihat docs/verification.md |
 
 Eksplorasi aset P2 dapat berlangsung sebelum atau bersama fondasi kode. Logika murni P3 tidak harus menunggu logo final. P7 dapat mulai sebelum P6 selesai, lalu keduanya digabungkan untuk memeriksa notifikasi yang membutuhkan service worker. Tabel dependensi tidak memerintahkan penggunaan subagent otomatis.
@@ -165,8 +165,8 @@ Aset sementara boleh membantu pengembangan jika diberi label jujur. Placeholder 
 - [x] **P6-01:** storage favorit berversi, deduplikasi, ID usang/data rusak dan kegagalan storage ditangani serta diuji.
 - [x] **P6-02:** tambah/hapus, keadaan kosong, persistensi reload, detail favorit dan timer bersama lulus uji browser.
 - [x] **P6-03:** pengaturan lokal default nonaktif tersedia; hari/waktu, perubahan dan pembatalan jadwal teruji.
-- [ ] **P6-04:** pisahkan pemeriksa jadwal dari adapter notifikasi. Minta izin hanya sesudah tindakan opt-in; tangani izin ditolak/unsupported. Integrasikan notifikasi berbasis service worker pada lingkungan yang memerlukannya melalui P7.
-- [ ] **P6-05:** periksa kembali jadwal ketika aplikasi aktif lagi sesuai keputusan D-05; hindari spam atau pengiriman ulang untuk kejadian yang sama. Tampilkan batas pengingat terbuka/berjalan dan ketidakpresisian browser.
+- [ ] **P6-04:** pemeriksa jadwal dan adapter sudah dipisahkan; opt-in, izin ditolak/unsupported, pembatalan, dan penerimaan API service worker diuji otomatis. Penerimaan pada Android Chrome fisik melalui P7 masih menunggu pemeriksaan manual.
+- [x] **P6-05:** pemeriksaan visibility dan deduplikasi setelah reload lulus simulasi browser; batas pengiriman disampaikan dalam UI. Sleep/resume dan notifikasi OS nyata tetap menunggu P7-04.
 
 **Keluaran:** favorit lokal dan pengingat yang berada dalam kendali pengguna.  
 **Kriteria selesai:** favorit bertahan pada reload jika penyimpanan tersedia; izin tidak diminta saat kunjungan awal; ubah/matikan pengingat berfungsi. Integrasi notifikasi nyata yang bergantung pada P7 tidak boleh dinyatakan selesai sebelum diperiksa.  
@@ -178,7 +178,7 @@ Aset sementara boleh membantu pengembangan jika diberi label jujur. Placeholder 
 
 - [x] **P7-01:** manifest `/app`, scope dan PNG sementara 192/512 tersedia dan diuji; ikon final mengikuti aset P2 yang ditunda.
 - [x] **P7-02:** worker produksi, cache statis berversi, fallback offline dan navigasi tanpa cache diuji. Pembaruan tidak memaksa reload sesi; versi cache dinaikkan saat rilis aset berubah.
-- [ ] **P7-03:** sambungkan adapter notifikasi P6 ketika service worker diperlukan. Tidak ada backend pengirim push atau janji notifikasi saat aplikasi tertutup.
+- [ ] **P7-03:** adapter P6 memakai service worker dan API asli Chrome menerima pengiriman pada uji produksi. Tampilan notifikasi serta izin OS Android belum diperiksa. Tidak ada backend pengirim push atau janji notifikasi saat aplikasi tertutup.
 - [ ] **P7-04:** periksa instalasi, peluncuran ikon, jalur masuk, serta akses browser normal di lingkungan D-07/D-08. Pembukaan PWA tidak memulai aktivitas/timer.
 
 **Keluaran:** pengalaman instalasi dan peluncuran PWA sesuai dukungan platform, dengan batas yang dijelaskan.  
@@ -189,7 +189,7 @@ Aset sementara boleh membantu pengembangan jika diberi label jujur. Placeholder 
 
 **Kebutuhan terkait:** seluruh FR dan kebutuhan nonfungsional PRD.
 
-- [x] **P8-01:** typecheck, lint, format, build, 14 Vitest, 34 alur browser, dan enam skenario produksi lulus; lihat docs/verification.md.
+- [x] **P8-01:** typecheck, lint, format, build, 17 Vitest, 38 alur browser dan delapan skenario produksi lulus; lihat docs/verification.md untuk batas setiap pemeriksaan.
 - [ ] **P8-02:** periksa keyboard, fokus, label, status, kontras, zoom, teks panjang, lebar sempit, dan reduced motion pada semua layar utama.
 - [x] **P8-03:** konteks menyatakan hook otomatis tidak aktif, sehingga detector dijalankan manual dan hasil/keterbatasannya dicatat; bukan klaim hook otomatis teruji.
 - [ ] **P8-04:** uji alur penggunaan dengan tugas PRD tanpa analitik pribadi. Catat kebingungan, kebutuhan bantuan, dan ketidakcocokan katalog; perbaiki masalah yang menghalangi penggunaan.

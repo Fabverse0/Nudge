@@ -44,6 +44,6 @@ For UI, copy, accessibility, responsive layout, or comments, read `.agents/skill
 
 This version has breaking changes; APIs, conventions, and file structure may differ from older versions. Read the relevant guide in `node_modules/next/dist/docs/` before changing framework behavior. Heed deprecation notices.
 
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+Next.js adds this marker block through `node_modules/next/dist/server/lib/generate-agent-files.js`. Preserve the markers when editing the contributor guide.
 
 <!-- END:nextjs-agent-rules -->
