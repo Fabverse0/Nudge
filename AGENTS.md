@@ -10,7 +10,7 @@ The selected stack is Next.js App Router, TypeScript, Tailwind CSS, manifest/ser
 
 ## Build, Test, and Development
 
-Use npm and commit `package-lock.json`. Read `package.json` before running scripts. Implementation is authorized for the full MVP. Document configured commands and actual verification as each stage is completed.
+Use npm and commit `package-lock.json`. Read `package.json` before running scripts. Commands: `npm run dev`, `npm run build`, `npm start`, `npm run lint`, `npm run typecheck`, `npm test`, `npm run test:e2e`, and `npm run format:check`. `npm run test:pwa` requires a fresh build and starts a production server on port 3100. Playwright uses installed Chrome. Read README.md for setup and docs/verification.md for observed results and remaining checks.
 
 ## Coding Style & Naming
 
@@ -37,3 +37,13 @@ For UI, copy, or assets, follow DESIGN.md: fixed decisions stay fixed, initial t
 <!-- antislop:start -->
 For UI, copy, accessibility, responsive layout, or comments, read `.agents/skills/antislop/SKILL.md` and matching companion skills. Follow Two Usage Modes; honor the current session's explicit choice without saving global preferences.
 <!-- antislop:end -->
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes; APIs, conventions, and file structure may differ from older versions. Read the relevant guide in `node_modules/next/dist/docs/` before changing framework behavior. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

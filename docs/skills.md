@@ -68,14 +68,14 @@ Skill dapat memiliki langkah delegasi sendiri; baca instruksi aktual sebelum men
 
 ## Perintah proyek setelah scaffolding
 
-Saat ini belum ada `package.json`, lockfile, atau script aplikasi. Setelah scaffolding diizinkan dan dibuat, baca konfigurasi aktual lalu perbarui bagian Build, Test, and Development di AGENTS.md dengan:
+Scaffolding sudah dibuat dengan npm dan package-lock.json. Baca package.json, README.md dan AGENTS.md untuk perintah aktual. Saat alat diperbarui, sinkronkan:
 
 - Package manager dan lockfile yang dipakai.
 - Perintah menjalankan aplikasi lokal dan membuat build produksi.
 - Perintah lint/format yang benar-benar dikonfigurasi.
 - Perintah Vitest dan Playwright, termasuk persiapan browser jika diperlukan.
 
-Jangan menambahkan perintah perkiraan atau mengklaim pemeriksaan berhasil sebelum tool tersedia dan dijalankan. Perubahan panduan ini tidak melakukan scaffolding atau pemasangan dependensi aplikasi.
+Catat hasil aktual di docs/verification.md. Jangan menyamakan pemeriksaan otomatis dengan pemasangan PWA atau izin OS pada perangkat nyata.
 
 ## Runtime dan batas lokal
 

@@ -22,43 +22,43 @@ colors:
   warning-surface: "#FFF4DB"
 typography:
   display:
-    fontFamily: "Nunito, ui-rounded, system-ui, sans-serif"
+    fontFamily: "Nunito Variable, Nunito, ui-rounded, system-ui, sans-serif"
     fontSize: "64px"
     fontWeight: 800
     lineHeight: 1.1
     letterSpacing: "-0.02em"
   heading:
-    fontFamily: "Nunito, ui-rounded, system-ui, sans-serif"
+    fontFamily: "Nunito Variable, Nunito, ui-rounded, system-ui, sans-serif"
     fontSize: "32px"
     fontWeight: 800
     lineHeight: 1.2
     letterSpacing: "-0.01em"
   title:
-    fontFamily: "Nunito, ui-rounded, system-ui, sans-serif"
+    fontFamily: "Nunito Variable, Nunito, ui-rounded, system-ui, sans-serif"
     fontSize: "24px"
     fontWeight: 700
     lineHeight: 1.3
     letterSpacing: "0em"
   body:
-    fontFamily: "Nunito, ui-rounded, system-ui, sans-serif"
+    fontFamily: "Nunito Variable, Nunito, ui-rounded, system-ui, sans-serif"
     fontSize: "16px"
     fontWeight: 500
     lineHeight: 1.6
     letterSpacing: "0em"
   label:
-    fontFamily: "Nunito, ui-rounded, system-ui, sans-serif"
+    fontFamily: "Nunito Variable, Nunito, ui-rounded, system-ui, sans-serif"
     fontSize: "16px"
     fontWeight: 700
     lineHeight: 1.4
     letterSpacing: "0em"
   caption:
-    fontFamily: "Nunito, ui-rounded, system-ui, sans-serif"
+    fontFamily: "Nunito Variable, Nunito, ui-rounded, system-ui, sans-serif"
     fontSize: "14px"
     fontWeight: 500
     lineHeight: 1.5
     letterSpacing: "0em"
   timer:
-    fontFamily: "Nunito, ui-rounded, system-ui, sans-serif"
+    fontFamily: "Nunito Variable, Nunito, ui-rounded, system-ui, sans-serif"
     fontSize: "80px"
     fontWeight: 800
     lineHeight: 1.1
@@ -109,6 +109,8 @@ components:
 ---
 
 # Nudge Design Guide
+
+Catatan implementasi 18 Oktober 2026: Nunito Variable sudah diintegrasikan dari Fontsource dan ikon Phosphor dari paket resminya. Nama family CSS memakai `Nunito Variable`; bentuk huruf tetap Nunito. Logo, ilustrasi, pose maskot, dan ikon final ditunda pengguna agar pengerjaan kode didahulukan. Ikon garis kura-kura serta ikon aplikasi `n.` masih sementara. Angka timer dibatasi lebar viewport pada pembesaran teks agar tetap muat. Status aset pada daftar awal di bawah merupakan kondisi sebelum implementasi.
 
 ## Overview
 
