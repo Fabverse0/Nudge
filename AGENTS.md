@@ -1,27 +1,39 @@
 # Repository Guidelines
 
-## Project Structure & Product Scope
+## Product References & Project Structure
 
-This repository currently contains `README.md`, `CONCEPT.md`, and this guide. Application source, tests, assets, and build configuration have not been created yet. Keep product decisions documented in `CONCEPT.md` until implementation begins. The discussed candidate stack is Next.js App Router, TypeScript, Tailwind CSS, a web manifest/service worker for PWA support, and `localStorage` for favorites; it has not been finalized or implemented. Once chosen, keep routes in `app/`, reusable UI in `components/`, shared logic in `lib/`, static assets in `public/`, and tests beside the code or in `tests/`.
+Read [prd.md](./prd.md) before implementing features, changing behavior, or planning scope. It governs MVP behavior and acceptance criteria; [DESIGN.md](./DESIGN.md) governs visual decisions. Use [GLOSSARY.md](./GLOSSARY.md) for terminology and [CONCEPT.md](./CONCEPT.md) for background. Read [stack research](./docs/research/stack-feasibility.md) when revisiting platform or notification assumptions. Skills operate within these decisions and the user's authorized scope; resolve contradictions explicitly rather than silently changing requirements.
 
-Preserve the MVP boundary: one responsive desktop web and mobile PWA experience, per-device favorites, and no accounts or cloud sync. Keep Nudge focused on one small activity at a time. Reminders must be user-requested and configurable; streaks are optional. Do not describe Nudge as a health or therapy app.
+Before starting or tracking implementation, read [implementation.md](./implementation.md) for task dependencies, acceptance evidence, and current status.
+
+Application code and Nudge assets are not created yet. The selected stack is Next.js App Router, TypeScript, Tailwind CSS, manifest/service worker, localStorage, Vitest, and Playwright. Planned directories: `app/` routes, `components/` UI, `lib/` logic, `public/` assets, and `tests/` browser tests.
 
 ## Build, Test, and Development
 
-No build, test, or development commands are configured yet because this folder has no `package.json` or lockfile. After scaffolding, document the actual package manager and scripts here. Run commands through those scripts (for example, `npm run dev`) only when they exist; do not add dependencies or assume a toolchain without checking the project configuration.
+No package manager, lockfile, or package scripts exist yet. Scaffold only when authorized, then document actual development, build, lint, unit-test, and browser-test commands. Read `package.json` before running scripts; avoid presenting example commands as configured commands.
 
 ## Coding Style & Naming
 
-No formatter or lint rules are configured. Follow repository configuration once added. If the discussed React/TypeScript stack is adopted, use two-space indentation unless the formatter specifies otherwise, PascalCase for React components, camelCase for functions and variables, and clear kebab-case names for standalone files. Keep UI components focused and put reusable selection or timer logic in shared modules.
+Use two-space indentation, PascalCase components, camelCase functions/variables, and kebab-case standalone files; preserve Next.js route filenames. Follow formatter/linter configuration when added. Separate selection and timer logic from UI. Write product copy in Indonesian; avoid em dashes in documents.
 
 ## Testing Guidelines
 
-No test framework or coverage target exists yet. When tests are introduced, add a documented package script and cover the behavior changed. For activity selection, include cases for available time, goal, mood, location, and equipment; for the timer, cover pause, early exit, completion, and restarting the flow.
+Use Vitest (`*.test.ts`, `*.test.tsx`) and Playwright (`tests/*.spec.ts`), selected but not installed. Follow PRD section 12; no coverage percentage is set. Check actual PWA installation and icon launch manually on target devices.
 
 ## Commits and Pull Requests
 
-Git history currently contains one `Initial commit`, which is too little to establish a commit convention. Use short imperative Conventional Commit subjects, such as `feat: add activity timer`. Pull requests should explain the user-facing change, list verification performed, link related issues when available, and include screenshots for UI changes.
+Commit each completed logical addition, modification, or removal using Conventional Commits, such as `feat(timer): add pause control` or `docs: update design guide`. The user has authorized this ongoing commit workflow; keep commits small, focused, and reviewable, with relevant checks recorded. PRs describe behavior, relevant requirements/issues, verification, and UI screenshots. Push only when explicitly requested, including pushes to `main`.
 
 ## Configuration and Privacy
 
-Do not introduce accounts, cloud synchronization, or collection of journaling text without an explicit product decision. Keep user reminders under user control, and avoid logging sensitive user-entered content.
+Preserve local favorites and session-only feedback. Accounts, cloud sync, journal collection, personal analytics, closed-app push, and streaks require a scope decision. Follow PRD reminder/completion rules; avoid sensitive logs.
+
+## Skills & Visual Work
+
+Before selecting development/design skills or updating them, read [docs/skills.md](./docs/skills.md) for task routing and runtime boundaries. Load relevant skills only. Keep installations/caches project-local; use `.codex/impeccable.cmd`. Hooks in `.codex/hooks.json` require Codex trust.
+
+For UI, copy, or assets, follow DESIGN.md: fixed decisions stay fixed, initial tokens are targets, and exploration areas remain open. Asset descriptions do not imply existing files.
+
+<!-- antislop:start -->
+For UI, copy, accessibility, responsive layout, or comments, read `.agents/skills/antislop/SKILL.md` and matching companion skills. Follow Two Usage Modes; honor the current session's explicit choice without saving global preferences.
+<!-- antislop:end -->
