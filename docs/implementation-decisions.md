@@ -23,3 +23,16 @@ Inventaris isi: satu aktivitas, 2/5/10 menit, mood opsional, lewati, journaling 
 Argumen landing: beralih dari scroll dengan satu langkah kecil (contoh kegiatan nyata); memilih menurut waktu (pilihan 2/5/10 menuju aplikasi); tiga tujuan (contoh dari katalog); kendali pengguna (mood opsional, selesai manual, penyimpanan lokal).
 
 Taste Skill menawarkan `one-motif`, `borrowed-category`, `loud-flat-poster`. Dipilih `one-motif`: bentuk tempurung menyatukan halaman tanpa menambah kategori visual lain. Palet dan tipe mengikuti DESIGN.md. Batas gerak serta jumlah bagian mengikuti kebutuhan Nudge, bukan kuota gambar/animasi skill.
+
+## Polesan landing page
+
+Fokus dipilih pengguna: landing page. Arah `one-motif` dengan seed `469094123` dipertahankan tanpa draw ulang. Antarmuka aplikasi, isi halaman, palet dan aset final berada di luar perubahan ini.
+
+- Padding hero dan panel demo dipadatkan agar judul, tindakan utama, dan contoh kegiatan lebih seimbang dalam layar pertama.
+- Pilihan durasi yang aktif memperoleh tanda centang agar statusnya tidak bergantung pada warna saja; radio native dan fokus keyboard tetap digunakan.
+- Panah pada link demo memakai Phosphor agar ukuran dan garisnya selaras dengan link perpindahan lain.
+- Dasar tombol utama setinggi 3 px, turun menjadi 1 px saat ditekan, mengikuti bahasa tombol dalam DESIGN.md. Ini pengecualian yang disengaja terhadap larangan shadow Taste Skill.
+- Latar dan ukuran simbol kategori diselaraskan agar ketiga tujuan terbaca sebagai kelompok setara. Simbol refleksi memakai permukaan putih agar tidak menyatu dengan bidang sand di belakangnya.
+- Footer mengelompokkan merek dengan keterangannya; link masuk ditempatkan di sebelah kanan pada desktop dan satu kolom pada ponsel.
+
+Identitas memakai kurva tempurung, Nunito, serta bidang sage, biru, dan sand yang sudah disepakati. Motion tetap 1: respons interaksi tanpa menambah animasi scroll atau mengubah batas aset yang ditunda pengguna.
