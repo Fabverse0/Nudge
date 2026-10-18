@@ -1,5 +1,14 @@
 import { expect, it } from "vitest";
-import { finishTimer, formatTime, pauseTimer, remaining, resumeTimer, startTimer, stopTimer, tick } from "./timer";
+import {
+  finishTimer,
+  formatTime,
+  pauseTimer,
+  remaining,
+  resumeTimer,
+  startTimer,
+  stopTimer,
+  tick,
+} from "./timer";
 
 it("uses the deadline after delayed callbacks and requires manual completion", () => {
   const timer = startTimer(2, 1_000);

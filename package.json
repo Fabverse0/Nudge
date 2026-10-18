@@ -2,6 +2,7 @@
   "name": "nudge",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:pwa": "playwright test --config playwright.production.config.ts",
     "format:check": "prettier --check src tests *.ts *.mjs *.json"
   },
   "engines": {
