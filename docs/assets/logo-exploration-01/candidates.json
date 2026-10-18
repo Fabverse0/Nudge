@@ -1,0 +1,50 @@
+[
+  {
+    "id": "A1",
+    "direction": "Tempurung bulat kompak",
+    "corner": "lower-left",
+    "colorA": "Tidal Sage #679F9E",
+    "colorMapping": "Use sage for the almost circular shell and facial marks, and sand for the big head and small feet.",
+    "description": "Treatment: a compact almost circular shell, a rounded oversized head looking toward the viewer in a gentle three-quarter view, two widely spaced simple eyes, and one softly lifted forefoot suggesting a first small step. The expression is warmly curious. The shell is one uninterrupted large mass with no shell pattern."
+  },
+  {
+    "id": "A2",
+    "direction": "Tempurung bulat kompak",
+    "corner": "lower-right",
+    "colorA": "deep sage #315F5E",
+    "colorMapping": "Use deep sage for the round shell and facial marks, and sand for the broad head and small feet.",
+    "description": "Treatment: a very compact circular dome shell, short rounded limbs, and a broad baby-like head gently turned toward the viewer. One forefoot is just beginning a small step. Two small round eyes and a tiny relaxed smile convey quiet confidence. Keep the shell plain and the body visually joined into a single soft silhouette."
+  },
+  {
+    "id": "B1",
+    "direction": "Kura-kura beristirahat",
+    "corner": "lower-left",
+    "colorA": "deep sage #315F5E",
+    "colorMapping": "Use deep sage for the broad dome shell and facial marks, and sand for the softly resting head and two forefeet.",
+    "description": "Treatment: a resting turtle with a broad soft dome shell, an oversized head peeking just beyond its shell, and two rounded forefeet tucked comfortably forward. Both simple eyes remain visible and gently content. The pose conveys a safe unhurried pause, with a small welcoming smile rather than sadness or sleepiness. No pillow, props, or shell pattern."
+  },
+  {
+    "id": "B2",
+    "direction": "Kura-kura beristirahat",
+    "corner": "lower-right",
+    "colorA": "Tidal Sage #679F9E",
+    "colorMapping": "Use sage for the soft dome shell and facial marks, and sand for the large resting face and two visible rounded forefeet.",
+    "description": "Treatment: a low relaxed turtle with a rounded dome shell and a large cheeky face nestled beside it. Show both forefeet resting comfortably and both simple eyes gently curved in a content friendly expression. The head remains upright, the silhouette chunky and cohesive, and the mood softly playful rather than tired or disappointed. No shell markings or surrounding objects."
+  },
+  {
+    "id": "C1",
+    "direction": "Wajah ramah dan tempurung besar",
+    "corner": "lower-left",
+    "colorA": "Tidal Sage #679F9E",
+    "colorMapping": "Use sage for the large arching shell and simple facial marks, and sand for the large front-facing head and forefeet.",
+    "description": "Treatment: a turtle greeting the viewer almost front-on, with a broad tall shell arch visible behind its rounded oversized face. The shell forms a single protective rounded region. Both rounded forefeet peek forward, two widely spaced simple eyes look curiously outward, and a tiny cheerful mouth makes the expression welcoming and a little mischievous. No shell pattern."
+  },
+  {
+    "id": "C2",
+    "direction": "Wajah ramah dan tempurung besar",
+    "corner": "lower-right",
+    "colorA": "deep sage #315F5E",
+    "colorMapping": "Use deep sage for the large rounded shell and facial marks, and sand for the large friendly face and both forefeet.",
+    "description": "Treatment: an almost front-facing turtle with a generously rounded shell rising behind a large baby-like head. Show two simple widely spaced eyes and a tiny happy open mouth, with one rounded forefoot lifted in a quiet greeting while the other remains visible. The expression is the most openly delighted of this treatment while staying calm and approachable. The shell remains plain and visually dominant behind the face."
+  }
+]
