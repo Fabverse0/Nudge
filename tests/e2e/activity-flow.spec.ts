@@ -178,6 +178,8 @@ test("corrupt and blocked local data does not block manual activities", async ({
 test("keyboard and accessibility on landing, selection and suggestion", async ({
   page,
 }) => {
+  // Three Axe audits share this test's deadline.
+  test.setTimeout(60_000);
   await page.goto("/");
   await page.keyboard.press("Tab");
   await expect(page.getByRole("link", { name: "Lewati ke isi" })).toBeFocused();
