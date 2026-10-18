@@ -1,7 +1,12 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { CheckIcon, FootprintsIcon, LeafIcon } from "@phosphor-icons/react";
+import {
+  ArrowUpRightIcon,
+  CheckIcon,
+  FootprintsIcon,
+  LeafIcon,
+} from "@phosphor-icons/react";
 
 const previews = {
   2: {
@@ -42,6 +47,11 @@ export function ActivityPreview() {
               <span>
                 {time}
                 <small>menit</small>
+                <CheckIcon
+                  size={14}
+                  className="demo-selection"
+                  aria-hidden="true"
+                />
               </span>
             </label>
           ))}
@@ -54,7 +64,8 @@ export function ActivityPreview() {
         <p>{item.copy}</p>
       </div>
       <Link href={`/app?minutes=${minutes}`} className="demo-link">
-        Pilih kegiatanku<span aria-hidden="true">↗</span>
+        Pilih kegiatanku
+        <ArrowUpRightIcon size={20} aria-hidden="true" />
       </Link>
     </div>
   );
