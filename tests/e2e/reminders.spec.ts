@@ -1,5 +1,76 @@
 import { expect, test } from "@playwright/test";
 
+type PermissionProbe = {
+  requests: number;
+  sent: number;
+  grant: () => void;
+};
+
+for (const scenario of [
+  { name: "within the due minute", wait: 15_000, expected: 1 },
+  { name: "after the due minute", wait: 90_000, expected: 0 },
+]) {
+  test(`delayed permission ${scenario.name} sends only a current reminder`, async ({
+    page,
+  }) => {
+    await page.clock.install({ time: new Date(2026, 9, 19, 16, 0, 5) });
+    await page.addInitScript(() => {
+      const probe: PermissionProbe = { requests: 0, sent: 0, grant: () => {} };
+      class MockNotification {
+        static permission: NotificationPermission = "default";
+        static requestPermission() {
+          probe.requests++;
+          return new Promise<NotificationPermission>((resolve) => {
+            probe.grant = () => {
+              MockNotification.permission = "granted";
+              resolve("granted");
+            };
+          });
+        }
+        constructor() {
+          probe.sent++;
+        }
+      }
+      Object.defineProperty(window, "Notification", {
+        value: MockNotification,
+      });
+      Object.defineProperty(window, "permissionProbe", { value: probe });
+    });
+    await page.goto("/app");
+    await page.getByRole("button", { name: "Pengingat", exact: true }).click();
+    await page
+      .getByRole("checkbox", { name: "Aktifkan pengingat", exact: false })
+      .check();
+    await page.getByRole("button", { name: "Simpan pengingat" }).click();
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () =>
+            (window as unknown as { permissionProbe: PermissionProbe })
+              .permissionProbe.requests,
+        ),
+      )
+      .toBe(1);
+    await page.clock.fastForward(scenario.wait);
+    await page.evaluate(() =>
+      (
+        window as unknown as { permissionProbe: PermissionProbe }
+      ).permissionProbe.grant(),
+    );
+    await expect(page.getByText("Notifikasi: diizinkan.")).toBeVisible();
+    await page.clock.fastForward(15_000);
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () =>
+            (window as unknown as { permissionProbe: PermissionProbe })
+              .permissionProbe.sent,
+        ),
+      )
+      .toBe(scenario.expected);
+  });
+}
+
 test("turning reminders off works with an unfinished time field", async ({
   page,
 }) => {
