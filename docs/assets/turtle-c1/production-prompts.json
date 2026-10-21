@@ -1,0 +1,26 @@
+{
+  "reference": "public/brand/mascot/nudge-turtle-idle.png",
+  "mode": "built-in image generation; model name not exposed",
+  "jobs": [
+    {
+      "name": "nudge-turtle-complete",
+      "folder": "mascot",
+      "prompt": "Create a new illustration of the SAME turtle character shown in the reference image. Preserve its identity exactly: enormous warm sand face (#E6D4BE family), broad tall uninterrupted sage shell arch (#679F9E family), large widely spaced sage oval eyes with a single sand highlight each, soft round sand forefeet, compact body, friendly curved sage smile, and the reference's soft graphic dimensional rendering. Do not add shell patterns, eyebrows, nostrils, clothing, or extra characters. Keep all shapes blunt, generous, simple and rounded. Pose: quiet delight after finishing one small activity. Both forefeet raised a little in a soft welcoming gesture, eyes gently closed as two broad happy curves, one open friendly smile. It should feel relieved and content, never competitive or triumphant. Whole body visible, ample clear margin, square composition. Transparent background with clean antialiased cutout edges, no colored fringe, no ground plane, no cast shadow, no text, no confetti, no trophies."
+    },
+    {
+      "name": "nudge-turtle-tidy",
+      "folder": "illustrations",
+      "prompt": "Create a new illustration of the SAME turtle character shown in the reference image. Preserve its identity exactly: enormous warm sand face (#E6D4BE family), broad tall uninterrupted sage shell arch (#679F9E family), large widely spaced sage oval eyes with a single sand highlight each, soft round sand forefeet, compact body, friendly curved sage smile, and the reference's soft graphic dimensional rendering. Do not add shell patterns, eyebrows, nostrils, clothing, or extra characters. Keep all shapes blunt, generous, simple and rounded. Scene: this single turtle is gently putting one small rounded blue block on top of another, next to one simple sand notebook. Convey tidying a small corner, not office work. Turtle faces slightly toward the objects with a pleased attentive expression; face remains very large. Objects only use muted blue #7EADDB, sand and sage. Full turtle and all objects visible within a square, grouped in the lower two thirds with comfortable margins. Genuine transparent background, clean edges, no ground plane or scenery, no text or symbols, no extra decoration."
+    },
+    {
+      "name": "nudge-turtle-move",
+      "folder": "illustrations",
+      "prompt": "Create a new illustration of the SAME turtle character shown in the reference image. Preserve its identity exactly: enormous warm sand face (#E6D4BE family), broad tall uninterrupted sage shell arch (#679F9E family), large widely spaced sage oval eyes with a single sand highlight each, soft round sand forefeet, compact body, friendly curved sage smile, and the reference's soft graphic dimensional rendering. Do not add shell patterns, eyebrows, nostrils, clothing, or extra characters. Keep all shapes blunt, generous, simple and rounded. Scene: this single turtle takes one small relaxed step, one rounded forefoot gently extended forward and the other supporting it, shell and face in a slight three-quarter view. Cheerful open eyes, gentle smile. Make the step visibly different from a wave and from the idle pose. No workout equipment, clothing, sweat, speed lines or athletic strain. Whole body visible, square composition, ample margins, genuine transparent background, clean edges, no ground plane or scenery, no text or extra decorations."
+    },
+    {
+      "name": "nudge-turtle-journal",
+      "folder": "illustrations",
+      "prompt": "Create a new illustration of the SAME turtle character shown in the reference image. Preserve its identity exactly: enormous warm sand face (#E6D4BE family), broad tall uninterrupted sage shell arch (#679F9E family), large widely spaced sage oval eyes with a single sand highlight each, soft round sand forefeet, compact body, friendly curved sage smile, and the reference's soft graphic dimensional rendering. Do not add shell patterns, eyebrows, nostrils, clothing, or extra characters. Keep all shapes blunt, generous, simple and rounded. Scene: this single turtle sits calmly beside an open small blank journal, holding a short thick blunt sage pencil in one rounded forefoot as if writing. Journal has sand pages and a muted blue #7EADDB cover; pages have no letters or marks. Thoughtful kind eyes look gently down toward the journal, with a small smile. Preserve huge round face and broad plain shell. Full body, journal and pencil visible in a balanced square with generous margins. Genuine transparent background, clean cutout edges, no ground plane or scenery, no text, no extra objects."
+    }
+  ]
+}
