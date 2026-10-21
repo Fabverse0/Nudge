@@ -3,6 +3,23 @@
   overflow: clip;
 }
 
+.landing-studio :is(h1, h2, h3, p, a) {
+  overflow-wrap: anywhere;
+}
+
+.landing-studio .site-header {
+  flex-wrap: wrap;
+}
+
+.landing-studio .site-header .brand {
+  flex-shrink: 0;
+}
+
+.landing-studio .site-header nav {
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
 .landing-studio .hero {
   grid-template-columns: 1fr 1.12fr;
   gap: clamp(24px, 4vw, 64px);
@@ -67,9 +84,12 @@
 
 .landing-studio .demo-duration > div {
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .landing-studio .demo-duration label {
+  flex: 1 1 4rem;
+  min-width: 4rem;
   max-width: 100px;
 }
 
@@ -251,7 +271,8 @@
 }
 
 .landing-studio .site-footer .brand {
-  width: min(300px, 100%);
+  width: fit-content;
+  max-width: 100%;
 }
 
 .landing-studio .site-footer .brand-wordmark {
@@ -317,8 +338,8 @@
   }
 
   .landing-studio .how-flow article {
-    grid-template-columns: 96px minmax(0, 1fr);
-    gap: 16px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
   }
 
   .landing-studio .flow-word {
@@ -372,6 +393,6 @@
   }
 
   .landing-studio .site-footer .brand {
-    width: 220px;
+    width: fit-content;
   }
 }
