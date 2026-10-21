@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { ArrowUpRightIcon, CheckIcon } from "@phosphor-icons/react";
+import { ArrowUpRightIcon, CheckCircleIcon } from "@phosphor-icons/react";
 
 const previews = {
   2: {
@@ -80,8 +80,9 @@ export function ActivityPreview() {
                 <span>
                   {time}
                   <small>menit</small>
-                  <CheckIcon
-                    size={14}
+                  <CheckCircleIcon
+                    size={24}
+                    weight="fill"
                     className="demo-selection"
                     aria-hidden="true"
                   />

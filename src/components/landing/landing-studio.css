@@ -104,6 +104,16 @@
   background: var(--action);
 }
 
+.landing-studio .demo-selection {
+  top: -8px;
+  right: -6px;
+  width: 24px;
+  height: 24px;
+  color: var(--canvas);
+  background: var(--action);
+  border-radius: 50%;
+}
+
 .landing-studio .demo-activity {
   margin: 0;
   padding: 0;
