@@ -107,6 +107,38 @@ test("studio images and text reflow at four widths", async ({
   }
 });
 
+test("studio reflows enlarged text on a narrow screen", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.goto("/");
+  await activate(page);
+  await page.evaluate(() => {
+    document.documentElement.style.fontSize = "200%";
+  });
+  const failures = await page.evaluate(() =>
+    [
+      ...document.querySelectorAll(
+        ".landing h1, .landing h2, .landing h3, .landing p, .landing a, .flow-word, .demo-duration label > span",
+      ),
+    ]
+      .filter((element) => {
+        const rect = element.getBoundingClientRect();
+        return (
+          rect.left < -1 ||
+          rect.right > innerWidth + 1 ||
+          element.scrollWidth > element.clientWidth + 1
+        );
+      })
+      .map((element) => element.textContent),
+  );
+  expect(failures).toEqual([]);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+});
+
 test("studio motion runs once and honors a live reduced-motion change", async ({
   page,
 }) => {
