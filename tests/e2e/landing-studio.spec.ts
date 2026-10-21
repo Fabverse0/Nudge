@@ -8,6 +8,33 @@ async function activate(page: import("@playwright/test").Page) {
   ).toBeVisible();
 }
 
+test("landing review uses a clear check, step icons and walking art", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await activate(page);
+  const selected = page
+    .locator(".demo-duration label")
+    .filter({ has: page.getByRole("radio", { name: "2 menit", exact: true }) });
+  await expect(selected.locator(".demo-selection")).toBeVisible();
+  expect(
+    await selected
+      .locator(".demo-selection")
+      .evaluate((element) => element.getBoundingClientRect().width),
+  ).toBe(24);
+  await expect(page.locator(".start-activity-icon")).toHaveCount(2);
+  await expect(page.locator(".studio-category-move img")).toHaveAttribute(
+    "src",
+    /nudge-turtle-walk/,
+  );
+  await expect(page.locator('.closing [lang="en"]')).toContainText(
+    "Small steps. A fuller life.",
+  );
+  await expect(
+    page.getByRole("link", { name: "Mulai kegiatan", exact: true }),
+  ).toHaveAttribute("href", "/app");
+});
+
 test("studio duration supports keyboard, rapid changes and the real app route", async ({
   page,
 }) => {
