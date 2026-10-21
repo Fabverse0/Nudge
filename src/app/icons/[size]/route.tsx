@@ -13,7 +13,8 @@ export async function GET(
   const symbol = await readFile(
     path.join(process.cwd(), "public/brand/logo/nudge-symbol.png"),
   );
-  const artworkSize = Math.round(width * (maskable ? 0.64 : 0.96));
+  // A 56% square fits entirely inside the maskable safe circle (radius 40%).
+  const artworkSize = Math.round(width * (maskable ? 0.56 : 0.96));
   return new ImageResponse(
     <div
       style={{

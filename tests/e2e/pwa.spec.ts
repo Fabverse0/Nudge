@@ -111,6 +111,11 @@ test("production registers worker, serves real icons and keeps private state out
   page,
   request,
 }) => {
+  await page.goto("/offline.html");
+  await page.evaluate(async () => {
+    const obsolete = await caches.open("nudge-static-obsolete");
+    await obsolete.put("/icons/512", new Response("outdated icon"));
+  });
   await page.goto("/app");
   await page.evaluate(() => navigator.serviceWorker.ready);
   await page.reload();
@@ -140,6 +145,36 @@ test("production registers worker, serves real icons and keeps private state out
     type: "image/png",
     purpose: "maskable",
   });
+  const unsafePixels = await page.evaluate(async () => {
+    const image = new Image();
+    image.src = "/icons/maskable-512";
+    await image.decode();
+    const canvas = document.createElement("canvas");
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("Canvas unavailable for maskable icon check");
+    context.drawImage(image, 0, 0);
+    const { data } = context.getImageData(0, 0, canvas.width, canvas.height);
+    const center = canvas.width / 2;
+    const safeRadius = canvas.width * 0.4;
+    let outside = 0;
+    for (let y = 0; y < canvas.height; y += 1) {
+      for (let x = 0; x < canvas.width; x += 1) {
+        if (Math.hypot(x + 0.5 - center, y + 0.5 - center) <= safeRadius)
+          continue;
+        const offset = (y * canvas.width + x) * 4;
+        if (
+          [0, 1, 2].some(
+            (channel) => Math.abs(data[offset + channel] - data[channel]) > 8,
+          )
+        )
+          outside += 1;
+      }
+    }
+    return outside;
+  });
+  expect(unsafePixels, "Maskable artwork stays inside the safe circle").toBe(0);
   const cacheUrls = await page.evaluate(async () => {
     const urls: string[] = [];
     for (const key of await caches.keys()) {
@@ -152,6 +187,9 @@ test("production registers worker, serves real icons and keeps private state out
   expect(cacheUrls).toContain("/offline.html");
   expect(cacheUrls).not.toContain("/app");
   expect(cacheUrls).not.toContain("/");
+  expect(await page.evaluate(() => caches.keys())).not.toContain(
+    "nudge-static-obsolete",
+  );
 });
 
 test("offline navigation explains the real limitation", async ({
