@@ -5,6 +5,24 @@
   "prompt": "docs/assets/landing-studio/hero-prompt.txt",
   "assets": [
     {
+      "path": "docs/assets/landing-studio/walk-source-v2.png",
+      "reference": "public/brand/illustrations/nudge-turtle-move.png",
+      "prompt": "docs/assets/landing-studio/walk-prompt.txt",
+      "width": 1254,
+      "height": 1254,
+      "bytes": 813237,
+      "alpha": true,
+      "sha256": "e4ea97a400287f1e62b87a0dfd1c49c44e68fc4d3f87147273f59dc0d5167c27"
+    },
+    {
+      "path": "public/brand/landing/nudge-turtle-walk.webp",
+      "width": 900,
+      "height": 900,
+      "bytes": 67588,
+      "alpha": true,
+      "sha256": "ee163eb355da24fc1d0769a33b8ef035813cf951e752d5da5e085bc4bfb86076"
+    },
+    {
       "path": "docs/assets/landing-studio/hero-source-v1.png",
       "width": 1448,
       "height": 1086,
