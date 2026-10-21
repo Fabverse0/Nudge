@@ -167,7 +167,10 @@ test("studio motion runs once and honors a live reduced-motion change", async ({
   ).toHaveLength(1);
 });
 
-test("studio remains readable without JavaScript", async ({ browser, baseURL }) => {
+test("studio remains readable without JavaScript", async ({
+  browser,
+  baseURL,
+}) => {
   const context = await browser.newContext({
     baseURL,
     javaScriptEnabled: false,
