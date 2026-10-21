@@ -91,10 +91,11 @@ Preview produksi lokal pada `http://127.0.0.1:3100`, melalui browser dalam aplik
 - Mood dilewati, tujuan refleksi dan waktu dua menit menghasilkan saran beserta instruksi kegiatan di luar Nudge.
 - Memulai kegiatan membuka timer. Tab lalu Enter mengaktifkan jeda; status berubah menjadi sedang dijeda.
 - Menekan Selesai menampilkan pertanyaan perubahan mood. Lewati mengembalikan pemilihan dengan tujuan dan waktu sebelumnya tetap dipilih.
-- Favorit kosong menjelaskan cara menyimpan dan batas penyimpanan lokal. Penambahan serta persistensi favorit tidak diulang dalam tinjauan ini.
+- Favorit kosong menjelaskan cara menyimpan dan batas penyimpanan lokal. Dalam pemeriksaan lanjutan, satu kegiatan ditambahkan, halaman dimuat ulang, dan kegiatan tetap tersedia serta dapat dibuka dari favorit. Favorit uji kemudian dihapus lewat UI sehingga daftar kembali kosong.
 - Pengingat ditampilkan nonaktif, dengan penjelasan batas aplikasi terbuka. Izin notifikasi dan jadwal tersimpan tidak diubah.
 - Tombol panah pada pilihan durasi landing mengubah lima menjadi sepuluh menit. Tautan pilihan membuka `/app?minutes=10`, dengan sepuluh menit terpilih dan tanpa timer aktif.
 - Pada halaman pemilihan yang diukur, tidak ada overflow horizontal atau gambar gagal dimuat. Screenshot landing: `.impeccable/review/desktop-review-2026-10-22.png`.
+- Berhenti dari timer kembali ke pemilihan dengan pesan bahwa kegiatan belum ditandai selesai. Ganti kegiatan dari timer yang dibuka melalui favorit juga kembali ke pemilihan tanpa layar penyelesaian. Screenshot akhir daftar favorit yang sudah dibersihkan: `.impeccable/review/desktop-favorites-cleanup-2026-10-22.png`.
 
 Tidak ditemukan masalah baru pada langkah tersebut. Ini peninjauan agen, bukan observasi peserta. Zoom browser nyata, pembaca layar, pengiriman notifikasi OS, dan Android tetap belum diperiksa. Pengguna memilih menunda Android dan meninjau desktop terlebih dahulu.
 
