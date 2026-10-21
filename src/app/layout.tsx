@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     "Sedang gabut atau ingin jeda dari scrolling? Pilih satu kegiatan kecil sesuai mood dan waktumu.",
   applicationName: "Nudge",
-  icons: { icon: "/icons/192", apple: "/icons/192" },
+  icons: { icon: "/icons/32", apple: "/icons/180" },
   appleWebApp: { capable: true, statusBarStyle: "default", title: "Nudge" },
 };
 export const viewport: Viewport = {

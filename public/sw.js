@@ -1,6 +1,6 @@
 // Bump the version when releasing changed static assets.
-const CACHE = "nudge-static-v1";
-const STATIC = ["/offline.html", "/icons/192", "/icons/512"];
+const CACHE = "nudge-static-v2";
+const STATIC = ["/offline.html", "/icons/32", "/icons/180", "/icons/192", "/icons/512", "/icons/maskable-512"];
 self.addEventListener("install", (event) => { event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(STATIC))); });
 self.addEventListener("activate", (event) => { event.waitUntil(caches.keys().then((keys) => Promise.all(keys.filter((key) => key.startsWith("nudge-static-") && key !== CACHE).map((key) => caches.delete(key))))); });
 self.addEventListener("fetch", (event) => {

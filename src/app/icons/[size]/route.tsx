@@ -1,12 +1,19 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ size: string }> },
 ) {
   const { size } = await params;
-  if (size !== "192" && size !== "512")
+  if (!["32", "180", "192", "512", "maskable-512"].includes(size))
     return new Response("Not found", { status: 404 });
-  const width = Number(size);
+  const maskable = size === "maskable-512";
+  const width = maskable ? 512 : Number(size);
+  const symbol = await readFile(
+    path.join(process.cwd(), "public/brand/logo/nudge-symbol.png"),
+  );
+  const artworkSize = Math.round(width * (maskable ? 0.64 : 0.96));
   return new ImageResponse(
     <div
       style={{
@@ -15,14 +22,22 @@ export async function GET(
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#EAF3EE",
-        color: "#315F5E",
-        fontSize: width * 0.7,
-        fontWeight: 800,
+        background: "#7EADDB",
       }}
     >
-      n.
+      {/* ImageResponse renders an image directly; next/image is for browser HTML. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={`data:image/png;base64,${symbol.toString("base64")}`}
+        width={artworkSize}
+        height={artworkSize}
+        alt=""
+      />
     </div>,
-    { width, height: width },
+    {
+      width,
+      height: width,
+      headers: { "Cache-Control": "public, max-age=3600" },
+    },
   );
 }
