@@ -8,6 +8,7 @@ import { TurtleMascot } from "@/components/ui/turtle-mascot";
 import { Brand } from "@/components/brand";
 import { ActivityPreview } from "@/components/landing/activity-preview";
 import { LandingMotion } from "@/components/landing/landing-motion";
+import { StartActivityIcon } from "@/components/landing/start-activity-icon";
 import "@/components/landing/landing-studio.css";
 
 export default function HomePage() {
@@ -39,7 +40,7 @@ export default function HomePage() {
             </p>
             <Link href="/app" className="button primary hero-cta">
               Mulai satu kegiatan
-              <ArrowUpRightIcon size={20} />
+              <StartActivityIcon />
             </Link>
             <p className="hero-footnote">
               <TurtleMascot pose="symbol" size={28} />
@@ -124,10 +125,14 @@ export default function HomePage() {
               </article>
               <article className="studio-category studio-category-move">
                 <div className="studio-art-frame" data-studio-motion="image">
-                  <TurtleMascot
-                    pose="move"
-                    size={320}
-                    className="category-illustration"
+                  <Image
+                    src="/brand/landing/nudge-turtle-walk.webp"
+                    alt="Kura-kura Nudge melangkah dengan kaki depan terangkat dan jejak di belakangnya"
+                    width={900}
+                    height={900}
+                    sizes="(max-width: 700px) 280px, 320px"
+                    loading="lazy"
+                    className="turtle-mascot category-illustration"
                   />
                 </div>
                 <div>
@@ -181,7 +186,7 @@ export default function HomePage() {
           </div>
           <Link href="/app" className="button primary">
             Mulai kegiatan
-            <ArrowUpRightIcon size={20} />
+            <StartActivityIcon />
           </Link>
         </section>
       </main>

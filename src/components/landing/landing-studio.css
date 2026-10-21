@@ -49,6 +49,27 @@
   border-radius: 50% 50% 14% 14%;
 }
 
+.start-activity-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  color: var(--action);
+  background: var(--canvas);
+}
+
+.start-activity-icon svg {
+  transition: transform 180ms var(--studio-ease);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .landing-studio .button:hover .start-activity-icon svg {
+    transform: translateY(-2px) rotate(-8deg);
+  }
+}
+
 .studio-hero-art {
   display: block;
   width: 112%;
