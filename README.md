@@ -30,7 +30,7 @@ npm run test:pwa
 npm run format:check
 ```
 
-Playwright memakai Chrome yang sudah terpasang, dengan profil pengujian terpisah. `test:pwa` memerlukan build produksi terbaru dan port 3100 yang bebas untuk server sementara. Server pengembangan menggunakan port 3000. Pemasangan PWA dan izin OS pada perangkat fisik memerlukan pemeriksaan manual.
+Playwright memakai Chrome yang sudah terpasang, dengan profil pengujian terpisah. `test:pwa` memeriksa landing studio serta regresi PWA, memerlukan build produksi terbaru dan port 3100 yang bebas untuk server sementara. Server pengembangan menggunakan port 3000. Pemasangan PWA dan izin OS pada perangkat fisik memerlukan pemeriksaan manual.
 
 ## Struktur dan data
 
@@ -49,5 +49,7 @@ Pengingat default nonaktif, meminta izin hanya setelah opt-in, dan membutuhkan a
 Gunakan [PRD](./prd.md) untuk perilaku, [desain](./DESIGN.md) untuk identitas, [rencana implementasi](./implementation.md) untuk progres, dan [keputusan implementasi](./docs/implementation-decisions.md) untuk rincian teknis. Ikuti [panduan kontribusi](./AGENTS.md) sebelum mengubah proyek.
 
 Tugas dan lembar hasil untuk pemasangan PWA, izin OS, dan observasi pengguna tersedia di [pemeriksaan manual](./docs/manual-checks.md).
+
+Landing studio memakai satu adegan C1 baru dan tiga ilustrasi kegiatan yang sudah ada, dengan gerak sekali masuk serta dukungan reduced motion. Arah dan hasil tinjauan tersedia di [catatan studio](./docs/landing-studio.md), sedangkan sumber gambar dan prompt ada di [inventaris hero](./docs/assets/landing-studio/README.md).
 
 Pengguna memilih C1 dari [enam kandidat karakter](./docs/assets/logo-exploration-01/README.md). Empat pose, tiga ilustrasi aktivitas, simbol, wordmark, dan ikon browser/PWA sudah diintegrasikan. Lihat [inventaris dan prompt aset](./docs/assets/turtle-c1/README.md). Ekspor ulang wordmark serta logo komposit dengan `npm run assets:wordmark`. Wordmark memakai path vektor; logo komposit memadukan simbol raster dengan tulisan vektor. Nunito dan Phosphor memiliki pemberitahuan lisensi di [docs/licenses](./docs/licenses).

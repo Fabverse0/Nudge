@@ -319,6 +319,8 @@ Jika muncul kebutuhan baru, catat masalah yang hendak diselesaikan, dampak terha
 
 ## 13. Ringkasan kesiapan peninjauan rilis
 
+Polesan landing studio yang disetujui 22 Oktober 2026 telah diimplementasikan: satu hero C1 baru, ilustrasi kategori besar, demo durasi, animasi terarah, reduced motion, dan fallback statis. Dua puluh skenario produksi lulus; arah, kritik visual, serta keterbatasannya dicatat di docs/landing-studio.md dan docs/verification.md. Ini menyelesaikan pekerjaan polesan landing tersebut, bukan penerimaan Android atau seluruh MVP.
+
 - [ ] Seluruh FR memiliki keluaran implementasi dan bukti penerimaan.
 - [x] Build serta pemeriksaan yang dikonfigurasi lulus, atau ada keterbatasan yang dinyatakan jelas dan diputuskan sebelum rilis.
 - [x] Pengguna dapat menyelesaikan satu alur dan memulai lagi tanpa akun.

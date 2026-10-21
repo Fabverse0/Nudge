@@ -6,6 +6,24 @@ Diperbarui: 22 Oktober 2026. Status: kode MVP dan aset C1 terintegrasi; penerima
 
 Windows, Node.js 22.19.0, npm 11.19.0. Next.js 16.4.2, React 19.3.1, TypeScript 6.0.3, Tailwind 4.3.3, Vitest 5.0.5, Playwright 1.64.1. Versi terkunci dalam package-lock.json.
 
+## Polesan landing studio, 22 Oktober 2026
+
+Landing memakai satu adegan hero C1 baru, tiga ilustrasi kategori lama yang diperbesar, demo durasi terpisah, bingkai lengkung tempurung, dan animasi yang berjalan sekali. [Catatan studio](./landing-studio.md) memuat arah, adaptasi skill, serta batas gerak; [inventaris aset](./assets/landing-studio/README.md) memuat sumber PNG, prompt, WebP 83.254 byte, ukuran, dan hash. Tidak ada paket runtime, backend, atau media stok baru.
+
+- Build produksi dan typecheck lulus. Lint, format check, serta `git diff --check` lulus untuk perubahan ini.
+- `npm run test:pwa`: **20/20 lulus dalam 55,9 detik**, terdiri dari 12 skenario landing dan delapan regresi produksi/PWA pada Chrome desktop dan viewport Pixel 7. Konfigurasi produksi kini juga memasukkan `landing-studio.spec.ts`.
+- Landing diuji pada lebar 320, 390, 768, dan 1440 px. Gambar ditunggu hingga benar-benar dimuat setelah perubahan viewport. Screenshot tersedia di `.impeccable/review/studio-*-*.png`.
+- Tes membuktikan pilihan awal lima menit, keyboard, perubahan durasi berulang, tautan dengan durasi terpilih, tidak ada timer otomatis, reduced motion yang berubah saat halaman terbuka, hero masuk sekali, serta landing terbaca tanpa JavaScript. Kontrol preview dinonaktifkan sebelum hydration; tautan statis dan penjelasan lima menit tetap tersedia tanpa script.
+- Axe pada landing dengan reduced motion tidak menemukan pelanggaran otomatis. Pemeriksaan teks CSS 200% pada lebar 320 px lulus; ini bukan pengganti zoom browser nyata atau pembaca layar.
+- Taste source lint: **0 FAIL, 0 WARN**. Inspector final pada 1440/768/390: **0 FAIL, 2 WARN**, empat gambar utama, 21 elemen bergerak tercatat, judul maksimal dua baris pada ukuran teks standar, dan daftar console error kosong. Laporan/screenshot: `.taste-skill/landing-studio/final/`.
+- Dua WARN dipertahankan secara eksplisit: canvas hangat berasal dari palet tetap DESIGN.md; tidak ada video karena pengguna memilih studio ilustrasi dengan gerak terarah tanpa loop. Tidak ada penyembunyian aturan untuk overflow atau gambar rusak.
+- Impeccable detector pada halaman dan komponen landing: **0 temuan primer**, 10 advisory ukuran font/radius. Rentang display dan bentuk lengkung khusus landing dijelaskan dalam DESIGN.md; tidak ada pengubahan ignore global atau perbaikan drift skill sebagai efek samping.
+- Screenshot final desktop disimpan di `.impeccable/review/studio-desktop-final.png`; viewport alat dikembalikan setelah peninjauan. Android fisik tetap ditunda, dan tidak ada klaim baru mengenai pemasangan atau notifikasi OS.
+
+Putaran awal menemukan lapisan visual menutupi klik radio, logo/teks besar meluber pada lebar sempit, dan landing tanpa JavaScript tertahan pada fallback pemuatan. Perbaikan menargetkan penyebab: lapisan label noninteraktif, reflow kontrol/teks, serta memindahkan loading boundary ke `/app`. Teks loading aplikasi tidak berubah. Tes terakhir juga menunggu varian hero responsif selesai dimuat setelah resize; assertion gambar tetap dipertahankan. Pencatat Taste melewatkan transisi WAAPI yang selesai di antara sampelnya; animasi bagian kini memakai CSS native, sementara hero/preview tetap memakai WAAPI. Tidak ada timeout atau pemaksaan klik yang ditambahkan untuk menutupi kegagalan tersebut.
+
+Unit/domain dan seluruh suite development lama tidak diulang untuk perubahan presentasi ini. Bukti historis di bawah tetap dipisahkan dari 20 skenario produksi terbaru. Penerimaan menyeluruh MVP masih mengikuti pekerjaan manual yang sudah dicatat.
+
 ## Integrasi C1, 21–22 Oktober 2026
 
 Empat pose, tiga ilustrasi aktivitas, simbol ringkas/monokrom, wordmark, dan logo komposit telah dibuat. Header, hero, kelompok aktivitas, pemilihan, saran, keadaan kosong, timer dan penyelesaian memakai keluarga C1. Inventaris, prompt, sumber font, ukuran, dan hash tersimpan di [inventaris aset](./assets/turtle-c1/README.md).

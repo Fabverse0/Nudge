@@ -32,3 +32,29 @@ Content is visible before scripts and between animations. Reduced motion removes
 The automatically dealt striped hero, four-field process, switches, sentence input and looping crossfade do not match the approved content and non-looping motion plan. Keep the selected shell motif and approved studio composition rather than inventing a fourth step, form or new interactions. These are documented adaptations, not claims of implementing those blueprints verbatim. The full sheet and baseline are local artifacts in `.taste-skill/landing-studio/`.
 
 DESIGN.md's fixed palette and rounded identity take precedence over Taste's generic cream/radius preferences. Absence of video follows the approved still-illustration direction. No rule is suppressed to conceal overflow, missing content or broken images.
+
+## Final visual critique
+
+ROUND 2, after static layout and interaction corrections. This is a self-review of rendered screenshots, not an independent jury score.
+
+Seen in one second: a large friendly C1 leaving the phone, beside one short invitation.
+
+Idea (one sentence): the arch of C1's shell frames small activities away from scrolling.
+
+Live thing: change 2/5/10 minutes and open the app with that duration selected.
+
+Layout words by section: hero=split illustration / preview=horizontal control / process=open sequence / activities=alternating gallery / control=statement / close=color band / footer=wordmark.
+
+Scores: design 7.8 · usability 8.3 · creativity 7.4 · content 8.0 → overall 7.9.
+
+Caps applied: none from the final inspector; no claim of passing real-device or screen-reader acceptance.
+
+Top three problems from the prior rounds, each with its render and correction:
+
+1. Baseline `desktop-fold.jpg`: the small mascot and modest type did not establish a focal point. The new scene and larger title now lead the first screen.
+2. Baseline `mobile-page-01.jpg`: activity artwork was subordinate to text. Each category now has a large arched illustration and a separate reading group.
+3. The 320 px browser measurements found the brand hit areas narrower than their content; enlarged text also overflowed controls and step labels. Header wrapping, intrinsic logo width and flexible text/control layouts now pass the narrow-screen checks. Final images are `.impeccable/review/studio-320-desktop.png` and the corresponding mobile/other-width files.
+
+Final inspector images at 1440/768/390 were visually reviewed. All four main raster illustrations are present; standard headings remain within two lines, no headline is covered, and controls remain distinguishable from illustration frames. The gallery deliberately reuses the shell frame; the illustrative texture is part of C1, not a new material system. No further visible blocker was identified in this review.
+
+Further exploration could add individually articulated character motion, but that was not part of the chosen single-image asset scope. No character limbs are fabricated or warped in this implementation.
