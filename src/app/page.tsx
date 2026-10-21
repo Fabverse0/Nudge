@@ -178,10 +178,10 @@ export default function HomePage() {
           </div>
         </section>
         <section className="closing content-width">
-          <div>
-            <h2 data-studio-motion="copy">Mulai dari yang kecil.</h2>
+          <div lang="en">
+            <h2 data-studio-motion="copy">Small steps. A fuller life.</h2>
             <p data-studio-motion="copy" data-studio-delay="70">
-              Satu kegiatan untuk waktu yang kamu punya.
+              Make room for what matters, one small act at a time.
             </p>
           </div>
           <Link href="/app" className="button primary">
