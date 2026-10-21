@@ -8,6 +8,16 @@ Windows, Node.js 22.19.0, npm 11.19.0. Next.js 16.4.2, React 19.3.1, TypeScript 
 
 ## Polesan landing studio, 22 Oktober 2026
 
+### Revisi lima komentar browser
+
+Revisi setelah review pengguna mencakup CheckCircle fill 24 px sebagai badge pilihan durasi, ikon Footprints dalam inset 34 px pada CTA hero/penutup, ilustrasi berjalan C1 baru, dan teks penutup Inggris dengan penanda `lang="en"`. Label tombol dan alur aplikasi tetap Indonesia. Ruang tombol penutup diperbaiki setelah tinjauan langsung pada viewport komentar 767 x 524.
+
+- Build produksi/typecheck, lint, format check, serta diff check lulus. `npm run test:pwa` terbaru: **22/22 lulus dalam 1,3 menit**, termasuk dua skenario baru untuk revisi ini pada desktop/viewport seluler, reflow empat lebar, teks 200%, reduced motion, no-script, Axe, dan delapan regresi PWA.
+- Taste source lint: 0 FAIL/0 WARN. Inspector akhir: **0 FAIL/2 WARN** pada 1440/768/390; kedua WARN tetap mengenai canvas identitas dan tidak adanya video. Screenshot ketiga ukuran ditinjau pada `.taste-skill/landing-review-final/`.
+- Impeccable scan halaman/komponen landing: 0 temuan primer dan 10 advisory ukuran/radius. Tidak ada ignore baru.
+- Bukti langsung: `.impeccable/review/review-check.png`, `review-walking.png`, dan `review-closing-final.png`. Fokus keyboard terlihat pada screenshot penutup karena navigasi Tab digunakan untuk memeriksa area tersebut.
+- Aset berjalan memakai acuan C1 lama melalui tool gambar bawaan. Sumber 1254 x 1254 dan turunan WebP 900 x 900 (67.588 byte) beserta prompt/hash dicatat dalam inventaris landing. Tidak ada pemalsuan anatomi dengan CSS; gerak digambarkan dalam pose baru. Ini bukan pengujian Android fisik.
+
 Landing memakai satu adegan hero C1 baru, tiga ilustrasi kategori lama yang diperbesar, demo durasi terpisah, bingkai lengkung tempurung, dan animasi yang berjalan sekali. [Catatan studio](./landing-studio.md) memuat arah, adaptasi skill, serta batas gerak; [inventaris aset](./assets/landing-studio/README.md) memuat sumber PNG, prompt, WebP 83.254 byte, ukuran, dan hash. Tidak ada paket runtime, backend, atau media stok baru.
 
 - Build produksi dan typecheck lulus. Lint, format check, serta `git diff --check` lulus untuk perubahan ini.
