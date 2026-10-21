@@ -1,0 +1,120 @@
+{
+  "selectedCandidate": "C1",
+  "updated": "2026-10-21",
+  "generationMode": "built-in image generation",
+  "imageModel": "not exposed by tool",
+  "reference": "docs/assets/logo-exploration-01/c1.png",
+  "derivativeReference": "public/brand/mascot/nudge-turtle-idle.png",
+  "assets": [
+    {
+      "path": "public/brand/illustrations/nudge-turtle-journal.png",
+      "bytes": 1085465,
+      "sha256": "7e8b955c01ac243c30535cc842f332136f446c4dd7e639e3c14b61d0af8a7ba7",
+      "width": 1254,
+      "height": 1254,
+      "prompt": "production-prompts.json",
+      "source": "exec-18432388-27dc-4a86-bfdf-ff2f7c9a73d9.png"
+    },
+    {
+      "path": "public/brand/illustrations/nudge-turtle-move.png",
+      "bytes": 1018426,
+      "sha256": "6692c060cd1e02314c0d6fb4875169c5b5d2d2d0c938706c41b884b982d507d0",
+      "width": 1254,
+      "height": 1254,
+      "prompt": "production-prompts.json",
+      "source": "exec-70cbb107-a4bf-49ac-a4d8-d54d6a17c434.png"
+    },
+    {
+      "path": "public/brand/illustrations/nudge-turtle-tidy.png",
+      "bytes": 899040,
+      "sha256": "f68e4fe97cfe9bb88b4db94c0c89527a2a59b5bf2a3379d9a70cde685ce2b395",
+      "width": 1254,
+      "height": 1254,
+      "prompt": "production-prompts.json",
+      "source": "exec-9a9dd750-c6fd-4dee-ab16-442e29144684.png"
+    },
+    {
+      "path": "public/brand/logo/nudge-logo-horizontal-mono.svg",
+      "bytes": 807955,
+      "sha256": "3cdeb2486a35c780bd3dcea46f83d9514087f5c1b041c3c6d71f3620af21860b",
+      "source": "scripts/export-wordmark.mjs"
+    },
+    {
+      "path": "public/brand/logo/nudge-logo-horizontal.svg",
+      "bytes": 1190444,
+      "sha256": "6500e74b58fb4029ed11d80b41ebf9ae26b4286e8364af97660b3ebf84c1ab8b",
+      "source": "scripts/export-wordmark.mjs"
+    },
+    {
+      "path": "public/brand/logo/nudge-symbol-mono.png",
+      "bytes": 603286,
+      "sha256": "ddc1681390ac51dbebfbae42921663d4668cb654ccf3b10c365aedd48ec0df84",
+      "width": 1254,
+      "height": 1254,
+      "prompt": "nudge-symbol-mono-prompt.txt",
+      "source": "exec-905952a3-03b4-473e-a69f-175c23903335.png"
+    },
+    {
+      "path": "public/brand/logo/nudge-symbol.png",
+      "bytes": 890245,
+      "sha256": "16aa236a77c90dd39ad5b52951e2fae94802e814cbcc543775691c388a85b4d5",
+      "width": 1254,
+      "height": 1254,
+      "prompt": "nudge-symbol-prompt.txt",
+      "source": "exec-84f6ce9d-640f-4c23-ad9e-659957121df7.png"
+    },
+    {
+      "path": "public/brand/logo/nudge-wordmark-inverse.svg",
+      "bytes": 3480,
+      "sha256": "85c9a52b7746269540888fa4d6b79ba77eeecf14b23ad2911fcd60c9f1c4647b",
+      "source": "scripts/export-wordmark.mjs"
+    },
+    {
+      "path": "public/brand/logo/nudge-wordmark-mono.svg",
+      "bytes": 3480,
+      "sha256": "08229517b26e4610cd1fe8204d92b8c261d043021366b65ced035e4109345f14",
+      "source": "scripts/export-wordmark.mjs"
+    },
+    {
+      "path": "public/brand/logo/nudge-wordmark.svg",
+      "bytes": 3480,
+      "sha256": "b00fe1f5f8f832ab0d59987dda2e4f6614d61462e004d9eb66a211df9434c61b",
+      "source": "scripts/export-wordmark.mjs"
+    },
+    {
+      "path": "public/brand/mascot/nudge-turtle-complete.png",
+      "bytes": 969285,
+      "sha256": "2ea9dd1f503b72ee472b83fcf93c81268737fb14bfc35dd504d39e03e0c82c1a",
+      "width": 1254,
+      "height": 1254,
+      "prompt": "production-prompts.json",
+      "source": "exec-2809fa23-39fd-4620-b310-e3692855a97f.png"
+    },
+    {
+      "path": "public/brand/mascot/nudge-turtle-idle.png",
+      "bytes": 993566,
+      "sha256": "aea78568c2baa3ca5e7f93b7ed1024a7654febff8730e917fbba61ef343be270",
+      "width": 1254,
+      "height": 1254,
+      "prompt": "nudge-turtle-idle-prompt.txt",
+      "source": "exec-1fb90c25-d3eb-4754-8610-947a1c822a43.png"
+    },
+    {
+      "path": "public/brand/mascot/nudge-turtle-think.png",
+      "bytes": 1007008,
+      "sha256": "2da856f23a29a8b9db954da6b194f36ad8aeab3e4026a6e2354bc104dae8a8a9",
+      "width": 1254,
+      "height": 1254,
+      "prompt": "nudge-turtle-think-prompt.txt"
+    },
+    {
+      "path": "public/brand/mascot/nudge-turtle-wave.png",
+      "bytes": 962029,
+      "sha256": "fc2e4c925be5adff9e72e737c385e3cd057155a795c2b8d37d40dbfd502ebc74",
+      "width": 1254,
+      "height": 1254,
+      "prompt": "nudge-turtle-wave-prompt.txt",
+      "source": "exec-5bd2c97c-2a92-4ca6-91d1-3eff91694da0.png"
+    }
+  ]
+}

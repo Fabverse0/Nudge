@@ -31,7 +31,7 @@ Setiap kandidat dibuat melalui satu panggilan terpisah tanpa referensi kandidat 
 
 ## Turunan setelah bentuk induk dipilih
 
-Daftar berikut adalah keluaran yang akan diproduksi sesudah pilihan pengguna, belum berupa berkas tersedia:
+Pengguna telah memilih C1. Turunan pada daftar berikut sudah dibuat dan diintegrasikan; berkas, prompt, dan ukuran aktual tercatat pada [inventaris keluarga C1](../turtle-c1/README.md). Tabel ini mempertahankan batas penggunaan dari brief eksplorasi:
 
 | Kelompok | Keluaran | Batas penggunaan |
 | --- | --- | --- |

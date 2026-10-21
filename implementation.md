@@ -1,6 +1,6 @@
 # Rencana Implementasi Nudge
 
-Status: kode MVP dan polesan landing dapat ditinjau; penerimaan menyeluruh menunggu aset final serta pemeriksaan manual. Tahap aset dibuka kembali dan enam kandidat bentuk induk tersedia untuk dipilih pengguna.
+Status: kode MVP, aset C1, dan integrasinya dapat ditinjau; penerimaan menyeluruh masih menunggu pemeriksaan manual. Pengguna memilih C1; pose, ilustrasi, logo, dan ikon turunannya tersedia dalam docs/assets/turtle-c1/README.md.
 Tanggal: 18 Oktober 2026.  
 Cakupan: MVP web responsif dan PWA dalam satu codebase.
 
@@ -66,13 +66,13 @@ Keputusan yang sudah diterapkan dijelaskan di docs/implementation-decisions.md d
 | --- | --- | --- | --- |
 | P0 | Persiapan pelaksanaan dan keputusan awal | Dokumen tersedia dan izin pelaksanaan | Selesai |
 | P1 | Fondasi proyek dan alat pemeriksaan | P0 | Selesai |
-| P2 | Token visual, komponen dasar, dan aset induk | P0; kode komponen memerlukan P1 | Komponen/token dan enam kandidat tersedia; bentuk induk menunggu pilihan pengguna |
+| P2 | Token visual, komponen dasar, dan aset induk | P0; kode komponen memerlukan P1 | C1 dipilih; pose, ilustrasi, logo, ikon, dan inventaris sudah dibuat serta diintegrasikan |
 | P3 | Katalog, rekomendasi, state sesi, dan timer | P1 serta keputusan D-03/D-04 | Selesai |
 | P4 | Alur aplikasi utama | P2 komponen, P3 | Alur teruji; pendamping kura-kura masih ikon sementara |
-| P5 | Landing page | P1, P2, P4 | Fungsional dan dipoles; ilustrasi/logo final menunggu |
+| P5 | Landing page | P1, P2, P4 | Fungsional, dipoles, dan memakai logo serta ilustrasi C1 |
 | P6 | Favorit dan pengingat opt-in | P3/P4/P7 | Otomatis diuji; notifikasi OS nyata belum diperiksa |
 | P7 | PWA dan integrasi browser/perangkat | P1, P2, P4/P5 | Delapan skenario produksi lulus; instalasi nyata menunggu |
-| P8 | Pemeriksaan rilis dan pemolesan | P4 sampai P7 | Bukti otomatis tersedia; penerimaan manual dan aset masih menunggu, lihat docs/verification.md |
+| P8 | Pemeriksaan rilis dan pemolesan | P4 sampai P7 | Aset dan bukti otomatis tersedia; penerimaan manual masih menunggu, lihat docs/verification.md |
 
 Eksplorasi aset P2 dapat berlangsung sebelum atau bersama fondasi kode. Logika murni P3 tidak harus menunggu logo final. P7 dapat mulai sebelum P6 selesai, lalu keduanya digabungkan untuk memeriksa notifikasi yang membutuhkan service worker. Tabel dependensi tidak memerintahkan penggunaan subagent otomatis.
 
@@ -108,9 +108,9 @@ Eksplorasi aset P2 dapat berlangsung sebelum atau bersama fondasi kode. Logika m
 **Acuan:** DESIGN.md; tidak mengubah kebutuhan FR.
 
 - [x] **P2-01:** tiga arah dan enam kandidat dihasilkan melalui IP as Logo memakai tool gambar bawaan yang sebelumnya disetujui pengguna. Seluruh PNG asli, prompt lengkap, dan metadata tersedia di docs/assets/logo-exploration-01/README.md. Pemilihan bentuk induk dan turunannya dilanjutkan pada P2-02.
-- [ ] **P2-02:** tetapkan satu bentuk induk, lalu produksi pose ringkas, ekspresi yang dipakai, ilustrasi tiga kelompok aktivitas, logo/wordmark, dan turunan ikon PWA. Catat sumber, lisensi/atribusi, ukuran, serta lokasi berkas nyata.
+- [x] **P2-02:** pengguna memilih C1. Empat pose, tiga ilustrasi, simbol ringkas, varian monokrom, wordmark vektor, logo komposit, dan ikon browser/PWA dibuat dan diintegrasikan. Sumber, prompt, hash, ukuran, lisensi font, dan lokasi berkas ada di docs/assets/turtle-c1/README.md serta manifest.json. Tampilan nyata diperiksa pada 320/768/1440 px; ikon diperiksa lewat suite produksi.
 - [x] **P2-03:** token, Nunito Variable dan Phosphor diintegrasikan; lisensi ada di docs/licenses.
-- [x] **P2-04:** kontrol, kartu, pilihan, status, fokus dan ikon kura-kura sementara tersedia; diperiksa lewat browser/Axe/keyboard.
+- [x] **P2-04:** kontrol, kartu, pilihan, status, fokus dan maskot C1 tersedia; diperiksa lewat browser/Axe/keyboard.
 
 **Keluaran:** token terpakai, komponen bersama, serta inventaris aset yang membedakan referensi, sementara, dan siap pakai.  
 **Kriteria selesai:** komponen konsisten dan dapat dioperasikan; maskot tetap dikenali pada ukuran kecil; aset yang ditandai siap benar-benar tersedia.  
@@ -152,7 +152,7 @@ Aset sementara boleh membantu pengembangan jika diberi label jujur. Placeholder 
 
 - [x] **P5-01:** arah one-motif dipilih di dalam identitas tetap; batas hasil detector tercatat pada docs/verification.md.
 - [x] **P5-02:** landing menampilkan isi PRD, demo waktu interaktif, dan CTA nyata menuju `/app`.
-- [ ] **P5-03:** integrasikan logo dan kura-kura lebih ekspresif; jaga teks utama serta tindakan tetap terlihat pada seluler. Tambahkan ajakan PWA hanya sesuai dukungan dan hasil P7.
+- [x] **P5-03:** simbol/wordmark C1 pada header dan footer, pose menyapa pada hero, serta ilustrasi tiga kelompok aktivitas terintegrasi. Teks dan tindakan diperiksa pada 320/768/1440 px. Panduan PWA mengikuti dukungan browser yang sudah diterapkan, tanpa menjanjikan notifikasi saat tertutup.
 
 **Keluaran:** halaman `/` yang memperkenalkan produk dan mengantar pengguna ke aplikasi.  
 **Kriteria selesai:** CTA dapat digunakan, isi tidak menjanjikan fitur/hasil yang tidak ada, dan tidak ada navigasi mati, statistik palsu, akun, atau badge toko aplikasi yang tidak relevan.  
@@ -176,7 +176,7 @@ Aset sementara boleh membantu pengembangan jika diberi label jujur. Placeholder 
 
 **Kebutuhan terkait:** FR-09, dukungan notifikasi FR-08.
 
-- [x] **P7-01:** manifest `/app`, scope dan PNG sementara 192/512 tersedia dan diuji; ikon final mengikuti aset P2 yang ditunda.
+- [x] **P7-01:** manifest `/app`, scope, serta ikon C1 32/180/192/512 dan maskable 512 tersedia. Suite produksi memeriksa PNG, ukuran, metadata maskable, serta penolakan ukuran yang tidak didukung. Peluncuran ikon fisik tetap bagian P7-04.
 - [x] **P7-02:** worker produksi, cache statis berversi, fallback offline dan navigasi tanpa cache diuji. Pembaruan tidak memaksa reload sesi; versi cache dinaikkan saat rilis aset berubah.
 - [ ] **P7-03:** adapter P6 memakai service worker dan API asli Chrome menerima pengiriman pada uji produksi. Tampilan notifikasi serta izin OS Android belum diperiksa. Tidak ada backend pengirim push atau janji notifikasi saat aplikasi tertutup.
 - [ ] **P7-04:** periksa instalasi, peluncuran ikon, jalur masuk, serta akses browser normal di lingkungan D-07/D-08. Pembukaan PWA tidak memulai aktivitas/timer.
@@ -323,11 +323,11 @@ Jika muncul kebutuhan baru, catat masalah yang hendak diselesaikan, dampak terha
 - [x] Build serta pemeriksaan yang dikonfigurasi lulus, atau ada keterbatasan yang dinyatakan jelas dan diputuskan sebelum rilis.
 - [x] Pengguna dapat menyelesaikan satu alur dan memulai lagi tanpa akun.
 - [x] Mood opsional, penyelesaian manual, dan batas sesi sesuai PRD.
-- [ ] Maskot hadir, aset final tersedia, dan state UI memenuhi DESIGN.md.
+- [x] Maskot C1 hadir, aset produksi tersedia, dan state UI diperiksa terhadap DESIGN.md; bukti ada di docs/verification.md.
 - [x] Favorit/pengingat menangani kegagalan tanpa memblokir penggunaan manual.
 - [ ] PWA dan notifikasi diperiksa pada lingkungan sasaran; batas dukungan disampaikan.
 - [ ] Catatan uji alur, masalah tersisa, dan lisensi/sumber aset tersedia.
 - [x] Dokumentasi perintah sesuai konfigurasi aktual; tidak ada rahasia atau data jurnal pada laporan/log.
 - [x] Tindakan publikasi dan Git dilakukan hanya dalam izin pengguna.
 
-**Langkah berikutnya:** pilih satu bentuk induk dari enam kandidat pada P2, lalu produksi pose, ilustrasi, logo dan ikon turunannya untuk P2/P5. Pemeriksaan Android Chrome fisik pada P6/P7 serta observasi pengguna pada P8 masih menunggu. Seluruh rencana belum selesai selama bukti manual dan aset yang diwajibkan belum tersedia; lihat docs/manual-checks.md dan docs/verification.md.
+**Langkah berikutnya:** periksa instalasi/peluncuran ikon dan notifikasi pada Android Chrome fisik untuk P6/P7, lalu zoom browser, pembaca layar, serta observasi tugas pada P8. Aset C1 dan integrasi P2/P5 sudah tersedia. Seluruh rencana belum selesai selama bukti manual belum tersedia; lihat docs/manual-checks.md dan docs/verification.md. Hosting HTTPS belum dipilih atau dipublikasikan.

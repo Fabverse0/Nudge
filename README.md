@@ -34,7 +34,7 @@ Playwright memakai Chrome yang sudah terpasang, dengan profil pengujian terpisah
 
 ## Struktur dan data
 
-- `src/app`: landing `/`, aplikasi `/app`, manifest, dan ikon PNG sementara.
+- `src/app`: landing `/`, aplikasi `/app`, manifest, dan route ikon PNG kura-kura C1.
 - `src/components`: antarmuka dan integrasi browser.
 - `src/lib`: katalog, rekomendasi, timer, sesi, penyimpanan, dan jadwal.
 - `tests/e2e`: pemeriksaan alur browser serta PWA.
@@ -50,4 +50,4 @@ Gunakan [PRD](./prd.md) untuk perilaku, [desain](./DESIGN.md) untuk identitas, [
 
 Tugas dan lembar hasil untuk pemasangan PWA, izin OS, dan observasi pengguna tersedia di [pemeriksaan manual](./docs/manual-checks.md).
 
-Tahap logo dan ilustrasi maskot telah dilanjutkan. Enam kandidat bentuk induk tersedia di [eksplorasi karakter](./docs/assets/logo-exploration-01/README.md), menunggu pilihan pengguna sebelum membuat turunan yang konsisten. Ikon kura-kura garis dan ikon aplikasi `n.` masih merupakan aset sementara untuk pengembangan. Nunito dan Phosphor dipakai dari paket resminya; pemberitahuan lisensi tersedia di [docs/licenses](./docs/licenses).
+Pengguna memilih C1 dari [enam kandidat karakter](./docs/assets/logo-exploration-01/README.md). Empat pose, tiga ilustrasi aktivitas, simbol, wordmark, dan ikon browser/PWA sudah diintegrasikan. Lihat [inventaris dan prompt aset](./docs/assets/turtle-c1/README.md). Ekspor ulang wordmark serta logo komposit dengan `npm run assets:wordmark`. Wordmark memakai path vektor; logo komposit memadukan simbol raster dengan tulisan vektor. Nunito dan Phosphor memiliki pemberitahuan lisensi di [docs/licenses](./docs/licenses).

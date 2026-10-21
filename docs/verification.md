@@ -1,12 +1,33 @@
 # Pemeriksaan implementasi Nudge
 
-Tanggal: 18 Oktober 2026. Status: kode MVP dapat ditinjau; pemeriksaan perangkat fisik dan aset final masih menunggu.
+Diperbarui: 22 Oktober 2026. Status: kode MVP dan aset C1 terintegrasi; penerimaan perangkat fisik serta observasi pengguna masih menunggu.
 
 ## Lingkungan
 
 Windows, Node.js 22.19.0, npm 11.19.0. Next.js 16.4.2, React 19.3.1, TypeScript 6.0.3, Tailwind 4.3.3, Vitest 5.0.5, Playwright 1.64.1. Versi terkunci dalam package-lock.json.
 
-## Bukti yang sudah diperoleh
+## Integrasi C1, 21–22 Oktober 2026
+
+Empat pose, tiga ilustrasi aktivitas, simbol ringkas/monokrom, wordmark, dan logo komposit telah dibuat. Header, hero, kelompok aktivitas, pemilihan, saran, keadaan kosong, timer dan penyelesaian memakai keluarga C1. Inventaris, prompt, sumber font, ukuran, dan hash tersimpan di [inventaris aset](./assets/turtle-c1/README.md).
+
+- Typecheck dan lint lulus. `npm run format:check` serta pemeriksaan Prettier untuk `scripts/export-wordmark.mjs` lulus.
+- `npm run assets:wordmark` berhasil. Tiga wordmark memiliki outline vektor; dua logo horizontal menyertakan simbol raster dengan tulisan vektor.
+- Run alur awal: 27 dari 28 skenario lulus. Satu navigasi landing desktop belum mencapai `/app` dalam assertion lima detik. Pengulangan terarah skenario yang sama tiga kali lulus tanpa perubahan kode atau timeout. Seluruh suite kemudian dijalankan pada build produksi di port 3000: **28/28 lulus dalam satu run, 1.7 menit**. Penyebab kegagalan awal pada dev belum dibuktikan; tidak ada timeout assertion yang dilonggarkan untuk menyembunyikannya.
+- Kedua proyek browser lulus pemeriksaan gambar termuat dan overflow pada 320/768/1440 px. Screenshot seluruh halaman ditinjau untuk seluler, tablet, dan desktop; teks besar/reduced motion serta Axe/keyboard dalam suite alur juga lulus.
+- Build default sempat gagal ketika worker CSS Turbopack keluar sebelum koneksi. Kegagalan muncul di dalam maupun di luar sandbox dan tetap muncul setelah server dev dihentikan. Setelah hanya cache `.next` dibersihkan, `npm run build` berhasil, termasuk TypeScript dan pembuatan halaman. Tidak ada perubahan bundler atau konfigurasi untuk menghindarinya. Ini bukti pemulihan setelah cache bersih, bukan pembuktian akar masalah.
+- `npm run test:pwa`: 8/8 lulus dalam 43.6 detik, pada build Turbopack bersih. Memeriksa alur produksi tanpa error hydration/browser, worker, offline/pemulihan, cache tanpa navigasi privat, penerimaan API notifikasi, ikon PNG 32/180/192/512/maskable-512, metadata maskable, dan respons 404 untuk ukuran tak didukung.
+- Ikon 32, 512, dan maskable 512 ditinjau dari hasil render produksi. Wajah masih terbaca pada 32 px. Audit geometri memperkecil kotak maskable menjadi sekitar 56% kanvas (287 × 287 pada 512 px), sehingga sudutnya berjarak 202.94 px dari pusat, di dalam radius aman 204.8 px. Pemotongan launcher nyata tetap pemeriksaan Android fisik.
+- Impeccable: 14 advisory skala huruf dan 10 advisory radius; tidak ada temuan non-advisory dalam scan berkas UI yang berubah. Nilai ini berasal dari skala responsif serta motif tempurung yang sudah dipakai. Tidak ada aturan detector yang dimatikan.
+- Inspector Taste pada 1440/768/390 px menemukan overflow 0 dan gambar rusak 0. Tetap ada lima jenis FAIL (`shadow`, `button-fx`, `few-pictures`, `focal-point`, `still-page`) dan dua WARN (`palette-cream`, `no-footage`). Dasar tombol mengikuti keputusan kedalaman yang sudah ada; canvas dan gerak tenang mengikuti DESIGN.md. Inspector menghitung satu gambar besar; tiga ilustrasi kategori tetap tersedia dan diperiksa lewat screenshot. Tidak menambah video, animasi berulang, atau gambar besar hanya untuk memenuhi kuota alat. Ini bukan klaim seluruh gate Taste lulus.
+- Screenshot C1: `.impeccable/review/c1-*`; laporan detector: `.impeccable/review/c1-detector.json`; laporan Taste: `.taste-skill/inspect/c1/`. Berkas pemeriksaan lokal tidak dianggap aset produk.
+
+Tinjauan screenshot produksi menemukan pose timer belum termuat ketika snapshot diambil. Maskot pada layar aplikasi kini memakai pemuatan eager; gambar kategori landing tetap lazy. Skenario produksi diperkuat dengan pemeriksaan `complete` dan `naturalWidth > 0` sebelum screenshot timer dan penyelesaian. Gambar penyelesaian juga direkam terpisah. Build default setelah perubahan ini berhasil; **8/8 tes PWA akhir lulus dalam 49.4 detik**, termasuk pemeriksaan gambar. Screenshot timer dan penyelesaian yang diperbarui ditinjau langsung.
+
+Pemeriksaan setelah koreksi maskable dan pembaruan cache v3: **8/8 lulus dalam 41.0 detik**. Test membaca piksel hasil PNG dan memastikan tidak ada gambar depan di luar lingkaran aman beradius 40%. Test juga menanam cache `nudge-static-obsolete` sebelum registrasi worker dan membuktikan cache tersebut dibersihkan. Instalasi cache baru mengambil ulang aset melalui `Request` dengan `cache: "reload"`; siklus worker tidak memaksa reload sesi. Build default untuk route ikon 56% berhasil. Typecheck, lint, dan format check terakhir juga lulus.
+
+Batas waktu keseluruhan skenario layout menjadi 90 detik karena memuat enam halaman, menunggu gambar, dan merekam screenshot. Assertion navigasi lima detik tetap dipertahankan. Suite unit dan skenario pengingat terpisah tidak dijalankan ulang untuk perubahan aset ini; hasil baseline tetap dibedakan dari bukti terbaru.
+
+## Bukti baseline, 18 Oktober 2026
 
 - Build produksi akhir berhasil untuk `/`, `/app`, manifest, dan ikon.
 - Vitest: 17 test lulus pada 6 berkas. Meliputi seluruh tujuan/waktu, mood, feedback sesi, penolakan/alternatif, timer, data lokal, jadwal, serta adapter notifikasi service worker dan pembatalannya.
@@ -118,7 +139,7 @@ Target fisik yang dipilih pengguna adalah Android dengan Chrome. Tugas dan lemba
 - Pemasangan PWA dari menu browser dan peluncuran dari ikon pada perangkat fisik.
 - Izin OS, pengiriman notifikasi nyata, penundaan saat tidur, dan pembaruan worker pada perangkat sasaran.
 - Pembaca layar nyata dan pengujian alur dengan peserta. Pemeriksaan otomatis tidak membuktikan seluruh aksesibilitas atau kegunaan produk.
-- Tahap logo, ilustrasi, pose maskot, dan ikon final telah dibuka kembali. Enam kandidat tersedia untuk pemilihan bentuk induk; pose serta ilustrasi turunan belum dibuat. Ikon sementara tidak dianggap aset final.
+- Aset C1 sudah tersedia. Pemeriksaan pemotongan dan peluncuran ikon pemasangan pada Android fisik masih menunggu.
 - Hosting HTTPS belum dipilih; aplikasi belum dipublikasikan.
 
 ## Dependensi
@@ -163,8 +184,8 @@ Peringatan hydration lain muncul ketika pengujian mengambil screenshot sebelum i
 
 ## Pekerjaan yang memerlukan tahap berikutnya
 
-- P2-01 menghasilkan enam kandidat; P2-02/P5-03 menunggu pilihan bentuk induk sebelum produksi pose, ilustrasi, serta logo dan ikon final.
+- P2-02/P5-03 sudah diselesaikan dengan C1 dan inventaris produksi; lihat hasil terbaru pada bagian integrasi C1 di atas.
 - P6-04/P7-03/P7-04: pemasangan, peluncuran ikon, izin OS, sleep/resume, serta notifikasi pada Android Chrome fisik belum dibuktikan. Belum ada URL produksi/preview yang diizinkan dan bisa digunakan pada perangkat tersebut.
 - P8-02: pemeriksaan otomatis dan screenshot tersedia; zoom browser serta pembaca layar nyata belum diperiksa.
 - P8-04: pengguna melaporkan percobaan desktop berjalan lancar, tetapi tugas yang dicoba, lingkungan, serta hasil per langkah belum dicatat. Observasi tugas secara terstruktur belum dilakukan; tidak ada hasil tambahan yang boleh diisi dari simulasi agen.
-- P8-05 dan kesiapan rilis bergantung pada bukti manual serta aset final tersebut. Status kode yang dapat ditinjau tidak menyatakan seluruh rencana selesai.
+- P8-05 dan kesiapan rilis masih bergantung pada bukti manual tersebut. Status kode yang dapat ditinjau tidak menyatakan seluruh rencana selesai.

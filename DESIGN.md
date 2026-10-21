@@ -110,11 +110,11 @@ components:
 
 # Nudge Design Guide
 
-Catatan implementasi 18 Oktober 2026: Nunito Variable sudah diintegrasikan dari Fontsource dan ikon Phosphor dari paket resminya. Nama family CSS memakai `Nunito Variable`; bentuk huruf tetap Nunito. Tahap logo, maskot, dan ilustrasi dibuka kembali oleh pengguna setelah pengerjaan kode. Enam kandidat bentuk induk tersedia di [eksplorasi karakter batch 01](./docs/assets/logo-exploration-01/README.md); bentuk terpilih, pose turunan, dan ikon final belum ditetapkan. Ikon garis kura-kura serta ikon aplikasi `n.` masih sementara. Angka timer dibatasi lebar viewport pada pembesaran teks agar tetap muat. Status aset pada daftar awal di bawah merupakan kondisi sebelum implementasi.
+Catatan implementasi 21 Oktober 2026: Nunito Variable sudah diintegrasikan dari Fontsource dan ikon Phosphor dari paket resminya. Pengguna memilih C1 dari [eksplorasi batch 01](./docs/assets/logo-exploration-01/README.md). Empat pose, tiga ilustrasi aktivitas, simbol ringkas, wordmark, logo komposit, dan ikon browser/PWA sudah dibuat dan diintegrasikan; lihat [inventaris produksi](./docs/assets/turtle-c1/README.md). Ikon garis dan ikon `n.` telah diganti. Nama family CSS tetap `Nunito Variable`. Angka timer dibatasi viewport saat teks diperbesar. Tabel kebutuhan aset di bawah mencatat kondisi awal; inventaris produksi menjadi acuan status aktual.
 
 ## Overview
 
-Status: panduan visual v1; kode MVP tersedia dan eksplorasi aset berlangsung.
+Status: panduan visual v1 dengan aset C1 terintegrasi; pemeriksaan perangkat fisik masih menunggu.
 
 Tanggal: 18 Oktober 2026.  
 Tema MVP: terang. Bahasa antarmuka: Bahasa Indonesia.
@@ -129,11 +129,11 @@ Dokumen ini menetapkan arah visual dan perilaku presentasi. [prd.md](./prd.md) t
 | --- | --- |
 | Tetap | Karakter playful, membulat, hangat, dan tenang; ramah untuk pengguna umum. |
 | Tetap | Palet identitas Tidal Sage, Glacial Periwinkle, dan Toasted Sand; tema terang untuk MVP. |
-| Tetap | Maskot kura-kura yang hadir juga di aplikasi, termasuk saat timer berjalan. |
+| Tetap | Maskot kura-kura induk C1 yang hadir juga di aplikasi, termasuk saat timer berjalan. |
 | Tetap | Landing page lebih ekspresif; layar aplikasi mengutamakan pemilihan dan pelaksanaan aktivitas. |
 | Tetap | Bahasa tidak menghakimi, pilihan mood setara, serta kontrol lewati dan berhenti yang jelas. |
 | Nilai awal | Nunito, turunan warna aksesibel, skala ukuran, radius, jarak, dan durasi transisi dalam dokumen ini. |
-| Eksplorasi | Bentuk tempurung, proporsi, wajah, nama, pose, dan detail ilustrasi kura-kura. |
+| Eksplorasi | Nama karakter, pose tambahan, dan detail ilustrasi; identitas serta proporsi induk C1 dipertahankan. |
 | Eksplorasi | Komposisi hero, susunan bagian landing page, detail logo, dan penyempurnaan layout tiap layar. |
 
 Nilai awal dipakai konsisten sampai ada alasan dan hasil pemeriksaan untuk mengubahnya. Eksplorasi memperluas pilihan di dalam identitas yang sudah disepakati; jangan mengganti spesies maskot atau palet utama secara sepihak.
@@ -199,7 +199,7 @@ Targetkan minimal 4,5:1 untuk teks normal, 3:1 untuk teks besar yang memenuhi de
 
 ### Keluarga dan karakter
 
-Gunakan **Nunito** sebagai keluarga awal untuk judul dan UI. Bentuknya mendukung karakter membulat; satu keluarga dengan perbedaan bobot menjaga instruksi tetap sederhana. Gunakan bobot 500 untuk isi, 700 untuk kontrol/subjudul, dan 800 untuk penekanan utama. Font belum dipasang pada repository.
+Gunakan **Nunito** untuk judul dan UI. Bentuknya mendukung karakter membulat; satu keluarga dengan perbedaan bobot menjaga instruksi tetap sederhana. Gunakan bobot 500 untuk isi, 700 untuk kontrol/subjudul, dan 800 untuk penekanan utama. Font sudah dipasang melalui Fontsource; wordmark memakai outline bobot 900.
 
 Gunakan berkas berlisensi jelas dari sumber resmi dan simpan pemberitahuan lisensinya saat integrasi. Hindari ketergantungan pada font khusus Duolingo. Fallback awal: `Nunito, ui-rounded, system-ui, sans-serif`. Saat font belum dimuat, teks dan kontrol harus tetap terbaca tanpa layout rusak.
 
@@ -291,9 +291,9 @@ Pola tempurung boleh menjadi motif identitas setelah bentuk maskot dipilih. Guna
 
 Karakter: santai, penasaran, suportif, dan sedikit jenaka. Gagasan internalnya adalah “pelan juga tetap bergerak”; kalimat ini bukan kewajiban untuk semua headline.
 
-Siluet awal: kepala dan tempurung membulat, kaki sederhana, ekspresi mudah dikenali. Satu langkah kecil dapat dieksplorasi sebagai pose khas. Bentuk tempurung, proporsi, ekspresi, dan nama belum final.
+Induk terpilih C1: tempurung berupa lengkungan sage lebar tanpa pola, wajah sand besar, mata oval sage berjauhan dengan detail sand kecil, senyum melengkung, dan kaki depan besar membulat. Pertahankan anatomi serta rendering lembut ini ketika mengembangkan pose baru. Nama karakter masih terbuka.
 
-Palet sage, sand, dan periwinkle menjadi acuan. Pembagian sage untuk tempurung, sand untuk tubuh, dan biru sebagai aksen adalah kandidat, bukan desain karakter yang sudah disahkan. Pastikan pemisahan bentuk tetap jelas pada ukuran penggunaan.
+Pembagian warna terpilih: sage untuk tempurung serta mata/senyum, sand untuk tubuh/wajah, serta periwinkle untuk objek pendamping dan bidang ikon. Versi ringkas membesarkan wajah; versi monokrom mengandalkan bidang dan ruang negatif.
 
 | Konteks | Kehadiran dan perilaku |
 | --- | --- |
@@ -308,11 +308,11 @@ Maskot harus hadir dalam layar aplikasi, meskipun kecil. Pada layar sempit, pert
 
 ### Logo, ikon, dan aset
 
-Arah logo awal: simbol kura-kura sederhana bersama tulisan “Nudge” yang membulat. Siluet samping dengan satu kaki melangkah boleh dieksplorasi. Belum ada bentuk final; logo tidak harus identik dengan seluruh detail ilustrasi maskot.
+Logo produksi memakai wajah C1 yang disederhanakan bersama tulisan `nudge.` dari outline Nunito bobot 900. Simbol berformat PNG; wordmark berformat SVG path. Ekspor horizontal menyatukan simbol raster dan tulisan vektor, termasuk varian satu warna. Ikon pemasangan memakai bidang biru dan varian maskable dengan area aman.
 
 Rencanakan simbol + tulisan, tulisan saja, simbol saja, serta versi satu warna. Periksa simbol pada ukuran kecil sebelum menggunakannya sebagai favicon. Ikon PWA perlu versi yang aman dari pemotongan sistem; gambar eksplorasi bersudut dari IP as Logo belum otomatis memenuhi kebutuhan tersebut.
 
-Gunakan satu keluarga **Phosphor Icons Regular** sebagai pilihan awal ikon kontrol, dengan ukuran 20–24 px dan bobot konsisten. Ini pilihan untuk bentuk yang ramah dan cakupan tindakan umum; belum ada paket ikon dipasang. Pasangkan ikon dengan label pada tindakan utama. Jangan menambah ikon sekadar untuk mengisi ruang.
+Gunakan satu keluarga **Phosphor Icons Regular** untuk ikon kontrol, dengan ukuran 20–24 px dan bobot konsisten. Paket sudah diintegrasikan untuk bentuk yang ramah dan cakupan tindakan umum. Pasangkan ikon dengan label pada tindakan utama. Jangan menambah ikon sekadar untuk mengisi ruang.
 
 | Kebutuhan | Status saat dokumen dibuat | Ketentuan produksi |
 | --- | --- | --- |
