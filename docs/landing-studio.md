@@ -58,3 +58,17 @@ Top three problems from the prior rounds, each with its render and correction:
 Final inspector images at 1440/768/390 were visually reviewed. All four main raster illustrations are present; standard headings remain within two lines, no headline is covered, and controls remain distinguishable from illustration frames. The gallery deliberately reuses the shell frame; the illustrative texture is part of C1, not a new material system. No further visible blocker was identified in this review.
 
 Further exploration could add individually articulated character motion, but that was not part of the chosen single-image asset scope. No character limbs are fabricated or warped in this implementation.
+
+## Annotated review revisions, 22 October 2026
+
+The user subsequently authorized these five targeted changes:
+
+| Comment | Revision |
+| --- | --- |
+| Checkmark looked like a thin line. | Use a filled 24 px Phosphor CheckCircle as a high-contrast selection badge, with the native radio state preserved. |
+| Movement illustration looked stationary. | Generate a new walking pose with a raised front foot and a visible trail; keep C1's identity and the old source. |
+| Closing CTA icon lacked character. | Use Phosphor Footprints in a 34 px circular inset, with a small hover step and reduced-motion support. |
+| Closing invitation should be philosophical English. | Use “Small steps. A fuller life.” and “Make room for what matters, one small act at a time.”, marked `lang="en"`. |
+| Hero CTA icon looked ordinary. | Reuse the same step icon to connect both primary actions to Nudge's small-step idea. |
+
+The English copy is an explicit user-directed exception limited to the closing invitation. Action labels remain Indonesian and still link to `/app`. The walking scene extends the original one-new-hero scope following the user's request; [asset inventory](./assets/landing-studio/README.md) contains the exact prompt, source and web output. No shared app mascot mapping was replaced.
