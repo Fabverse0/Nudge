@@ -205,7 +205,7 @@ Gunakan berkas berlisensi jelas dari sumber resmi dan simpan pemberitahuan lisen
 
 | Peran | Ukuran awal | Aturan |
 | --- | --- | --- |
-| Hero landing | 36 px seluler, sampai 64 px desktop | Tebal 800, line-height 1,1; susut mengikuti lebar, jangan paksa pemenggalan judul. |
+| Hero landing | 40 px seluler, sampai 92 px desktop pada studio C1 | Tebal 800, line-height 1,02; responsif, dua baris pada ukuran teks standar. |
 | Judul bagian landing | 28 px seluler, sampai 40 px desktop | Line-height 1,2; lebih kecil dari hero. |
 | Judul layar aplikasi | 28–32 px | Tebal 800; tujuan layar terbaca sebelum pilihan. |
 | Judul kartu | 20–24 px | Tebal 700, line-height 1,3. |
@@ -395,6 +395,14 @@ Hindari diagnosis, janji menghilangkan brainrot, janji penurunan screen time, an
 | Timer dan maskot pendamping | Statis saat idle | Tanpa kedipan, bounce berulang, gerak angka, atau animasi latar. |
 
 Easing awal `cubic-bezier(0.2, 0.8, 0.2, 1)`. Utamakan opacity dan transform. Dengan `prefers-reduced-motion: reduce`, hilangkan perpindahan, perayaan, dan efek tekan bergerak; pertahankan feedback instan melalui warna, border, teks, dan ikon. Konten muncul tanpa menunggu scroll animation. Animasi tidak menjadi prasyarat memahami hasil tindakan.
+
+### Landing studio C1, 22 Oktober 2026
+
+Polesan yang disetujui pengguna mempertahankan palet, C1 dan Nunito. Satu adegan hero baru memperlihatkan C1 beranjak dari ponsel menuju notebook dan kotak penyimpanan. Tiga ilustrasi kategori lama diperbesar menjadi 240–320 px pada desktop. Lengkung tempurung menjadi bingkai gambar, dengan radius `50% 50% 14% 14%`; panel demo memakai radius 32 px dan penutup 64/24 px. Ini bentuk khusus landing, bukan pengganti radius kontrol aplikasi.
+
+Hero memakai rentang 48–92 px pada desktop, 40–64 px pada layar menengah/seluler, dengan satu warna judul. Judul kategori 28–40 px dan kata langkah 32–40 px. Ketika teks diperbesar, pembungkusan teks dan kontrol didahulukan daripada mempertahankan jumlah baris standar. Lihat [arah studio dan aset](./docs/landing-studio.md).
+
+Gerak masuk hero berlangsung sekali selama 760 ms, perpindahan 12/18 px dan skala awal 0,96. Bingkai gambar memakai 600 ms, teks/langkah 480 ms dengan jeda saudara 70–140 ms, dan pergantian contoh durasi 220 ms. Easing khusus landing adalah `cubic-bezier(0.16, 1, 0.3, 1)`. Tidak ada loop, pengambilalihan scroll, atau penundaan CTA. Reduced motion menghilangkan perpindahan; tab tersembunyi membatalkan gerak aktif. Aturan timer dan maskot aplikasi tetap berlaku.
 
 ## Do's and Don'ts
 
