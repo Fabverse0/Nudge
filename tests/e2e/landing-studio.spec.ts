@@ -57,6 +57,16 @@ test("studio images and text reflow at four widths", async ({
   await activate(page);
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
+    await expect
+      .poll(() =>
+        page
+          .locator(".studio-hero-art")
+          .evaluate(
+            (image: HTMLImageElement) =>
+              image.complete && image.naturalWidth > 0,
+          ),
+      )
+      .toBe(true);
     for (const image of await page.locator(".studio-category img").all()) {
       await image.scrollIntoViewIfNeeded();
       await expect
