@@ -24,11 +24,6 @@
   max-width: 37ch;
 }
 
-.landing-studio .button.primary,
-.landing-studio .button.primary:active {
-  box-shadow: none;
-}
-
 .studio-scene {
   display: grid;
   place-items: center;

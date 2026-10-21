@@ -266,12 +266,6 @@ svg {
 .hero-cta {
   margin-top: 32px;
 }
-.landing .button.primary {
-  box-shadow: 0 3px 0 var(--pressed);
-}
-.landing .button.primary:active {
-  box-shadow: 0 1px 0 var(--pressed);
-}
 .hero-footnote {
   display: flex;
   gap: 10px;
