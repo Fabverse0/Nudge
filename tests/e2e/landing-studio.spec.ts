@@ -146,6 +146,10 @@ test("studio motion runs once and honors a live reduced-motion change", async ({
   await page.addInitScript(() => {
     const calls: string[] = [];
     Object.defineProperty(window, "studioMotionCalls", { value: calls });
+    document.addEventListener("animationstart", (event) => {
+      if (event.target instanceof Element)
+        calls.push(event.target.className.toString());
+    });
     const animate = Element.prototype.animate;
     Element.prototype.animate = function (...args) {
       calls.push(this.className.toString());

@@ -141,6 +141,22 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .landing-studio [data-studio-visible="true"] {
+    animation: studio-copy-in 480ms var(--studio-ease);
+  }
+
+  .landing-studio [data-studio-motion="image"][data-studio-visible="true"] {
+    animation: studio-picture-in 600ms var(--studio-ease);
+  }
+
+  .landing-studio [data-studio-delay="70"][data-studio-visible="true"] {
+    animation-delay: 70ms;
+  }
+
+  .landing-studio [data-studio-delay="140"][data-studio-visible="true"] {
+    animation-delay: 140ms;
+  }
+
   .landing-studio .button:active,
   .landing-studio .demo-duration label:active > span {
     transform: scale(0.98);
@@ -148,6 +164,28 @@
 
   .landing-studio .demo-duration input:checked + span .demo-selection {
     animation: studio-selection-in 180ms var(--studio-ease);
+  }
+}
+
+@keyframes studio-copy-in {
+  from {
+    opacity: 0.7;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes studio-picture-in {
+  from {
+    opacity: 0.65;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
   }
 }
 

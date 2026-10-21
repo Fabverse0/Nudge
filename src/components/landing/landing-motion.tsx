@@ -19,20 +19,17 @@ export function LandingMotion({ children }: { children: ReactNode }) {
     function play(element: HTMLElement, heroEntrance = false) {
       if (preference.matches || document.hidden || seen.has(element)) return;
       seen.add(element);
-      const image = element.dataset.studioMotion === "image";
-      const from = heroEntrance
-        ? "translate(-12px, 18px) scale(0.96)"
-        : image
-          ? "scale(0.97)"
-          : "translateY(16px)";
+      if (!heroEntrance) {
+        element.dataset.studioVisible = "true";
+        return;
+      }
       const animation = element.animate(
         [
-          { opacity: heroEntrance || image ? 0.65 : 0.7, transform: from },
+          { opacity: 0.65, transform: "translate(-12px, 18px) scale(0.96)" },
           { opacity: 1, transform: "none" },
         ],
         {
-          duration: heroEntrance ? 760 : image ? 600 : 480,
-          delay: Number(element.dataset.studioDelay ?? 0),
+          duration: 760,
           easing,
         },
       );
@@ -55,6 +52,8 @@ export function LandingMotion({ children }: { children: ReactNode }) {
 
     function stop() {
       observer.disconnect();
+      for (const target of targets)
+        target.removeAttribute("data-studio-visible");
       for (const animation of active) animation.cancel();
       active.clear();
     }
