@@ -118,7 +118,7 @@ Audit lanjutan pada 18 Oktober 2026 menggunakan source pada `f980ddf` dan build 
 | --- | --- | --- |
 | P2-01/P2-02/P5-03 | Source memakai TurtleIcon serta ikon PNG `n.` sementara; aset final belum tersedia dan ditunda pengguna. | Pengguna membuka kembali tahap aset. |
 | P6-04/P7-03/P7-04 | Uji produksi lokal lulus; kolom lingkungan/hasil Android pada manual-checks.md masih kosong, hosting HTTPS belum ditetapkan. | URL HTTPS yang disepakati serta pemeriksaan pada Android Chrome fisik. |
-| P8-02 | Bukti otomatis dan screenshot tersedia; zoom browser serta pembaca layar nyata belum dicatat. | Pemeriksaan manual dengan alat dan lingkungan sasaran. |
+| P8-02 | Bukti otomatis dan screenshot tersedia; pengguna melaporkan zoom Chrome 200% tanpa error pada 22 Oktober 2026. Rincian layar belum dicatat; pembaca layar belum diperiksa. | Lengkapi rincian lingkungan dan pemeriksaan pembaca layar nyata. |
 | P8-04 | Laporan pengguna menyebut desktop lancar, tanpa rincian tugas/perangkat atau catatan observasi terstruktur. | Sesi observasi pengguna dengan tugas PRD. |
 | P8-05 | README, keputusan, laporan, serta lisensi font/ikon tersedia; penerimaan rilis masih bergantung pada item di atas. | Melengkapi bukti manual dan aset sebelum menyatakan seluruh rencana selesai. |
 
@@ -186,6 +186,6 @@ Peringatan hydration lain muncul ketika pengujian mengambil screenshot sebelum i
 
 - P2-02/P5-03 sudah diselesaikan dengan C1 dan inventaris produksi; lihat hasil terbaru pada bagian integrasi C1 di atas.
 - P6-04/P7-03/P7-04: pemasangan, peluncuran ikon, izin OS, sleep/resume, serta notifikasi pada Android Chrome fisik belum dibuktikan. Belum ada URL produksi/preview yang diizinkan dan bisa digunakan pada perangkat tersebut.
-- P8-02: pemeriksaan otomatis dan screenshot tersedia; zoom browser serta pembaca layar nyata belum diperiksa.
+- P8-02: pemeriksaan otomatis dan screenshot tersedia. Pada 22 Oktober 2026 pengguna melaporkan percobaan zoom Chrome 200% berjalan baik tanpa error; rincian layar dan versi browser belum tersedia. Pembaca layar nyata belum diperiksa. Lihat laporan pengguna di docs/manual-checks.md.
 - P8-04: pengguna melaporkan percobaan desktop berjalan lancar, tetapi tugas yang dicoba, lingkungan, serta hasil per langkah belum dicatat. Observasi tugas secara terstruktur belum dilakukan; tidak ada hasil tambahan yang boleh diisi dari simulasi agen.
 - P8-05 dan kesiapan rilis masih bergantung pada bukti manual tersebut. Status kode yang dapat ditinjau tidak menyatakan seluruh rencana selesai.

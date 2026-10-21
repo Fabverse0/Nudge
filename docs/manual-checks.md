@@ -97,7 +97,11 @@ Preview produksi lokal pada `http://127.0.0.1:3100`, melalui browser dalam aplik
 - Pada halaman pemilihan yang diukur, tidak ada overflow horizontal atau gambar gagal dimuat. Screenshot landing: `.impeccable/review/desktop-review-2026-10-22.png`.
 - Berhenti dari timer kembali ke pemilihan dengan pesan bahwa kegiatan belum ditandai selesai. Ganti kegiatan dari timer yang dibuka melalui favorit juga kembali ke pemilihan tanpa layar penyelesaian. Screenshot akhir daftar favorit yang sudah dibersihkan: `.impeccable/review/desktop-favorites-cleanup-2026-10-22.png`.
 
-Tidak ditemukan masalah baru pada langkah tersebut. Ini peninjauan agen, bukan observasi peserta. Zoom browser nyata, pembaca layar, pengiriman notifikasi OS, dan Android tetap belum diperiksa. Pengguna memilih menunda Android dan meninjau desktop terlebih dahulu.
+Tidak ditemukan masalah baru pada langkah tersebut. Ini peninjauan agen, bukan observasi peserta. Pada saat walkthrough ini, zoom browser nyata, pembaca layar, pengiriman notifikasi OS, dan Android belum diperiksa. Pengguna memilih menunda Android dan meninjau desktop terlebih dahulu.
+
+### Laporan pengguna: zoom Chrome 200%, 22 Oktober 2026
+
+Setelah memilih pemeriksaan zoom Chrome 200% dan menerima panduan pemeriksaan, pengguna melaporkan: "sudah bagus dan tidak ada error saat saya melakukan pemeriksaan". Hasil dicatat sebagai laporan pengguna tanpa masalah yang dilaporkan pada percobaan tersebut. Daftar layar yang dicoba, versi Chrome, dan screenshot belum disertakan, sehingga ini bukan bukti kelulusan per layar atau seluruh aksesibilitas. Pembaca layar, notifikasi OS, serta Android tetap belum diperiksa.
 
 Minta pengguna menjalankan tugas tanpa penjelasan langkah demi langkah: memahami manfaat, memilih/melewati mood, meminta saran, memulai, mengganti, menyelesaikan, dan memulai lagi. Catat kebingungan, kebutuhan bantuan, serta alasan kegiatan tidak cocok. Tidak perlu memasang analitik atau menyimpan isi jurnal/mood pribadi dalam laporan.
 
