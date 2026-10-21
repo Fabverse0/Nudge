@@ -7,11 +7,12 @@ import {
 import { TurtleMascot } from "@/components/ui/turtle-mascot";
 import { Brand } from "@/components/brand";
 import { ActivityPreview } from "@/components/landing/activity-preview";
+import { LandingMotion } from "@/components/landing/landing-motion";
 import "@/components/landing/landing-studio.css";
 
 export default function HomePage() {
   return (
-    <div className="landing landing-studio">
+    <LandingMotion>
       <header className="site-header">
         <Brand />
         <nav aria-label="Navigasi utama">
@@ -61,28 +62,28 @@ export default function HomePage() {
         <ActivityPreview />
         <section className="small-start content-width" id="cara-pakai">
           <div className="section-heading">
-            <h2>Tak harus langsung banyak.</h2>
-            <p>
+            <h2 data-studio-motion="copy">Tak harus langsung banyak.</h2>
+            <p data-studio-motion="copy" data-studio-delay="70">
               Kamu tidak perlu menyusun hari yang sempurna untuk mulai melakukan
               sesuatu.
             </p>
           </div>
           <div className="how-flow">
-            <article>
+            <article data-studio-motion="step">
               <span className="flow-word">Pilih.</span>
               <p>
                 Ceritakan sedikit: ingin apa, punya berapa menit? Mood boleh
                 dilewati.
               </p>
             </article>
-            <article>
+            <article data-studio-motion="step" data-studio-delay="70">
               <span className="flow-word">Coba.</span>
               <p>
                 Satu saran, bukan daftar tanpa akhir. Belum pas? Cari kegiatan
                 lain.
               </p>
             </article>
-            <article>
+            <article data-studio-motion="step" data-studio-delay="140">
               <span className="flow-word">Jalani.</span>
               <p>
                 Mulai timer, lalu beralih dari layar. Tekan Selesai saat kamu
@@ -94,8 +95,8 @@ export default function HomePage() {
         <section className="activity-world">
           <div className="content-width world-grid">
             <div className="world-intro">
-              <h2>Ke mana langkah kecilmu?</h2>
-              <p>
+              <h2 data-studio-motion="copy">Ke mana langkah kecilmu?</h2>
+              <p data-studio-motion="copy" data-studio-delay="70">
                 Bereskan sesuatu, gerakkan badan, atau ambil jeda. Pilih yang
                 kamu butuhkan sekarang.
               </p>
@@ -106,7 +107,7 @@ export default function HomePage() {
             </div>
             <div className="category-list">
               <article className="studio-category studio-category-tidy">
-                <div className="studio-art-frame">
+                <div className="studio-art-frame" data-studio-motion="image">
                   <TurtleMascot
                     pose="tidy"
                     size={320}
@@ -114,15 +115,15 @@ export default function HomePage() {
                   />
                 </div>
                 <div>
-                  <h3>Produktif ringan</h3>
-                  <p>
+                  <h3 data-studio-motion="copy">Produktif ringan</h3>
+                  <p data-studio-motion="copy" data-studio-delay="70">
                     Kembalikan lima benda. Rapikan satu sudut. Siapkan langkah
                     berikutnya.
                   </p>
                 </div>
               </article>
               <article className="studio-category studio-category-move">
-                <div className="studio-art-frame">
+                <div className="studio-art-frame" data-studio-motion="image">
                   <TurtleMascot
                     pose="move"
                     size={320}
@@ -130,14 +131,14 @@ export default function HomePage() {
                   />
                 </div>
                 <div>
-                  <h3>Bergerak</h3>
-                  <p>
+                  <h3 data-studio-motion="copy">Bergerak</h3>
+                  <p data-studio-motion="copy" data-studio-delay="70">
                     Regangkan bahu atau jalan santai. Ikuti kenyamanan badanmu.
                   </p>
                 </div>
               </article>
               <article className="studio-category studio-category-journal">
-                <div className="studio-art-frame">
+                <div className="studio-art-frame" data-studio-motion="image">
                   <TurtleMascot
                     pose="journal"
                     size={320}
@@ -145,8 +146,8 @@ export default function HomePage() {
                   />
                 </div>
                 <div>
-                  <h3>Refleksi dan jeda</h3>
-                  <p>
+                  <h3 data-studio-motion="copy">Refleksi dan jeda</h3>
+                  <p data-studio-motion="copy" data-studio-delay="70">
                     Istirahatkan pandangan atau journaling di media pilihanmu.
                   </p>
                 </div>
@@ -157,10 +158,10 @@ export default function HomePage() {
         <section className="your-pace content-width">
           <div className="pace-heading">
             <TurtleMascot pose="think" size={100} />
-            <h2>Kamu pegang kendalinya.</h2>
+            <h2 data-studio-motion="copy">Kamu pegang kendalinya.</h2>
           </div>
           <div className="pace-copy">
-            <p>
+            <p data-studio-motion="copy" data-studio-delay="70">
               Boleh lewati mood. Boleh ganti kegiatan. Boleh berhenti dan mulai
               lagi nanti.
             </p>
@@ -173,8 +174,10 @@ export default function HomePage() {
         </section>
         <section className="closing content-width">
           <div>
-            <h2>Mulai dari yang kecil.</h2>
-            <p>Satu kegiatan untuk waktu yang kamu punya.</p>
+            <h2 data-studio-motion="copy">Mulai dari yang kecil.</h2>
+            <p data-studio-motion="copy" data-studio-delay="70">
+              Satu kegiatan untuk waktu yang kamu punya.
+            </p>
           </div>
           <Link href="/app" className="button primary">
             Mulai kegiatan
@@ -187,6 +190,6 @@ export default function HomePage() {
         <p>Teman untuk satu langkah kecil.</p>
         <Link href="/app">Masuk ke kegiatan</Link>
       </footer>
-    </div>
+    </LandingMotion>
   );
 }

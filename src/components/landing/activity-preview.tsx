@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRightIcon, CheckIcon } from "@phosphor-icons/react";
 
 const previews = {
@@ -22,7 +22,35 @@ const previews = {
 };
 export function ActivityPreview() {
   const [minutes, setMinutes] = useState<2 | 5 | 10>(5);
+  const previewRef = useRef<HTMLDivElement>(null);
+  const previousMinutes = useRef(minutes);
   const item = previews[minutes];
+
+  useEffect(() => {
+    if (previousMinutes.current === minutes) return;
+    previousMinutes.current = minutes;
+    if (
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+      document.hidden
+    )
+      return;
+    const animation = previewRef.current?.animate(
+      [
+        { opacity: 0.65, transform: "translateY(8px)" },
+        { opacity: 1, transform: "none" },
+      ],
+      { duration: 220, easing: "cubic-bezier(0.16, 1, 0.3, 1)" },
+    );
+    const stop = () => animation?.cancel();
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    preference.addEventListener("change", stop);
+    document.addEventListener("visibilitychange", stop);
+    return () => {
+      stop();
+      preference.removeEventListener("change", stop);
+      document.removeEventListener("visibilitychange", stop);
+    };
+  }, [minutes]);
   return (
     <section
       className="hero-demo studio-demo content-width"
@@ -58,9 +86,14 @@ export function ActivityPreview() {
           <ArrowUpRightIcon size={20} aria-hidden="true" />
         </Link>
       </div>
-      <div className="demo-activity" aria-live="polite">
-        <p className="small">Contoh kegiatan · {item.category}</p>
+      <div
+        ref={previewRef}
+        className="demo-activity"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         <h2>{item.title}</h2>
+        <p className="small">Contoh kegiatan · {item.category}</p>
         <p>{item.copy}</p>
       </div>
     </section>
