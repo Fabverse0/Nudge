@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowUpRightIcon,
   BookmarkSimpleIcon,
@@ -6,10 +7,11 @@ import {
 import { TurtleMascot } from "@/components/ui/turtle-mascot";
 import { Brand } from "@/components/brand";
 import { ActivityPreview } from "@/components/landing/activity-preview";
+import "@/components/landing/landing-studio.css";
 
 export default function HomePage() {
   return (
-    <div className="landing">
+    <div className="landing landing-studio">
       <header className="site-header">
         <Brand />
         <nav aria-label="Navigasi utama">
@@ -43,8 +45,20 @@ export default function HomePage() {
               Dua menit juga boleh.
             </p>
           </div>
-          <ActivityPreview />
+          <div className="studio-scene">
+            <Image
+              src="/brand/landing/nudge-small-step.webp"
+              alt="C1 beranjak dari ponsel menuju buku catatan dan kegiatan kecil"
+              width={1200}
+              height={900}
+              sizes="(max-width: 700px) 100vw, 52vw"
+              loading="eager"
+              fetchPriority="high"
+              className="studio-hero-art"
+            />
+          </div>
         </section>
+        <ActivityPreview />
         <section className="small-start content-width" id="cara-pakai">
           <div className="section-heading">
             <h2>Tak harus langsung banyak.</h2>
@@ -91,12 +105,14 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="category-list">
-              <article>
-                <TurtleMascot
-                  pose="tidy"
-                  size={128}
-                  className="category-illustration"
-                />
+              <article className="studio-category studio-category-tidy">
+                <div className="studio-art-frame">
+                  <TurtleMascot
+                    pose="tidy"
+                    size={320}
+                    className="category-illustration"
+                  />
+                </div>
                 <div>
                   <h3>Produktif ringan</h3>
                   <p>
@@ -105,12 +121,14 @@ export default function HomePage() {
                   </p>
                 </div>
               </article>
-              <article>
-                <TurtleMascot
-                  pose="move"
-                  size={128}
-                  className="category-illustration"
-                />
+              <article className="studio-category studio-category-move">
+                <div className="studio-art-frame">
+                  <TurtleMascot
+                    pose="move"
+                    size={320}
+                    className="category-illustration"
+                  />
+                </div>
                 <div>
                   <h3>Bergerak</h3>
                   <p>
@@ -118,12 +136,14 @@ export default function HomePage() {
                   </p>
                 </div>
               </article>
-              <article>
-                <TurtleMascot
-                  pose="journal"
-                  size={128}
-                  className="category-illustration"
-                />
+              <article className="studio-category studio-category-journal">
+                <div className="studio-art-frame">
+                  <TurtleMascot
+                    pose="journal"
+                    size={320}
+                    className="category-illustration"
+                  />
+                </div>
                 <div>
                   <h3>Refleksi dan jeda</h3>
                   <p>
