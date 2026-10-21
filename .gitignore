@@ -7,6 +7,7 @@ test-results/
 .taste-skill/
 .impeccable/review/
 .impeccable/detector-final.json
+.impeccable/npm-cache/
 .env*
 !.env.example
 *.tsbuildinfo
