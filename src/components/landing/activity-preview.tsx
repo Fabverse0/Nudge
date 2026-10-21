@@ -1,31 +1,24 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  ArrowUpRightIcon,
-  CheckIcon,
-  FootprintsIcon,
-  LeafIcon,
-} from "@phosphor-icons/react";
+import { ArrowUpRightIcon, CheckIcon } from "@phosphor-icons/react";
+import { TurtleMascot } from "@/components/ui/turtle-mascot";
 
 const previews = {
   2: {
     title: "Kembalikan lima benda",
     copy: "Satu benda, lalu satu lagi. Cukup mulai dari yang ada di dekatmu.",
     category: "Produktif ringan",
-    icon: <CheckIcon size={36} />,
   },
   5: {
     title: "Jalan santai sebentar",
     copy: "Letakkan ponsel. Langkahkan kaki di rumah atau jalur aman di dekatmu.",
     category: "Bergerak",
-    icon: <FootprintsIcon size={36} />,
   },
   10: {
     title: "Jeda tanpa layar",
     copy: "Cari posisi nyaman. Perhatikan sekitar dan beri pikiranmu sedikit ruang.",
     category: "Refleksi/jeda layar",
-    icon: <LeafIcon size={36} />,
   },
 };
 export function ActivityPreview() {
@@ -33,6 +26,13 @@ export function ActivityPreview() {
   const item = previews[minutes];
   return (
     <div className="hero-demo">
+      <TurtleMascot
+        pose="wave"
+        size={260}
+        className="hero-mascot"
+        alt="Kura-kura Nudge menyapa"
+        eager
+      />
       <fieldset className="demo-duration">
         <legend>Punya waktu berapa menit?</legend>
         <div>
@@ -58,7 +58,6 @@ export function ActivityPreview() {
         </div>
       </fieldset>
       <div className="demo-activity" aria-live="polite">
-        <div className="demo-symbol">{item.icon}</div>
         <p className="small">Contoh kegiatan · {item.category}</p>
         <h2>{item.title}</h2>
         <p>{item.copy}</p>

@@ -2,11 +2,8 @@ import Link from "next/link";
 import {
   ArrowUpRightIcon,
   BookmarkSimpleIcon,
-  CheckIcon,
-  FootprintsIcon,
-  LeafIcon,
 } from "@phosphor-icons/react/dist/ssr";
-import { TurtleIcon } from "@/components/ui/turtle-icon";
+import { TurtleMascot } from "@/components/ui/turtle-mascot";
 import { Brand } from "@/components/brand";
 import { ActivityPreview } from "@/components/landing/activity-preview";
 
@@ -42,7 +39,7 @@ export default function HomePage() {
               <ArrowUpRightIcon size={20} />
             </Link>
             <p className="hero-footnote">
-              <TurtleIcon size={24} />
+              <TurtleMascot pose="symbol" size={28} />
               Dua menit juga boleh.
             </p>
           </div>
@@ -95,9 +92,11 @@ export default function HomePage() {
             </div>
             <div className="category-list">
               <article>
-                <span className="category-symbol sage">
-                  <CheckIcon size={28} />
-                </span>
+                <TurtleMascot
+                  pose="tidy"
+                  size={128}
+                  className="category-illustration"
+                />
                 <div>
                   <h3>Produktif ringan</h3>
                   <p>
@@ -107,9 +106,11 @@ export default function HomePage() {
                 </div>
               </article>
               <article>
-                <span className="category-symbol blue">
-                  <FootprintsIcon size={28} />
-                </span>
+                <TurtleMascot
+                  pose="move"
+                  size={128}
+                  className="category-illustration"
+                />
                 <div>
                   <h3>Bergerak</h3>
                   <p>
@@ -118,9 +119,11 @@ export default function HomePage() {
                 </div>
               </article>
               <article>
-                <span className="category-symbol sand">
-                  <LeafIcon size={28} />
-                </span>
+                <TurtleMascot
+                  pose="journal"
+                  size={128}
+                  className="category-illustration"
+                />
                 <div>
                   <h3>Refleksi dan jeda</h3>
                   <p>
@@ -133,7 +136,7 @@ export default function HomePage() {
         </section>
         <section className="your-pace content-width">
           <div className="pace-heading">
-            <TurtleIcon size={54} />
+            <TurtleMascot pose="think" size={100} />
             <h2>Kamu pegang kendalinya.</h2>
           </div>
           <div className="pace-copy">

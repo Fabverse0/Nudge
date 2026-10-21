@@ -15,7 +15,7 @@ import {
   SmileyIcon,
   XIcon,
 } from "@phosphor-icons/react";
-import { TurtleIcon } from "@/components/ui/turtle-icon";
+import { TurtleMascot } from "@/components/ui/turtle-mascot";
 import { Brand } from "@/components/brand";
 import {
   activities,
@@ -313,10 +313,11 @@ export function ActivityApp({
                     Pilih yang terasa pas. Satu kegiatan kecil dulu.
                   </p>
                 </div>
-                <TurtleIcon
-                  size={60}
+                <TurtleMascot
+                  pose="wave"
+                  size={80}
                   className="turtle-companion"
-                  aria-label="Pendamping kura-kura"
+                  alt="Pendamping kura-kura"
                 />
               </div>
               <form
@@ -453,10 +454,10 @@ export function ActivityApp({
                 <>
                   <div className="suggestion-heading">
                     <h1>Satu ini, mau coba?</h1>
-                    <TurtleIcon
-                      size={44}
+                    <TurtleMascot
+                      pose="think"
+                      size={64}
                       className="turtle-companion"
-                      aria-hidden="true"
                     />
                   </div>
                   <article className="activity-card">
@@ -558,7 +559,7 @@ export function ActivityApp({
                 </>
               ) : (
                 <div className="empty-state">
-                  <TurtleIcon size={60} />
+                  <TurtleMascot pose="think" size={80} />
                   <h1>
                     {result?.kind === "exhausted"
                       ? "Pilihan sesi ini sudah dicoba."
@@ -652,7 +653,7 @@ export function ActivityApp({
                 </button>
               </div>
               <div className="calm-companion">
-                <TurtleIcon size={40} />
+                <TurtleMascot size={40} />
                 <span>Pelan-pelan juga boleh.</span>
               </div>
               <details className="timer-instructions">
@@ -684,14 +685,13 @@ export function ActivityApp({
           {screen === "complete" && (
             <section className="completion-screen">
               <div className="completion-mark">
-                <CheckIcon size={40} />
+                <TurtleMascot pose="complete" size={128} />
               </div>
               <h1>Satu langkah sudah.</h1>
               <p className="muted">
                 Terima kasih sudah memberi waktu untuk dirimu.
               </p>
               <div className="completion-question">
-                <TurtleIcon size={64} className="turtle-companion" />
                 <h2>Mood kamu berubah?</h2>
                 <p className="muted">Boleh berbeda, boleh tetap sama.</p>
                 <div className="mood-options">
@@ -764,7 +764,7 @@ export function ActivityApp({
                 </div>
               ) : (
                 <div className="empty-state">
-                  <TurtleIcon size={64} />
+                  <TurtleMascot pose="think" size={80} />
                   <h2>Belum ada favorit.</h2>
                   <p>
                     Simpan kegiatan yang ingin kamu coba lagi lewat ikon simpan

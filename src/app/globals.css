@@ -211,8 +211,19 @@ svg {
   font-weight: 900;
   letter-spacing: -0.05em;
 }
-.brand-period {
-  color: var(--primary);
+.brand-wordmark {
+  width: 102px;
+  height: auto;
+}
+.turtle-mascot {
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.hero-mascot {
+  width: min(260px, 100%);
+  height: auto;
+  margin: -12px auto 4px;
 }
 .site-header nav {
   display: flex;
@@ -270,7 +281,7 @@ svg {
 }
 .hero-demo {
   background: var(--blue);
-  padding: 40px 32px 24px;
+  padding: 24px 32px;
   border-radius: 140px 140px 40px 40px;
 }
 .demo-topline {
@@ -352,15 +363,11 @@ svg {
   outline-offset: 4px;
 }
 .demo-activity {
-  min-height: 250px;
+  min-height: 190px;
   margin-top: 24px;
   padding: 24px;
   border-radius: var(--card-radius);
   background: var(--canvas);
-}
-.demo-symbol {
-  color: var(--action);
-  margin-bottom: 14px;
 }
 .demo-activity h2 {
   margin: 8px 0 12px;
@@ -447,25 +454,16 @@ svg {
 .category-list p {
   margin-top: 8px;
 }
-.category-symbol,
 .favorite-symbol {
   border-radius: 20px;
   padding: 16px;
   display: inline-flex;
   color: var(--ink);
 }
-.category-symbol {
-  width: 64px;
-  height: 64px;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.category-symbol.sage {
-  background: var(--primary);
-}
-.category-symbol.sand {
-  background: var(--surface);
+.category-illustration {
+  width: 128px;
+  height: 128px;
+  align-self: center;
 }
 .sage {
   background: var(--selection);
@@ -482,8 +480,7 @@ svg {
   gap: 80px;
   padding-block: 96px;
 }
-.pace-heading svg {
-  color: var(--action);
+.pace-heading .turtle-mascot {
   margin-bottom: 22px;
 }
 .pace-copy > p:first-child {
@@ -1050,12 +1047,9 @@ input[type="time"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
-  border-radius: 28px;
-  color: var(--action);
-  background: var(--selection);
-  margin-bottom: 24px;
+  width: 128px;
+  height: 128px;
+  margin-bottom: 16px;
   animation: completion-in 350ms ease-out;
 }
 .completion-screen > p {
@@ -1207,8 +1201,8 @@ input[type="time"] {
     font-size: 1.75rem;
     gap: 8px;
   }
-  .brand svg {
-    width: 30px;
+  .brand-wordmark {
+    width: 90px;
   }
   .desktop-link {
     display: none;
@@ -1239,14 +1233,14 @@ input[type="time"] {
     margin-top: 18px;
   }
   .hero-demo {
-    padding: 48px 24px 24px;
+    padding: 20px 24px 24px;
     border-radius: 100px 100px 28px 28px;
     max-width: 480px;
     width: 100%;
     margin-inline: auto;
   }
   .demo-activity {
-    min-height: 240px;
+    min-height: 190px;
   }
   .section-heading {
     grid-template-columns: 1fr;
@@ -1292,18 +1286,16 @@ input[type="time"] {
   .category-list article {
     gap: 16px;
   }
-  .category-symbol {
-    width: 56px;
-    height: 56px;
-    padding: 12px;
-    border-radius: 16px;
+  .category-illustration {
+    width: 88px;
+    height: 88px;
   }
   .your-pace {
     grid-template-columns: 1fr;
     gap: 24px;
     padding-block: 56px;
   }
-  .pace-heading svg {
+  .pace-heading .turtle-mascot {
     margin-bottom: 16px;
   }
   .pace-copy > p:first-child {
