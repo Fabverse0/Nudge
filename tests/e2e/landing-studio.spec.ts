@@ -20,7 +20,7 @@ test("landing review uses a clear check, step icons and walking art", async ({
   expect(
     await selected
       .locator(".demo-selection")
-      .evaluate((element) => element.getBoundingClientRect().width),
+      .evaluate((element) => Number.parseFloat(getComputedStyle(element).width)),
   ).toBe(24);
   await expect(page.locator(".start-activity-icon")).toHaveCount(2);
   await expect(page.locator(".studio-category-move img")).toHaveAttribute(
