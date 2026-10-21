@@ -1,0 +1,24 @@
+{
+  "created": "2026-10-22",
+  "tool": "built-in image generation",
+  "reference": "public/brand/mascot/nudge-turtle-wave.png",
+  "prompt": "docs/assets/landing-studio/hero-prompt.txt",
+  "assets": [
+    {
+      "path": "docs/assets/landing-studio/hero-source-v1.png",
+      "width": 1448,
+      "height": 1086,
+      "bytes": 899567,
+      "alpha": true,
+      "sha256": "dda79fbd989cf0cac7f6a619e5d436375bb1af207ff26e69d9920334d3166568"
+    },
+    {
+      "path": "public/brand/landing/nudge-small-step.webp",
+      "width": 1200,
+      "height": 900,
+      "bytes": 83254,
+      "alpha": true,
+      "sha256": "85df2e0ae25943282956c975e58f9088534b5bc02d53fbb0350f9951dbda7bde"
+    }
+  ]
+}
