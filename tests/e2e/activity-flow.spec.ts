@@ -223,7 +223,8 @@ test("changing mood updates the next selection and changing activity stops the p
 
 test("layout has no horizontal overflow at 320, 768 and 1440", async ({
   page,
-}) => {
+}, testInfo) => {
+  test.setTimeout(90_000);
   for (const width of [320, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     for (const path of ["/", "/app"]) {
@@ -232,6 +233,25 @@ test("layout has no horizontal overflow at 320, 768 and 1440", async ({
         () => document.documentElement.scrollWidth > window.innerWidth,
       );
       expect(overflow, `${path} at ${width}`).toBe(false);
+      for (const image of await page.locator("img").all()) {
+        await image.scrollIntoViewIfNeeded();
+        await expect(image).toBeVisible();
+        await expect
+          .poll(() =>
+            image.evaluate(
+              (node: HTMLImageElement) =>
+                node.complete && node.naturalWidth > 0,
+            ),
+          )
+          .toBe(true);
+      }
+      await page.evaluate(() =>
+        window.scrollTo({ top: 0, behavior: "instant" }),
+      );
+      await page.screenshot({
+        path: `.impeccable/review/c1-${path === "/" ? "landing" : "app"}-${width}-${testInfo.project.name}.png`,
+        fullPage: true,
+      });
     }
   }
 });

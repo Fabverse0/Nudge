@@ -71,6 +71,15 @@ test("production activity flow has no hydration or browser errors", async ({
   await page.getByRole("radio", { name: "2 menit" }).check();
   await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
   await page.getByRole("button", { name: "Mulai kegiatan" }).click();
+  await expect
+    .poll(() =>
+      page
+        .locator(".calm-companion img")
+        .evaluate(
+          (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
+        ),
+    )
+    .toBe(true);
   await page.screenshot({
     path: `.impeccable/review/timer-production-${testInfo.project.name}.png`,
     fullPage: true,
@@ -78,6 +87,19 @@ test("production activity flow has no hydration or browser errors", async ({
   await page.getByRole("button", { name: "Jeda", exact: true }).click();
   await page.getByRole("button", { name: "Lanjut", exact: true }).click();
   await page.getByRole("button", { name: "Selesai", exact: true }).click();
+  await expect
+    .poll(() =>
+      page
+        .locator(".completion-mark img")
+        .evaluate(
+          (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
+        ),
+    )
+    .toBe(true);
+  await page.screenshot({
+    path: `.impeccable/review/completion-production-${testInfo.project.name}.png`,
+    fullPage: true,
+  });
   await page.getByRole("button", { name: "Lewati", exact: true }).click();
   await expect(
     page.getByRole("heading", { name: "Mau mulai dari apa?" }),
@@ -96,14 +118,28 @@ test("production registers worker, serves real icons and keeps private state out
     page.getByRole("heading", { name: "Mau mulai dari apa?" }),
   ).toBeVisible();
   await expect(page.getByRole("timer")).toHaveCount(0);
-  for (const size of [192, 512]) {
-    const icon = await request.get(`/icons/${size}`);
+  for (const [variant, size] of [
+    ["32", 32],
+    ["180", 180],
+    ["192", 192],
+    ["512", 512],
+    ["maskable-512", 512],
+  ] as const) {
+    const icon = await request.get(`/icons/${variant}`);
     expect(icon.ok()).toBe(true);
     expect(icon.headers()["content-type"]).toContain("image/png");
     const png = await icon.body();
     expect(png.readUInt32BE(16)).toBe(size);
     expect(png.readUInt32BE(20)).toBe(size);
   }
+  expect((await request.get("/icons/999")).status()).toBe(404);
+  const manifest = await (await request.get("/manifest.webmanifest")).json();
+  expect(manifest.icons).toContainEqual({
+    src: "/icons/maskable-512",
+    sizes: "512x512",
+    type: "image/png",
+    purpose: "maskable",
+  });
   const cacheUrls = await page.evaluate(async () => {
     const urls: string[] = [];
     for (const key of await caches.keys()) {
