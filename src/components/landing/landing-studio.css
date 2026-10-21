@@ -336,6 +336,15 @@
   border-radius: 64px 64px 24px 24px;
 }
 
+.landing-studio .closing > div {
+  min-width: 0;
+}
+
+.landing-studio .closing > .button {
+  flex-shrink: 0;
+  max-width: 100%;
+}
+
 .landing-studio .site-footer {
   padding-block: 64px 48px;
 }
