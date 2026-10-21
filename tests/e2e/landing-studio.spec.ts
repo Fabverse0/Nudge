@@ -221,6 +221,9 @@ test("studio remains readable without JavaScript", async ({
       page.getByText("Contoh ini memakai lima menit.", { exact: false }),
     ).toBeVisible();
     await expect(
+      page.getByRole("radio", { name: "2 menit", exact: true }),
+    ).toBeDisabled();
+    await expect(
       page.getByRole("link", { name: "Pilih kegiatanku" }),
     ).toHaveAttribute("href", "/app?minutes=5");
     await expect(

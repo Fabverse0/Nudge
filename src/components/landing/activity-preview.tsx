@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { ArrowUpRightIcon, CheckIcon } from "@phosphor-icons/react";
 
 const previews = {
@@ -20,7 +20,16 @@ const previews = {
     category: "Refleksi/jeda layar",
   },
 };
+const subscribe = () => () => {};
+const clientSnapshot = () => true;
+const serverSnapshot = () => false;
+
 export function ActivityPreview() {
+  const interactive = useSyncExternalStore(
+    subscribe,
+    clientSnapshot,
+    serverSnapshot,
+  );
   const [minutes, setMinutes] = useState<2 | 5 | 10>(5);
   const previewRef = useRef<HTMLDivElement>(null);
   const previousMinutes = useRef(minutes);
@@ -56,14 +65,8 @@ export function ActivityPreview() {
       className="hero-demo studio-demo content-width"
       aria-label="Coba pilihan waktu"
     >
-      <noscript>
-        <p className="studio-noscript">
-          Contoh ini memakai lima menit. Buka Nudge untuk memilih waktu
-          kegiatanmu.
-        </p>
-      </noscript>
       <div className="studio-duration">
-        <fieldset className="demo-duration">
+        <fieldset className="demo-duration" disabled={!interactive}>
           <legend>Punya waktu berapa menit?</legend>
           <div>
             {([2, 5, 10] as const).map((time) => (
@@ -91,6 +94,11 @@ export function ActivityPreview() {
           Pilih kegiatanku
           <ArrowUpRightIcon size={20} aria-hidden="true" />
         </Link>
+        <p className="studio-preview-note">
+          {interactive
+            ? "Pilihan waktumu akan dibawa ke Nudge."
+            : "Contoh ini memakai lima menit. Buka Nudge untuk memilih waktu kegiatanmu."}
+        </p>
       </div>
       <div
         ref={previewRef}

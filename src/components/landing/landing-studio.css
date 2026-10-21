@@ -74,12 +74,13 @@
   margin-bottom: 20px;
 }
 
-.studio-demo > noscript {
-  grid-column: 1 / -1;
+.studio-preview-note {
+  font-size: 1rem;
+  max-width: 32ch;
 }
 
-.studio-noscript {
-  font-weight: 700;
+.landing-studio .demo-duration:disabled :is(label, input) {
+  cursor: default;
 }
 
 .landing-studio .demo-duration > div {
