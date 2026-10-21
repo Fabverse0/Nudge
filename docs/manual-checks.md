@@ -4,6 +4,14 @@ Status: pemeriksaan Android Chrome pada perangkat fisik belum dijalankan. Penggu
 
 Target utama yang dipilih pengguna: **Android dengan Chrome**. Model perangkat, versi Android dan versi Chrome belum dicatat.
 
+## Kandidat yang siap diperiksa
+
+Kandidat kode dan aset C1: commit `5e4355b`, 22 Oktober 2026. Inventaris berada di [keluarga C1](./assets/turtle-c1/README.md), sedangkan hasil otomatis terbaru berada di [verification.md](./verification.md). Pembaruan dokumen setelah commit ini tidak otomatis menjadi hasil pengujian perangkat.
+
+Untuk menjalankan build produksi lokal di komputer, gunakan `npm start -- --hostname 127.0.0.1 --port 3100` setelah build berhasil. Landing ada di `http://127.0.0.1:3100/` dan aplikasi di `/app`. Alamat ini belum menjadi alamat pemeriksaan Android. Pilih preview HTTPS yang dapat dibuka ponsel sebelum memeriksa pemasangan dan izin OS.
+
+Urutan pemeriksaan: jalankan alur desktop, periksa zoom browser dan pembaca layar nyata, lalu lakukan pemasangan serta pengingat pada Android Chrome. Isi hasil nyata pada tabel setelah tugas dilakukan. Jika suatu langkah gagal, catat langkah, hasil yang terlihat, dan apakah pengguna memerlukan bantuan; biarkan item yang belum dicoba tetap kosong.
+
 ## Lingkungan pemeriksaan
 
 Isi dari perangkat yang benar-benar digunakan:
@@ -40,9 +48,9 @@ Untuk seluler, URL localhost komputer tidak menunjuk komputer tersebut dari pons
 2. Pada Chrome Android, buka menu browser lalu pilih pemasangan aplikasi atau Tambahkan ke layar utama bila tersedia. Catat pilihan yang benar-benar ditawarkan browser dan selesaikan dialog pemasangan.
 3. Tutup tampilan aplikasi lalu buka dari ikon yang baru dipasang.
 4. Pastikan layar awal adalah pemilihan `/app`, bukan landing, dan timer belum dimulai.
-5. Catat nama, ikon sementara, tampilan standalone, serta perbedaan browser yang diamati.
+5. Catat nama, ikon kura-kura C1, tampilan standalone, serta perbedaan browser yang diamati. Periksa wajah dan tempurung pada ikon launcher, termasuk bila sistem memotong ikon menjadi lingkaran atau bentuk lain.
 
-Status pemasangan: **belum diperiksa**. Ikon final ditunda pengguna; ikon `n.` saat ini adalah aset pengembangan.
+Status pemasangan: **belum diperiksa pada Android fisik**. Kandidat sudah memakai ikon C1 dengan varian maskable. Pemeriksaan PNG, area aman, dan metadata otomatis telah lulus; penerimaan launcher tetap memerlukan perangkat nyata.
 
 ### Pembaruan service worker
 
