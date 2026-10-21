@@ -318,6 +318,7 @@ export function ActivityApp({
                   size={80}
                   className="turtle-companion"
                   alt="Pendamping kura-kura"
+                  eager
                 />
               </div>
               <form
@@ -458,6 +459,7 @@ export function ActivityApp({
                       pose="think"
                       size={64}
                       className="turtle-companion"
+                      eager
                     />
                   </div>
                   <article className="activity-card">
@@ -559,7 +561,7 @@ export function ActivityApp({
                 </>
               ) : (
                 <div className="empty-state">
-                  <TurtleMascot pose="think" size={80} />
+                  <TurtleMascot pose="think" size={80} eager />
                   <h1>
                     {result?.kind === "exhausted"
                       ? "Pilihan sesi ini sudah dicoba."
@@ -653,7 +655,7 @@ export function ActivityApp({
                 </button>
               </div>
               <div className="calm-companion">
-                <TurtleMascot size={40} />
+                <TurtleMascot size={40} eager />
                 <span>Pelan-pelan juga boleh.</span>
               </div>
               <details className="timer-instructions">
@@ -685,7 +687,7 @@ export function ActivityApp({
           {screen === "complete" && (
             <section className="completion-screen">
               <div className="completion-mark">
-                <TurtleMascot pose="complete" size={128} />
+                <TurtleMascot pose="complete" size={128} eager />
               </div>
               <h1>Satu langkah sudah.</h1>
               <p className="muted">
@@ -764,7 +766,7 @@ export function ActivityApp({
                 </div>
               ) : (
                 <div className="empty-state">
-                  <TurtleMascot pose="think" size={80} />
+                  <TurtleMascot pose="think" size={80} eager />
                   <h2>Belum ada favorit.</h2>
                   <p>
                     Simpan kegiatan yang ingin kamu coba lagi lewat ikon simpan
