@@ -83,6 +83,21 @@ Menguji izin pada browser/OS sungguhan memerlukan tindakan pemilik perangkat. Ja
 
 ## Observasi penggunaan
 
+### Tinjauan desktop oleh agen, 22 Oktober 2026
+
+Preview produksi lokal pada `http://127.0.0.1:3100`, melalui browser dalam aplikasi Codex. Area halaman yang diukur saat pemilihan kegiatan adalah 583 x 524 CSS px; ini panel desktop sempit, bukan perangkat Android atau bukti zoom browser.
+
+- Mengirim pilihan kosong menampilkan arahan untuk memilih tujuan dan waktu.
+- Mood dilewati, tujuan refleksi dan waktu dua menit menghasilkan saran beserta instruksi kegiatan di luar Nudge.
+- Memulai kegiatan membuka timer. Tab lalu Enter mengaktifkan jeda; status berubah menjadi sedang dijeda.
+- Menekan Selesai menampilkan pertanyaan perubahan mood. Lewati mengembalikan pemilihan dengan tujuan dan waktu sebelumnya tetap dipilih.
+- Favorit kosong menjelaskan cara menyimpan dan batas penyimpanan lokal. Penambahan serta persistensi favorit tidak diulang dalam tinjauan ini.
+- Pengingat ditampilkan nonaktif, dengan penjelasan batas aplikasi terbuka. Izin notifikasi dan jadwal tersimpan tidak diubah.
+- Tombol panah pada pilihan durasi landing mengubah lima menjadi sepuluh menit. Tautan pilihan membuka `/app?minutes=10`, dengan sepuluh menit terpilih dan tanpa timer aktif.
+- Pada halaman pemilihan yang diukur, tidak ada overflow horizontal atau gambar gagal dimuat. Screenshot landing: `.impeccable/review/desktop-review-2026-10-22.png`.
+
+Tidak ditemukan masalah baru pada langkah tersebut. Ini peninjauan agen, bukan observasi peserta. Zoom browser nyata, pembaca layar, pengiriman notifikasi OS, dan Android tetap belum diperiksa. Pengguna memilih menunda Android dan meninjau desktop terlebih dahulu.
+
 Minta pengguna menjalankan tugas tanpa penjelasan langkah demi langkah: memahami manfaat, memilih/melewati mood, meminta saran, memulai, mengganti, menyelesaikan, dan memulai lagi. Catat kebingungan, kebutuhan bantuan, serta alasan kegiatan tidak cocok. Tidak perlu memasang analitik atau menyimpan isi jurnal/mood pribadi dalam laporan.
 
 Jumlah peserta dan ambang kuantitatif belum ditetapkan. Jangan mengisi hasil atau kesimpulan sebelum observasi benar-benar dilakukan.
