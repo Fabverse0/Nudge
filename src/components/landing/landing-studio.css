@@ -62,6 +62,14 @@
   margin-bottom: 20px;
 }
 
+.studio-demo > noscript {
+  grid-column: 1 / -1;
+}
+
+.studio-noscript {
+  font-weight: 700;
+}
+
 .landing-studio .demo-duration > div {
   justify-content: flex-start;
 }

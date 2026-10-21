@@ -56,6 +56,12 @@ export function ActivityPreview() {
       className="hero-demo studio-demo content-width"
       aria-label="Coba pilihan waktu"
     >
+      <noscript>
+        <p className="studio-noscript">
+          Contoh ini memakai lima menit. Buka Nudge untuk memilih waktu
+          kegiatanmu.
+        </p>
+      </noscript>
       <div className="studio-duration">
         <fieldset className="demo-duration">
           <legend>Punya waktu berapa menit?</legend>
