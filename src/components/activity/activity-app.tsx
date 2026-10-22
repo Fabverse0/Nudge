@@ -247,7 +247,7 @@ export function ActivityApp({
         >
           {screen === "choose" && (
             <>
-              <div className="app-intro">
+              <div className="app-intro selection-intro">
                 <div>
                   <h1>Mau mulai dari apa?</h1>
                   <p className="muted">

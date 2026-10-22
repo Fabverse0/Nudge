@@ -1,0 +1,901 @@
+.app-studio {
+  min-height: 100dvh;
+  padding-bottom: 16px;
+}
+
+.app-studio .app-header {
+  max-width: 1040px;
+  padding-block: 22px;
+}
+
+.app-studio .header-note {
+  color: var(--muted);
+}
+
+.app-studio .app-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: min(640px, calc(100% - 32px));
+  margin: 8px auto 0;
+  gap: 8px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--subtle);
+}
+
+.app-studio .nav-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 10px 16px;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.app-studio .nav-button:hover {
+  color: var(--action);
+  background: var(--selection);
+}
+
+.app-studio .nav-button.active {
+  border-color: var(--action);
+  color: var(--action);
+  background: var(--selection);
+}
+
+.app-studio .app-main {
+  width: min(640px, calc(100% - 32px));
+  margin: 32px auto 0;
+}
+
+.app-studio .app-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.app-studio .app-intro > div {
+  min-width: 0;
+}
+
+.app-studio .app-intro h1,
+.app-studio .suggestion-heading h1 {
+  font-size: 1.75rem;
+}
+
+.app-studio .app-intro p {
+  margin-top: 8px;
+  max-width: 42ch;
+}
+
+.app-studio .turtle-companion {
+  flex-shrink: 0;
+  color: var(--action);
+}
+
+.app-studio .context-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.app-studio .selection-flow {
+  padding: 24px 20px;
+  background: var(--surface);
+  border: 1px solid var(--subtle);
+  border-radius: var(--card-radius);
+}
+
+.app-studio .selection-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--subtle);
+}
+
+.app-studio .selection-progress-label {
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.app-studio .selection-progress ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.app-studio .selection-progress li {
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+
+.app-studio .selection-progress li[data-current="true"] {
+  color: var(--action);
+  font-weight: 800;
+  border-color: var(--action);
+}
+
+.app-studio .selection-progress li[data-done="true"] {
+  color: var(--action);
+}
+
+.app-studio .selection-step {
+  min-width: 0;
+}
+
+.app-studio .selection-step:focus {
+  outline: none;
+}
+
+.app-studio .selection-question {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.app-studio .selection-summary {
+  margin-bottom: 16px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.app-studio .selection-helper {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.app-studio .selection-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.app-studio .selection-actions .button {
+  width: 100%;
+}
+
+.app-studio .selection-actions .secondary,
+.app-studio .selection-actions .text-button {
+  align-self: center;
+  width: auto;
+  border-color: transparent;
+  background: transparent;
+}
+
+.app-studio .selection-actions .secondary:hover {
+  background: var(--selection);
+}
+
+.app-studio .mood-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.app-studio .mood-options .choice {
+  min-height: 72px;
+  padding: 16px;
+  gap: 8px;
+}
+
+.app-studio .choice > :not(input) {
+  pointer-events: none;
+}
+
+.app-studio .mood-options .selection-check {
+  margin-left: auto;
+}
+
+.app-studio .goal-options {
+  display: grid;
+  gap: 12px;
+}
+
+.app-studio .goal-choice {
+  min-width: 0;
+  min-height: 88px;
+  gap: 16px;
+  padding: 16px;
+  background: var(--surface);
+}
+
+.app-studio .goal-choice > svg:first-of-type {
+  color: var(--action);
+}
+
+.app-studio .goal-choice > span {
+  min-width: 0;
+}
+
+.app-studio .goal-choice small {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.app-studio .goal-choice .selection-check {
+  margin-left: auto;
+}
+
+.app-studio .duration-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.app-studio .duration-choice {
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  min-height: 104px;
+  padding: 20px 8px 16px;
+  gap: 4px;
+}
+
+.app-studio .duration-choice strong {
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.app-studio .duration-choice .selection-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.app-studio .filter-details {
+  padding-top: 20px;
+  border-top: 1px solid var(--subtle);
+}
+
+.app-studio .filter-details summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 44px;
+  list-style: none;
+  font-weight: 700;
+}
+
+.app-studio .filter-details summary::after {
+  content: "+";
+  margin-left: auto;
+  font-size: 1.5rem;
+}
+
+.app-studio .filter-details[open] summary::after {
+  content: "−";
+}
+
+.app-studio .filter-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.app-studio .filter-grid label,
+.app-studio .time-label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.app-studio .filter-grid select {
+  margin-top: 8px;
+}
+
+.app-studio .install-guide {
+  width: min(640px, calc(100% - 32px));
+  margin: 28px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--subtle);
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.app-studio .install-guide summary {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--action);
+  font-weight: 700;
+}
+
+.app-studio .install-guide p {
+  margin-block: 12px;
+}
+
+.app-studio .app-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 24px 16px 8px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.app-studio .suggestion-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.app-studio .activity-card {
+  background: var(--surface);
+  border-radius: var(--card-radius);
+}
+
+.app-studio .activity-art {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 24px;
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+}
+
+.app-studio .activity-art-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+}
+
+.app-studio .activity-content {
+  padding: 24px;
+}
+
+.app-studio .activity-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.app-studio .activity-meta > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.app-studio .activity-content h2 {
+  margin-bottom: 12px;
+}
+
+.app-studio .activity-content .warning-note {
+  margin-top: 20px;
+}
+
+.app-studio .conditions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.app-studio .activity-steps {
+  padding-left: 24px;
+  margin: 24px 0;
+}
+
+.app-studio .activity-steps li {
+  padding-left: 6px;
+  margin-block: 12px;
+}
+
+.app-studio .activity-steps li::marker {
+  color: var(--action);
+  font-weight: 800;
+}
+
+.app-studio .reason {
+  padding-top: 20px;
+  border-top: 1px solid var(--subtle);
+  font-size: 0.875rem;
+}
+
+.app-studio .reason p {
+  margin-top: 6px;
+}
+
+.app-studio .feedback-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.app-studio .feedback-row > span {
+  flex-basis: 100%;
+}
+
+.app-studio .feedback-row button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  font-weight: 700;
+}
+
+.app-studio .feedback-row button:hover,
+.app-studio .feedback-row button[aria-pressed="true"] {
+  background: var(--selection);
+  border-color: var(--action);
+}
+
+.app-studio .start-button {
+  margin-top: 24px;
+}
+
+.app-studio .empty-state {
+  padding: 32px 16px;
+  text-align: center;
+}
+
+.app-studio .empty-state > .turtle-mascot {
+  margin: 0 auto 20px;
+}
+
+.app-studio .empty-state p {
+  max-width: 45ch;
+  margin: 16px auto 24px;
+}
+
+.app-studio .empty-state .button {
+  margin: 6px;
+}
+
+.app-studio .timer-main {
+  max-width: 560px;
+  margin-top: 40px;
+}
+
+.app-studio .timer-screen {
+  text-align: center;
+}
+
+.app-studio .timer-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  color: var(--muted);
+}
+
+.app-studio .timer-screen h1 {
+  font-size: 1.5rem;
+}
+
+.app-studio .timer-display {
+  margin: 36px 0 16px;
+  font-size: min(5rem, 21vw);
+  font-weight: 800;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.app-studio .timer-status {
+  max-width: 38ch;
+  margin-inline: auto;
+  color: var(--muted);
+}
+
+.app-studio .timer-screen[data-state="paused"] .timer-display {
+  color: var(--muted);
+}
+
+.app-studio .timer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.app-studio .timer-controls .button {
+  flex: 1 1 160px;
+  max-width: 240px;
+}
+
+.app-studio .calm-companion {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.app-studio .timer-instructions {
+  padding-top: 16px;
+  margin-top: 32px;
+  border-top: 1px solid var(--subtle);
+  text-align: left;
+}
+
+.app-studio .timer-instructions summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  font-weight: 800;
+  list-style: none;
+}
+
+.app-studio .timer-instructions summary::after {
+  content: "+";
+  margin-left: auto;
+}
+
+.app-studio .timer-instructions[open] summary::after {
+  content: "−";
+}
+
+.app-studio .timer-secondary {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 24px;
+  margin-top: 20px;
+}
+
+.app-studio .timer-secondary button {
+  min-height: 44px;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--action);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.app-studio .completion-screen {
+  text-align: center;
+}
+
+.app-studio .completion-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.app-studio .completion-screen > p {
+  margin-top: 12px;
+}
+
+.app-studio .completion-question {
+  padding: 28px 20px;
+  margin-top: 28px;
+  background: var(--surface);
+  border-radius: var(--card-radius);
+}
+
+.app-studio .completion-question p {
+  margin: 12px 0 24px;
+}
+
+.app-studio .completion-question .text-button {
+  margin-top: 20px;
+}
+
+.app-studio .favorite-heading-mascot {
+  flex-shrink: 0;
+}
+
+.app-studio .favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.app-studio .favorite-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--control-radius);
+  background: var(--surface);
+}
+
+.app-studio .favorite-row > div:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+
+.app-studio .favorite-row h2 {
+  font-size: 1.125rem;
+}
+
+.app-studio .favorite-row h2 button {
+  min-height: 44px;
+  border: 0;
+  background: transparent;
+  font-weight: 800;
+  text-align: left;
+}
+
+.app-studio .favorite-row h2 button:hover {
+  text-decoration: underline;
+}
+
+.app-studio .favorite-symbol {
+  display: none;
+  padding: 12px;
+  border-radius: 14px;
+  color: var(--ink);
+}
+
+.app-studio .settings-panel form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.app-studio .reminder-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  border-radius: var(--control-radius);
+  background: var(--surface);
+  color: var(--muted);
+}
+
+.app-studio .reminder-status strong {
+  display: block;
+  color: var(--ink);
+}
+
+.app-studio .reminder-status p > span {
+  display: block;
+  margin-top: 4px;
+}
+
+.app-studio .reminder-status[data-enabled="true"] {
+  background: var(--selection);
+  color: var(--action);
+}
+
+.app-studio .toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 72px;
+  cursor: pointer;
+}
+
+.app-studio .toggle-row span span {
+  display: block;
+  margin-top: 4px;
+}
+
+.app-studio .toggle-row input {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  margin: 8px;
+  accent-color: var(--action);
+  cursor: pointer;
+}
+
+.app-studio .settings-fields {
+  display: grid;
+  gap: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--subtle);
+}
+
+.app-studio .day-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.app-studio .day-choice {
+  justify-content: center;
+  gap: 6px;
+  padding-inline: 12px;
+}
+
+.app-studio .day-choice .selection-check {
+  width: 12px;
+}
+
+.app-studio .time-label {
+  width: min(100%, 240px);
+}
+
+.app-studio .permission-status {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+@media (min-width: 480px) {
+  .app-studio .app-main {
+    margin-top: 40px;
+  }
+
+  .app-studio .selection-flow {
+    padding: 28px;
+  }
+
+  .app-studio .selection-actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .app-studio .selection-actions .primary {
+    width: auto;
+    min-width: 200px;
+  }
+
+  .app-studio .filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .app-studio .favorite-symbol {
+    display: inline-flex;
+  }
+
+  .app-studio .favorite-row {
+    padding: 18px;
+    gap: 16px;
+  }
+}
+
+@media (min-width: 720px) {
+  .app-studio .app-intro h1,
+  .app-studio .suggestion-heading h1 {
+    font-size: 2rem;
+  }
+
+  .app-studio .selection-flow {
+    padding: 32px;
+  }
+
+  .app-studio .timer-main {
+    margin-top: 56px;
+  }
+
+  .app-studio .timer-screen h1 {
+    font-size: 1.75rem;
+  }
+
+  .app-studio .timer-display {
+    margin-top: 44px;
+  }
+}
+
+@media (max-width: 479px) {
+  .app-studio .header-note {
+    display: none;
+  }
+
+  .app-studio .app-nav {
+    gap: 4px;
+  }
+
+  .app-studio .nav-button {
+    flex: 1 1 auto;
+    gap: 6px;
+    padding-inline: 8px;
+    font-size: 0.875rem;
+  }
+
+  .app-studio .selection-intro .turtle-mascot {
+    width: 64px;
+    height: auto;
+  }
+
+  .app-studio .selection-progress {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .app-studio .activity-art {
+    padding-inline: 20px;
+  }
+
+  .app-studio .activity-content {
+    padding: 20px;
+  }
+
+  .app-studio .activity-art-label {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 359px) {
+  .app-studio .selection-flow {
+    padding-inline: 16px;
+  }
+
+  .app-studio .mood-options {
+    grid-template-columns: 1fr;
+  }
+
+  .app-studio .mood-options .choice {
+    min-height: 56px;
+  }
+
+  .app-studio .duration-options {
+    gap: 8px;
+  }
+
+  .app-studio .goal-choice {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .app-studio .app-intro {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .app-studio .activity-art {
+    gap: 12px;
+    padding-inline: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .app-studio .selection-step {
+    animation: selection-step-enter 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes selection-step-enter {
+    from {
+      opacity: 0.7;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
