@@ -219,6 +219,21 @@ for (const { width, enlarged } of [
         document.documentElement.style.fontSize = "200%";
       });
     const check = async (screen: string) => {
+      await expect
+        .poll(
+          () =>
+            page
+              .locator("main img")
+              .evaluateAll((images) =>
+                images.every(
+                  (image) =>
+                    (image as HTMLImageElement).complete &&
+                    (image as HTMLImageElement).naturalWidth > 0,
+                ),
+              ),
+          { message: `${screen}: C1 artwork loads` },
+        )
+        .toBe(true);
       const overflowing = await page
         .locator("header, nav, main, footer")
         .evaluateAll((roots) =>
