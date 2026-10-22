@@ -21,7 +21,7 @@ export default function HomePage() {
             Cara pakai
           </a>
           <Link href="/app" className="button secondary compact">
-            Buka Nudge
+            Mulai kegiatan
             <ArrowUpRightIcon size={18} />
           </Link>
         </nav>
@@ -39,18 +39,18 @@ export default function HomePage() {
               kegiatan kecil yang pas dengan mood dan waktumu.
             </p>
             <Link href="/app" className="button primary hero-cta">
-              Mulai satu kegiatan
+              Mulai kegiatan
               <StartActivityIcon />
             </Link>
             <p className="hero-footnote">
               <TurtleMascot pose="symbol" size={28} />
-              Dua menit juga boleh.
+              Tanpa akun. Dua menit juga boleh.
             </p>
           </div>
           <div className="studio-scene">
             <Image
               src="/brand/landing/nudge-small-step.webp"
-              alt="C1 beranjak dari ponsel menuju buku catatan dan kegiatan kecil"
+              alt="Kura-kura Nudge beranjak dari ponsel menuju buku catatan dan kegiatan kecil"
               width={1200}
               height={900}
               sizes="(max-width: 700px) 100vw, 52vw"
@@ -73,22 +73,19 @@ export default function HomePage() {
             <article data-studio-motion="step">
               <span className="flow-word">Pilih.</span>
               <p>
-                Ceritakan sedikit: ingin apa, punya berapa menit? Mood boleh
-                dilewati.
+                Pilih tujuan dan waktu, dengan mood yang boleh dilewati.
               </p>
             </article>
             <article data-studio-motion="step" data-studio-delay="70">
               <span className="flow-word">Coba.</span>
               <p>
-                Satu saran, bukan daftar tanpa akhir. Belum pas? Cari kegiatan
-                lain.
+                Temukan satu kegiatan kecil atau ganti jika belum cocok.
               </p>
             </article>
             <article data-studio-motion="step" data-studio-delay="140">
               <span className="flow-word">Jalani.</span>
               <p>
-                Mulai timer, lalu beralih dari layar. Tekan Selesai saat kamu
-                selesai.
+                Jalani kegiatan dengan timer hingga kamu menekan Selesai.
               </p>
             </article>
           </div>
@@ -102,7 +99,7 @@ export default function HomePage() {
                 kamu butuhkan sekarang.
               </p>
               <Link className="text-link" href="/app">
-                Cari yang pas untukku
+                Mulai kegiatan
                 <ArrowUpRightIcon size={20} />
               </Link>
             </div>
@@ -193,7 +190,7 @@ export default function HomePage() {
       <footer className="site-footer content-width">
         <Brand />
         <p>Teman untuk satu langkah kecil.</p>
-        <Link href="/app">Masuk ke kegiatan</Link>
+        <Link href="/app">Mulai kegiatan</Link>
       </footer>
     </LandingMotion>
   );

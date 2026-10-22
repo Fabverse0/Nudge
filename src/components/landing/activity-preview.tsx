@@ -17,7 +17,7 @@ const previews = {
   10: {
     title: "Jeda tanpa layar",
     copy: "Cari posisi nyaman. Perhatikan sekitar dan beri pikiranmu sedikit ruang.",
-    category: "Refleksi/jeda layar",
+    category: "Refleksi dan jeda",
   },
 };
 const subscribe = () => () => {};
@@ -92,12 +92,12 @@ export function ActivityPreview() {
           </div>
         </fieldset>
         <Link href={`/app?minutes=${minutes}`} className="demo-link">
-          Pilih kegiatanku
+          Lanjut ke Nudge
           <ArrowUpRightIcon size={20} aria-hidden="true" />
         </Link>
         <p className="studio-preview-note">
           {interactive
-            ? "Pilihan waktumu akan dibawa ke Nudge."
+            ? "Ini contoh kegiatan. Pilihan waktumu dibawa ke Nudge; kamu memilih tujuan di sana."
             : "Contoh ini memakai lima menit. Buka Nudge untuk memilih waktu kegiatanmu."}
         </p>
       </div>
