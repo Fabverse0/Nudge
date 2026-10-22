@@ -53,7 +53,7 @@ export default function HomePage() {
               alt="Kura-kura Nudge beranjak dari ponsel menuju buku catatan dan kegiatan kecil"
               width={1200}
               height={900}
-              sizes="(max-width: 700px) 100vw, 52vw"
+              sizes="(max-width: 700px) calc(112vw - 72px), (max-width: 1264px) 52vw, 680px"
               loading="eager"
               fetchPriority="high"
               className="studio-hero-art"
