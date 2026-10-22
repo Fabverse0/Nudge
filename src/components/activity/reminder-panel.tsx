@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { BellIcon, CheckIcon } from "@phosphor-icons/react";
 import { isReminder, type Reminder } from "@/lib/reminders/schedule";
+import { TurtleMascot } from "@/components/ui/turtle-mascot";
 
 const days = ["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
 export function ReminderPanel({
@@ -18,14 +19,16 @@ export function ReminderPanel({
   const [error, setError] = useState("");
   return (
     <section className="settings-panel">
-      <div className="section-icon">
-        <BellIcon size={28} />
+      <div className="settings-heading app-intro">
+        <div>
+          <h1>Jeda, sesuai jadwalmu.</h1>
+          <p className="muted">
+            Pengingat bersifat opsional. Atur kapan kamu ingin diajak bergerak
+            sebentar.
+          </p>
+        </div>
+        <TurtleMascot pose="think" size={64} eager />
       </div>
-      <h1>Jeda, sesuai jadwalmu.</h1>
-      <p className="muted">
-        Pengingat bersifat opsional. Atur kapan kamu ingin diajak bergerak
-        sebentar.
-      </p>
       <form
         noValidate
         onSubmit={async (event) => {
@@ -51,10 +54,17 @@ export function ReminderPanel({
           }
         }}
       >
-        <p className="small muted">
-          Pengingat tersimpan: {value.enabled ? "aktif" : "nonaktif"}. Perubahan
-          berlaku setelah kamu menekan Simpan pengingat.
-        </p>
+        <div className="reminder-status" data-enabled={value.enabled}>
+          <BellIcon size={22} aria-hidden="true" />
+          <p>
+            <strong>
+              Pengingat tersimpan: {value.enabled ? "aktif" : "nonaktif"}.
+            </strong>
+            <span className="small muted">
+              Perubahan berlaku setelah kamu menekan Simpan pengingat.
+            </span>
+          </p>
+        </div>
         <label className="toggle-row">
           <span>
             <strong>Aktifkan pengingat</strong>
