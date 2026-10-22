@@ -8,6 +8,75 @@ async function activate(page: import("@playwright/test").Page) {
   ).toBeVisible();
 }
 
+test("hero sizing avoids an oversized wide-desktop download", async ({
+  browser,
+  baseURL,
+}, testInfo) => {
+  const context = await browser.newContext({
+    baseURL,
+    viewport: { width: 1920, height: 900 },
+    deviceScaleFactor: 1,
+    reducedMotion: "reduce",
+  });
+  const page = await context.newPage();
+  try {
+    await page.goto("/");
+    const hero = page.locator(".studio-hero-art");
+    await expect
+      .poll(() =>
+        hero.evaluate(
+          (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
+        ),
+      )
+      .toBe(true);
+    const optimized = await hero.evaluate((image: HTMLImageElement) => ({
+      source: image.currentSrc,
+      width: image.getBoundingClientRect().width,
+    }));
+    expect(new URL(optimized.source).searchParams.get("w")).toBe("750");
+    // Reproduce the old hint on the same layout to isolate source selection.
+    await hero.evaluate((image: HTMLImageElement) => {
+      image.sizes = "(max-width: 700px) 100vw, 52vw";
+    });
+    await expect
+      .poll(() =>
+        hero.evaluate(
+          (image: HTMLImageElement) =>
+            image.complete && image.currentSrc.includes("w=1080&"),
+        ),
+      )
+      .toBe(true);
+    const measurements = await page.evaluate((optimized) => {
+      const image =
+        document.querySelector<HTMLImageElement>(".studio-hero-art")!;
+      const bytes = (source: string) =>
+        (
+          performance
+            .getEntriesByName(source)
+            .at(-1) as PerformanceResourceTiming
+        )?.encodedBodySize;
+      return {
+        viewport: innerWidth,
+        dpr: devicePixelRatio,
+        renderedWidth: optimized.width,
+        optimized: { source: optimized.source, bytes: bytes(optimized.source) },
+        previous: { source: image.currentSrc, bytes: bytes(image.currentSrc) },
+      };
+    }, optimized);
+    expect(measurements.optimized.bytes).toBeGreaterThan(0);
+    expect(measurements.optimized.bytes).toBeLessThan(
+      measurements.previous.bytes,
+    );
+    await testInfo.attach("hero-image-measurement", {
+      body: JSON.stringify(measurements, null, 2),
+      contentType: "application/json",
+    });
+    console.log(JSON.stringify(measurements));
+  } finally {
+    await context.close();
+  }
+});
+
 test("landing explains entry and preserves the large illustration gallery", async ({
   page,
 }) => {

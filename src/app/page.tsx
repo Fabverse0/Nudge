@@ -72,21 +72,15 @@ export default function HomePage() {
           <div className="how-flow">
             <article data-studio-motion="step">
               <span className="flow-word">Pilih.</span>
-              <p>
-                Pilih tujuan dan waktu, dengan mood yang boleh dilewati.
-              </p>
+              <p>Pilih tujuan dan waktu, dengan mood yang boleh dilewati.</p>
             </article>
             <article data-studio-motion="step" data-studio-delay="70">
               <span className="flow-word">Coba.</span>
-              <p>
-                Temukan satu kegiatan kecil atau ganti jika belum cocok.
-              </p>
+              <p>Temukan satu kegiatan kecil atau ganti jika belum cocok.</p>
             </article>
             <article data-studio-motion="step" data-studio-delay="140">
               <span className="flow-word">Jalani.</span>
-              <p>
-                Jalani kegiatan dengan timer hingga kamu menekan Selesai.
-              </p>
+              <p>Jalani kegiatan dengan timer hingga kamu menekan Selesai.</p>
             </article>
           </div>
         </section>
