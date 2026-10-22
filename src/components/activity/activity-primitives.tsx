@@ -21,7 +21,7 @@ export function GoalIcon({ goal, size = 24 }: { goal: Goal; size?: number }) {
 export function ActivityArtwork({ goal }: { goal: Goal }) {
   return goal === "move" ? (
     <Image
-      src="/brand/landing/nudge-turtle-walk.webp"
+      src="/brand/small-steps/stretch.webp"
       width={64}
       height={64}
       sizes="64px"

@@ -14,6 +14,8 @@ import {
   XIcon,
 } from "@phosphor-icons/react";
 import { TurtleMascot } from "@/components/ui/turtle-mascot";
+import { StepTrail } from "@/components/ui/step-trail";
+import { useSurfaceMotion } from "@/components/ui/use-surface-motion";
 import { Brand } from "@/components/brand";
 import {
   activities,
@@ -76,6 +78,8 @@ export function ActivityApp({
   const [formError, setFormError] = useState("");
   const heading = useRef<HTMLDivElement>(null);
   const previousScreen = useRef(screen);
+  const rootRef = useRef<HTMLDivElement>(null);
+  useSurfaceMotion(rootRef);
   const local = useLocalData();
   const suggestion = result?.kind === "suggestion" ? result.suggestion : null;
   const activity = suggestion?.activity;
@@ -168,7 +172,7 @@ export function ActivityApp({
   }
 
   return (
-    <div className="app-shell app-studio">
+    <div ref={rootRef} className="app-shell app-studio" data-screen={screen}>
       <header className="site-header app-header">
         <Brand />
         <span className="small header-note">Satu langkah, pelan-pelan.</span>
@@ -228,9 +232,11 @@ export function ActivityApp({
           </div>
         )}
         <div
+          key={screen === "suggestion" ? `${screen}-${activity?.id}` : screen}
           ref={heading}
           tabIndex={-1}
           className="screen-focus"
+          data-screen={screen}
           role="region"
           aria-label={
             screen === "suggestion" && activity
@@ -254,13 +260,16 @@ export function ActivityApp({
                     Pilih yang terasa pas. Satu kegiatan kecil dulu.
                   </p>
                 </div>
-                <TurtleMascot
-                  pose="wave"
-                  size={80}
-                  className="turtle-companion"
-                  alt="Pendamping kura-kura"
-                  eager
-                />
+                <div className="selection-companion">
+                  <TurtleMascot
+                    pose="wave"
+                    size={80}
+                    className="turtle-companion"
+                    alt="Pendamping kura-kura"
+                    eager
+                  />
+                  <StepTrail />
+                </div>
               </div>
               <SelectionFlow
                 step={selectionStep}
@@ -549,7 +558,8 @@ export function ActivityApp({
           {screen === "complete" && (
             <section className="completion-screen">
               <div className="completion-mark">
-                <TurtleMascot pose="complete" size={128} eager />
+                <StepTrail className="completion-trail" />
+                <TurtleMascot pose="content" size={144} eager />
               </div>
               <h1>Satu langkah sudah.</h1>
               <p className="muted">
@@ -633,7 +643,10 @@ export function ActivityApp({
                 </div>
               ) : (
                 <div className="empty-state">
-                  <TurtleMascot pose="think" size={80} eager />
+                  <div className="favorite-empty-art">
+                    <TurtleMascot pose="pause" size={104} eager />
+                    <StepTrail />
+                  </div>
                   <h2>Belum ada favorit.</h2>
                   <p>
                     Simpan kegiatan yang ingin kamu coba lagi lewat ikon simpan

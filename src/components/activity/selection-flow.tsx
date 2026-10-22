@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -63,6 +63,11 @@ export function SelectionFlow(props: SelectionFlowProps) {
   ].filter(Boolean);
   const focusTarget = useRef<HTMLElement>(null);
   const previousStep = useRef(step);
+  const [direction, setDirection] = useState("forward");
+  function changeStep(next: SelectionStep) {
+    setDirection(steps.indexOf(next) < currentIndex ? "backward" : "forward");
+    onStepChange(next);
+  }
   useEffect(() => {
     if (previousStep.current !== step) {
       focusTarget.current?.focus({ preventScroll: true });
@@ -78,8 +83,8 @@ export function SelectionFlow(props: SelectionFlowProps) {
         : minutes !== null && goal !== null;
   function advance() {
     if (!canContinue) return;
-    if (step === "mood") onStepChange("goal");
-    else if (step === "goal") onStepChange("time");
+    if (step === "mood") changeStep("goal");
+    else if (step === "goal") changeStep("time");
     else props.onSubmit();
   }
   return (
@@ -119,6 +124,7 @@ export function SelectionFlow(props: SelectionFlowProps) {
         ref={focusTarget}
         className="selection-step"
         data-step={step}
+        data-direction={direction}
         tabIndex={-1}
         role="region"
         aria-label={`Langkah ${currentIndex + 1}: ${questions[step]}`}
@@ -259,7 +265,7 @@ export function SelectionFlow(props: SelectionFlowProps) {
             className="button secondary"
             onClick={() => {
               props.onMoodChange(null);
-              onStepChange("goal");
+              changeStep("goal");
             }}
           >
             Lewati
@@ -268,7 +274,7 @@ export function SelectionFlow(props: SelectionFlowProps) {
           <button
             type="button"
             className="button secondary"
-            onClick={() => onStepChange(step === "time" ? "goal" : "mood")}
+            onClick={() => changeStep(step === "time" ? "goal" : "mood")}
           >
             <ArrowLeftIcon size={18} aria-hidden="true" />
             Kembali
