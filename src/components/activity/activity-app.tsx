@@ -6,12 +6,10 @@ import {
   BookmarkSimpleIcon,
   CheckIcon,
   ClockIcon,
-  FootprintsIcon,
   HeartIcon,
   LeafIcon,
   PauseIcon,
   PlayIcon,
-  SlidersHorizontalIcon,
   SmileyIcon,
   XIcon,
 } from "@phosphor-icons/react";
@@ -21,8 +19,6 @@ import {
   activities,
   goals,
   moods,
-  placeLabels,
-  toolLabels,
   type Activity,
   type Goal,
   type Mood,
@@ -49,84 +45,23 @@ import { updateMood } from "@/lib/session/session";
 import { useLocalData } from "./use-local-data";
 import { ReminderPanel } from "./reminder-panel";
 import { InstallGuide } from "../install-guide";
+import { SelectionFlow, type SelectionStep } from "./selection-flow";
+import {
+  ActivityDetails,
+  ActivityArtwork,
+  GoalIcon,
+} from "./activity-primitives";
+import "./activity-studio.css";
 
 type Screen =
   "choose" | "suggestion" | "timer" | "complete" | "favorites" | "reminders";
-function GoalIcon({ goal, size = 24 }: { goal: Goal; size?: number }) {
-  return goal === "move" ? (
-    <FootprintsIcon size={size} />
-  ) : goal === "reflect" ? (
-    <LeafIcon size={size} />
-  ) : (
-    <CheckIcon size={size} />
-  );
-}
-function MoodChoices({
-  value,
-  choose,
-  completion = false,
-}: {
-  value: Mood | null;
-  choose: (mood: Mood | "skip") => void;
-  completion?: boolean;
-}) {
-  return (
-    <fieldset>
-      <legend>
-        {completion
-          ? "Pilih mood sekarang, atau lewati"
-          : "Lagi merasa bagaimana?"}
-        {!completion && <span className="optional">Opsional</span>}
-      </legend>
-      <div className="mood-options">
-        {moods.map((mood) => (
-          <label className="choice" key={mood}>
-            <input
-              type="radio"
-              name={completion ? "mood-after" : "mood"}
-              checked={value === mood}
-              onChange={() => choose(mood)}
-            />
-            <span>{mood}</span>
-            <CheckIcon
-              className="selection-check"
-              size={16}
-              aria-hidden="true"
-            />
-          </label>
-        ))}
-        {!completion && (
-          <label className="choice">
-            <input
-              type="radio"
-              name="mood"
-              checked={value === null}
-              onChange={() => choose("skip")}
-            />
-            <span>Lewati</span>
-            <CheckIcon
-              className="selection-check"
-              size={16}
-              aria-hidden="true"
-            />
-          </label>
-        )}
-      </div>
-      {!completion && (
-        <p className="field-hint">
-          Untuk menyesuaikan saran, bukan penilaian kesehatan.
-        </p>
-      )}
-    </fieldset>
-  );
-}
-
 export function ActivityApp({
   initialMinutes = null,
 }: {
   initialMinutes?: 2 | 5 | 10 | null;
 }) {
   const [screen, setScreen] = useState<Screen>("choose");
+  const [selectionStep, setSelectionStep] = useState<SelectionStep>("mood");
   const [mood, setMood] = useState<Mood | null>(null);
   const [goal, setGoal] = useState<Goal | null>(null);
   const [minutes, setMinutes] = useState<2 | 5 | 10 | null>(initialMinutes);
@@ -220,6 +155,7 @@ export function ActivityApp({
     setScreen("suggestion");
   }
   function backToStart(message = "") {
+    setSelectionStep("mood");
     setScreen("choose");
     setTimer(null);
     if (message) local.setNotice(message);
@@ -232,7 +168,7 @@ export function ActivityApp({
   }
 
   return (
-    <div className="app-shell">
+    <div className="app-shell app-studio">
       <header className="site-header app-header">
         <Brand />
         <span className="small header-note">Satu langkah, pelan-pelan.</span>
@@ -262,7 +198,12 @@ export function ActivityApp({
                   ? "nav-button active"
                   : "nav-button"
               }
-              aria-current={screen === item.id ? "page" : undefined}
+              aria-current={
+                screen === item.id ||
+                (screen === "suggestion" && item.id === "choose")
+                  ? "page"
+                  : undefined
+              }
               onClick={() => setScreen(item.id)}
             >
               {item.icon}
@@ -321,132 +262,50 @@ export function ActivityApp({
                   eager
                 />
               </div>
-              <form
-                className="context-form"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  suggest();
+              <SelectionFlow
+                step={selectionStep}
+                onStepChange={(next) => {
+                  setFormError("");
+                  setSelectionStep(next);
                 }}
-              >
-                <MoodChoices
-                  value={mood}
-                  choose={(next) => {
-                    setMood(next === "skip" ? null : next);
-                    resetRejected();
-                  }}
-                />
-                <fieldset>
-                  <legend>Ingin melakukan apa?</legend>
-                  <div className="goal-options">
-                    {(Object.keys(goals) as Goal[]).map((key) => (
-                      <label
-                        className={`choice goal-choice ${goals[key].color}`}
-                        key={key}
-                      >
-                        <input
-                          type="radio"
-                          name="goal"
-                          checked={goal === key}
-                          onChange={() => {
-                            setGoal(key);
-                            resetRejected();
-                          }}
-                        />
-                        <GoalIcon goal={key} />
-                        <span>
-                          <strong>{goals[key].label}</strong>
-                          <small>{goals[key].description}</small>
-                        </span>
-                        <CheckIcon
-                          size={18}
-                          className="selection-check"
-                          aria-hidden="true"
-                        />
-                      </label>
-                    ))}
-                  </div>
-                </fieldset>
-                <fieldset>
-                  <legend>Ada waktu berapa lama?</legend>
-                  <div className="duration-options">
-                    {([2, 5, 10] as const).map((value) => (
-                      <label className="choice duration-choice" key={value}>
-                        <input
-                          type="radio"
-                          name="duration"
-                          checked={minutes === value}
-                          onChange={() => {
-                            setMinutes(value);
-                            resetRejected();
-                          }}
-                        />
-                        <strong>{value}</strong>
-                        <span>menit</span>
-                        <CheckIcon
-                          size={16}
-                          className="selection-check"
-                          aria-hidden="true"
-                        />
-                      </label>
-                    ))}
-                  </div>
-                </fieldset>
-                <details className="filter-details">
-                  <summary>
-                    <SlidersHorizontalIcon size={20} />
-                    Tempat dan alat<span className="optional">Opsional</span>
-                  </summary>
-                  <div className="filter-grid">
-                    <div>
-                      <label htmlFor="place-filter">Tempat</label>
-                      <select
-                        id="place-filter"
-                        value={place}
-                        onChange={(e) => {
-                          setPlace(e.target.value as Context["place"]);
-                          resetRejected();
-                        }}
-                      >
-                        <option value="any">Bebas tempat</option>
-                        <option value="indoor">Dalam ruangan</option>
-                        <option value="outdoor">Luar ruangan</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="tool-filter">Alat</label>
-                      <select
-                        id="tool-filter"
-                        value={tools}
-                        onChange={(e) => {
-                          setTools(e.target.value as Context["tools"]);
-                          resetRejected();
-                        }}
-                      >
-                        <option value="any">Alat boleh digunakan</option>
-                        <option value="none">Tanpa alat</option>
-                      </select>
-                    </div>
-                  </div>
-                </details>
-                {formError && (
-                  <p className="error-note" role="alert">
-                    {formError}
-                  </p>
-                )}
-                <button type="submit" className="button primary full-width">
-                  Cari kegiatan kecil
-                </button>
-                <p className="field-hint centered">
-                  Tidak ada target besar yang harus dikejar.
-                </p>
-              </form>
+                mood={mood}
+                goal={goal}
+                minutes={minutes}
+                place={place}
+                tools={tools}
+                onMoodChange={(value) => {
+                  setMood(value);
+                  resetRejected();
+                }}
+                onGoalChange={(value) => {
+                  setGoal(value);
+                  resetRejected();
+                }}
+                onMinutesChange={(value) => {
+                  setMinutes(value);
+                  resetRejected();
+                }}
+                onPlaceChange={(value) => {
+                  setPlace(value);
+                  resetRejected();
+                }}
+                onToolsChange={(value) => {
+                  setTools(value);
+                  resetRejected();
+                }}
+                onSubmit={() => suggest()}
+                error={formError}
+              />
             </>
           )}
           {screen === "suggestion" && (
             <>
               <button
                 className="back-button"
-                onClick={() => setScreen("choose")}
+                onClick={() => {
+                  setSelectionStep("time");
+                  setScreen("choose");
+                }}
               >
                 <ArrowLeftIcon size={18} />
                 Ubah pilihan
@@ -466,8 +325,11 @@ export function ActivityApp({
                     <div
                       className={`activity-art ${goals[suggestion.activity.goal].color}`}
                     >
-                      <GoalIcon goal={suggestion.activity.goal} size={56} />
-                      <span>{goals[suggestion.activity.goal].label}</span>
+                      <ActivityArtwork goal={suggestion.activity.goal} />
+                      <span className="activity-art-label">
+                        <GoalIcon goal={suggestion.activity.goal} size={20} />
+                        {goals[suggestion.activity.goal].label}
+                      </span>
                     </div>
                     <div className="activity-content">
                       <div className="activity-meta">
@@ -595,7 +457,7 @@ export function ActivityApp({
             </>
           )}
           {screen === "timer" && activity && timer && (
-            <section className="timer-screen">
+            <section className="timer-screen" data-state={timer.status}>
               <div className="timer-title">
                 <GoalIcon goal={activity.goal} />
                 <p>{goals[activity.goal].label}</p>
@@ -619,7 +481,7 @@ export function ActivityApp({
               <div className="timer-controls">
                 {timer.status === "running" && (
                   <button
-                    className="button secondary"
+                    className="button primary"
                     onClick={() => {
                       const time = Date.now();
                       setNow(time);
@@ -632,7 +494,7 @@ export function ActivityApp({
                 )}
                 {timer.status === "paused" && (
                   <button
-                    className="button secondary"
+                    className="button primary"
                     onClick={() => {
                       const time = Date.now();
                       setNow(time);
@@ -644,7 +506,7 @@ export function ActivityApp({
                   </button>
                 )}
                 <button
-                  className="button primary"
+                  className={`button ${timer.status === "elapsed" ? "primary" : "secondary"}`}
                   onClick={() => {
                     setTimer(finishTimer(timer));
                     setScreen("complete");
@@ -728,7 +590,12 @@ export function ActivityApp({
                     Disimpan di browser dan perangkat ini saja.
                   </p>
                 </div>
-                <BookmarkSimpleIcon size={36} />
+                <TurtleMascot
+                  pose="think"
+                  size={64}
+                  className="favorite-heading-mascot"
+                  eager
+                />
               </div>
               {!local.loaded ? (
                 <p role="status">Membaca favorit...</p>
@@ -803,31 +670,5 @@ export function ActivityApp({
         <span>Kamu yang menentukan ritmenya.</span>
       </footer>
     </div>
-  );
-}
-
-function ActivityDetails({ activity }: { activity: Activity }) {
-  return (
-    <>
-      <div className="conditions">
-        <span>{activity.places.map((p) => placeLabels[p]).join(" / ")}</span>
-        <span>
-          {activity.requiredTools.length
-            ? `Perlu: ${activity.requiredTools.map((t) => toolLabels[t]).join(", ")}`
-            : "Tanpa alat"}
-        </span>
-      </div>
-      <ol className="activity-steps">
-        {activity.steps.map((step) => (
-          <li key={step}>{step}</li>
-        ))}
-      </ol>
-      {activity.id.startsWith("journal") && (
-        <p className="info-note small">
-          Tulisanmu tetap di media pilihanmu. Nudge tidak mengumpulkan atau
-          menyimpan isi jurnal.
-        </p>
-      )}
-    </>
   );
 }
