@@ -8,6 +8,7 @@ export default defineConfig({
     "landing-studio.spec.ts",
     "activity-flow.spec.ts",
     "app-polish.spec.ts",
+    "reminder-polish.spec.ts",
   ],
   testIgnore: [],
   use: {
