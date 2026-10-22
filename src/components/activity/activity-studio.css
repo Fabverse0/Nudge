@@ -210,6 +210,16 @@
   pointer-events: none;
 }
 
+.app-studio .selection-check {
+  display: block;
+  visibility: hidden;
+  flex-shrink: 0;
+}
+
+.app-studio .choice:has(input:checked) .selection-check {
+  visibility: visible;
+}
+
 .app-studio .mood-options .selection-check {
   margin-left: auto;
 }

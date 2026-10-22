@@ -76,42 +76,44 @@ export function ReminderPanel({
             onChange={(e) => setDraft({ ...draft, enabled: e.target.checked })}
           />
         </label>
-        <fieldset>
-          <legend>Hari pengingat</legend>
-          <div className="day-options">
-            {days.map((day, index) => (
-              <label className="choice day-choice" key={day}>
-                <input
-                  type="checkbox"
-                  checked={draft.days.includes(index)}
-                  onChange={() =>
-                    setDraft({
-                      ...draft,
-                      days: draft.days.includes(index)
-                        ? draft.days.filter((d) => d !== index)
-                        : [...draft.days, index],
-                    })
-                  }
-                />
-                <span>{day}</span>
-                <CheckIcon
-                  size={14}
-                  className="selection-check"
-                  aria-hidden="true"
-                />
-              </label>
-            ))}
-          </div>
-        </fieldset>
-        <label className="time-label">
-          Waktu lokal perangkat
-          <input
-            type="time"
-            required={draft.enabled}
-            value={draft.time}
-            onChange={(e) => setDraft({ ...draft, time: e.target.value })}
-          />
-        </label>
+        <div className="settings-fields">
+          <fieldset>
+            <legend>Hari pengingat</legend>
+            <div className="day-options">
+              {days.map((day, index) => (
+                <label className="choice day-choice" key={day}>
+                  <input
+                    type="checkbox"
+                    checked={draft.days.includes(index)}
+                    onChange={() =>
+                      setDraft({
+                        ...draft,
+                        days: draft.days.includes(index)
+                          ? draft.days.filter((d) => d !== index)
+                          : [...draft.days, index],
+                      })
+                    }
+                  />
+                  <span>{day}</span>
+                  <CheckIcon
+                    size={14}
+                    className="selection-check"
+                    aria-hidden="true"
+                  />
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <label className="time-label">
+            Waktu lokal perangkat
+            <input
+              type="time"
+              required={draft.enabled}
+              value={draft.time}
+              onChange={(e) => setDraft({ ...draft, time: e.target.value })}
+            />
+          </label>
+        </div>
         <div className="info-note">
           <strong>Selama Nudge terbuka dan berjalan</strong>
           <p>
