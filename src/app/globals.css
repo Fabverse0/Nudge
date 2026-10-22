@@ -910,11 +910,6 @@ input[type="time"] {
   .content-width {
     width: calc(100% - 40px);
   }
-  .how-flow article {
-    display: grid;
-    grid-template-columns: 88px 1fr;
-    gap: 18px;
-  }
   .header-note {
     display: none;
   }

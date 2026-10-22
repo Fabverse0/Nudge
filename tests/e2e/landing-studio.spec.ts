@@ -124,13 +124,13 @@ test("studio duration supports keyboard, rapid changes and the real app route", 
   expect(errors).toEqual([]);
 });
 
-test("studio images and text reflow at four widths", async ({
+test("studio images and text reflow at five widths", async ({
   page,
 }, testInfo) => {
   test.setTimeout(90_000);
   await page.goto("/");
   await activate(page);
-  for (const width of [320, 390, 768, 1440]) {
+  for (const width of [320, 390, 710, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await expect
       .poll(() =>
