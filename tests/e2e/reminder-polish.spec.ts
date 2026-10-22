@@ -12,8 +12,9 @@ async function mockNotifications(
       Reflect.deleteProperty(window, "Notification");
       return;
     }
+    const initialPermission: NotificationPermission = initial;
     class MockNotification {
-      static permission: NotificationPermission = initial;
+      static permission: NotificationPermission = initialPermission;
       static async requestPermission(): Promise<NotificationPermission> {
         state.requests += 1;
         MockNotification.permission = "granted";
