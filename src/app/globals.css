@@ -438,3 +438,43 @@ input[type="time"] {
     transform: none;
   }
 }
+
+.step-trail {
+  display: block;
+  width: 120px;
+  height: auto;
+  flex-shrink: 0;
+  pointer-events: none;
+  color: var(--primary);
+}
+
+[data-motion-finished="true"] {
+  animation: none !important;
+}
+
+.step-trail g:nth-child(2) {
+  --step-delay: 90ms;
+}
+.step-trail g:nth-child(3) {
+  --step-delay: 180ms;
+}
+.step-trail g:nth-child(4) {
+  --step-delay: 270ms;
+}
+.step-trail g:nth-child(5) {
+  --step-delay: 360ms;
+}
+.step-trail g:nth-child(6) {
+  --step-delay: 450ms;
+}
+
+@keyframes small-step-arrive {
+  from {
+    opacity: 0.15;
+    transform: scale(0.45);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
