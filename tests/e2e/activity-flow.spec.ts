@@ -7,10 +7,24 @@ async function choose(
   page: import("@playwright/test").Page,
   goal = "Bergerak",
 ) {
-  await page
-    .getByRole("group", { name: "Ingin melakukan apa?" })
-    .getByRole("radio", { name: goal, exact: false })
-    .check();
+  await expect(page.locator(".selection-step")).toBeVisible();
+  if (await page.locator('.selection-step[data-step="mood"]').count()) {
+    if (
+      await page
+        .getByRole("button", { name: "Lanjut", exact: true })
+        .isEnabled()
+    )
+      await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+    else
+      await page.getByRole("button", { name: "Lewati", exact: true }).click();
+  }
+  if (await page.locator('.selection-step[data-step="goal"]').count()) {
+    await page
+      .getByRole("group", { name: "Ingin melakukan apa?" })
+      .getByRole("radio", { name: goal, exact: false })
+      .check();
+    await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+  }
   await page.getByRole("radio", { name: "2 menit" }).check();
   await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
 }
@@ -35,13 +49,10 @@ test("optional mood, validation, pause, elapsed and explicit completion", async 
 }) => {
   await page.clock.install();
   await page.goto("/app");
-  await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
-  await expect(page.getByRole("main").getByRole("alert")).toContainText(
-    "Pilih tujuan dan waktu",
-  );
   await expect(
-    page.getByRole("radio", { name: "Lewati", exact: true }),
-  ).toBeChecked();
+    page.getByRole("button", { name: "Lanjut", exact: true }),
+  ).toBeDisabled();
+  await expect(page.locator('input[type="radio"]:checked')).toHaveCount(0);
   await choose(page);
   await page.getByRole("button", { name: "Cocok", exact: true }).click();
   await expect(page.getByRole("timer")).toHaveCount(0);
@@ -62,8 +73,9 @@ test("optional mood, validation, pause, elapsed and explicit completion", async 
   await page.getByRole("button", { name: "Selesai", exact: true }).click();
   await page.getByRole("button", { name: "Lewati", exact: true }).click();
   await expect(
-    page.getByRole("radio", { name: "Lewati", exact: true }),
-  ).toBeChecked();
+    page.getByRole("button", { name: "Lewati", exact: true }),
+  ).toBeVisible();
+  await expect(page.locator('input[type="radio"]:checked')).toHaveCount(0);
   await expect(page).toHaveURL(/\/app$/);
 });
 
@@ -81,17 +93,20 @@ test("mood stays the same on skip and feedback resets on reload", async ({
   ).toBeChecked();
   await page.reload();
   await expect(
-    page.getByRole("radio", { name: "Lewati", exact: true }),
-  ).toBeChecked();
+    page.getByRole("button", { name: "Lewati", exact: true }),
+  ).toBeVisible();
+  await expect(page.locator('input[type="radio"]:checked')).toHaveCount(0);
 });
 
 test("alternatives explain differing filters, exhaust, and restart", async ({
   page,
 }) => {
   await page.goto("/app");
+  await page.getByRole("button", { name: "Lewati", exact: true }).click();
   await page
     .getByRole("radio", { name: "Produktif ringan", exact: false })
     .check();
+  await page.getByRole("button", { name: "Lanjut", exact: true }).click();
   await page.getByRole("radio", { name: "2 menit" }).check();
   await page.getByText("Tempat dan alat", { exact: false }).click();
   await page.getByLabel("Tempat", { exact: true }).selectOption("outdoor");
@@ -135,9 +150,11 @@ test("favorites persist, open their own details and remove", async ({
 test("journaling keeps writing outside the application", async ({ page }) => {
   await page.goto("/app");
   await page.getByRole("radio", { name: "Bosan", exact: true }).check();
+  await page.getByRole("button", { name: "Lanjut", exact: true }).click();
   await page
     .getByRole("radio", { name: "Refleksi/jeda layar", exact: false })
     .check();
+  await page.getByRole("button", { name: "Lanjut", exact: true }).click();
   await page.getByRole("radio", { name: "5 menit" }).check();
   await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
   await expect(
@@ -276,9 +293,15 @@ test("keyboard choices work and every remaining screen has accessible controls",
     fullPage: true,
   });
   await page
+    .getByRole("button", { name: "Lanjut", exact: true })
+    .press("Enter");
+  await page
     .getByRole("group", { name: "Ingin melakukan apa?" })
     .getByRole("radio", { name: "Bergerak", exact: false })
     .press("Space");
+  await page
+    .getByRole("button", { name: "Lanjut", exact: true })
+    .press("Enter");
   await page.getByRole("radio", { name: "2 menit" }).press("Space");
   await page
     .getByRole("button", { name: "Cari kegiatan kecil" })

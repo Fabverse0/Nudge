@@ -64,10 +64,12 @@ test("production activity flow has no hydration or browser errors", async ({
     path: `.impeccable/review/app-production-${testInfo.project.name}.png`,
     fullPage: true,
   });
+  await page.getByRole("button", { name: "Lewati", exact: true }).click();
   await page
     .getByRole("group", { name: "Ingin melakukan apa?" })
     .getByRole("radio", { name: "Bergerak", exact: false })
     .check();
+  await page.getByRole("button", { name: "Lanjut", exact: true }).click();
   await page.getByRole("radio", { name: "2 menit" }).check();
   await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
   await page.getByRole("button", { name: "Mulai kegiatan" }).click();

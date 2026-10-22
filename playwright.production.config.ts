@@ -3,7 +3,12 @@ import config from "./playwright.config";
 
 export default defineConfig({
   ...config,
-  testMatch: ["pwa.spec.ts", "landing-studio.spec.ts"],
+  testMatch: [
+    "pwa.spec.ts",
+    "landing-studio.spec.ts",
+    "activity-flow.spec.ts",
+    "app-polish.spec.ts",
+  ],
   testIgnore: [],
   use: {
     ...config.use,

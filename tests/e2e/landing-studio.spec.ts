@@ -187,6 +187,15 @@ test("studio duration supports keyboard, rapid changes and the real app route", 
     page.getByRole("heading", { name: "Mau mulai dari apa?" }),
   ).toBeVisible();
   await expect(
+    page.getByText("Langkah 1 dari 3", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("radio", { name: "10 menit", exact: true }),
+  ).toHaveCount(0);
+  await page.getByRole("button", { name: "Lewati", exact: true }).click();
+  await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
+  await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+  await expect(
     page.getByRole("radio", { name: "10 menit", exact: true }),
   ).toBeChecked();
   await expect(page.getByRole("timer")).toHaveCount(0);
