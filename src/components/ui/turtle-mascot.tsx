@@ -9,6 +9,9 @@ const artwork = {
   move: "/brand/illustrations/nudge-turtle-move.png",
   journal: "/brand/illustrations/nudge-turtle-journal.png",
   symbol: "/brand/logo/nudge-symbol.png",
+  pause: "/brand/small-steps/pause.webp",
+  stretch: "/brand/small-steps/stretch.webp",
+  content: "/brand/small-steps/content.webp",
 } as const;
 
 export function TurtleMascot({
