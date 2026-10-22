@@ -82,7 +82,7 @@ test("reminders require an explicit valid save before activation or browser perm
   const days = page.getByRole("group", { name: "Hari pengingat", exact: true });
   for (const day of await days.getByRole("checkbox").all()) await day.uncheck();
   await save(page).click();
-  await expect(page.getByRole("alert")).toHaveText(
+  await expect(page.getByRole("main").getByRole("alert")).toHaveText(
     "Pilih setidaknya satu hari dan waktu yang valid.",
   );
   await expect(page.locator(".reminder-status")).toHaveAttribute(
@@ -119,7 +119,7 @@ test("reminders require an explicit valid save before activation or browser perm
     "data-enabled",
     "false",
   );
-  await expect(page.getByRole("alert")).toHaveCount(0);
+  await expect(page.getByRole("main").getByRole("alert")).toHaveCount(0);
   expect(await permissionCalls(page)).toBe(1);
   await page.reload();
   await page.getByRole("button", { name: "Pengingat", exact: true }).click();
