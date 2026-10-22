@@ -113,6 +113,11 @@ test("menus preserve each wizard step and suggestion returns to its time choices
   await expect(
     page.getByRole("radio", { name: "2 menit", exact: true }),
   ).toBeChecked();
+  await expect(
+    page.getByText("Filter aktif: Dalam ruangan · Tanpa alat.", {
+      exact: true,
+    }),
+  ).toBeVisible();
   await page.getByText("Tempat dan alat", { exact: false }).click();
   await expect(page.getByLabel("Tempat", { exact: true })).toHaveValue(
     "indoor",

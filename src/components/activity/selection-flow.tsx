@@ -7,7 +7,13 @@ import {
   CheckCircleIcon,
   SlidersHorizontalIcon,
 } from "@phosphor-icons/react";
-import { goals, moods, type Goal, type Mood } from "@/lib/activities/catalog";
+import {
+  goals,
+  moods,
+  placeLabels,
+  type Goal,
+  type Mood,
+} from "@/lib/activities/catalog";
 import type { Context } from "@/lib/recommendation/recommend";
 import { GoalIcon } from "./activity-primitives";
 
@@ -51,6 +57,10 @@ function SelectionCheck() {
 export function SelectionFlow(props: SelectionFlowProps) {
   const { step, mood, goal, minutes, place, tools, onStepChange } = props;
   const currentIndex = steps.indexOf(step);
+  const activeFilters = [
+    place !== "any" ? placeLabels[place] : null,
+    tools === "none" ? "Tanpa alat" : null,
+  ].filter(Boolean);
   const focusTarget = useRef<HTMLElement>(null);
   const previousStep = useRef(step);
   useEffect(() => {
@@ -219,6 +229,11 @@ export function SelectionFlow(props: SelectionFlowProps) {
               </div>
             </div>
           </details>
+        )}
+        {step === "time" && activeFilters.length > 0 && (
+          <p className="field-hint">
+            Filter aktif: {activeFilters.join(" · ")}.
+          </p>
         )}
       </section>
       {props.error && (
