@@ -22,7 +22,7 @@ test("landing gives a real route to the app and never auto-starts", async ({
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "Jeda dulu.",
   );
-  await page.getByRole("link", { name: "Mulai satu kegiatan" }).click();
+  await page.locator(".hero-cta").click();
   await expect(page).toHaveURL(/\/app$/);
   await expect(
     page.getByRole("heading", { name: "Mau mulai dari apa?" }),

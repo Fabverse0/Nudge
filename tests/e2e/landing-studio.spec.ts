@@ -8,6 +8,48 @@ async function activate(page: import("@playwright/test").Page) {
   ).toBeVisible();
 }
 
+test("landing explains entry and preserves the large illustration gallery", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await activate(page);
+  const entries = page.getByRole("link", {
+    name: "Mulai kegiatan",
+    exact: true,
+  });
+  await expect(entries).toHaveCount(5);
+  for (const entry of await entries.all())
+    await expect(entry).toHaveAttribute("href", "/app");
+  await expect(page.locator(".hero-footnote")).toHaveText(
+    "Tanpa akun. Dua menit juga boleh.",
+  );
+  await expect(page.locator(".studio-preview-note")).toHaveText(
+    "Ini contoh kegiatan. Pilihan waktumu dibawa ke Nudge; kamu memilih tujuan di sana.",
+  );
+  await expect(page.locator(".studio-hero-art")).toHaveAttribute(
+    "alt",
+    "Kura-kura Nudge beranjak dari ponsel menuju buku catatan dan kegiatan kecil",
+  );
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const image of await page.locator(".category-illustration").all()) {
+      await image.scrollIntoViewIfNeeded();
+      await expect
+        .poll(() =>
+          image.evaluate(
+            (element: HTMLImageElement) =>
+              element.complete && element.naturalWidth > 0,
+          ),
+        )
+        .toBe(true);
+      const bounds = await image.boundingBox();
+      expect(bounds?.width).toBeGreaterThanOrEqual(width === 390 ? 260 : 310);
+      expect(bounds!.height / bounds!.width).toBeGreaterThan(0.95);
+      expect(bounds!.height / bounds!.width).toBeLessThan(1.05);
+    }
+  }
+});
+
 test("landing review uses a clear check, step icons and walking art", async ({
   page,
 }) => {
@@ -33,7 +75,9 @@ test("landing review uses a clear check, step icons and walking art", async ({
     "Small steps. A fuller life.",
   );
   await expect(
-    page.getByRole("link", { name: "Mulai kegiatan", exact: true }),
+    page
+      .locator(".closing")
+      .getByRole("link", { name: "Mulai kegiatan", exact: true }),
   ).toHaveAttribute("href", "/app");
 });
 
@@ -61,13 +105,15 @@ test("studio duration supports keyboard, rapid changes and the real app route", 
       .getByRole("radio", { name: `${minutes} menit`, exact: true })
       .check();
     await expect(
-      page.getByRole("link", { name: "Pilih kegiatanku" }),
+      page.getByRole("link", { name: "Lanjut ke Nudge", exact: true }),
     ).toHaveAttribute("href", `/app?minutes=${minutes}`);
   }
   await expect(
     page.getByRole("heading", { name: "Jeda tanpa layar" }),
   ).toBeVisible();
-  await page.getByRole("link", { name: "Pilih kegiatanku" }).click();
+  await page
+    .getByRole("link", { name: "Lanjut ke Nudge", exact: true })
+    .click();
   await expect(
     page.getByRole("heading", { name: "Mau mulai dari apa?" }),
   ).toBeVisible();
@@ -257,9 +303,7 @@ test("studio remains readable without JavaScript", async ({
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
       "Jeda dulu.",
     );
-    await expect(
-      page.getByRole("link", { name: "Mulai satu kegiatan" }),
-    ).toHaveAttribute("href", "/app");
+    await expect(page.locator(".hero-cta")).toHaveAttribute("href", "/app");
     await expect(
       page.getByText("Contoh ini memakai lima menit.", { exact: false }),
     ).toBeVisible();
@@ -267,7 +311,7 @@ test("studio remains readable without JavaScript", async ({
       page.getByRole("radio", { name: "2 menit", exact: true }),
     ).toBeDisabled();
     await expect(
-      page.getByRole("link", { name: "Pilih kegiatanku" }),
+      page.getByRole("link", { name: "Lanjut ke Nudge", exact: true }),
     ).toHaveAttribute("href", "/app?minutes=5");
     await expect(
       page.getByRole("heading", { name: "Refleksi dan jeda" }),

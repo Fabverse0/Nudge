@@ -56,7 +56,7 @@ test("production activity flow has no hydration or browser errors", async ({
     if (message.type() === "error") errors.push(message.text());
   });
   await page.goto("/");
-  await page.getByRole("link", { name: "Mulai satu kegiatan" }).click();
+  await page.locator(".hero-cta").click();
   await expect(
     page.getByRole("heading", { name: "Mau mulai dari apa?" }),
   ).toBeVisible();
