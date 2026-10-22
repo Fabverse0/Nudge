@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { useSurfaceMotion } from "@/components/ui/use-surface-motion";
 
 export function LandingMotion({ children }: { children: ReactNode }) {
   const rootRef = useRef<HTMLDivElement>(null);
+  useSurfaceMotion(rootRef);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -12,7 +14,9 @@ export function LandingMotion({ children }: { children: ReactNode }) {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const seen = new WeakSet<Element>();
     const active = new Set<Animation>();
-    const targets = root.querySelectorAll<HTMLElement>("[data-studio-motion]");
+    const targets = root.querySelectorAll<HTMLElement>(
+      "[data-studio-motion], .studio-scene, .how-flow, .closing",
+    );
     const hero = root.querySelector<HTMLImageElement>(".studio-hero-art");
     const easing = "cubic-bezier(0.16, 1, 0.3, 1)";
 
@@ -41,19 +45,26 @@ export function LandingMotion({ children }: { children: ReactNode }) {
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
+          const target = entry.target as HTMLElement;
+          if (!entry.isIntersecting) {
+            target.getAnimations({ subtree: true }).forEach((animation) => {
+              const animated = (animation.effect as KeyframeEffect | null)
+                ?.target;
+              if (animated instanceof Element)
+                animated.setAttribute("data-motion-finished", "true");
+              animation.cancel();
+            });
+            continue;
+          }
           if (!entry.isIntersecting || document.hidden || preference.matches)
             continue;
-          play(entry.target as HTMLElement);
-          observer.unobserve(entry.target);
+          play(target);
         }
       },
       { threshold: 0.16 },
     );
 
     function stop() {
-      observer.disconnect();
-      for (const target of targets)
-        target.removeAttribute("data-studio-visible");
       for (const animation of active) animation.cancel();
       active.clear();
     }
@@ -68,7 +79,7 @@ export function LandingMotion({ children }: { children: ReactNode }) {
         return;
       }
       for (const target of targets) {
-        if (!seen.has(target)) observer.observe(target);
+        observer.observe(target);
       }
       if (hero?.complete && hero.naturalWidth > 0) startHero();
     }
@@ -79,6 +90,7 @@ export function LandingMotion({ children }: { children: ReactNode }) {
     document.addEventListener("visibilitychange", sync);
     return () => {
       stop();
+      observer.disconnect();
       hero?.removeEventListener("load", startHero);
       preference.removeEventListener("change", sync);
       document.removeEventListener("visibilitychange", sync);

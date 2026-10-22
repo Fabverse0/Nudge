@@ -9,6 +9,7 @@ import { Brand } from "@/components/brand";
 import { ActivityPreview } from "@/components/landing/activity-preview";
 import { LandingMotion } from "@/components/landing/landing-motion";
 import { StartActivityIcon } from "@/components/landing/start-activity-icon";
+import { StepTrail } from "@/components/ui/step-trail";
 import "@/components/landing/landing-studio.css";
 
 export default function HomePage() {
@@ -48,6 +49,8 @@ export default function HomePage() {
             </p>
           </div>
           <div className="studio-scene">
+            <span className="shell-echo" aria-hidden="true" />
+            <StepTrail className="hero-trail" />
             <Image
               src="/brand/landing/nudge-small-step.webp"
               alt="Kura-kura Nudge beranjak dari ponsel menuju buku catatan dan kegiatan kecil"
@@ -83,6 +86,7 @@ export default function HomePage() {
               <p>Jalani kegiatan dengan timer hingga kamu menekan Selesai.</p>
             </article>
           </div>
+          <StepTrail className="flow-trail" />
         </section>
         <section className="activity-world">
           <div className="content-width world-grid">
@@ -117,8 +121,8 @@ export default function HomePage() {
               <article className="studio-category studio-category-move">
                 <div className="studio-art-frame" data-studio-motion="image">
                   <Image
-                    src="/brand/landing/nudge-turtle-walk.webp"
-                    alt="Kura-kura Nudge melangkah dengan kaki depan terangkat dan jejak di belakangnya"
+                    src="/brand/small-steps/stretch.webp"
+                    alt="Kura-kura Nudge meregangkan badan ke samping dengan satu kaki depan terangkat"
                     width={900}
                     height={900}
                     sizes="(max-width: 700px) 280px, 320px"
@@ -153,7 +157,10 @@ export default function HomePage() {
         </section>
         <section className="your-pace content-width">
           <div className="pace-heading">
-            <TurtleMascot pose="think" size={100} />
+            <div className="pace-art" data-studio-motion="pause">
+              <TurtleMascot pose="pause" size={180} />
+              <StepTrail className="pace-trail" />
+            </div>
             <h2 data-studio-motion="copy">Kamu pegang kendalinya.</h2>
           </div>
           <div className="pace-copy">
@@ -169,6 +176,7 @@ export default function HomePage() {
           </div>
         </section>
         <section className="closing content-width">
+          <StepTrail className="closing-trail" />
           <div lang="en">
             <h2 data-studio-motion="copy">Small steps. A fuller life.</h2>
             <p data-studio-motion="copy" data-studio-delay="70">

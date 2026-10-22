@@ -343,6 +343,7 @@
 }
 
 .landing-studio .studio-scene {
+  position: relative;
   display: grid;
   place-items: center;
   aspect-ratio: 1.1;
@@ -372,6 +373,8 @@
 }
 
 .landing-studio .studio-hero-art {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 112%;
   max-width: none;
@@ -411,11 +414,15 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .landing-studio [data-studio-visible="true"] {
+  .landing-studio[data-motion-allowed="true"]
+    [data-studio-motion="copy"][data-studio-visible="true"],
+  .landing-studio[data-motion-allowed="true"]
+    [data-studio-motion="step"][data-studio-visible="true"] {
     animation: studio-copy-in 480ms var(--studio-ease);
   }
 
-  .landing-studio [data-studio-motion="image"][data-studio-visible="true"] {
+  .landing-studio[data-motion-allowed="true"]
+    [data-studio-motion="image"][data-studio-visible="true"] {
     animation: studio-picture-in 600ms var(--studio-ease);
   }
 
@@ -451,11 +458,169 @@
 @keyframes studio-picture-in {
   from {
     opacity: 0.65;
-    transform: scale(0.97);
+    transform: translateX(var(--picture-travel, -22px)) rotate(-2deg)
+      scale(0.97);
   }
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+.landing-studio .shell-echo {
+  position: absolute;
+  inset: -12px 12px 16px -12px;
+  border: 2px solid var(--action);
+  border-radius: inherit;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.landing-studio .hero-trail {
+  position: absolute;
+  right: -10px;
+  top: 0;
+  width: clamp(90px, 10vw, 140px);
+  color: var(--action);
+  transform: rotate(-24deg);
+  z-index: 2;
+}
+
+.landing-studio .flow-trail {
+  width: 150px;
+  margin: 32px auto 0;
+  color: var(--primary);
+}
+
+.landing-studio .studio-category-move {
+  --picture-travel: 22px;
+}
+
+.landing-studio .pace-art {
+  position: relative;
+  width: 240px;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.landing-studio .pace-art .turtle-mascot {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+}
+
+.landing-studio .pace-trail {
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  width: 100px;
+  color: var(--primary);
+  transform: rotate(-18deg);
+}
+
+.landing-studio .closing {
+  position: relative;
+}
+
+.landing-studio .closing-trail {
+  position: absolute;
+  right: 24px;
+  bottom: 8px;
+  width: 110px;
+  opacity: 0.2;
+  color: var(--action);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-studio[data-motion-allowed="true"]
+    :is(.studio-scene, .how-flow, .closing)[data-studio-visible="true"]
+    .step-trail
+    ellipse {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: small-step-arrive 300ms var(--studio-ease) var(--step-delay, 0ms)
+      backwards;
+  }
+
+  .landing-studio[data-motion-allowed="true"]
+    .studio-scene[data-studio-visible="true"]
+    .shell-echo {
+    animation: shell-outline-open 700ms var(--studio-ease);
+  }
+
+  .landing-studio[data-motion-allowed="true"]
+    [data-studio-motion="pause"][data-studio-visible="true"]
+    .turtle-mascot {
+    animation: pause-settle 640ms var(--studio-ease);
+  }
+
+  .landing-studio[data-motion-allowed="true"]
+    [data-studio-motion="pause"][data-studio-visible="true"]
+    .pace-trail
+    ellipse {
+    animation: footprint-breathe 1600ms ease-in-out 3;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .landing-studio .category-illustration {
+    transition: transform 220ms var(--studio-ease);
+  }
+
+  .landing-studio .studio-art-frame:hover .category-illustration {
+    transform: rotate(2deg) translateY(-4px);
+  }
+}
+
+@keyframes shell-outline-open {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes pause-settle {
+  from {
+    transform: translateX(12px) rotate(3deg);
+    opacity: 0.65;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes footprint-breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (max-width: 700px) {
+  .landing-studio .flow-trail {
+    width: 120px;
+    margin-top: 20px;
+  }
+  .landing-studio .pace-art {
+    width: 190px;
+  }
+  .landing-studio .pace-art .turtle-mascot {
+    width: 150px;
+    height: auto;
+  }
+  .landing-studio .pace-trail {
+    width: 80px;
+  }
+  .landing-studio .closing-trail {
+    width: 90px;
+    right: 16px;
+    bottom: 12px;
   }
 }
 
