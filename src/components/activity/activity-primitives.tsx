@@ -22,16 +22,16 @@ export function ActivityArtwork({ goal }: { goal: Goal }) {
   return goal === "move" ? (
     <Image
       src="/brand/landing/nudge-turtle-walk.webp"
-      width={80}
-      height={80}
-      sizes="80px"
+      width={64}
+      height={64}
+      sizes="64px"
       alt=""
       className="turtle-mascot"
     />
   ) : (
     <TurtleMascot
       pose={goal === "reflect" ? "journal" : "tidy"}
-      size={80}
+      size={64}
       eager
     />
   );
