@@ -398,6 +398,8 @@ Easing awal `cubic-bezier(0.2, 0.8, 0.2, 1)`. Utamakan opacity dan transform. De
 
 ### Landing studio C1, 22 Oktober 2026
 
+Penyempurnaan berdasarkan audit Impeccable mempertahankan galeri besar pada desktop dan mobile. Ukuran gambar kategori tetap hingga 320 px desktop dan 280 px mobile; yang diringkas adalah teks langkah dan jarak, bukan ilustrasinya. CTA umum memakai “Mulai kegiatan”; demo memakai “Lanjut ke Nudge” dan menjelaskan bahwa hanya pilihan waktu yang dibawa. Catatan “Tanpa akun. Dua menit juga boleh.” hadir dekat CTA hero. Aturan khusus landing dikonsolidasikan dalam stylesheet landing dengan breakpoint 700/900 px, terpisah dari aturan bersama aplikasi.
+
 Revisi berdasarkan komentar pengguna: indikator durasi memakai CheckCircle Phosphor fill 24 px; CTA hero dan penutup memakai Footprints fill 22 px dalam bidang lingkaran 34 px. Kategori Bergerak memakai ilustrasi berjalan C1 baru pada inventaris landing. Pengguna secara eksplisit meminta teks penutup berbahasa Inggris; judulnya “Small steps. A fuller life.” dengan “Make room for what matters, one small act at a time.” pada container `lang="en"`. Bahasa tombol dan aplikasi tetap Indonesia. Ini pengecualian lokal yang diminta pengguna, bukan perubahan bahasa produk secara menyeluruh.
 
 Polesan yang disetujui pengguna mempertahankan palet, C1 dan Nunito. Satu adegan hero baru memperlihatkan C1 beranjak dari ponsel menuju notebook dan kotak penyimpanan. Tiga ilustrasi kategori lama diperbesar menjadi 240–320 px pada desktop. Lengkung tempurung menjadi bingkai gambar, dengan radius `50% 50% 14% 14%`; panel demo memakai radius 32 px dan penutup 64/24 px. Ini bentuk khusus landing, bukan pengganti radius kontrol aplikasi.

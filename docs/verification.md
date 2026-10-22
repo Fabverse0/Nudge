@@ -8,6 +8,16 @@ Windows, Node.js 22.19.0, npm 11.19.0. Next.js 16.4.2, React 19.3.1, TypeScript 
 
 ## Polesan landing studio, 22 Oktober 2026
 
+### Penyempurnaan setelah audit Impeccable
+
+Pengguna menyetujui seluruh temuan relevan sambil mempertahankan galeri besar pada desktop dan mobile. CTA umum diseragamkan, perpindahan dari demo waktu dijelaskan, informasi tanpa akun didekatkan ke CTA pertama, teks langkah diringkas, dan jarak mobile dirapikan. Aturan layout landing dipindahkan dari globals ke stylesheet scoped; aturan bersama aplikasi tetap dipertahankan. Review independen menemukan satu aturan langkah lama pada 720 px yang sudah dihapus dan tercakup pemeriksaan 710 px.
+
+- Build produksi, TypeScript, lint, format check, dan `git diff --check` lulus. Run produksi final: **26/26 lulus dalam 1,1 menit** pada dua proyek Chrome desktop/viewport seluler. Tes mencakup reflow 320/390/710/768/1440, galeri tetap besar, semua CTA umum, penjelasan demo, alt hero, keyboard, pergantian durasi cepat, handoff menit tanpa timer otomatis, teks CSS 200%, reduced motion dinamis, tanpa JavaScript, Axe, dan regresi PWA. Ini bukan pengujian Android fisik atau pembaca layar.
+- Dua skenario pengukuran memakai konteks Chrome baru dengan viewport 1920 x 900, DPR 1, dan reduced motion. Pada layout yang sama, hint baru memilih varian 750 px dengan **28.376 encoded bytes**; reproduksi hint lama memilih 1080 px dengan **48.938 byte**. Lebar render 672,17 px, pengurangan payload sekitar **42%** pada kondisi tersebut. Tidak ada klaim perubahan LCP/INP/CLS atau kecepatan jaringan nyata. Attachment JSON berada dalam hasil Playwright.
+- Impeccable final: **0 temuan primer, 16 advisory** ukuran huruf/radius. Enam advisory tambahan muncul karena aturan lama yang sebelumnya berada di globals kini ikut masuk cakupan scan komponen landing. Nilai tipografi/bentuk mengikuti identitas yang dipertahankan; tidak ada ignore baru. Laporan lokal: `.impeccable/review/refinement-detector.json`.
+- Preview produksi berhasil dibuka langsung setelah audit awal hanya mendapatkan fallback offline. Tinjauan browser memastikan copy baru, susunan tablet, dan galeri mobile tetap besar. Screenshot: `.impeccable/review/refinement-desktop.png` dan `refinement-mobile-gallery.png`. Screenshot lama tidak dipakai sebagai bukti hasil revisi ini.
+- Penilaian awal dua subagen (22/28 desain, 17/20 teknis) bersifat sementara berdasarkan source dan screenshot saat live belum tersedia. Tidak dibuat skor pascaperbaikan tanpa mengulang seluruh metode critique.
+
 ### Revisi lima komentar browser
 
 Revisi setelah review pengguna mencakup CheckCircle fill 24 px sebagai badge pilihan durasi, ikon Footprints dalam inset 34 px pada CTA hero/penutup, ilustrasi berjalan C1 baru, dan teks penutup Inggris dengan penanda `lang="en"`. Label tombol dan alur aplikasi tetap Indonesia. Ruang tombol penutup diperbaiki setelah tinjauan langsung pada viewport komentar 767 x 524.

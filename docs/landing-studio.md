@@ -72,3 +72,13 @@ The user subsequently authorized these five targeted changes:
 | Hero CTA icon looked ordinary. | Reuse the same step icon to connect both primary actions to Nudge's small-step idea. |
 
 The English copy is an explicit user-directed exception limited to the closing invitation. Action labels remain Indonesian and still link to `/app`. The walking scene extends the original one-new-hero scope following the user's request; [asset inventory](./assets/landing-studio/README.md) contains the exact prompt, source and web output. No shared app mascot mapping was replaced.
+
+## Impeccable refinement, 22 October 2026
+
+Two independent assessments reviewed design and implementation. The initial live URL returned the offline fallback, so the critique used current source and matching stored screenshots: provisional design score 22/28 and technical audit 17/20. Those scores are not post-fix measurements or WCAG certification. The user selected all relevant improvements while explicitly retaining the large gallery on both desktop and mobile.
+
+The implemented direction keeps all three arched illustrations at up to 320 px desktop and 280 px mobile. Shorter process copy and reduced mobile section/list gaps make the middle more concise. Generic app links now say “Mulai kegiatan”; the duration demo says “Lanjut ke Nudge” and explains that time transfers while the goal is chosen in the app. The hero reassures “Tanpa akun. Dua menit juga boleh.” The English closing, C1 artwork, icons and motion remain intact.
+
+Landing layout rules now live in the scoped landing stylesheet, with 700/900 px breakpoints; shared application rules stay global. Review caught and removed a leftover 720 px step-grid rule, and 710 px was added to the reflow checks. Hero alt uses the public character name rather than the internal C1 code.
+
+Production image measurement isolates the old and new `sizes` hints on the same 1920 px layout in fresh DPR-1 Chrome contexts. Render width is 672.17 px: the new hint chooses a 750 px resource (28,376 encoded bytes), while the old hint chooses 1080 px (48,938 bytes). This is about 42% less image payload in that scenario, not a measured CWV or physical-mobile improvement. Browser caches may retain a larger previously downloaded image when resizing an existing tab. See [verification](./verification.md) for test results and remaining limits.
