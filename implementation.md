@@ -319,6 +319,8 @@ Jika muncul kebutuhan baru, catat masalah yang hendak diselesaikan, dampak terha
 
 ## 13. Ringkasan kesiapan peninjauan rilis
 
+Polesan seluruh aplikasi berikutnya memakai tiga langkah pemilihan eksplisit dan presentasi konsisten untuk saran, timer, penyelesaian, favorit, serta pengingat. Implementasi dan batasnya dicatat di docs/app-polish.md; unit 17/17 dan regresi produksi 84/84 lulus. Status ini menyelesaikan lingkup polesan aplikasi yang disetujui, sementara pemeriksaan perangkat fisik dan penerimaan MVP di bawah tetap terbuka.
+
 Polesan landing studio yang disetujui 22 Oktober 2026 telah diimplementasikan: satu hero C1 baru, ilustrasi kategori besar, demo durasi, animasi terarah, reduced motion, dan fallback statis. Penyempurnaan setelah audit Impeccable mempertahankan galeri, memperjelas perpindahan ke aplikasi, merapikan CSS, dan mengukur penghematan payload hero. Hasil tes produksi terbaru, arah, kritik visual, serta keterbatasannya dicatat di docs/landing-studio.md dan docs/verification.md. Ini menyelesaikan pekerjaan polesan landing tersebut, bukan penerimaan Android atau seluruh MVP.
 
 - [ ] Seluruh FR memiliki keluaran implementasi dan bukti penerimaan.

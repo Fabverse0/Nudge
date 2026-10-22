@@ -246,11 +246,11 @@ Header cukup memuat identitas Nudge dan akses masuk aplikasi yang diperlukan. Ti
 
 ### Aplikasi `/app`
 
-Mode permukaan: **Operate**. Gunakan satu pusat perhatian pada setiap langkah. Struktur awal dapat bertahap atau satu halaman ringkas; skill boleh mengeksplorasi komposisi selama kontrol dan urutan PRD terjaga.
+Mode permukaan: **Operate**. Gunakan satu pusat perhatian pada setiap langkah. Pengguna memilih alur bertahap Mood, Tujuan, lalu Waktu dengan tombol Lanjut eksplisit. Pemilihan tidak otomatis memindahkan langkah. Mood memiliki Lewati; tujuan dan waktu wajib. Tempat/alat berada pada langkah Waktu. Pilihan dan langkah bertahan ketika berpindah menu dalam sesi, sedangkan penyelesaian kembali ke langkah Mood. Rincian ada di [polish aplikasi](./docs/app-polish.md).
 
 | Layar/keadaan | Fokus dan komposisi |
 | --- | --- |
-| Memilih konteks | Judul singkat, mood beserta Lewati, tujuan, dan waktu. Tempat/alat dibuka saat relevan. Akses Favorit dan Pengingat tetap mudah ditemukan. |
+| Memilih konteks | Tiga langkah dengan progres tekstual, pilihan native, Lanjut/Kembali, dan Lewati mood. Durasi dari landing tetap terpilih pada langkah Waktu. Akses Favorit dan Pengingat tetap mudah ditemukan. |
 | Saran | Satu kartu utama berisi judul, durasi, instruksi, kondisi, dan alasan. Mulai paling menonjol; Kurang cocok dan Favorit menjadi pendamping. |
 | Timer | Judul aktivitas, angka waktu, status berjalan/jeda/habis, kontrol yang jelas, dan maskot kecil. Instruksi tetap dapat dilihat kembali. |
 | Setelah selesai | Respons singkat, “Mood kamu berubah?”, pilihan mood setara dan Lewati, kemudian kembali ke awal aplikasi. |

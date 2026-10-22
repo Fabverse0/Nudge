@@ -6,6 +6,21 @@ Diperbarui: 22 Oktober 2026. Status: kode MVP dan aset C1 terintegrasi; penerima
 
 Windows, Node.js 22.19.0, npm 11.19.0. Next.js 16.4.2, React 19.3.1, TypeScript 6.0.3, Tailwind 4.3.3, Vitest 5.0.5, Playwright 1.64.1. Versi terkunci dalam package-lock.json.
 
+## Polesan seluruh aplikasi, 22 Oktober 2026
+
+Pengguna menyetujui [rencana aplikasi](./app-polish.md): pemilihan Mood/Tujuan/Waktu dengan Lanjut eksplisit, polesan saran, timer, penyelesaian, favorit, dan pengingat. Konteks/posisi langkah bertahan saat berpindah menu; Ubah pilihan kembali ke Waktu; filter aktif terlihat meskipun kontrol ditutup. Tidak ada perubahan file domain `src/lib`, format penyimpanan, atau pengiriman notifikasi.
+
+- Build produksi dan TypeScript lulus. Unit: **17/17 lulus**, enam berkas. Run produksi final: **84/84 lulus dalam 3,4 menit**, pada Chrome desktop dan viewport Pixel 7. Konfigurasi produksi mencakup activity-flow, app-polish, reminder-polish, landing-studio, dan pwa.
+- Tes membuktikan langkah eksplisit, tombol wajib nonaktif sebelum pilihan, Kembali mempertahankan nilai, fokus pada langkah, Lewati mood awal, pembaruan/pelewatan mood setelah selesai, reset penolakan saat konteks berubah, pilihan menit dari landing, dan tidak ada timer otomatis.
+- Seluruh layar diperiksa pada 320/390/710/768/1440 serta teks CSS 200% pada 320. Assertion mencakup overflow elemen, tidak ada gerak dengan reduced motion, dan seluruh gambar C1 di main selesai dimuat. Keadaan yang dicakup: mood, tujuan, waktu/filter, saran, favorit kosong/terisi, pengingat, timer berjalan/jeda/habis, dan penyelesaian. Axe memeriksa pemilihan, saran, timer, penyelesaian, favorit, serta pengingat.
+- Pengingat diuji melalui UI dengan mock izin yang terisolasi: belum meminta izin pada kunjungan atau draft aktif, hari kosong ditolak, izin hanya diminta setelah save aktif yang valid, jadwal dimatikan/disimpan/reload, izin ditolak/tidak didukung, serta storage diblokir. Aktivitas manual tetap dapat dimulai pada kondisi tersebut. Uji PWA terpisah tetap memeriksa penerimaan API service worker produksi; ini bukan bukti notifikasi OS pada perangkat fisik.
+- Run awal 73/76 lulus menemukan overflow judul saran pada teks 200%, diperbaiki dengan pembungkusan teks scoped. Satu kegagalan penulisan trace Playwright tidak berulang pada run final. Tes pengingat awal memiliki locator alert yang juga memilih route announcer Next; locator dipersempit ke main tanpa mengurangi assertion. Build sempat menemukan tipe mock izin yang belum dipersempit; diperbaiki sebelum build dan run final.
+- Review source independen tidak menemukan temuan actionable. Impeccable pada komponen aplikasi: **0 temuan primer, 6 advisory** ukuran/radius. Nilai yang dipertahankan: judul mobile/timer 28 px, judul favorit 18 px, radius navigasi/simbol 14 px dan kontrol feedback 12 px. Tidak ada ignore baru. Laporan lokal: `.impeccable/review/app-polish-detector.json`.
+- Tinjauan langsung browser mencakup pilihan desktop/mobile, saran, timer dijeda, penyelesaian dengan artwork termuat, favorit kosong, dan pengingat. Bukti lokal memakai prefiks `.impeccable/review/polish-app-`; screenshot reflow per state berada di output Playwright. Screenshot yang diambil ketika server tes berhenti tidak dipakai sebagai bukti gambar rusak aplikasi; bukti penyelesaian diambil ulang setelah server hidup.
+- Zoom browser nyata untuk versi aplikasi baru, pembaca layar, instalasi Android, notifikasi OS, dan observasi peserta tetap menunggu. Teks CSS 200% dan viewport seluler bukan pengganti perangkat fisik atau pembaca layar.
+
+Gate penyerahan Anti Slop dan alasan desain dicatat dalam [app-polish.md](./app-polish.md). Perubahan hanya pada implementasi lokal; tidak ada deployment atau push.
+
 ## Polesan landing studio, 22 Oktober 2026
 
 ### Penyempurnaan setelah audit Impeccable
