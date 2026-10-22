@@ -119,7 +119,7 @@ test("landing explains entry and preserves the large illustration gallery", asyn
   }
 });
 
-test("landing review uses a clear check, step icons and walking art", async ({
+test("landing review uses a clear check, step icons and stretching art", async ({
   page,
 }) => {
   await page.goto("/");
@@ -138,7 +138,7 @@ test("landing review uses a clear check, step icons and walking art", async ({
   await expect(page.locator(".start-activity-icon")).toHaveCount(2);
   await expect(page.locator(".studio-category-move img")).toHaveAttribute(
     "src",
-    /nudge-turtle-walk/,
+    /small-steps%2Fstretch|small-steps\/stretch/,
   );
   await expect(page.locator('.closing [lang="en"]')).toContainText(
     "Small steps. A fuller life.",

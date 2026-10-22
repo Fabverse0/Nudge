@@ -9,6 +9,7 @@ export default defineConfig({
     "activity-flow.spec.ts",
     "app-polish.spec.ts",
     "reminder-polish.spec.ts",
+    "small-steps-motion.spec.ts",
   ],
   testIgnore: [],
   use: {
