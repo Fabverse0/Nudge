@@ -3,6 +3,10 @@
   padding-bottom: 16px;
 }
 
+.app-studio :is(h1, h2, h3, p, button, label, summary) {
+  overflow-wrap: anywhere;
+}
+
 .app-studio .app-header {
   max-width: 1040px;
   padding-block: 22px;
@@ -120,6 +124,9 @@
 }
 
 .app-studio .selection-progress li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   padding-bottom: 4px;
   border-bottom: 2px solid transparent;
 }
@@ -136,6 +143,10 @@
 
 .app-studio .selection-step {
   min-width: 0;
+}
+
+.app-studio .selection-step .filter-details {
+  margin-top: 24px;
 }
 
 .app-studio .selection-step:focus {
