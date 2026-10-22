@@ -1,5 +1,7 @@
 # Landing studio C1
 
+Later approved refinement: three new C1 poses, footprint/shell motifs, varied entrances and bounded accent motion are recorded in [small-steps-motion.md](./small-steps-motion.md). Latest production regression: 94/94 passed. The sections below retain the original studio direction and its earlier verification history.
+
 ## Approved direction
 
 22 October 2026. The user chose an illustration studio, directed expressive motion, one new hero scene, and reuse of the three existing activity illustrations. Preserve C1, Nunito, sage/blue/sand, rounded forms, Indonesian copy, and real navigation to the app. Mode: Persuade.

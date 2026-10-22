@@ -2,6 +2,8 @@
 
 Tanggal: 22 Oktober 2026. Permukaan: `/app`. Mode Impeccable: **Operate**.
 
+Catatan lanjutan: pengguna kemudian menyetujui perluasan animasi/dekorasi. Transisi kini 200 ms dengan arah maju/kembali, konfirmasi pilihan 160 ms, serta pose penyelesaian baru dengan masuk sekali. Bukti produksi terbaru 94/94 dan rincian ada di [small-steps-motion.md](./small-steps-motion.md). Bagian berikut mencatat lingkup polesan sebelumnya.
+
 ## Arah yang disetujui
 
 Pengguna memilih seluruh aplikasi dan pemilihan bertahap, dengan tombol Lanjut eksplisit. Pertahankan C1, Nunito, palet sage/biru/sand, bentuk membulat, Bahasa Indonesia, dan batas MVP. Landing tetap menjadi permukaan terpisah.

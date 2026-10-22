@@ -2,6 +2,16 @@
 
 Diperbarui: 22 Oktober 2026. Status: kode MVP dan aset C1 terintegrasi; penerimaan perangkat fisik serta observasi pengguna masih menunggu.
 
+## Animasi dan dekorasi small steps
+
+Perluasan yang disetujui menambahkan tiga ilustrasi C1 transparan, jejak langkah dan lengkung tempurung, koreografi landing, arah transisi langkah, respons pilihan/favorit/umpan balik, serta penyelesaian sekali. Timer tetap statis. Tidak ada perubahan kontrak domain, penyimpanan, atau notifikasi.
+
+- Build produksi, TypeScript, ESLint, Prettier, dan diff check lulus. Unit 17/17; pemeriksaan terarah 28/28; suite produksi final **94/94 dalam 6,2 menit**, Chrome desktop dan emulasi viewport Pixel 7.
+- Taste lint 0 FAIL/0 WARN; inspector render 1440/768/390 menghasilkan 0 FAIL/2 WARN, yaitu canvas krem tetap dan tidak ada footage. Keduanya dipertahankan sesuai identitas C1. Impeccable regex scan: 0 temuan utama, 22 advisory font/radius pada gaya landing dan aplikasi yang sudah ada.
+- Aset baru terdekode, alpha WebP terbukti, dekorasi tidak menangkap input, gerak terbatas berhenti di luar layar, reduced motion aktif saat runtime membatalkan animasi, fokus/arah langkah benar, dan timer tidak beranimasi. Uji tab tersembunyi menggunakan simulasi event lifecycle; bukan bukti OS Android.
+- Tinjauan browser dan screenshot mencakup hero, galeri peregangan, bagian kendali, penutup, dan penyelesaian aplikasi. Rincian, kritik visual, inventaris/prompt aset, gate Anti Slop dan batas pemeriksaan ada di [small-steps-motion.md](./small-steps-motion.md).
+- Build awal gagal pada worker PostCSS Turbopack. Build bersih berhasil setelah cache gagal dipindahkan ke folder pemulihan lokal; penyebab tingkat lebih rendah belum dipastikan. Pemeriksaan Android fisik dan pembaca layar nyata tetap terbuka.
+
 ## Lingkungan
 
 Windows, Node.js 22.19.0, npm 11.19.0. Next.js 16.4.2, React 19.3.1, TypeScript 6.0.3, Tailwind 4.3.3, Vitest 5.0.5, Playwright 1.64.1. Versi terkunci dalam package-lock.json.

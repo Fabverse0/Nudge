@@ -408,6 +408,8 @@ Hero memakai rentang 48–92 px pada desktop, 40–64 px pada layar menengah/sel
 
 Gerak masuk hero berlangsung sekali selama 760 ms, perpindahan 12/18 px dan skala awal 0,96. Bingkai gambar memakai 600 ms, teks/langkah 480 ms dengan jeda saudara 70–140 ms, dan pergantian contoh durasi 220 ms. Easing khusus landing adalah `cubic-bezier(0.16, 1, 0.3, 1)`. Tidak ada loop, pengambilalihan scroll, atau penundaan CTA. Reduced motion menghilangkan perpindahan; tab tersembunyi membatalkan gerak aktif. Aturan timer dan maskot aplikasi tetap berlaku.
 
+Perluasan yang disetujui berikutnya menambahkan jejak langkah, garis lengkung tempurung, serta pose jeda, peregangan, dan penyelesaian C1. Satu aksen jejak pada landing boleh bergerak lembut tiga siklus selama total 4,8 detik, lalu diam; tidak ada loop tanpa akhir. Masuk gambar kategori mengikuti arah komposisi. Aplikasi memakai transisi maju/kembali 200 ms, konfirmasi pilihan 160 ms, serta masuk penyelesaian 560 ms sekali. Timer tetap statis. Hentikan gerak di luar layar atau ketika tab tersembunyi, hormati reduced motion, dan jangan tutupi teks/kontrol. Detail serta bukti ada di [panduan motion](./docs/small-steps-motion.md).
+
 ## Do's and Don'ts
 
 ### Terapkan
