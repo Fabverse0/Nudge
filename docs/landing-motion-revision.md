@@ -1,5 +1,7 @@
 # Revisi motion landing Nudge
 
+Catatan berikut merekam hasil 23 Oktober. Revisi ponsel berikutnya, termasuk ukuran JSON dan jeda yang berubah, dicatat di [cerita ponsel](./phone-story.md).
+
 ## Keputusan dan batas
 
 Menggantikan pendekatan rig berulang pada `landing-alive.md`, berdasarkan kritik pengguna: gerak terasa kaku dan semua kura-kura tampak sama. Pilihan pengguna: campuran terarah, sumber gratis, dunia visual hanya kura-kura dan benda. C1 3D hadir di hero dan penutup; lima adegan cerita memiliki siluet berbeda. Aplikasi `/app`, komponen bersama, CSS global, service worker, dan aset aplikasi tidak termasuk pekerjaan ini.

@@ -1,5 +1,7 @@
 # Pemeriksaan implementasi Nudge
 
+Revisi ponsel landing 24 Oktober 2026: suite penuh 31 lulus/1 dilewati, kemudian pemeriksaan terfokus versi lintasan final 5 lulus/1 dilewati. Build produksi berhasil. Sumber, ukuran, screenshot, pengecualian Taste, dan batas bukti ada di [cerita ponsel](./phone-story.md). Aplikasi tidak termasuk perubahan ini.
+
 Diperbarui: 23 Oktober 2026. Status: kode MVP dan aset C1 terintegrasi; penerimaan perangkat fisik serta observasi pengguna masih menunggu.
 
 ## Landing hidup, pemeriksaan terbaru 23 Oktober 2026

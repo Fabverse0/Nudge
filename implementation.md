@@ -352,6 +352,8 @@ Polesan landing studio yang disetujui 22 Oktober 2026 telah diimplementasikan: s
 
 ## Revisi animasi landing setelah kritik pengguna, 23 Oktober 2026
 
+Pembaruan ponsel 24 Oktober: feed berwarna, transisi menuju buku/tanaman, penahanan pose, dan poster lengkap sudah diterapkan. Build produksi serta suite landing diperiksa; rincian versi final dan batas bukti ada di [cerita ponsel](./docs/phone-story.md). Lingkup tetap landing, tanpa perubahan aplikasi.
+
 Selesai untuk lingkup landing: C1 tetap di hero/penutup, lima adegan cerita memakai benda yang berbeda. Dua sumber Lottie gratis diadaptasi, lisensi/kredit disertakan, serta pemutar dan poster lokal ditambahkan. Detail sumber dan batas kualitas ada di [revisi motion](./docs/landing-motion-revision.md).
 
 Bukti produksi: build webpack berhasil; 31 tes landing lulus, satu tes dua siklus mobile dilewati karena duplikasi pemeriksaan panjang desktop. Lifecycle mobile, reduced motion, pause offscreen/hidden, no-JS, kegagalan unduh, kontrol waktu, dan Axe tetap tercakup. Tidak ada perubahan source atau aset aplikasi; pemeriksaan Android fisik tetap terpisah dari pekerjaan ini. Commit kecil dibuat; push belum diminta untuk revisi ini.
