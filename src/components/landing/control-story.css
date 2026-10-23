@@ -194,6 +194,10 @@
   outline: 3px solid #315f5e;
   outline-offset: 4px;
 }
+.nudge-alive .control-story button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
 @keyframes control-art-in {
   from {
     transform: scale(0.94) rotate(-4deg);
