@@ -48,7 +48,6 @@ export function StretchStory() {
         fill="#315F5E"
         opacity=".13"
       />
-      <path d="m133 284-25 5 21 13" fill="#CBAF8B" />
       <path
         d="M175 276c-25-4-38 20-37 39 0 13 41 16 48 5l11-27Z"
         fill="#CBAF8B"
