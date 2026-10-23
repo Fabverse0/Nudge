@@ -178,8 +178,8 @@
 .nudge-alive .scene-journal .scene-props {
   z-index: 4;
 }
-.nudge-alive .journal-pencil {
-  transform-origin: 413px 321px;
+.nudge-alive .journal-hand {
+  transform-origin: 355px 338px;
 }
 .nudge-alive .journal-line {
   stroke-dasharray: 70;
@@ -247,17 +247,29 @@
 .nudge-alive .scene-time-cards > span:nth-child(3) {
   animation-delay: 0.8s;
 }
-.nudge-alive .scene-tidy .rig-right {
-  animation: alive-tidy-reach 8s ease-in-out infinite;
+.nudge-alive .scene-tidy .rig-right,
+.nudge-alive .scene-journal .rig-right {
+  visibility: hidden;
 }
-.nudge-alive .tidy-object {
+.nudge-alive .tidy-grip {
   animation: alive-tidy-object 8s ease-in-out infinite;
 }
-.nudge-alive .scene-journal .rig-right {
-  animation: alive-write-foot 8s ease-in-out infinite;
+.nudge-alive .tidy-object {
+  animation: alive-release 8s ease-in-out infinite;
 }
-.nudge-alive .journal-pencil {
+.nudge-alive .journal-hand {
   animation: alive-write 8s ease-in-out infinite;
+}
+.nudge-alive .scene-tidy .alive-rig-body {
+  animation: alive-lean 8s ease-in-out infinite;
+}
+.nudge-alive .scene-journal .rig-head,
+.nudge-alive .scene-journal .rig-happy {
+  transform-origin: 65% 80%;
+  rotate: 10deg;
+}
+.nudge-alive .scene-phone .alive-rig {
+  animation: alive-leave-phone 9s ease-in-out infinite;
 }
 .nudge-alive .journal-line {
   animation: alive-line 8s ease-in-out infinite;
@@ -476,24 +488,53 @@
   18%,
   100% {
     transform: translate(0, 0);
-    opacity: 1;
   }
   30% {
     transform: translate(10px, -35px);
-    opacity: 1;
   }
   48% {
     transform: translate(105px, -58px);
-    opacity: 1;
   }
   60%,
   87% {
     transform: translate(117px, 14px);
-    opacity: 0;
   }
   95% {
     transform: translate(0, 0);
+  }
+}
+@keyframes alive-release {
+  0%,
+  55%,
+  100% {
+    opacity: 1;
+  }
+  65%,
+  97% {
     opacity: 0;
+  }
+}
+@keyframes alive-lean {
+  0%,
+  15%,
+  90%,
+  100% {
+    transform: none;
+  }
+  40%,
+  60% {
+    transform: translate(25px, -4px) rotate(-5deg);
+  }
+}
+@keyframes alive-leave-phone {
+  0%,
+  45%,
+  100% {
+    transform: none;
+  }
+  62%,
+  88% {
+    transform: translate(23px, -2px) rotate(-3deg);
   }
 }
 @keyframes alive-write {

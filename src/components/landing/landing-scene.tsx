@@ -208,15 +208,26 @@ function TidyProps() {
         <path d="m322 260 105-13 48 33-104 16Z" fill="#315F5E" opacity=".18" />
         <rect x="393" y="321" width="43" height="11" rx="5" fill="#CBAF8B" />
       </g>
-      <g className="tidy-object">
-        <rect x="251" y="284" width="51" height="45" rx="10" fill="#7EADDB" />
-        <path
-          d="m251 294 24 9 27-9"
-          stroke="#6898C2"
-          strokeWidth="4"
-          fill="none"
+      <g className="tidy-grip">
+        <g className="tidy-object">
+          <rect x="251" y="284" width="51" height="45" rx="10" fill="#7EADDB" />
+          <path
+            d="m251 294 24 9 27-9"
+            stroke="#6898C2"
+            strokeWidth="4"
+            fill="none"
+          />
+        </g>
+        <image
+          href="/brand/landing/alive/foot-right.webp"
+          x="220"
+          y="230"
+          width="77"
+          height="66"
         />
       </g>
+      <path d="m371 296 104-16v80l-104 16Z" fill="#E6D4BE" />
+      <rect x="393" y="321" width="43" height="11" rx="5" fill="#CBAF8B" />
       <g className="tidy-book" transform="rotate(-12 96 346)">
         <rect x="57" y="319" width="88" height="56" rx="10" fill="#679F9E" />
         <rect x="65" y="319" width="80" height="49" rx="7" fill="#E6D4BE" />
@@ -249,10 +260,19 @@ function JournalProps() {
         <path className="journal-line line-two" d="m319 330 46 5" />
         <path className="journal-line line-three" d="m316 344 29 3" />
       </g>
-      <g className="journal-pencil">
-        <path d="m360 232 14-11 40 78-10 8Z" fill="#679F9E" />
-        <path d="m404 307 10-8 1 24Z" fill="#E6D4BE" />
-        <path d="m411 314 4 9-8-6Z" fill="#315F5E" />
+      <g className="journal-hand">
+        <g transform="translate(-60 15)">
+          <path d="m360 232 14-11 40 78-10 8Z" fill="#679F9E" />
+          <path d="m404 307 10-8 1 24Z" fill="#E6D4BE" />
+          <path d="m411 314 4 9-8-6Z" fill="#315F5E" />
+        </g>
+        <image
+          href="/brand/landing/alive/foot-right.webp"
+          x="306"
+          y="225"
+          width="88"
+          height="75"
+        />
       </g>
     </g>
   );
