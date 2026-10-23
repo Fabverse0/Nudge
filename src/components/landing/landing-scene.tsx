@@ -6,7 +6,7 @@ export type LandingSceneKind =
 const descriptions: Record<LandingSceneKind, string> = {
   hero: "Nudge bersama ponsel yang ditinggalkan dan satu langkah menuju kegiatan kecil",
   phone:
-    "Ponsel dengan isi layar yang bergulir, mengajakmu beranjak dari scrolling",
+    "Feed berwarna bergulir pada ponsel, berhenti pada Jeda sebentar, lalu buku dan tanaman muncul dari layar",
   time: "Jam dan kartu waktu mengikuti pilihan dua, lima, atau sepuluh menit",
   move: "Sepasang langkah bergantian menapak dan meninggalkan jejak di jalur kecil",
   tidy: "Buku dan benda meja tersusun satu per satu ke tempatnya",

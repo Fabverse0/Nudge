@@ -413,6 +413,12 @@ const invitation = layer(
   }),
 );
 invitation.shapes.at(-1).it.at(-1).s = fixed([55, 55, 100]);
+invitation.shapes.at(-1).it.at(-1).o = keys([
+  [0, 100],
+  [94, 100],
+  [103, 0],
+  [180, 0],
+]);
 const screenAsset = { id: "nudge-screen", layers: [invitation, feed] };
 const sourceOutline = structuredClone(
   source.layers.find((l) => l.nm === "Outline").shapes[0].it[0],
@@ -436,6 +442,7 @@ const reverseGroups = (node) => {
   if (node.ty === "gr") {
     const tr = node.it.at(-1);
     const shapes = node.it.slice(0, -1);
+    shapes.forEach(reverseGroups);
     // Fill/stroke must remain after their associated geometry.
     if (shapes.every((s) => s.ty === "gr")) node.it = [...shapes.reverse(), tr];
   }
@@ -467,21 +474,21 @@ const phone = precomp(
 const emergingBook = layer(
   "Book leaves the screen",
   book(),
-  transform([288, 214, 0], {
+  transform([298, 248, 0], {
     p: keys([
-      [0, [288, 214, 0]],
-      [94, [288, 214, 0]],
+      [0, [298, 248, 0]],
+      [94, [298, 248, 0]],
       [112, [230, 246, 0]],
       [132, [144, 327, 0]],
       [155, [144, 327, 0]],
-      [180, [288, 214, 0]],
+      [180, [298, 248, 0]],
     ]),
     s: keys([
-      [0, [25, 25, 100]],
-      [94, [25, 25, 100]],
+      [0, [55, 55, 100]],
+      [94, [55, 55, 100]],
       [132, [100, 100, 100]],
       [155, [100, 100, 100]],
-      [180, [25, 25, 100]],
+      [180, [55, 55, 100]],
     ]),
     r: keys([
       [0, -8],
@@ -564,11 +571,19 @@ const animation = {
   assets: [screenAsset, phoneAsset],
   layers: [emergingBook, plant, phone, trail],
 };
+for (const [item, name] of [
+  [feed, "feed"],
+  [invitation, "invitation"],
+  [emergingBook, "book"],
+  [plant, "plant"],
+  [phone, "handset"],
+])
+  item.cl = `phone-story-${name}`;
 const output = "public/brand/landing/motion/phone.json";
 writeFileSync(
   output,
   JSON.stringify(animation, (_key, value) =>
-    typeof value === "number" ? Math.round(value * 1000) / 1000 : value,
+    typeof value === "number" ? Math.round(value * 100) / 100 : value,
   ),
 );
 console.log(`${output}: ${readFileSync(output).length} bytes`);
