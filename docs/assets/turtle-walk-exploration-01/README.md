@@ -1,6 +1,6 @@
 # Eksplorasi gambar awal video berjalan C1
 
-Tanggal: 24 Oktober 2026. Status: menunggu pilihan pengguna. Kedua kandidat belum dipakai di landing atau diunggah ke Flow.
+Tanggal: 24 Oktober 2026. Status: pengguna memilih kandidat B v2. Kandidat belum dipakai di landing atau berhasil diunggah ke Flow; unggah otomatis membutuhkan izin file URL pada ekstensi Chrome.
 
 ## Kandidat untuk dipilih
 

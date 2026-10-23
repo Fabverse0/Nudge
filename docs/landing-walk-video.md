@@ -8,13 +8,16 @@ Dua komposisi gambar disiapkan sebelum video. Pilihan pengguna atas gambar dan p
 
 ## Status 24 Oktober 2026
 
-- Dua kandidat v2 dibuat dan disimpan; versi awal juga dipertahankan. Gambar menunggu pilihan pengguna.
+- Dua kandidat v2 dibuat dan disimpan; versi awal juga dipertahankan. Pengguna memilih kandidat B v2 untuk gambar awal.
+- Veo 3.1 Fast dipilih pada setelan project dengan output video x1. Percobaan unggah kandidat B gagal sebelum file dikirim karena ekstensi Chrome belum memiliki izin file URL. Tidak ada perubahan izin ekstensi yang dilakukan.
 - Flow telah diperiksa sebelumnya: akun menampilkan PLUS dan 250 kredit saat pemeriksaan, dengan Veo 3.1 Fast dalam daftar. Saldo dan biaya wajib diperiksa ulang saat eksekusi.
 - Generasi video: belum dilakukan. Kredit Flow yang dipakai untuk pekerjaan ini: 0.
 - Integrasi landing, optimasi video, pemeriksaan runtime video, dan penerimaan pengguna: belum dilakukan.
 - Source aplikasi dan landing belum diubah pada tahap gambar ini. `next-env.d.ts` sudah berubah sebelum pekerjaan dimulai dan tidak termasuk commit.
 
 ## Langkah setelah pilihan gambar
+
+Selesaikan izin unggah Chrome melalui pengguna, atau pengguna mengunggah `candidate-b-v2.png` secara manual pada project Flow yang sudah terbuka. Draft instruksi ada di `docs/assets/turtle-walk-exploration-01/video-prompt.txt`; instruksi tersebut belum dikirim ke Flow. Periksa kembali dukungan gambar awal, durasi, dan total biaya sebelum menekan generasi.
 
 Tinjau rekaman gerak sumber agar prompt menekankan pijakan dan perpindahan berat. Gunakan gambar awal yang dipilih, durasi 6 detik, Veo 3.1 Fast, satu hasil, maksimal 20 kredit tanpa pembelian. Target: melihat tujuan selama 0–0,8 detik, berjalan hingga detik 4, melambat dan menoleh pada detik 4–5, lalu menahan pose hingga detik 6. Jika pengaturan tidak mendukung kombinasi ini, laporkan sebelum mengganti pendekatan atau memakai kredit.
 
