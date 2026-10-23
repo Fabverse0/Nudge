@@ -44,10 +44,10 @@ export default function HomePage() {
             <StepTrail className="hero-trail" />
           </div>
           <div className="hero-copy">
-            <h1>
-              Jeda dulu.
+            <h1 lang="en">
+              Pause first.
               <br />
-              <span>Mulai kecil.</span>
+              <span>Start small.</span>
             </h1>
             <p>Temukan kegiatan kecil yang pas dengan mood dan waktumu.</p>
             <Link href="/app" className="button primary hero-cta">

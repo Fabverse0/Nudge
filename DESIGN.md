@@ -412,7 +412,7 @@ Perluasan yang disetujui berikutnya menambahkan jejak langkah, garis lengkung te
 
 ### Landing adaptasi Duolingo, 23 Oktober 2026
 
-Pengguna menyetujui adaptasi kuat berdasarkan landing Duolingo dan dokumen referensi alpha yang diberikan. Pertahankan C1, Nunito, warna Nudge, Bahasa Indonesia dan penutup Inggris yang disetujui. Referensi memberi prinsip komposisi dan kontrol; ukurannya dipetakan ke kebutuhan responsif Nudge. Lihat [pemetaan referensi](./docs/landing-duolingo.md).
+Pengguna menyetujui adaptasi kuat berdasarkan landing Duolingo dan dokumen referensi alpha yang diberikan. Pertahankan C1, Nunito, warna Nudge, Bahasa Indonesia dan penutup Inggris yang disetujui. Atas permintaan pengguna, judul hero memakai “Pause first. Start small.” dengan atribut `lang="en"`; teks pendukung dan tombol tetap berbahasa Indonesia. Referensi memberi prinsip komposisi dan kontrol; ukurannya dipetakan ke kebutuhan responsif Nudge. Lihat [pemetaan referensi](./docs/landing-duolingo.md).
 
 Hero memakai adegan C1 transparan yang terbuka, gambar di kiri dan teks di kanan pada desktop, lalu gambar di atas teks pada mobile. Headline desktop 48–72 px, menengah 40–56 px, seluler 40–52 px; heading manfaat 28–44 px, isi 18 px desktop dan 16 px mobile. Pembesaran teks boleh menambah baris. Lebar konten maksimal 1080 px, dengan ruang kategori bergantian dan hanya kategori bergerak memakai bingkai tempurung biru. Urutan landing: hero, demo waktu, manfaat, cara pakai, kendali pengguna, penutup, footer.
 

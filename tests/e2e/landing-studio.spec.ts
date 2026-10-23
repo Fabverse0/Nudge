@@ -381,7 +381,7 @@ test("studio remains readable without JavaScript", async ({
   try {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Jeda dulu.",
+      "Pause first.",
     );
     await expect(page.locator(".hero-cta")).toHaveAttribute("href", "/app");
     await expect(
