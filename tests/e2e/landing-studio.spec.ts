@@ -121,6 +121,39 @@ test("all scene loops run in view and pause offscreen without resetting", async 
   );
 });
 
+test("expressions switch cleanly without overlapping faces", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  const scene = page.locator(".scene-hero");
+  await expect(scene).toHaveAttribute("data-running", "true");
+  const samples = await scene.evaluate((node) => {
+    const animations = node.getAnimations({ subtree: true });
+    animations.forEach((animation) => animation.pause());
+    return [0, 3000, 3300, 3400, 3600, 3800, 4000].map((time) => {
+      animations.forEach((animation) => {
+        animation.currentTime = time;
+      });
+      const open = getComputedStyle(node.querySelector(".rig-head")!);
+      const happy = getComputedStyle(node.querySelector(".rig-happy")!);
+      return {
+        open: Number(open.opacity),
+        happy: Number(happy.opacity),
+        openTransform: open.transform,
+        happyTransform: happy.transform,
+      };
+    });
+  });
+  for (const sample of samples) {
+    expect(sample.open + sample.happy).toBe(1);
+    expect([0, 1]).toContain(sample.open);
+    expect([0, 1]).toContain(sample.happy);
+    expect(sample.openTransform).toBe(sample.happyTransform);
+  }
+  expect(samples.some((sample) => sample.happy === 1)).toBe(true);
+});
+
 test("runtime reduced motion and hidden document halt all scene motion", async ({
   page,
 }) => {

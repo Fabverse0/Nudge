@@ -205,10 +205,14 @@
   animation: alive-breathe var(--cycle) ease-in-out infinite;
 }
 .nudge-alive .rig-head {
-  animation: alive-look var(--cycle) ease-in-out infinite;
+  animation:
+    alive-look var(--cycle) ease-in-out infinite,
+    alive-open-eyes var(--cycle) steps(1, end) infinite;
 }
 .nudge-alive .rig-happy {
-  animation: alive-smile var(--cycle) ease-in-out infinite;
+  animation:
+    alive-look var(--cycle) ease-in-out infinite,
+    alive-smile var(--cycle) steps(1, end) infinite;
 }
 .nudge-alive .scene-hero .rig-left,
 .nudge-alive .scene-move .rig-left {
@@ -331,6 +335,18 @@
   42%,
   46% {
     opacity: 1;
+  }
+}
+@keyframes alive-open-eyes {
+  0%,
+  38%,
+  49%,
+  100% {
+    opacity: 1;
+  }
+  42%,
+  46% {
+    opacity: 0;
   }
 }
 @keyframes alive-step-left {
