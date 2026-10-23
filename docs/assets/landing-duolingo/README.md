@@ -1,0 +1,12 @@
+# C1 first-step hero
+
+Created 23 October 2026 with the built-in ImageGen tool. Reference character: `public/brand/mascot/nudge-turtle-idle.png`. This is original Nudge artwork; Duolingo supplies layout inspiration only.
+
+- Master: `source.png`, transparent generated PNG, preserved without editing.
+- Production: `public/brand/landing/nudge-first-step.webp`, 1200 × 900, alpha preserved, 75,690 bytes.
+- Export: `node scripts/export-landing-hero.mjs <generated-source.png>` uses the installed Sharp runtime supplied with Next.js; quality 86, alpha quality 100, 150,000-byte budget enforced.
+- Visual inspection: C1's large sage dome, sand face, oval eyes and short feet match the reference; one front foot is raised. The phone is face down; journal/pencil and blue cubes support the activity story. No text or backdrop was generated. This is a static cutout, not articulated animation.
+
+## Exact prompt
+
+Create ONE production landing-page hero illustration on a genuinely transparent background. Strict character reference is the attached C1 turtle: very large smooth domed sage shell enveloping a warm sand face, teal oval eyes with little cream highlights, simple teal smiling mouth, four short chunky cream feet, no neck, no fingers. Keep exactly this simple original character identity, plush matte softly shaded 3D toy material, sage #679F9E shell and eyes, warm cream/sand #E6D4BE face/body, muted blue #7EADDB props. New EXPRESSION and ACTION: three-quarter C1 actively taking its first small step, one front foot lifted toward the viewer, body slightly leaning forward, cheerful attentive eyes and confident gentle smile. Entire turtle visible; head and shell dominate the composition. Story around it: a small muted-blue smartphone FACE DOWN left behind at lower left; an open cream journal with sage pencil at lower right, and two small tidy blue cubes farther right. Turtle is stepping between the phone and journal, not standing on the phone or book. Compose an OPEN slightly diagonal cluster, no enclosing circle, arch, card, platform or scene background. Props are small and secondary, with clear transparent gaps and generous outer safety margin. Landscape 4:3 composition with turtle centered and readable at mobile sizes. No text, writing, numbers, emblems, sparkles, hearts, badges, extra animals, clothing, human hands, gradients behind the subject, floor, or cast shadow rectangle. Soft lighting matching the reference. Isolated transparent cutout artwork, not a full webpage.
