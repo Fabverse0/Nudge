@@ -1,5 +1,6 @@
 """Create Nudge derivatives from the two licensed animation source archives."""
 import json
+import subprocess
 from pathlib import Path
 from zipfile import ZipFile
 
@@ -35,6 +36,10 @@ def recolor(value):
 for name in ('phone', 'diary'):
     with ZipFile(SOURCE / f'{name}-original.lottie') as archive:
         animation = json.loads(archive.read(next(n for n in archive.namelist() if n.startswith('animations/'))))
+    if name == 'phone':
+        (SOURCE / 'phone-source.json').write_text(json.dumps(animation, separators=(',', ':')), encoding='utf-8')
+        subprocess.run(['node', 'scripts/build-phone-story.mjs'], check=True)
+        continue
     recolor(animation)
     if name == 'phone':
         animation['layers'] = [layer for layer in animation['layers'] if layer.get('nm') != 'Hand' and layer.get('ind') not in (1, 2, 3)]
