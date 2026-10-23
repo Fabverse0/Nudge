@@ -80,7 +80,7 @@ export function AliveDuration() {
             : "Contoh ini memakai lima menit. Buka Nudge untuk memilih waktu kegiatanmu."}
         </p>
       </div>
-      <LandingScene kind="time" />
+      <LandingScene kind="time" minutes={minutes} />
     </section>
   );
 }
