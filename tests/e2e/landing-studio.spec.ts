@@ -143,7 +143,7 @@ test("landing review uses a clear check, step icons and stretching art", async (
     /small-steps%2Fstretch|small-steps\/stretch/,
   );
   await expect(page.locator('.closing [lang="en"]')).toContainText(
-    "Small steps. A fuller life.",
+    "Your next small step starts here.",
   );
   await expect(
     page
@@ -381,7 +381,7 @@ test("studio remains readable without JavaScript", async ({
   try {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Pause first.",
+      "Small steps.",
     );
     await expect(page.locator(".hero-cta")).toHaveAttribute("href", "/app");
     await expect(

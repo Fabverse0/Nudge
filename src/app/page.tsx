@@ -45,9 +45,9 @@ export default function HomePage() {
           </div>
           <div className="hero-copy">
             <h1 lang="en">
-              Pause first.
+              Small steps.
               <br />
-              <span>Start small.</span>
+              <span>A fuller life.</span>
             </h1>
             <p>Temukan kegiatan kecil yang pas dengan mood dan waktumu.</p>
             <Link href="/app" className="button primary hero-cta">
@@ -175,7 +175,7 @@ export default function HomePage() {
         <section className="closing content-width">
           <StepTrail className="closing-trail" />
           <div lang="en">
-            <h2 data-studio-motion="copy">Small steps. A fuller life.</h2>
+            <h2 data-studio-motion="copy">Your next small step starts here.</h2>
             <p data-studio-motion="copy" data-studio-delay="70">
               Make room for what matters, one small act at a time.
             </p>
