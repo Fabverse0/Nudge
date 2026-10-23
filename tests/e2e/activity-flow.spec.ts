@@ -278,6 +278,8 @@ test("layout has no horizontal overflow at 320, 768 and 1440", async ({
 test("keyboard choices work and every remaining screen has accessible controls", async ({
   page,
 }, testInfo) => {
+  // This scenario includes four Axe audits and two full-page captures.
+  test.setTimeout(90_000);
   // Audit settled colors; transition behavior has separate motion coverage.
   await page.emulateMedia({ reducedMotion: "reduce" });
   const errors: string[] = [];
