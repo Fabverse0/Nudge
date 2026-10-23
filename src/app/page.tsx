@@ -9,10 +9,12 @@ import { AliveMotion } from "@/components/landing/alive-motion";
 import { AliveDuration } from "@/components/landing/alive-duration";
 import { LandingScene } from "@/components/landing/landing-scene";
 import { StartActivityIcon } from "@/components/landing/start-activity-icon";
+import { HowStory } from "@/components/landing/how-story";
 import "@/components/landing/landing-alive.css";
 import "@/components/landing/alive-scenes.css";
 import "@/components/landing/time-story.css";
 import "@/components/landing/stretch-story.css";
+import "@/components/landing/how-story.css";
 
 export default function HomePage() {
   return (
@@ -80,20 +82,7 @@ export default function HomePage() {
           <LandingScene kind="phone" />
         </section>
         <AliveDuration />
-        <div className="alive-how" aria-label="Cara memakai Nudge">
-          <div>
-            <strong>Pilih.</strong>
-            <p>Tujuan, waktu, dan mood jika kamu mau.</p>
-          </div>
-          <div>
-            <strong>Coba.</strong>
-            <p>Satu saran. Boleh ganti kalau belum cocok.</p>
-          </div>
-          <div>
-            <strong>Jalani.</strong>
-            <p>Mulai timer. Kamu yang menentukan selesai.</p>
-          </div>
-        </div>
+        <HowStory />
         <section
           className="alive-section alive-move-section"
           aria-labelledby="move-title"

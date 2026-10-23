@@ -1,0 +1,161 @@
+.nudge-alive .how-story {
+  width: calc(100% - 64px);
+  max-width: 1120px;
+  margin: 0 auto 35px;
+  padding: 42px 40px 48px;
+  border-radius: 24px;
+  background: #e8f1ec;
+  color: var(--alive-ink);
+}
+.nudge-alive .how-story h2 {
+  margin: 0 0 26px;
+  text-align: center;
+  font-size: clamp(28px, 3vw, 32px);
+  font-weight: 900;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.nudge-alive .how-journey {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nudge-alive .how-journey li {
+  position: relative;
+  text-align: center;
+}
+.nudge-alive .how-journey li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -36px;
+  top: 80px;
+  width: 33px;
+  height: 15px;
+  border-top: 3px dashed #93b5b0;
+  border-radius: 50%;
+}
+.nudge-alive .how-journey svg {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto 16px;
+  overflow: visible;
+}
+.nudge-alive .how-journey h3 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+.nudge-alive .how-journey p {
+  max-width: 24ch;
+  margin: 0 auto;
+  color: #4c6e6c;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.nudge-alive .how-choice {
+  transform-origin: 198px 117px;
+  animation: how-choice 9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.nudge-alive .how-suggestion {
+  transform-origin: 130px 140px;
+  animation: how-suggestion 9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.nudge-alive .how-timer-hand {
+  transform-origin: 131px 94px;
+  animation: how-timer 9s cubic-bezier(0.45, 0, 0.22, 1) infinite;
+}
+.nudge-alive .how-story:not([data-running="true"]) * {
+  animation-play-state: paused;
+}
+@keyframes how-choice {
+  0%,
+  8%,
+  32%,
+  100% {
+    transform: scale(1);
+  }
+  18% {
+    transform: scale(1.16);
+  }
+  26% {
+    transform: scale(1);
+  }
+}
+@keyframes how-suggestion {
+  0%,
+  28%,
+  58%,
+  100% {
+    transform: rotate(0);
+  }
+  38% {
+    transform: rotate(-5deg) translateY(-5px);
+  }
+  49% {
+    transform: rotate(1deg);
+  }
+}
+@keyframes how-timer {
+  0%,
+  54% {
+    transform: rotate(-35deg);
+  }
+  76%,
+  90% {
+    transform: rotate(80deg);
+  }
+  100% {
+    transform: rotate(-35deg);
+  }
+}
+@media (max-width: 620px) {
+  .nudge-alive .how-story {
+    width: calc(100% - 32px);
+    padding: 30px 20px;
+    border-radius: 24px;
+  }
+  .nudge-alive .how-story h2 {
+    text-align: left;
+    margin-bottom: 24px;
+    max-width: 14ch;
+  }
+  .nudge-alive .how-journey {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .nudge-alive .how-journey li {
+    display: grid;
+    grid-template-columns: minmax(80px, 110px) minmax(0, 1fr);
+    gap: 14px;
+    align-items: center;
+    text-align: left;
+  }
+  .nudge-alive .how-journey svg {
+    margin: 0;
+  }
+  .nudge-alive .how-journey h3 {
+    font-size: 24px;
+  }
+  .nudge-alive .how-journey p {
+    margin: 0;
+    font-size: 16px;
+  }
+  .nudge-alive .how-journey li:not(:last-child)::after {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nudge-alive .how-story * {
+    animation: none !important;
+  }
+}
+@media (max-width: 360px) {
+  .nudge-alive .how-journey li {
+    grid-template-columns: 84px minmax(0, 1fr);
+  }
+}
