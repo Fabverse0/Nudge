@@ -12,6 +12,7 @@ import { StartActivityIcon } from "@/components/landing/start-activity-icon";
 import "@/components/landing/landing-alive.css";
 import "@/components/landing/alive-scenes.css";
 import "@/components/landing/time-story.css";
+import "@/components/landing/stretch-story.css";
 
 export default function HomePage() {
   return (

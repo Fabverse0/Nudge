@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { LandingAnimation } from "./landing-animation";
 import { TimeStory } from "./time-story";
+import { StretchStory } from "./stretch-story";
 
 export type LandingSceneKind =
   "hero" | "phone" | "time" | "move" | "tidy" | "journal" | "welcome";
@@ -9,81 +10,12 @@ const descriptions: Record<LandingSceneKind, string> = {
   phone:
     "Feed berwarna bergulir pada ponsel, berhenti pada Jeda sebentar, lalu buku dan tanaman muncul dari layar",
   time: "Jam, kartu durasi, dan adegan langkah, buku terbuka, atau susunan benda mengikuti pilihan waktu",
-  move: "Sepasang langkah bergantian menapak dan meninggalkan jejak di jalur kecil",
+  move: "Kura-kura Nudge meregangkan badan di atas alas, dengan ponsel diletakkan di samping",
   tidy: "Buku dan benda meja tersusun satu per satu ke tempatnya",
   journal:
     "Pena bergerak di atas jurnal terbuka, dengan catatan pendek yang muncul",
   welcome: "Kura-kura Nudge menyambut langkah kecilmu di samping daun dan buku",
 };
-
-function Steps() {
-  return (
-    <svg viewBox="0 0 520 430" className="object-scene" aria-hidden="true">
-      <path
-        d="M60 346C154 374 235 329 283 253s92-134 182-142"
-        className="walking-route"
-      />
-      {[0, 1, 2, 3].map((i) => (
-        <g
-          key={i}
-          className={`trail-print trail-${i}`}
-          transform={`translate(${105 + i * 78} ${327 - i * 57}) rotate(28)`}
-        >
-          <ellipse rx="11" ry="21" fill="#679F9E" />
-          <circle cy="-31" r="8" fill="#679F9E" />
-        </g>
-      ))}
-      <g className="walking-shoe shoe-left">
-        <g transform="translate(155 215) rotate(-24)">
-          <path
-            d="M-35-72c-7-26 21-46 45-30l28 52 47 24c22 11 15 38-8 39L-4 9C-28 7-36-4-35-25Z"
-            fill="#315F5E"
-          />
-          <path
-            d="M-35-25c24 14 45 13 76 6l41-4c10 14 3 35-15 36L-4 9C-28 7-36-4-35-25Z"
-            fill="#E6D4BE"
-          />
-          <path
-            d="m-1-52 24-9m-17 23 24-8"
-            stroke="#FAF8F4"
-            strokeWidth="8"
-            strokeLinecap="round"
-          />
-        </g>
-      </g>
-      <g className="walking-shoe shoe-right">
-        <g transform="translate(316 223) rotate(17)">
-          <path
-            d="M-35-72c-7-26 21-46 45-30l28 52 47 24c22 11 15 38-8 39L-4 9C-28 7-36-4-35-25Z"
-            fill="#7EADDB"
-          />
-          <path
-            d="M-35-25c24 14 45 13 76 6l41-4c10 14 3 35-15 36L-4 9C-28 7-36-4-35-25Z"
-            fill="#E6D4BE"
-          />
-          <path
-            d="m-1-52 24-9m-17 23 24-8"
-            stroke="#FAF8F4"
-            strokeWidth="8"
-            strokeLinecap="round"
-          />
-        </g>
-      </g>
-      <g transform="translate(405 315)">
-        <path
-          d="M0 34V-20"
-          stroke="#315F5E"
-          strokeWidth="7"
-          strokeLinecap="round"
-        />
-        <path
-          d="M0 0C-38 0-39-33-39-33 0-37 0 0 0 0Zm1-12c0-36 35-39 35-39 5 35-35 39-35 39Z"
-          fill="#679F9E"
-        />
-      </g>
-    </svg>
-  );
-}
 
 function Tidy() {
   return (
@@ -263,7 +195,7 @@ export function LandingScene({
       {kind === "phone" && <LandingAnimation name="phone" />}
       {kind === "journal" && <LandingAnimation name="diary" />}
       {kind === "time" && <TimeStory minutes={minutes} />}
-      {kind === "move" && <Steps />}
+      {kind === "move" && <StretchStory />}
       {kind === "tidy" && <Tidy />}
     </div>
   );
