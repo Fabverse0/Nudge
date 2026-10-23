@@ -10,6 +10,6 @@ Use of Files without attributing the creator(s) of the Files is permitted under 
 FILES ARE PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. EXCEPT TO THE EXTENT REQUIRED BY APPLICABLE LAW, IN NO EVENT WILL THE CREATOR(S) OF FILES OR DESIGN BARN, INC. BE LIABLE ON ANY LEGAL THEORY FOR ANY SPECIAL, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, OR EXEMPLARY DAMAGES ARISING OUT OF THIS LICENSE OR THE USE OF SUCH FILES.
 
 Source: https://lottiefiles.com/page/license
-phone.json: Scrolling Phone by Nafta R, recolored and hand removed for Nudge.
+phone.json: handset outline adapted from Scrolling Phone by Nafta R. Colorful feed, dimensional case, invitation, book, plant and story choreography created for Nudge. Outlined lettering uses Nunito under the accompanying SIL Open Font License.
 diary.json: Diary by Brian Karungani, recolored and affirmation removed for Nudge.
 Both derivatives and their SVG poster frames are distributed under the license above.
