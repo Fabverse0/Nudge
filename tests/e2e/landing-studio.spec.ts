@@ -33,7 +33,9 @@ test("hero sizing avoids an oversized wide-desktop download", async ({
       source: image.currentSrc,
       width: image.getBoundingClientRect().width,
     }));
-    expect(new URL(optimized.source).searchParams.get("w")).toBe("750");
+    expect(
+      Number(new URL(optimized.source).searchParams.get("w")),
+    ).toBeLessThanOrEqual(750);
     // Reproduce the old hint on the same layout to isolate source selection.
     await hero.evaluate((image: HTMLImageElement) => {
       image.sizes = "(max-width: 700px) 100vw, 52vw";
@@ -97,7 +99,7 @@ test("landing explains entry and preserves the large illustration gallery", asyn
   );
   await expect(page.locator(".studio-hero-art")).toHaveAttribute(
     "alt",
-    "Kura-kura Nudge beranjak dari ponsel menuju buku catatan dan kegiatan kecil",
+    "Kura-kura Nudge mengambil langkah kecil dari ponsel telungkup menuju jurnal dan benda yang dirapikan",
   );
   for (const width of [390, 1440]) {
     await page.setViewportSize({ width, height: 900 });

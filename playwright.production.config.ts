@@ -10,6 +10,7 @@ export default defineConfig({
     "app-polish.spec.ts",
     "reminder-polish.spec.ts",
     "small-steps-motion.spec.ts",
+    "landing-reference.spec.ts",
   ],
   testIgnore: [],
   use: {
