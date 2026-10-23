@@ -51,7 +51,7 @@
   gap: 30px;
 }
 .nudge-alive .alive-how-link {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   text-decoration: none;
   color: var(--alive-ink);
@@ -69,7 +69,7 @@
   border-radius: 16px;
   background: var(--alive-ink);
   color: var(--alive-canvas);
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.35;
   font-weight: 900;
   text-decoration: none;
@@ -128,14 +128,14 @@
   margin-bottom: 24px;
 }
 .nudge-alive .alive-copy p {
-  font-size: 19px;
+  font-size: 18px;
   line-height: 1.7;
   text-wrap: pretty;
 }
 .nudge-alive .alive-copy .alive-copy-soft {
   margin-top: 18px;
   color: #4c6e6c;
-  font-size: 17px;
+  font-size: 16px;
 }
 .nudge-alive .alive-hero {
   min-height: 620px;
@@ -166,7 +166,7 @@
   gap: 24px 60px;
   padding: 26px 24px;
   color: var(--alive-ink);
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 900;
   background: var(--alive-soft);
 }
@@ -206,7 +206,7 @@
   min-width: 0;
 }
 .nudge-alive .alive-time-picker legend {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   margin-bottom: 12px;
 }
@@ -236,7 +236,7 @@
   border-radius: 16px;
   background: var(--alive-canvas);
   font-weight: 900;
-  font-size: 29px;
+  font-size: 28px;
   line-height: 1;
   position: relative;
 }
@@ -269,12 +269,12 @@
   margin-bottom: 18px;
 }
 .nudge-alive .alive-example .alive-example-label {
-  font-size: 13px;
+  font-size: 14px;
   color: #4c6e6c;
   margin-bottom: 5px;
 }
 .nudge-alive .alive-example h3 {
-  font-size: 21px;
+  font-size: 20px;
   line-height: 1.35;
   margin-bottom: 8px;
   font-weight: 900;
@@ -304,7 +304,7 @@
   padding: 0 0 50px;
 }
 .nudge-alive .alive-how strong {
-  font-size: 27px;
+  font-size: 28px;
   color: var(--alive-ink);
   font-weight: 900;
 }
@@ -325,7 +325,7 @@
   border-radius: 36px;
 }
 .nudge-alive .alive-control h2 {
-  font-size: clamp(28px, 3vw, 38px);
+  font-size: clamp(28px, 3vw, 36px);
   line-height: 1.2;
   font-weight: 900;
   letter-spacing: -0.02em;
@@ -341,7 +341,7 @@
   display: flex;
   align-items: flex-start;
   gap: 13px;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.6;
 }
 .nudge-alive .alive-control-points svg {
@@ -362,13 +362,13 @@
 }
 .nudge-alive .alive-closing h2 {
   color: var(--alive-ink);
-  font-size: clamp(34px, 3.7vw, 45px);
+  font-size: clamp(34px, 3.7vw, 44px);
   line-height: 1.12;
   letter-spacing: -0.025em;
   font-weight: 900;
 }
 .nudge-alive .alive-closing p {
-  font-size: 17px;
+  font-size: 16px;
   line-height: 1.7;
   margin-top: 18px;
 }
@@ -390,12 +390,12 @@
 }
 .nudge-alive .alive-footer p {
   color: #4c6e6c;
-  font-size: 15px;
+  font-size: 14px;
 }
 .nudge-alive .alive-footer > a {
   margin-left: auto;
   color: var(--alive-ink);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 800;
   text-underline-offset: 4px;
 }
@@ -419,13 +419,13 @@
     min-height: 520px;
   }
   .nudge-alive .alive-copy h1 {
-    font-size: 49px;
+    font-size: 48px;
   }
   .nudge-alive .alive-copy h2 {
-    font-size: 35px;
+    font-size: 36px;
   }
   .nudge-alive .alive-copy p {
-    font-size: 17px;
+    font-size: 16px;
   }
   .nudge-alive .alive-control {
     padding: 36px;
@@ -438,7 +438,7 @@
     padding: 35px;
   }
   .nudge-alive .alive-closing h2 {
-    font-size: 33px;
+    font-size: 34px;
   }
 }
 @media (max-width: 700px) {
@@ -462,7 +462,7 @@
   }
   .nudge-alive .alive-header-cta {
     padding: 9px 13px 7px;
-    font-size: 12px;
+    font-size: 14px;
     min-height: 44px;
   }
   .nudge-alive .alive-section {
@@ -503,7 +503,7 @@
     margin-bottom: 18px;
   }
   .nudge-alive .alive-copy p {
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.65;
   }
   .nudge-alive .alive-hero-cta {
@@ -530,7 +530,7 @@
     max-width: 110px;
   }
   .nudge-alive .alive-copy .alive-note {
-    font-size: 13px;
+    font-size: 14px;
   }
   .nudge-alive .alive-how {
     grid-template-columns: 1fr;
@@ -550,7 +550,7 @@
   }
   .nudge-alive .alive-how p {
     margin: 0;
-    font-size: 15px;
+    font-size: 16px;
   }
   .nudge-alive .alive-control {
     width: calc(100% - 32px);
