@@ -10,6 +10,8 @@ Ini merupakan interpretasi C1 dalam bentuk 2D, bukan klaim animasi 3D atau hasil
 
 ## Koreografi
 
+Penyempurnaan setelah komentar pengguna: warna tempurung disatukan ke sage. Aksen pendek di atas tempurung muncul pada puncak regangan, dua garis tekanan di alas mengikuti jangkauan kaki depan, embusan napas memakai garis melengkung yang melebar lalu hilang, bayangan kontak mengikuti perpindahan berat, dan senyum sedikit membesar saat lega. Efek mengikuti siklus yang sama dan berhenti bersama lifecycle adegan. Preview `127.0.0.1` sempat menyajikan CSS lama; keyframe tambahan diverifikasi pada origin `localhost:3100` yang belum memiliki cache sebelumnya. Pemeriksaan ini tidak mengubah service worker atau aplikasi.
+
 Siklus 8,4 detik: diam, persiapan menurunkan badan, kaki depan menjangkau, kepala terangkat dan mata menyipit, embusan napas, lalu kembali santai. Kaki belakang dan alas menjadi tumpuan tetap. Kepala, torso, kaki depan dekat/jauh, dan ekspresi memakai kurva serta waktu yang terkoordinasi. Tidak ada perpindahan seluruh gambar melintasi layar. Dials mengikuti landing: ENERGY 3, RHYTHM 2, MOTION 3.
 
 `stretch-story.tsx` menyimpan bentuk, `stretch-story.css` menyimpan gerak. Lifecycle `AliveMotion` yang sudah ada mengendalikan `data-running`; aturan khusus menghentikan animasi tanpa status `true`. Reduced motion menampilkan pose kepala sedikit terangkat tanpa animasi. Tanpa JavaScript, SVG tetap terlihat dan diam. Deskripsi aksesibel berada di pembungkus scene; detail SVG disembunyikan dari pembaca layar.

@@ -59,6 +59,17 @@ export function StretchStory() {
           fill="#CBAF8B"
         />
       </g>
+      <g
+        className="stretch-effort"
+        fill="none"
+        stroke="#679F9E"
+        strokeWidth="5"
+        strokeLinecap="round"
+      >
+        <path d="m128 164-17-8" />
+        <path d="m141 143-10-18" />
+        <path d="m163 130-2-20" />
+      </g>
       <g className="stretch-torso">
         <path
           d="M141 261c8-58 55-95 114-91 60 4 88 62 66 121-28 41-163 29-180-30Z"
@@ -152,13 +163,23 @@ export function StretchStory() {
         <ellipse cx="375" cy="214" rx="8" ry="4" fill="#CBAF8B" opacity=".55" />
       </g>
       <g
+        className="stretch-paw-pressure"
+        fill="none"
+        stroke="#FAF8F4"
+        strokeWidth="3"
+        strokeLinecap="round"
+      >
+        <path d="M348 349q19 5 39-1" />
+        <path d="M342 358q26 7 52-1" />
+      </g>
+      <g
         className="stretch-exhale"
         fill="none"
         stroke="#679F9E"
         strokeWidth="4"
         strokeLinecap="round"
       >
-        <path d="M401 203q15-7 25-2m-22 13q19-1 29 7" />
+        <path d="M399 202c13-12 29-13 35-5 7 10-9 15-12 7m-18 11c14-2 31 4 34 13" />
       </g>
     </svg>
   );
