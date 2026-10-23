@@ -1,5 +1,7 @@
 # Landing Nudge: dari scrolling ke bergerak
 
+> Pendekatan rig tujuh adegan dalam dokumen ini digantikan oleh [revisi motion landing](./landing-motion-revision.md) setelah kritik pengguna. Hasil tes serta kritik di bawah merupakan catatan iterasi sebelumnya, bukan bukti kualitas animasi versi terbaru.
+
 Mode: Persuade. Taste dan Impeccable shape, animate, critique, polish digunakan bersama Anti Slop during. Keputusan pengguna mengunci komposisi Duolingo, palet Nudge, C1 3D lembut, properti vektor ekspresif, tujuh adegan, dan tidak mengubah aplikasi.
 
 ## Design Read

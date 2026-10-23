@@ -472,3 +472,11 @@ Skala desktop: display 68 px; heading bagian 48 px; penutup 44 px; judul kendali
 Warna utama: `#315F5E`, `#679F9E`, `#7EADDB`, `#E6D4BE`, `#FAF8F4`; teks `#17393B`, teks pendukung `#4C6E6C`, bidang sage pucat `#E8F1EC`. Turunan properti memakai `#6898C2`, `#5A8D8B`, `#CBAF8B`, `#F0E2CC`, `#F7ECD9`. Depth kontrol memakai tepi bawah gelap `#234948`; pilihan durasi memakai garis `#C9DCD7`, `#B5CECA`, `#93B5B0`. Radius kontrol 13–16 px, bidang kendali 28–36 px, dan penutup 48/24 px desktop atau 36/20 px mobile.
 
 Tepi bawah 4–6 px pada CTA, radio, dan kartu ilustrasi adalah kedalaman tekan yang diminta melalui referensi Duolingo, bukan border aksen dekoratif. Pertahankan ketika detector menandainya sebagai `border-accent-on-rounded`.
+
+### Revisi gerak landing setelah kritik pengguna
+
+Revisi ini menggantikan arahan rig tubuh terpisah pada tujuh adegan landing. Pengguna memilih campuran terarah: C1 3D di hero dan penutup, ilustrasi benda pada bagian cerita, aset gratis, tanpa karakter manusia. C1 memakai potret utuh yang berbeda pada hero dan penutup, dengan gerak kecil. Tidak mengklaim potret tersebut sebagai animasi karakter 3D penuh.
+
+Ponsel memakai adaptasi Scrolling Phone oleh Nafta R; jurnal memakai adaptasi Diary oleh Brian Karungani, dengan Lottie Simple License dan kredit pada footer. Tangan serta sisa garis gestur ponsel dihapus. Afirmasi jurnal diganti goresan netral. Lima adegan cerita tidak mengulang satu siluet kura-kura. Jam/tiket mengikuti durasi pengguna; sepatu dan benda meja memiliki gerak tersendiri.
+
+Aset, runtime, pengecualian Taste, serta bukti pemeriksaan dicatat pada [revisi motion landing](./docs/landing-motion-revision.md). Loop hanya berjalan saat terlihat, berhenti ketika tab tersembunyi, dan memiliki poster statis untuk reduced motion, tanpa JavaScript, atau kegagalan unduh. Batas aplikasi tetap berlaku.

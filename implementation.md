@@ -349,3 +349,9 @@ Polesan landing studio yang disetujui 22 Oktober 2026 telah diimplementasikan: s
 - [x] Tindakan publikasi dan Git dilakukan hanya dalam izin pengguna.
 
 **Langkah berikutnya:** sesuai pilihan pengguna pada 22 Oktober 2026, prioritaskan peninjauan desktop dan tunda Android. Walkthrough agen telah memeriksa transisi landing ke aplikasi, validasi pilihan, jeda melalui keyboard, penyelesaian/mood, persistensi favorit setelah reload, serta berhenti dan mengganti kegiatan. Rincian dan batas bukti ada di docs/manual-checks.md; walkthrough ini tidak menggantikan observasi peserta P8-04. Pengguna melaporkan percobaan zoom Chrome 200% berjalan baik tanpa error; pembaca layar P8-02 masih menunggu pemeriksaan. Instalasi/peluncuran ikon, notifikasi, dan perilaku perangkat Android untuk P6/P7 tetap terbuka. Aset C1 dan integrasi P2/P5 sudah tersedia. Seluruh rencana belum selesai selama bukti manual belum tersedia; lihat juga docs/verification.md. Hosting HTTPS belum dipilih atau dipublikasikan.
+
+## Revisi animasi landing setelah kritik pengguna, 23 Oktober 2026
+
+Selesai untuk lingkup landing: C1 tetap di hero/penutup, lima adegan cerita memakai benda yang berbeda. Dua sumber Lottie gratis diadaptasi, lisensi/kredit disertakan, serta pemutar dan poster lokal ditambahkan. Detail sumber dan batas kualitas ada di [revisi motion](./docs/landing-motion-revision.md).
+
+Bukti produksi: build webpack berhasil; 31 tes landing lulus, satu tes dua siklus mobile dilewati karena duplikasi pemeriksaan panjang desktop. Lifecycle mobile, reduced motion, pause offscreen/hidden, no-JS, kegagalan unduh, kontrol waktu, dan Axe tetap tercakup. Tidak ada perubahan source atau aset aplikasi; pemeriksaan Android fisik tetap terpisah dari pekerjaan ini. Commit kecil dibuat; push belum diminta untuk revisi ini.

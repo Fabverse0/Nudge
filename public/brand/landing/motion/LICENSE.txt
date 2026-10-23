@@ -12,4 +12,4 @@ FILES ARE PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED
 Source: https://lottiefiles.com/page/license
 phone.json: Scrolling Phone by Nafta R, recolored and hand removed for Nudge.
 diary.json: Diary by Brian Karungani, recolored and affirmation removed for Nudge.
-Both derivatives are distributed under the license above.
+Both derivatives and their SVG poster frames are distributed under the license above.

@@ -275,3 +275,12 @@ Peringatan hydration lain muncul ketika pengujian mengambil screenshot sebelum i
 - P8-02: pemeriksaan otomatis dan screenshot tersedia. Pada 22 Oktober 2026 pengguna melaporkan percobaan zoom Chrome 200% berjalan baik tanpa error; rincian layar dan versi browser belum tersedia. Pembaca layar nyata belum diperiksa. Lihat laporan pengguna di docs/manual-checks.md.
 - P8-04: pengguna melaporkan percobaan desktop berjalan lancar, tetapi tugas yang dicoba, lingkungan, serta hasil per langkah belum dicatat. Observasi tugas secara terstruktur belum dilakukan; tidak ada hasil tambahan yang boleh diisi dari simulasi agen.
 - P8-05 dan kesiapan rilis masih bergantung pada bukti manual tersebut. Status kode yang dapat ditinjau tidak menyatakan seluruh rencana selesai.
+
+## Revisi motion landing, 23 Oktober 2026
+
+- Produksi: `next build --webpack` berhasil dan HTTP 200 di port 3100.
+- Tes final `playwright.landing.config.ts`: 31 passed, 1 skipped, 2,1 menit. Pengulangan dua siklus hanya desktop; lifecycle mobile tetap diuji.
+- TypeScript, ESLint file landing/tes, serta pemeriksaan format file berubah dijalankan terpisah.
+- Tujuh cerita memiliki bentuk berbeda; hanya hero dan penutup memakai C1. Dua animasi Lottie diperiksa terus bergerak setelah lebih dari dua siklus, dengan fallback SVG dan pemuatan lokal.
+- Taste: source lint 0 FAIL/0 WARN; inspector final 0 FAIL/2 WARN setelah tiga pengecualian terdokumentasi, bukan kelulusan tanpa pengecualian. Rubric internal 7,2 dengan keterbatasan campuran gaya dan ruang terbuka.
+- Sumber/lisensi, pengecualian, screenshot, kritik visual, serta batas bukti lengkap ada di [revisi motion landing](./landing-motion-revision.md). Android fisik dan kualitas artistik menurut pengguna tidak disimpulkan dari tes otomatis.
