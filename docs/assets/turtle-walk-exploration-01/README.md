@@ -24,5 +24,5 @@ Kedua gambar baru dihasilkan untuk Nudge, bukan mengambil karakter dari rekaman 
 ## Gerbang berikutnya
 
 1. Pengguna memilih A atau B, atau meminta revisi gambar.
-2. Setelah gambar disetujui, unggah gambar terpilih ke Flow untuk satu percobaan 6 detik, Veo 3.1 Fast, x1, maksimal 20 kredit. Jika biaya atau model berubah, berhenti sebelum generasi dan laporkan.
+2. Pengguna memilih B dan mengunggahnya ke Flow. Setelah Flow melaporkan batas durasi, pengguna menyetujui satu percobaan 8 detik, Veo 3.1 Fast, 720p, x1, maksimal 20 kredit. Jika biaya atau model berubah, berhenti sebelum generasi dan laporkan.
 3. Pengguna meninjau hasil gerak sebelum integrasi landing. Jangan menganggap pilihan gambar sebagai persetujuan otomatis atas video yang belum dilihat.

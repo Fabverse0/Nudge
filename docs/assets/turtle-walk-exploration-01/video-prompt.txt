@@ -1,12 +1,12 @@
-DRAFT FOR THE APPROVED SINGLE TRIAL. NOT SUBMITTED.
-Model: Veo 3.1 Fast. One output. Duration: 6 seconds. Landscape 16:9. Maximum total: 20 existing Flow credits. No model substitution or additional generation without user approval.
+REVISED FOR THE APPROVED SINGLE TRIAL. FLOW CONFIRMATION ACCEPTED ONCE; REQUEST FAILED AT RECAPTCHA. NO OUTPUT OR CREDIT REDUCTION OBSERVED.
+Model: Veo 3.1 Fast. One output. Duration: 8 seconds. Resolution: 720p. Landscape 16:9. Maximum total: 20 existing Flow credits. No model substitution or additional generation without user approval.
 Use candidate-b-v2.png as the FIRST FRAME, not merely a loose style reference. Do not generate a new starting image.
 
 Animate the supplied scene as one continuous polished full-body 3D character shot. Locked low eye-level camera, no zoom, no cuts. Preserve the exact same C1 turtle, smooth sage shell, sand face, oval sage eyes, smile, four rounded legs, proportions and matte soft lighting. Preserve the phone at left, plant and pot at right, and the warm offwhite flat floor.
 
 0.0-0.8 seconds: the turtle looks toward the plant and subtly shifts its weight in preparation for a step.
-0.8-4.0 seconds: it takes two or three small deliberate steps to the right toward the plant, covering only the available floor gap. Feet alternately lift, swing forward and plant; the supporting foot remains fixed relative to the floor while the body advances. The low torso transfers weight naturally and the shell follows with restrained overlapping movement. The whole turtle moves, not a static image sliding across the frame.
-4.0-5.0 seconds: it gently decelerates, stops before touching the pot, and turns its head slightly toward the viewer with a warm small smile.
-5.0-6.0 seconds: hold the complete stable final pose.
+0.8-5.0 seconds: it takes two or three small deliberate steps to the right toward the plant, covering only the available floor gap. Feet alternately lift, swing forward and plant; the supporting foot remains fixed relative to the floor while the body advances. The low torso transfers weight naturally and the shell follows with restrained overlapping movement. The whole turtle moves, not a static image sliding across the frame.
+5.0-6.5 seconds: it gently decelerates, stops before touching the pot, and turns its head slightly toward the viewer with a warm small smile.
+6.5-8.0 seconds: hold the complete stable final pose.
 
 Keep the full character in frame. Natural grounded contact and coherent four-leg anatomy throughout, with far legs only occluded naturally by the body. No extra or missing limbs, shoes, human hands, flight, bouncing, floating feet, foot sliding, morphing face or shell, duplicate turtle, changing props, moving camera, lettering, speech, music or decorative particles. The phone and plant stay in place. Do not rewind the motion or force a seamless return to the first frame.
