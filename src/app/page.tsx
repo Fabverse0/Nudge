@@ -1,20 +1,18 @@
 import Link from "next/link";
-import {
-  BookmarkSimpleIcon,
-  HeartIcon,
-  BellSimpleIcon,
-} from "@phosphor-icons/react/dist/ssr";
 import { Brand } from "@/components/brand";
 import { AliveMotion } from "@/components/landing/alive-motion";
 import { AliveDuration } from "@/components/landing/alive-duration";
 import { LandingScene } from "@/components/landing/landing-scene";
 import { StartActivityIcon } from "@/components/landing/start-activity-icon";
 import { HowStory } from "@/components/landing/how-story";
+import { ControlStory } from "@/components/landing/control-story";
+import { activities } from "@/lib/activities/catalog";
 import "@/components/landing/landing-alive.css";
 import "@/components/landing/alive-scenes.css";
 import "@/components/landing/time-story.css";
 import "@/components/landing/stretch-story.css";
 import "@/components/landing/how-story.css";
+import "@/components/landing/control-story.css";
 
 export default function HomePage() {
   return (
@@ -137,25 +135,13 @@ export default function HomePage() {
             </p>
           </div>
         </section>
-        <section className="alive-control" aria-labelledby="control-title">
-          <h2 id="control-title">Kamu pegang kendalinya.</h2>
-          <div className="alive-control-points">
-            <p>
-              <HeartIcon size={26} weight="fill" aria-hidden="true" />
-              <span>
-                Boleh lewati mood, ganti kegiatan, atau berhenti dulu.
-              </span>
-            </p>
-            <p>
-              <BookmarkSimpleIcon size={26} weight="fill" aria-hidden="true" />
-              <span>Favorit tersimpan di perangkatmu. Tanpa akun.</span>
-            </p>
-            <p>
-              <BellSimpleIcon size={26} weight="fill" aria-hidden="true" />
-              <span>Pengingat hanya aktif kalau kamu memilihnya.</span>
-            </p>
-          </div>
-        </section>
+        <ControlStory
+          examples={activities
+            .filter(({ id }) =>
+              ["stretch-2", "desk-5", "journal-5"].includes(id),
+            )
+            .map(({ id, title, minutes }) => ({ id, title, minutes }))}
+        />
         <section className="alive-closing" aria-labelledby="closing-title">
           <LandingScene kind="welcome" />
           <div className="alive-closing-copy">

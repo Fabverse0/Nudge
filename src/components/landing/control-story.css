@@ -1,0 +1,242 @@
+.nudge-alive .control-story {
+  width: calc(100% - 64px);
+  max-width: 1120px;
+  margin: 65px auto 0;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  padding: 48px;
+  border-radius: 24px;
+  background: #e8f1ec;
+  color: var(--alive-ink);
+}
+.nudge-alive .control-story h2 {
+  margin: 0;
+  font-size: clamp(28px, 3.3vw, 40px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.nudge-alive .control-intro {
+  margin: 18px 0 24px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.nudge-alive .control-choices {
+  display: grid;
+  gap: 8px;
+}
+.nudge-alive .control-choices button {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 16px;
+  text-align: left;
+  color: #315f5e;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+.nudge-alive .control-choices button[aria-pressed="true"] {
+  background: #faf8f4;
+  border-color: #679f9e;
+}
+.nudge-alive .control-choices button:hover {
+  border-color: #679f9e;
+}
+.nudge-alive .control-choices button > svg {
+  flex-shrink: 0;
+}
+.nudge-alive .control-choices button strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.4;
+}
+.nudge-alive .control-choices button span span {
+  display: block;
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #506765;
+}
+.nudge-alive .control-playground {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+  background: #faf8f4;
+  border-radius: 24px;
+  text-align: center;
+  min-width: 0;
+}
+.nudge-alive .control-art {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 12px;
+  animation: control-art-in 550ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.nudge-alive .control-art > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.nudge-alive .control-art-symbol {
+  position: absolute;
+  right: 8%;
+  bottom: 14%;
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: #7eaddb;
+  color: #315f5e;
+  transform: rotate(9deg);
+}
+.nudge-alive .control-art-symbol[data-active="false"] {
+  background: #e6d4be;
+}
+.nudge-alive .control-demo-content {
+  min-height: 180px;
+  animation: control-copy-in 240ms ease-out both;
+}
+.nudge-alive .control-example-label {
+  margin: 0 0 12px;
+  font-size: 14px;
+  color: #506765;
+}
+.nudge-alive .control-demo-content h3 {
+  max-width: 20ch;
+  margin: 0 auto 24px;
+  min-height: 2.5em;
+  font-size: 24px;
+  line-height: 1.25;
+  font-weight: 900;
+  text-wrap: balance;
+}
+.nudge-alive .control-demo-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  max-width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #315f5e;
+  border-radius: 16px;
+  background: #315f5e;
+  color: #faf8f4;
+  font-weight: 800;
+  font-size: 16px;
+  cursor: pointer;
+}
+.nudge-alive .control-demo-action:hover {
+  background: #284f4e;
+}
+.nudge-alive .control-demo-action[aria-pressed="true"] {
+  background: #e8f1ec;
+  color: #315f5e;
+}
+.nudge-alive .control-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 4px;
+  border: 0;
+  background: transparent;
+  color: #315f5e;
+  font-weight: 800;
+  cursor: pointer;
+}
+.nudge-alive .control-switch-track {
+  display: block;
+  width: 58px;
+  padding: 4px;
+  border: 2px solid #6b8583;
+  border-radius: 9999px;
+  background: #e6d4be;
+  transition: background-color 200ms ease;
+}
+.nudge-alive .control-switch-track span {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #315f5e;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nudge-alive .control-switch[aria-checked="true"] .control-switch-track {
+  background: #679f9e;
+}
+.nudge-alive .control-switch[aria-checked="true"] .control-switch-track span {
+  transform: translateX(24px);
+  background: #faf8f4;
+}
+.nudge-alive .control-demo-note {
+  max-width: 32ch;
+  margin: 20px auto 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #506765;
+}
+.nudge-alive .control-story button:focus-visible {
+  outline: 3px solid #315f5e;
+  outline-offset: 4px;
+}
+@keyframes control-art-in {
+  from {
+    transform: scale(0.94) rotate(-4deg);
+  }
+  to {
+    transform: scale(1) rotate(0);
+  }
+}
+@keyframes control-copy-in {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 800px) {
+  .nudge-alive .control-story {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 28px;
+    width: calc(100% - 32px);
+  }
+  .nudge-alive .control-story h2 br {
+    display: none;
+  }
+  .nudge-alive .control-playground {
+    padding: 24px 16px;
+  }
+}
+@media (max-width: 360px) {
+  .nudge-alive .control-story {
+    padding: 20px 16px;
+  }
+  .nudge-alive .control-choices button {
+    padding: 12px;
+    gap: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nudge-alive .control-story *,
+  .nudge-alive .control-story *::before {
+    animation: none !important;
+    transition: none !important;
+  }
+}
