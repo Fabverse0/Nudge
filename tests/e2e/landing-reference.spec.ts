@@ -1,24 +1,38 @@
 import { expect, test } from "@playwright/test";
 import sharp from "sharp";
-import { stat } from "node:fs/promises";
+import { stat, readFile } from "node:fs/promises";
 
-test("new clay atlas exports have alpha and a bounded shared download", async () => {
+test("licensed derivatives are local vectors and C1 uses bounded alpha exports", async () => {
   let total = 0;
-  for (const name of [
-    "shell",
-    "head",
-    "happy",
-    "foot-left",
-    "foot-right",
-    "foot-back",
-  ]) {
-    const path = "public/brand/landing/alive/" + name + ".webp";
+  for (const name of ["phone", "diary"]) {
+    const path = `public/brand/landing/motion/${name}.json`;
+    const text = await readFile(path, "utf8");
+    const data = JSON.parse(text);
+    expect(data.fr).toBeGreaterThanOrEqual(30);
+    expect(data.layers.length).toBeGreaterThan(0);
+    expect(text).not.toMatch(/https?:|data:image|"nm":"Hand"|I am|worthy/);
+    total += (await stat(path)).size;
+    const poster = await sharp(
+      `public/brand/landing/motion/${name}.svg`,
+    ).metadata();
+    expect(poster.width).toBeGreaterThan(500);
+  }
+  expect(total).toBeLessThan(150000);
+  for (const name of ["idle", "wave"]) {
+    const path = `public/brand/landing/motion/c1-${name}.webp`;
     const metadata = await sharp(path).metadata();
     expect(metadata.hasAlpha).toBe(true);
-    expect(metadata.width).toBeLessThanOrEqual(600);
-    total += (await stat(path)).size;
+    expect(metadata.width).toBeLessThanOrEqual(800);
+    expect((await stat(path)).size).toBeLessThan(60000);
   }
-  expect(total).toBeLessThan(100000);
+  const diary = JSON.parse(
+    await readFile("public/brand/landing/motion/diary.json", "utf8"),
+  );
+  expect(
+    diary.layers.filter((layer: { nm: string }) =>
+      layer.nm.startsWith("Nudge neutral note"),
+    ),
+  ).toHaveLength(2);
 });
 
 test("hero art precedes copy on mobile and sits left on desktop", async ({

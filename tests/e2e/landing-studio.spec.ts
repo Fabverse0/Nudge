@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { mkdir } from "node:fs/promises";
 
-test("landing tells seven activity stories with decoded articulated artwork", async ({
+test("landing tells seven distinct stories with decoded artwork", async ({
   page,
 }) => {
   await page.goto("/");
@@ -20,7 +20,10 @@ test("landing tells seven activity stories with decoded articulated artwork", as
   for (const scene of await scenes.all()) {
     await scene.scrollIntoViewIfNeeded();
     await expect(scene).toHaveAttribute("aria-label", /.+/);
-    await expect(scene.locator(".rig-part")).toHaveCount(6);
+    const kind = await scene.getAttribute("data-alive-scene");
+    await expect(scene.locator(".c1-portrait")).toHaveCount(
+      kind === "hero" || kind === "welcome" ? 1 : 0,
+    );
     await expect
       .poll(() =>
         scene
@@ -45,6 +48,7 @@ test("native duration controls support keyboard and preserve every handoff", asy
 }) => {
   await page.goto("/");
   const five = page.getByRole("radio", { name: "5 menit", exact: true });
+  await expect(five).toBeEnabled();
   await expect(five).toBeChecked();
   await five.focus();
   await page.keyboard.press("ArrowRight");
@@ -60,6 +64,9 @@ test("native duration controls support keyboard and preserve every handoff", asy
     await page
       .getByRole("radio", { name: minutes + " menit", exact: true })
       .check();
+    await expect(page.locator(".scene-time svg text").first()).toHaveText(
+      String(minutes),
+    );
     await expect(
       page.getByRole("link", { name: "Lanjut ke Nudge" }),
     ).toHaveAttribute("href", "/app?minutes=" + minutes);
@@ -91,6 +98,16 @@ test("all scene loops run in view and pause offscreen without resetting", async 
     const scene = page.locator('[data-alive-scene="' + kind + '"]');
     await scene.scrollIntoViewIfNeeded();
     await expect(scene).toHaveAttribute("data-running", "true");
+    if (kind === "phone" || kind === "journal") {
+      const player = scene.locator("[data-motion-asset]");
+      await expect(player).toHaveAttribute("data-loaded", "true");
+      await expect(player).toHaveAttribute("data-playing", "true");
+      const before = await player.locator(".motion-canvas").innerHTML();
+      await expect
+        .poll(() => player.locator(".motion-canvas").innerHTML())
+        .not.toBe(before);
+      continue;
+    }
     const animations = await scene.evaluate((node) =>
       node.getAnimations({ subtree: true }).map((a) => ({
         duration: Number(a.effect!.getTiming().duration),
@@ -121,37 +138,36 @@ test("all scene loops run in view and pause offscreen without resetting", async 
   );
 });
 
-test("expressions switch cleanly without overlapping faces", async ({
+test("licensed players pause offscreen and leave visible static posters", async ({
   page,
 }) => {
-  await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
-  const scene = page.locator(".scene-hero");
-  await expect(scene).toHaveAttribute("data-running", "true");
-  const samples = await scene.evaluate((node) => {
-    const animations = node.getAnimations({ subtree: true });
-    animations.forEach((animation) => animation.pause());
-    return [0, 3000, 3300, 3400, 3600, 3800, 4000].map((time) => {
-      animations.forEach((animation) => {
-        animation.currentTime = time;
-      });
-      const open = getComputedStyle(node.querySelector(".rig-head")!);
-      const happy = getComputedStyle(node.querySelector(".rig-happy")!);
-      return {
-        open: Number(open.opacity),
-        happy: Number(happy.opacity),
-        openTransform: open.transform,
-        happyTransform: happy.transform,
-      };
+  const phone = page.locator(".scene-phone");
+  await phone.scrollIntoViewIfNeeded();
+  const player = phone.locator("[data-motion-asset]");
+  await expect(player).toHaveAttribute("data-loaded", "true");
+  await expect(player).toHaveAttribute("data-playing", "true");
+  await page.evaluate(() => {
+    Object.defineProperty(document, "hidden", {
+      configurable: true,
+      value: true,
     });
+    document.dispatchEvent(new Event("visibilitychange"));
   });
-  for (const sample of samples) {
-    expect(sample.open + sample.happy).toBe(1);
-    expect([0, 1]).toContain(sample.open);
-    expect([0, 1]).toContain(sample.happy);
-    expect(sample.openTransform).toBe(sample.happyTransform);
-  }
-  expect(samples.some((sample) => sample.happy === 1)).toBe(true);
+  await expect(player).toHaveAttribute("data-playing", "false");
+  await page.evaluate(() => {
+    Reflect.deleteProperty(document, "hidden");
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await expect(player).toHaveAttribute("data-playing", "true");
+  await page.locator(".scene-welcome").scrollIntoViewIfNeeded();
+  await expect(player).toHaveAttribute("data-playing", "false");
+  const stopped = await player.locator(".motion-canvas").innerHTML();
+  await page.waitForTimeout(250);
+  expect(await player.locator(".motion-canvas").innerHTML()).toBe(stopped);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(player.locator(".motion-poster")).toHaveCSS("opacity", "1");
+  await expect(player.locator(".motion-canvas")).toHaveCSS("opacity", "0");
 });
 
 test("runtime reduced motion and hidden document halt all scene motion", async ({
@@ -310,7 +326,7 @@ test("landing has no automated accessibility violations in static mode", async (
 test("failed illustration downloads leave the story and duration usable", async ({
   page,
 }) => {
-  await page.route("**/brand/landing/alive/*.webp", (route) =>
+  await page.route("**/brand/landing/motion/*.json", (route) =>
     route.abort("failed"),
   );
   await page.goto("/");
@@ -318,6 +334,22 @@ test("failed illustration downloads leave the story and duration usable", async 
     "Small steps.",
   );
   await expect(page.locator(".alive-hero-cta")).toHaveAttribute("href", "/app");
+  for (const kind of ["phone", "journal"]) {
+    const scene = page.locator(`.scene-${kind}`);
+    await scene.scrollIntoViewIfNeeded();
+    await expect(scene.locator(".motion-poster")).toHaveCSS("opacity", "1");
+    await expect(scene.locator(".motion-canvas")).toHaveCSS("opacity", "0");
+    await expect
+      .poll(() =>
+        scene
+          .locator("img")
+          .evaluate(
+            (image: HTMLImageElement) =>
+              image.complete && image.naturalWidth > 0,
+          ),
+      )
+      .toBe(true);
+  }
   await page.getByRole("radio", { name: "2 menit", exact: true }).check();
   await expect(
     page.getByRole("link", { name: "Lanjut ke Nudge" }),
