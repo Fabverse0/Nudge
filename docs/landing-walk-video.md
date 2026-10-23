@@ -9,7 +9,8 @@ Dua komposisi gambar disiapkan sebelum video. Pilihan pengguna atas gambar dan p
 ## Status 24 Oktober 2026
 
 - Dua kandidat v2 dibuat dan disimpan; versi awal juga dipertahankan. Pengguna memilih kandidat B v2 untuk gambar awal.
-- Veo 3.1 Fast dipilih pada setelan project dengan output video x1. Percobaan unggah kandidat B gagal sebelum file dikirim karena ekstensi Chrome belum memiliki izin file URL. Tidak ada perubahan izin ekstensi yang dilakukan.
+- Veo 3.1 Fast dipilih pada setelan project dengan output video x1. Pengguna telah mengunggah gambar B secara manual; gambar diperiksa secara visual dan dilampirkan ke perintah Flow. Tidak ada perubahan izin ekstensi yang dilakukan.
+- Permintaan usulan dikirim dengan batas 6 detik dan 20 kredit, tanpa generasi otomatis. Respons agen Flow menyatakan Veo 3.1 Fast I2V hanya mendukung 8 detik pada 720p seharga 20 kredit di tier akun ini. Respons yang sama menawarkan Omni 1.1 Flash I2V 6 detik pada 720p seharga 10 kredit. Ini merupakan informasi dari agen Flow, belum konfirmasi biaya akhir generasi. Perubahan durasi/model menunggu keputusan pengguna.
 - Flow telah diperiksa sebelumnya: akun menampilkan PLUS dan 250 kredit saat pemeriksaan, dengan Veo 3.1 Fast dalam daftar. Saldo dan biaya wajib diperiksa ulang saat eksekusi.
 - Generasi video: belum dilakukan. Kredit Flow yang dipakai untuk pekerjaan ini: 0.
 - Integrasi landing, optimasi video, pemeriksaan runtime video, dan penerimaan pengguna: belum dilakukan.
@@ -17,7 +18,7 @@ Dua komposisi gambar disiapkan sebelum video. Pilihan pengguna atas gambar dan p
 
 ## Langkah setelah pilihan gambar
 
-Selesaikan izin unggah Chrome melalui pengguna, atau pengguna mengunggah `candidate-b-v2.png` secara manual pada project Flow yang sudah terbuka. Draft instruksi ada di `docs/assets/turtle-walk-exploration-01/video-prompt.txt`; instruksi tersebut belum dikirim ke Flow. Periksa kembali dukungan gambar awal, durasi, dan total biaya sebelum menekan generasi.
+Tunggu keputusan pengguna atas perbedaan durasi/model yang dilaporkan Flow. Draft instruksi ada di `docs/assets/turtle-walk-exploration-01/video-prompt.txt`; versi permintaan dengan isi adegan yang sama sudah dikirim untuk meminta usulan dan konfirmasi, bukan menjalankan generasi. Periksa dukungan gambar awal, durasi, dan total biaya pada konfirmasi akhir sebelum menekan generasi.
 
 Tinjau rekaman gerak sumber agar prompt menekankan pijakan dan perpindahan berat. Gunakan gambar awal yang dipilih, durasi 6 detik, Veo 3.1 Fast, satu hasil, maksimal 20 kredit tanpa pembelian. Target: melihat tujuan selama 0–0,8 detik, berjalan hingga detik 4, melambat dan menoleh pada detik 4–5, lalu menahan pose hingga detik 6. Jika pengaturan tidak mendukung kombinasi ini, laporkan sebelum mengganti pendekatan atau memakai kredit.
 
