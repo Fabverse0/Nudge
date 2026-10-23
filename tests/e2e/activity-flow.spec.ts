@@ -56,6 +56,8 @@ test("optional mood, validation, pause, elapsed and explicit completion", async 
   await choose(page);
   await page.getByRole("button", { name: "Cocok", exact: true }).click();
   await expect(page.getByRole("timer")).toHaveCount(0);
+  // Freeze the start time before asserting exact seconds under browser load.
+  await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
   await page.getByRole("button", { name: "Mulai kegiatan" }).click();
   await expect(page.getByRole("timer")).toHaveText("02:00");
   await page.clock.fastForward(20_000);
@@ -276,6 +278,8 @@ test("layout has no horizontal overflow at 320, 768 and 1440", async ({
 test("keyboard choices work and every remaining screen has accessible controls", async ({
   page,
 }, testInfo) => {
+  // Audit settled colors; transition behavior has separate motion coverage.
+  await page.emulateMedia({ reducedMotion: "reduce" });
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   page.on("console", (message) => {
