@@ -187,6 +187,9 @@ export default function HomePage() {
         <Brand />
         <p>Teman untuk satu langkah kecil.</p>
         <Link href="/app">Masuk ke kegiatan</Link>
+        <a className="alive-art-credits" href="/brand/landing/motion/credits.html">
+          Kredit animasi
+        </a>
       </footer>
     </AliveMotion>
   );
