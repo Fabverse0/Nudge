@@ -1,417 +1,286 @@
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
+import { mkdir } from "node:fs/promises";
 
-async function activate(page: import("@playwright/test").Page) {
-  await page.getByRole("radio", { name: "2 menit", exact: true }).check();
-  await expect(
-    page.getByRole("heading", { name: "Kembalikan lima benda" }),
-  ).toBeVisible();
-}
-
-test("hero sizing avoids an oversized wide-desktop download", async ({
-  browser,
-  baseURL,
-}, testInfo) => {
-  const context = await browser.newContext({
-    baseURL,
-    viewport: { width: 1920, height: 900 },
-    deviceScaleFactor: 1,
-    reducedMotion: "reduce",
-  });
-  const page = await context.newPage();
-  try {
-    await page.goto("/");
-    const hero = page.locator(".studio-hero-art");
-    await expect
-      .poll(() =>
-        hero.evaluate(
-          (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
-        ),
-      )
-      .toBe(true);
-    const optimized = await hero.evaluate((image: HTMLImageElement) => ({
-      source: image.currentSrc,
-      width: image.getBoundingClientRect().width,
-    }));
-    expect(
-      Number(new URL(optimized.source).searchParams.get("w")),
-    ).toBeLessThanOrEqual(750);
-    // Reproduce the old hint on the same layout to isolate source selection.
-    await hero.evaluate((image: HTMLImageElement) => {
-      image.sizes = "(max-width: 700px) 100vw, 52vw";
-    });
-    await expect
-      .poll(() =>
-        hero.evaluate(
-          (image: HTMLImageElement) =>
-            image.complete && image.currentSrc.includes("w=1080&"),
-        ),
-      )
-      .toBe(true);
-    const measurements = await page.evaluate((optimized) => {
-      const image =
-        document.querySelector<HTMLImageElement>(".studio-hero-art")!;
-      const bytes = (source: string) =>
-        (
-          performance
-            .getEntriesByName(source)
-            .at(-1) as PerformanceResourceTiming
-        )?.encodedBodySize;
-      return {
-        viewport: innerWidth,
-        dpr: devicePixelRatio,
-        renderedWidth: optimized.width,
-        optimized: { source: optimized.source, bytes: bytes(optimized.source) },
-        previous: { source: image.currentSrc, bytes: bytes(image.currentSrc) },
-      };
-    }, optimized);
-    expect(measurements.optimized.bytes).toBeGreaterThan(0);
-    expect(measurements.optimized.bytes).toBeLessThan(
-      measurements.previous.bytes,
-    );
-    await testInfo.attach("hero-image-measurement", {
-      body: JSON.stringify(measurements, null, 2),
-      contentType: "application/json",
-    });
-    console.log(JSON.stringify(measurements));
-  } finally {
-    await context.close();
-  }
-});
-
-test("landing explains entry and preserves the large illustration gallery", async ({
+test("landing tells seven activity stories with decoded articulated artwork", async ({
   page,
 }) => {
   await page.goto("/");
-  await activate(page);
-  const entries = page.getByRole("link", {
-    name: "Mulai kegiatan",
-    exact: true,
-  });
-  await expect(entries).toHaveCount(5);
-  for (const entry of await entries.all())
-    await expect(entry).toHaveAttribute("href", "/app");
-  await expect(page.locator(".hero-footnote")).toHaveText(
-    "Tanpa akun. Dua menit juga boleh.",
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "Small steps.A fuller life.",
   );
-  await expect(page.locator(".studio-preview-note")).toHaveText(
-    "Ini contoh kegiatan. Pilihan waktumu dibawa ke Nudge; kamu memilih tujuan di sana.",
-  );
-  await expect(page.locator(".studio-hero-art")).toHaveAttribute(
-    "alt",
-    "Kura-kura Nudge mengambil langkah kecil dari ponsel telungkup menuju jurnal dan benda yang dirapikan",
-  );
-  for (const width of [390, 1440]) {
-    await page.setViewportSize({ width, height: 900 });
-    for (const image of await page.locator(".category-illustration").all()) {
-      await image.scrollIntoViewIfNeeded();
-      await expect
-        .poll(() =>
-          image.evaluate(
-            (element: HTMLImageElement) =>
-              element.complete && element.naturalWidth > 0,
-          ),
-        )
-        .toBe(true);
-      const bounds = await image.boundingBox();
-      expect(bounds?.width).toBeGreaterThanOrEqual(width === 390 ? 260 : 310);
-      expect(bounds!.height / bounds!.width).toBeGreaterThan(0.95);
-      expect(bounds!.height / bounds!.width).toBeLessThan(1.05);
-    }
-  }
-});
-
-test("landing review uses a clear check, step icons and stretching art", async ({
-  page,
-}) => {
-  await page.goto("/");
-  await activate(page);
-  const selected = page
-    .locator(".demo-duration label")
-    .filter({ has: page.getByRole("radio", { name: "2 menit", exact: true }) });
-  await expect(selected.locator(".demo-selection")).toBeVisible();
+  await expect(page.locator("h1")).toHaveAttribute("lang", "en");
+  const scenes = page.locator("[data-alive-scene]");
+  await expect(scenes).toHaveCount(7);
   expect(
-    await selected
-      .locator(".demo-selection")
-      .evaluate((element) =>
-        Number.parseFloat(getComputedStyle(element).width),
-      ),
-  ).toBe(24);
-  await expect(page.locator(".start-activity-icon")).toHaveCount(2);
-  await expect(page.locator(".studio-category-move img")).toHaveAttribute(
-    "src",
-    /small-steps%2Fstretch|small-steps\/stretch/,
-  );
-  await expect(page.locator('.closing [lang="en"]')).toContainText(
-    "Your next small step starts here.",
-  );
+    await scenes.evaluateAll((nodes) =>
+      nodes.map((node) => node.getAttribute("data-alive-scene")),
+    ),
+  ).toEqual(["hero", "phone", "time", "move", "tidy", "journal", "welcome"]);
+  for (const scene of await scenes.all()) {
+    await scene.scrollIntoViewIfNeeded();
+    await expect(scene).toHaveAttribute("aria-label", /.+/);
+    await expect(scene.locator(".rig-part")).toHaveCount(6);
+    await expect
+      .poll(() =>
+        scene
+          .locator("img")
+          .evaluateAll((images: HTMLImageElement[]) =>
+            images.every((image) => image.complete && image.naturalWidth > 0),
+          ),
+      )
+      .toBe(true);
+    await expect(scene).toHaveCSS("pointer-events", "none");
+  }
   await expect(
-    page
-      .locator(".closing")
-      .getByRole("link", { name: "Mulai kegiatan", exact: true }),
-  ).toHaveAttribute("href", "/app");
+    page.getByText("Tulisanmu tetap milikmu. Nudge tidak menyimpannya."),
+  ).toBeVisible();
+  await expect(page.locator(".alive-closing [lang=en]")).toContainText(
+    "Your next small step",
+  );
 });
 
-test("studio duration supports keyboard, rapid changes and the real app route", async ({
+test("native duration controls support keyboard and preserve every handoff", async ({
   page,
 }) => {
-  const errors: string[] = [];
-  page.on("pageerror", (error) => errors.push(error.message));
-  page.on("console", (message) => {
-    if (message.type() === "error") errors.push(message.text());
-  });
   await page.goto("/");
+  const five = page.getByRole("radio", { name: "5 menit", exact: true });
+  await expect(five).toBeChecked();
+  await five.focus();
+  await page.keyboard.press("ArrowRight");
   await expect(
-    page.getByRole("radio", { name: "5 menit", exact: true }),
+    page.getByRole("radio", { name: "10 menit", exact: true }),
   ).toBeChecked();
-  await activate(page);
-  await page
-    .getByRole("radio", { name: "2 menit", exact: true })
-    .press("ArrowRight");
   await expect(
-    page.getByRole("radio", { name: "5 menit", exact: true }),
-  ).toBeChecked();
-  for (const minutes of [10, 2, 5, 2, 10]) {
+    page.getByRole("link", { name: "Lanjut ke Nudge" }),
+  ).toHaveAttribute("href", "/app?minutes=10");
+  await page.keyboard.press("ArrowLeft");
+  await expect(five).toBeChecked();
+  for (const minutes of [2, 10, 5, 2]) {
     await page
-      .getByRole("radio", { name: `${minutes} menit`, exact: true })
+      .getByRole("radio", { name: minutes + " menit", exact: true })
       .check();
     await expect(
-      page.getByRole("link", { name: "Lanjut ke Nudge", exact: true }),
-    ).toHaveAttribute("href", `/app?minutes=${minutes}`);
+      page.getByRole("link", { name: "Lanjut ke Nudge" }),
+    ).toHaveAttribute("href", "/app?minutes=" + minutes);
   }
-  await expect(
-    page.getByRole("heading", { name: "Jeda tanpa layar" }),
-  ).toBeVisible();
-  await page
-    .getByRole("link", { name: "Lanjut ke Nudge", exact: true })
-    .click();
-  await expect(
-    page.getByRole("heading", { name: "Mau mulai dari apa?" }),
-  ).toBeVisible();
-  await expect(
-    page.getByText("Langkah 1 dari 3", { exact: true }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("radio", { name: "10 menit", exact: true }),
-  ).toHaveCount(0);
-  await page.getByRole("button", { name: "Lewati", exact: true }).click();
-  await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
-  await page.getByRole("button", { name: "Lanjut", exact: true }).click();
-  await expect(
-    page.getByRole("radio", { name: "10 menit", exact: true }),
-  ).toBeChecked();
-  await expect(page.getByRole("timer")).toHaveCount(0);
-  expect(errors).toEqual([]);
-});
-
-test("studio images and text reflow at five widths", async ({
-  page,
-}, testInfo) => {
-  test.setTimeout(90_000);
-  await page.goto("/");
-  await activate(page);
-  for (const width of [320, 390, 710, 768, 1440]) {
-    await page.setViewportSize({ width, height: 900 });
-    await expect
-      .poll(() =>
-        page
-          .locator(".studio-hero-art")
-          .evaluate(
-            (image: HTMLImageElement) =>
-              image.complete && image.naturalWidth > 0,
-          ),
-      )
-      .toBe(true);
-    for (const image of await page.locator(".studio-category img").all()) {
-      await image.scrollIntoViewIfNeeded();
-      await expect
-        .poll(() =>
-          image.evaluate(
-            (element: HTMLImageElement) =>
-              element.complete && element.naturalWidth > 0,
-          ),
-        )
-        .toBe(true);
-    }
-    await expect
-      .poll(() =>
-        page.evaluate(() => document.documentElement.scrollWidth <= innerWidth),
-      )
-      .toBe(true);
-    const layout = await page.evaluate(() => ({
-      heroLoaded: [
-        ...document.querySelectorAll<HTMLImageElement>(".studio-hero-art"),
-      ].every((image) => image.complete && image.naturalWidth > 0),
-      illustrationWidths: [
-        ...document.querySelectorAll(".category-illustration"),
-      ].map((element) => element.getBoundingClientRect().width),
-      clippedText: [
-        ...document.querySelectorAll(
-          ".landing h1, .landing h2, .landing h3, .landing p, .landing a",
-        ),
-      ]
-        .filter((element) => {
-          const bounds = element.getBoundingClientRect();
-          return (
-            bounds.left < -1 ||
-            bounds.right > innerWidth + 1 ||
-            element.scrollWidth > element.clientWidth + 1
-          );
-        })
-        .map((element) => element.textContent),
-    }));
-    expect(layout.heroLoaded).toBe(true);
-    expect(layout.illustrationWidths.every((size) => size >= 240)).toBe(true);
-    expect(layout.clippedText).toEqual([]);
-    await page.getByRole("heading", { level: 1 }).scrollIntoViewIfNeeded();
-    await page.screenshot({
-      path: `.impeccable/review/studio-${width}-${testInfo.project.name}.png`,
-      fullPage: true,
-      animations: "disabled",
-    });
-  }
-});
-
-test("studio reflows enlarged text on a narrow screen", async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.setViewportSize({ width: 320, height: 900 });
-  await page.goto("/");
-  await activate(page);
-  await page.evaluate(() => {
-    document.documentElement.style.fontSize = "200%";
-  });
-  const failures = await page.evaluate(() =>
-    [
-      ...document.querySelectorAll(
-        ".landing h1, .landing h2, .landing h3, .landing p, .landing a, .flow-word, .demo-duration label > span",
-      ),
-    ]
-      .filter((element) => {
-        const rect = element.getBoundingClientRect();
-        return (
-          rect.left < -1 ||
-          rect.right > innerWidth + 1 ||
-          element.scrollWidth > element.clientWidth + 1
-        );
-      })
-      .map((element) => element.textContent),
+  await expect(page.locator(".alive-hero-cta")).toHaveAttribute("href", "/app");
+  await expect(page.locator(".alive-closing .alive-button")).toHaveAttribute(
+    "href",
+    "/app",
   );
-  expect(failures).toEqual([]);
+  await expect(
+    page.getByText("Tanpa akun. Dua menit juga boleh."),
+  ).toBeVisible();
+});
+
+test("all scene loops run in view and pause offscreen without resetting", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  for (const kind of [
+    "hero",
+    "phone",
+    "time",
+    "move",
+    "tidy",
+    "journal",
+    "welcome",
+  ]) {
+    const scene = page.locator('[data-alive-scene="' + kind + '"]');
+    await scene.scrollIntoViewIfNeeded();
+    await expect(scene).toHaveAttribute("data-running", "true");
+    const animations = await scene.evaluate((node) =>
+      node.getAnimations({ subtree: true }).map((a) => ({
+        duration: Number(a.effect!.getTiming().duration),
+        infinite: a.effect!.getTiming().iterations === Infinity,
+        state: a.playState,
+      })),
+    );
+    expect(animations.some((a) => a.infinite && a.state === "running")).toBe(
+      true,
+    );
+    expect(
+      animations.every((a) => a.duration >= 6000 && a.duration <= 10000),
+    ).toBe(true);
+  }
+  const hero = page.locator(".scene-hero");
+  await expect(hero).toHaveAttribute("data-running", "false");
   expect(
-    await page.evaluate(
-      () => document.documentElement.scrollWidth <= innerWidth,
+    await hero.evaluate((node) =>
+      node
+        .getAnimations({ subtree: true })
+        .every((a) => a.playState === "paused"),
     ),
   ).toBe(true);
+  await hero.scrollIntoViewIfNeeded();
+  await expect(hero).toHaveAttribute("data-running", "true");
+  await expect(page.getByRole("button", { name: /jeda|pause/i })).toHaveCount(
+    0,
+  );
 });
 
-test("studio motion runs once and honors a live reduced-motion change", async ({
+test("runtime reduced motion and hidden document halt all scene motion", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.addInitScript(() => {
-    const calls: string[] = [];
-    Object.defineProperty(window, "studioMotionCalls", { value: calls });
-    document.addEventListener("animationstart", (event) => {
-      if (event.target instanceof Element)
-        calls.push(event.target.className.toString());
-    });
-    const animate = Element.prototype.animate;
-    Element.prototype.animate = function (...args) {
-      calls.push(this.className.toString());
-      return animate.apply(this, args);
-    };
-  });
-  const calls = () =>
-    page.evaluate(
-      () =>
-        (window as unknown as { studioMotionCalls: string[] })
-          .studioMotionCalls,
-    );
   await page.goto("/");
-  await activate(page);
-  await expect
-    .poll(
-      async () =>
-        (await calls()).filter((name) => name.includes("studio-hero-art"))
-          .length,
-    )
-    .toBe(1);
-  await page.locator(".studio-category-journal").scrollIntoViewIfNeeded();
-  await expect
-    .poll(
-      async () =>
-        (await calls()).filter((name) => name.includes("studio-art-frame"))
-          .length,
-    )
-    .toBeGreaterThan(0);
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect
-    .poll(() =>
-      page.evaluate(
-        () =>
-          document
-            .getAnimations()
-            .filter((animation) => animation.playState === "running").length,
-      ),
-    )
-    .toBe(0);
-  const reducedCalls = (await calls()).length;
-  await page.getByRole("radio", { name: "10 menit", exact: true }).check();
-  await expect(
-    page.getByRole("heading", { name: "Jeda tanpa layar" }),
-  ).toBeVisible();
-  expect((await calls()).length).toBe(reducedCalls);
-  await page.emulateMedia({ reducedMotion: "no-preference" });
-  await page.getByRole("heading", { level: 1 }).scrollIntoViewIfNeeded();
+  const hero = page.locator(".scene-hero");
+  await expect(hero).toHaveAttribute("data-running", "true");
+  await page.evaluate(() => {
+    Object.defineProperty(document, "hidden", {
+      configurable: true,
+      value: true,
+    });
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await expect(hero).toHaveAttribute("data-running", "false");
   expect(
-    (await calls()).filter((name) => name.includes("studio-hero-art")),
-  ).toHaveLength(1);
+    await hero.evaluate((node) =>
+      node
+        .getAnimations({ subtree: true })
+        .every((a) => a.playState === "paused"),
+    ),
+  ).toBe(true);
+  await page.evaluate(() => {
+    Reflect.deleteProperty(document, "hidden");
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await expect(hero).toHaveAttribute("data-running", "true");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(hero).toHaveAttribute("data-running", "false");
+  expect(
+    await page
+      .locator(".nudge-alive")
+      .evaluate((node) => node.getAnimations({ subtree: true }).length),
+  ).toBe(0);
+  await page.getByRole("radio", { name: "2 menit", exact: true }).check();
+  await expect(
+    page.getByRole("link", { name: "Lanjut ke Nudge" }),
+  ).toHaveAttribute("href", "/app?minutes=2");
 });
 
-test("studio remains readable without JavaScript", async ({
-  browser,
-  baseURL,
-}) => {
-  const context = await browser.newContext({
-    baseURL,
-    javaScriptEnabled: false,
-    viewport: { width: 390, height: 844 },
-  });
-  const page = await context.newPage();
-  try {
-    await page.goto("/");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Small steps.",
-    );
-    await expect(page.locator(".hero-cta")).toHaveAttribute("href", "/app");
-    await expect(
-      page.getByText("Contoh ini memakai lima menit.", { exact: false }),
-    ).toBeVisible();
-    await expect(
-      page.getByRole("radio", { name: "2 menit", exact: true }),
-    ).toBeDisabled();
-    await expect(
-      page.getByRole("link", { name: "Lanjut ke Nudge", exact: true }),
-    ).toHaveAttribute("href", "/app?minutes=5");
-    await expect(
-      page.getByRole("heading", { name: "Refleksi dan jeda" }),
-    ).toBeVisible();
+test("landing reflows at five widths with visible controls and intact scenes", async ({
+  page,
+}, testInfo) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await mkdir(".impeccable/review", { recursive: true });
+  for (const width of [320, 390, 710, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.getByRole("heading", { level: 1 }).scrollIntoViewIfNeeded();
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
       ),
     ).toBe(true);
+    const h1 = page.locator("h1");
+    const lines = await h1.evaluate(
+      (node) =>
+        node.getBoundingClientRect().height /
+        parseFloat(getComputedStyle(node).lineHeight),
+    );
+    expect(lines).toBeLessThanOrEqual(2.1);
+    for (const node of await page
+      .locator(".alive-scene,.alive-time-options,.alive-closing")
+      .all()) {
+      const box = await node.boundingBox();
+      expect(box!.x).toBeGreaterThanOrEqual(-1);
+      expect(box!.x + box!.width).toBeLessThanOrEqual(width + 1);
+    }
+    await page.screenshot({
+      path:
+        ".impeccable/review/alive-" +
+        width +
+        "-" +
+        testInfo.project.name +
+        ".png",
+      fullPage: true,
+    });
+  }
+});
+
+test("landing supports enlarged text on a narrow screen", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  await page.addStyleTag({
+    content:
+      ".nudge-alive h1,.nudge-alive h2,.nudge-alive h3,.nudge-alive p,.nudge-alive a,.nudge-alive legend,.nudge-alive strong,.alive-time-options span,.alive-time-options small {font-size:200% !important}",
+  });
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  for (const node of await page
+    .locator(".alive-button,.alive-time-options,.alive-copy")
+    .all()) {
+    const box = await node.boundingBox();
+    expect(box!.x).toBeGreaterThanOrEqual(-1);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(321);
+  }
+});
+
+test("without JavaScript the complete story and native links remain available", async ({
+  browser,
+  baseURL,
+}) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  try {
+    await page.goto(baseURL! + "/");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(
+      "Small steps.",
+    );
+    await expect(page.locator("[data-alive-scene]")).toHaveCount(7);
+    await expect(page.locator("fieldset")).toBeDisabled();
+    await expect(
+      page.getByRole("link", { name: "Lanjut ke Nudge" }),
+    ).toHaveAttribute("href", "/app?minutes=5");
+    expect(
+      await page
+        .locator(".nudge-alive")
+        .evaluate((node) =>
+          node
+            .getAnimations({ subtree: true })
+            .every((a) => a.playState === "paused"),
+        ),
+    ).toBe(true);
+    await expect(page.locator(".alive-hero-cta")).toHaveAttribute(
+      "href",
+      "/app",
+    );
   } finally {
     await context.close();
   }
 });
 
-test("studio has no automated accessibility violations with reduced motion", async ({
+test("landing has no automated accessibility violations in static mode", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
-  await activate(page);
-  const results = await new AxeBuilder({ page }).analyze();
-  expect(results.violations).toEqual([]);
+  await expect(
+    page.getByRole("radio", { name: "5 menit", exact: true }),
+  ).toBeEnabled();
+  const result = await new AxeBuilder({ page })
+    .include(".nudge-alive")
+    .analyze();
+  expect(result.violations).toEqual([]);
+});
+
+test("landing has no browser errors and no fake app store controls", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await expect(page.locator(".nudge-alive")).toBeVisible();
+  await page.getByRole("radio", { name: "2 menit", exact: true }).check();
+  expect(errors).toEqual([]);
+  await expect(
+    page.getByRole("link", { name: /app store|google play/i }),
+  ).toHaveCount(0);
 });

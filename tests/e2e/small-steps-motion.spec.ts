@@ -13,7 +13,10 @@ test("new illustrations decode and decorative trails never intercept input", asy
   page,
 }) => {
   await page.goto("/");
-  for (const selector of [".studio-category-move img", ".pace-art img"]) {
+  for (const selector of [
+    ".scene-move .rig-shell",
+    ".scene-journal .rig-head",
+  ]) {
     const image = page.locator(selector);
     await image.scrollIntoViewIfNeeded();
     await expect
@@ -38,14 +41,14 @@ test("new illustrations decode and decorative trails never intercept input", asy
   }
 });
 
-test("landing has bounded choreography and cancels decorations offscreen", async ({
+test("landing loops only while visible and pauses scenes offscreen", async ({
   page,
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
-  const pace = page.locator(".pace-art");
+  const pace = page.locator(".scene-journal");
   await pace.scrollIntoViewIfNeeded();
-  await expect(pace).toHaveAttribute("data-studio-visible", "true");
+  await expect(pace).toHaveAttribute("data-running", "true");
   const timings = await pace.evaluate((node) =>
     node.getAnimations({ subtree: true }).map((animation) => {
       const timing = animation.effect!.getTiming();
@@ -57,11 +60,13 @@ test("landing has bounded choreography and cancels decorations offscreen", async
   );
   expect(
     timings.some(
-      (timing) => timing.iterations === 3 && timing.duration === 1600,
+      (timing) => timing.iterations === Infinity && timing.duration === 8000,
     ),
   ).toBe(true);
   expect(
-    timings.every((timing) => timing.iterations * timing.duration <= 5000),
+    timings.every(
+      (timing) => timing.duration >= 6000 && timing.duration <= 10000,
+    ),
   ).toBe(true);
   await page.getByRole("heading", { level: 1 }).scrollIntoViewIfNeeded();
   await expect
@@ -156,9 +161,9 @@ test("live reduced motion and simulated hidden-tab lifecycle cancel animation", 
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
-  await page.locator(".pace-art").scrollIntoViewIfNeeded();
-  await expect(page.locator(".pace-art")).toHaveAttribute(
-    "data-studio-visible",
+  await page.locator(".scene-journal").scrollIntoViewIfNeeded();
+  await expect(page.locator(".scene-journal")).toHaveAttribute(
+    "data-running",
     "true",
   );
   // Simulate the platform lifecycle event to exercise the visibility listener.
@@ -169,8 +174,8 @@ test("live reduced motion and simulated hidden-tab lifecycle cancel animation", 
     });
     document.dispatchEvent(new Event("visibilitychange"));
   });
-  await expect(page.locator(".landing-studio")).toHaveAttribute(
-    "data-motion-allowed",
+  await expect(page.locator(".scene-journal")).toHaveAttribute(
+    "data-running",
     "false",
   );
   expect(
@@ -185,8 +190,8 @@ test("live reduced motion and simulated hidden-tab lifecycle cancel animation", 
     document.dispatchEvent(new Event("visibilitychange"));
   });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await expect(page.locator(".landing-studio")).toHaveAttribute(
-    "data-motion-allowed",
+  await expect(page.locator(".scene-journal")).toHaveAttribute(
+    "data-running",
     "false",
   );
   expect(
