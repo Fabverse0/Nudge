@@ -1,5 +1,9 @@
 # Produksi video berjalan untuk landing
 
+## Keputusan terbaru
+
+Pengguna melaporkan video sudah dihasilkan secara manual, menolak kualitasnya, lalu membatalkan pendekatan video. File hasil belum diserahkan atau ditinjau agen; jumlah kredit akhir tidak diasumsikan dari saldo sebelum generasi manual. Video tidak diintegrasikan. Arah penggantinya adalah [adegan SVG regangan](./stretch-story.md). Catatan produksi di bawah merupakan riwayat sebelum keputusan tersebut.
+
 ## Arah yang disepakati
 
 Ganti adegan sepatu melayang pada bagian bergerak dengan C1 utuh yang meninggalkan ponsel, berjalan menuju tanaman, lalu menoleh. Gaya 3D lembut, sage/sand/biru, kamera tetap, lantai mendatar, dan properti sederhana. ENERGY 3 / RHYTHM 2 / MOTION 3 mengikuti arah landing sebelumnya, bukan alasan menambah gerak acak.

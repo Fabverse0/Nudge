@@ -352,6 +352,8 @@ Polesan landing studio yang disetujui 22 Oktober 2026 telah diimplementasikan: s
 
 ## Revisi animasi landing setelah kritik pengguna, 23 Oktober 2026
 
+Pembaruan 24 Oktober: pengguna menolak hasil video dan membatalkan pendekatan tersebut. Scene bergerak kini memakai SVG kura-kura meregangkan badan di atas alas, dengan ponsel di samping. Implementasi terbatas landing dan dicommit bertahap; bukti aktual serta pemeriksaan yang belum dilakukan ada di [adegan regangan](./docs/stretch-story.md). Penerimaan estetika menunggu pengguna.
+
 Produksi video C1 berjalan berikutnya dimulai pada 24 Oktober: dua kandidat gambar v2 tersedia dan menunggu pilihan pengguna. Belum ada generasi video, pemakaian kredit Flow, atau perubahan runtime landing. Lihat [produksi video berjalan](./docs/landing-walk-video.md) untuk gerbang persetujuan dan langkah tersisa.
 
 Pembaruan jam 24 Oktober: bentuk berlapis dan tiga cerita responsif terhadap 2/5/10 menit telah diterapkan khusus landing. Contoh durasi diselaraskan; handoff tetap hanya durasi. Build produksi serta suite landing 31 lulus/1 dilewati; lihat [cerita jam](./docs/time-story.md).

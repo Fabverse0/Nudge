@@ -475,6 +475,8 @@ Tepi bawah 4–6 px pada CTA, radio, dan kartu ilustrasi adalah kedalaman tekan 
 
 ### Revisi gerak landing setelah kritik pengguna
 
+Pembaruan 24 Oktober 2026: pengguna membatalkan pendekatan video dan menyetujui satu adegan karakter SVG khusus pada bagian bergerak. C1 2D meregangkan badan di atas alas dengan ponsel di samping, sebagai pengganti sepatu melayang. Ini pengecualian terbatas terhadap arahan benda tanpa karakter di bawah; hero dan penutup tetap memakai C1 3D. Detail koreografi dan bukti ada di [adegan regangan](./docs/stretch-story.md).
+
 Revisi ini menggantikan arahan rig tubuh terpisah pada tujuh adegan landing. Pengguna memilih campuran terarah: C1 3D di hero dan penutup, ilustrasi benda pada bagian cerita, aset gratis, tanpa karakter manusia. C1 memakai potret utuh yang berbeda pada hero dan penutup, dengan gerak kecil. Tidak mengklaim potret tersebut sebagai animasi karakter 3D penuh.
 
 Ponsel memakai adaptasi Scrolling Phone oleh Nafta R; jurnal memakai adaptasi Diary oleh Brian Karungani, dengan Lottie Simple License dan kredit pada footer. Tangan serta sisa garis gestur ponsel dihapus. Afirmasi jurnal diganti goresan netral. Lima adegan cerita tidak mengulang satu siluet kura-kura. Jam/tiket mengikuti durasi pengguna; sepatu dan benda meja memiliki gerak tersendiri.
