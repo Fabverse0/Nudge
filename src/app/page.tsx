@@ -1,196 +1,197 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
-  ArrowUpRightIcon,
   BookmarkSimpleIcon,
+  HeartIcon,
+  BellSimpleIcon,
 } from "@phosphor-icons/react/dist/ssr";
-import { TurtleMascot } from "@/components/ui/turtle-mascot";
 import { Brand } from "@/components/brand";
-import { ActivityPreview } from "@/components/landing/activity-preview";
-import { LandingMotion } from "@/components/landing/landing-motion";
+import { AliveMotion } from "@/components/landing/alive-motion";
+import { AliveDuration } from "@/components/landing/alive-duration";
+import { LandingScene } from "@/components/landing/landing-scene";
 import { StartActivityIcon } from "@/components/landing/start-activity-icon";
-import { StepTrail } from "@/components/ui/step-trail";
-import "@/components/landing/landing-studio.css";
+import "@/components/landing/landing-alive.css";
+import "@/components/landing/alive-scenes.css";
 
 export default function HomePage() {
   return (
-    <LandingMotion>
-      <header className="site-header">
-        <div className="landing-header-inner">
+    <AliveMotion>
+      <header className="alive-header">
+        <div className="alive-header-inner">
           <Brand />
           <nav aria-label="Navigasi utama">
-            <a href="#cara-pakai" className="desktop-link">
+            <a href="#cara-pakai" className="alive-how-link">
               Cara pakai
             </a>
-            <Link href="/app" className="button primary compact">
+            <Link href="/app" className="alive-button alive-header-cta">
               Mulai kegiatan
             </Link>
           </nav>
         </div>
       </header>
       <main id="main">
-        <section className="hero content-width">
-          <div className="studio-scene">
-            <Image
-              src="/brand/landing/nudge-first-step.webp"
-              alt="Kura-kura Nudge mengambil langkah kecil dari ponsel telungkup menuju jurnal dan benda yang dirapikan"
-              width={1200}
-              height={900}
-              sizes="(max-width: 700px) 280px, (max-width: 1100px) 45vw, 520px"
-              loading="eager"
-              fetchPriority="high"
-              className="studio-hero-art"
-            />
-            <StepTrail className="hero-trail" />
-          </div>
-          <div className="hero-copy">
-            <h1 lang="en">
+        <section
+          className="alive-hero alive-section"
+          aria-labelledby="hero-title"
+        >
+          <LandingScene kind="hero" priority />
+          <div className="alive-copy">
+            <h1 id="hero-title" lang="en">
               Small steps.
               <br />
               <span>A fuller life.</span>
             </h1>
             <p>Temukan kegiatan kecil yang pas dengan mood dan waktumu.</p>
-            <Link href="/app" className="button primary hero-cta">
+            <Link href="/app" className="alive-button alive-hero-cta">
               Mulai kegiatan
               <StartActivityIcon />
             </Link>
-            <p className="hero-footnote">
-              <TurtleMascot pose="symbol" size={28} />
-              Tanpa akun. Dua menit juga boleh.
+            <p className="alive-note">Tanpa akun. Dua menit juga boleh.</p>
+          </div>
+        </section>
+        <div
+          className="alive-activity-ribbon"
+          aria-label="Pilihan kegiatan Nudge"
+        >
+          <span>Bergerak</span>
+          <span>Merapikan</span>
+          <span>Journaling</span>
+          <span>Jeda tanpa layar</span>
+        </div>
+        <section
+          className="alive-section alive-phone-section"
+          aria-labelledby="phone-title"
+        >
+          <div className="alive-copy">
+            <h2 id="phone-title">
+              Scroll sebentar.
+              <br />
+              Lalu kebablasan?
+            </h2>
+            <p>
+              Kadang yang kamu butuhkan cuma satu ide untuk beranjak. Nudge
+              membantumu memilih kegiatan kecil yang bisa langsung dicoba.
+            </p>
+            <p className="alive-copy-soft">
+              Letakkan ponsel. Beri hal lain kesempatan.
+            </p>
+          </div>
+          <LandingScene kind="phone" />
+        </section>
+        <AliveDuration />
+        <div className="alive-how" aria-label="Cara memakai Nudge">
+          <div>
+            <strong>Pilih.</strong>
+            <p>Tujuan, waktu, dan mood jika kamu mau.</p>
+          </div>
+          <div>
+            <strong>Coba.</strong>
+            <p>Satu saran. Boleh ganti kalau belum cocok.</p>
+          </div>
+          <div>
+            <strong>Jalani.</strong>
+            <p>Mulai timer. Kamu yang menentukan selesai.</p>
+          </div>
+        </div>
+        <section
+          className="alive-section alive-move-section"
+          aria-labelledby="move-title"
+        >
+          <LandingScene kind="move" />
+          <div className="alive-copy">
+            <h2 id="move-title">
+              Beri badanmu
+              <br />
+              giliran.
+            </h2>
+            <p>
+              Regangkan bahu atau jalan santai sebentar. Ikuti kenyamanan
+              badanmu, dengan pilihan di dalam ruangan dan tanpa alat.
             </p>
           </div>
         </section>
-        <ActivityPreview />
-        <section className="activity-world">
-          <div className="content-width world-grid">
-            <div className="world-intro">
-              <h2 data-studio-motion="copy">Ke mana langkah kecilmu?</h2>
-              <p data-studio-motion="copy" data-studio-delay="70">
-                Bereskan sesuatu, gerakkan badan, atau ambil jeda. Pilih yang
-                kamu butuhkan sekarang.
-              </p>
-              <Link className="text-link" href="/app">
-                Mulai kegiatan
-                <ArrowUpRightIcon size={20} />
-              </Link>
-            </div>
-            <div className="category-list">
-              <article className="studio-category studio-category-tidy">
-                <div className="studio-art-frame" data-studio-motion="image">
-                  <TurtleMascot
-                    pose="tidy"
-                    size={320}
-                    className="category-illustration"
-                  />
-                </div>
-                <div>
-                  <h3 data-studio-motion="copy">Produktif ringan</h3>
-                  <p data-studio-motion="copy" data-studio-delay="70">
-                    Kembalikan lima benda. Rapikan satu sudut. Siapkan langkah
-                    berikutnya.
-                  </p>
-                </div>
-              </article>
-              <article className="studio-category studio-category-move">
-                <div className="studio-art-frame" data-studio-motion="image">
-                  <Image
-                    src="/brand/small-steps/stretch.webp"
-                    alt="Kura-kura Nudge meregangkan badan ke samping dengan satu kaki depan terangkat"
-                    width={900}
-                    height={900}
-                    sizes="(max-width: 700px) 280px, 320px"
-                    loading="lazy"
-                    className="turtle-mascot category-illustration"
-                  />
-                </div>
-                <div>
-                  <h3 data-studio-motion="copy">Bergerak</h3>
-                  <p data-studio-motion="copy" data-studio-delay="70">
-                    Regangkan bahu atau jalan santai. Ikuti kenyamanan badanmu.
-                  </p>
-                </div>
-              </article>
-              <article className="studio-category studio-category-journal">
-                <div className="studio-art-frame" data-studio-motion="image">
-                  <TurtleMascot
-                    pose="journal"
-                    size={320}
-                    className="category-illustration"
-                  />
-                </div>
-                <div>
-                  <h3 data-studio-motion="copy">Refleksi dan jeda</h3>
-                  <p data-studio-motion="copy" data-studio-delay="70">
-                    Istirahatkan pandangan atau journaling di media pilihanmu.
-                  </p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
-        <section className="small-start content-width" id="cara-pakai">
-          <div className="section-heading">
-            <h2 data-studio-motion="copy">Tak harus langsung banyak.</h2>
-            <p data-studio-motion="copy" data-studio-delay="70">
-              Kamu tidak perlu menyusun hari yang sempurna untuk mulai melakukan
-              sesuatu.
+        <section
+          className="alive-section alive-tidy-section"
+          aria-labelledby="tidy-title"
+        >
+          <div className="alive-copy">
+            <h2 id="tidy-title">
+              Rapikan
+              <br />
+              satu sudut.
+            </h2>
+            <p>
+              Kembalikan lima benda. Rapikan meja. Tidak perlu membereskan
+              semuanya untuk membuat satu sudut terasa lebih lega.
             </p>
           </div>
-          <div className="how-flow">
-            <article data-studio-motion="step">
-              <span className="flow-word">Pilih.</span>
-              <p>Pilih tujuan dan waktu, dengan mood yang boleh dilewati.</p>
-            </article>
-            <article data-studio-motion="step" data-studio-delay="70">
-              <span className="flow-word">Coba.</span>
-              <p>Temukan satu kegiatan kecil atau ganti jika belum cocok.</p>
-            </article>
-            <article data-studio-motion="step" data-studio-delay="140">
-              <span className="flow-word">Jalani.</span>
-              <p>Jalani kegiatan dengan timer hingga kamu menekan Selesai.</p>
-            </article>
-          </div>
-          <StepTrail className="flow-trail" />
+          <LandingScene kind="tidy" />
         </section>
-        <section className="your-pace content-width">
-          <div className="pace-heading">
-            <div className="pace-art" data-studio-motion="pause">
-              <TurtleMascot pose="pause" size={180} />
-              <StepTrail className="pace-trail" />
-            </div>
-            <h2 data-studio-motion="copy">Kamu pegang kendalinya.</h2>
+        <section
+          className="alive-section alive-journal-section"
+          aria-labelledby="journal-title"
+        >
+          <LandingScene kind="journal" />
+          <div className="alive-copy">
+            <h2 id="journal-title">
+              Tuangkan
+              <br />
+              satu pikiran.
+            </h2>
+            <p>
+              Satu kalimat tentang harimu juga cukup. Journaling di kertas atau
+              media pilihanmu, dengan panduan kegiatan yang sederhana.
+            </p>
+            <p className="alive-copy-soft">
+              Tulisanmu tetap milikmu. Nudge tidak menyimpannya.
+            </p>
           </div>
-          <div className="pace-copy">
-            <p data-studio-motion="copy" data-studio-delay="70">
-              Boleh lewati mood. Boleh ganti kegiatan. Boleh berhenti dan mulai
-              lagi nanti.
+        </section>
+        <section className="alive-control" aria-labelledby="control-title">
+          <h2 id="control-title">
+            Pelan juga boleh.
+            <br />
+            Kamu pegang kendalinya.
+          </h2>
+          <div className="alive-control-points">
+            <p>
+              <HeartIcon size={26} weight="fill" aria-hidden="true" />
+              <span>
+                Boleh lewati mood, ganti kegiatan, atau berhenti dulu.
+              </span>
             </p>
             <p>
-              <BookmarkSimpleIcon size={22} />
-              Simpan kegiatan favorit di perangkatmu, tanpa akun. Pengingat
-              hanya aktif kalau kamu memilihnya.
+              <BookmarkSimpleIcon size={26} weight="fill" aria-hidden="true" />
+              <span>Favorit tersimpan di perangkatmu. Tanpa akun.</span>
+            </p>
+            <p>
+              <BellSimpleIcon size={26} weight="fill" aria-hidden="true" />
+              <span>Pengingat hanya aktif kalau kamu memilihnya.</span>
             </p>
           </div>
         </section>
-        <section className="closing content-width">
-          <StepTrail className="closing-trail" />
-          <div lang="en">
-            <h2 data-studio-motion="copy">Your next small step starts here.</h2>
-            <p data-studio-motion="copy" data-studio-delay="70">
-              Make room for what matters, one small act at a time.
-            </p>
+        <section className="alive-closing" aria-labelledby="closing-title">
+          <LandingScene kind="welcome" />
+          <div className="alive-closing-copy">
+            <div lang="en">
+              <h2 id="closing-title">
+                Your next small step
+                <br />
+                starts here.
+              </h2>
+              <p>Make room for what matters, one small act at a time.</p>
+            </div>
+            <Link href="/app" className="alive-button">
+              Mulai kegiatan
+              <StartActivityIcon />
+            </Link>
           </div>
-          <Link href="/app" className="button primary">
-            Mulai kegiatan
-            <StartActivityIcon />
-          </Link>
         </section>
       </main>
-      <footer className="site-footer content-width">
+      <footer className="alive-footer">
         <Brand />
         <p>Teman untuk satu langkah kecil.</p>
-        <Link href="/app">Mulai kegiatan</Link>
+        <Link href="/app">Masuk ke kegiatan</Link>
       </footer>
-    </LandingMotion>
+    </AliveMotion>
   );
 }
