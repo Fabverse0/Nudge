@@ -4,13 +4,13 @@
 
 Revisi 24 Oktober 2026 menanggapi kritik bahwa ponsel terlalu polos. Perubahan terbatas pada ilustrasi ponsel landing dan konfigurasi pemutarnya. Aplikasi, C1, komposisi halaman, dan adegan lain tetap mengikuti keputusan sebelumnya.
 
-Ponsel memiliki ketebalan, kamera, speaker, tombol samping, dan feed ilustratif dalam palet Nudge. Feed bergeser, melambat, lalu berganti menjadi “Jeda sebentar?” dan “Mulai kecil.” Buku membesar keluar dari layar melalui lintasan lengkung; tanaman tumbuh dan jejak muncul. Pose akhir ditahan sekitar 2,5 detik sebelum reset. Ini metafora kegiatan di luar layar, bukan fitur pemantauan screen time.
+Ponsel memiliki ketebalan, kamera, speaker, tombol samping, dan feed ilustratif dalam palet Nudge. Feed bergeser, melambat, lalu berganti menjadi “Jeda sebentar?” dan “Ayo mulai kecil.” Kata "Ayo" ditambahkan sesuai komentar pengguna. Buku membesar keluar dari layar melalui lintasan lengkung; tanaman tumbuh dan jejak muncul. Pose akhir ditahan sekitar 2,5 detik sebelum reset. Ini metafora kegiatan di luar layar, bukan fitur pemantauan screen time.
 
 ## Sumber dan runtime
 
 Outline dasar diadaptasi dari Scrolling Phone oleh Nafta R. Sumber asli ada di `docs/assets/landing-motion/phone-source.json`; feed dan koreografi baru dibuat untuk Nudge. Kredit/lisensi tersedia di footer dan direktori aset. Nunito menjadi path dengan OFL disertakan.
 
-Reproduksi: `node scripts/build-phone-story.mjs`, atau `python scripts/export-landing-motion.py` untuk kedua sumber. JSON ponsel 60.681 byte; bersama jurnal 148.131 byte, di bawah batas tes 150 KB. Poster SVG menampilkan buku dan tanaman pada reduced motion, kegagalan pemuatan, dan tanpa JavaScript.
+Reproduksi: `node scripts/build-phone-story.mjs`, atau `python scripts/export-landing-motion.py` untuk kedua sumber. Setelah penambahan "Ayo", outline huruf dibulatkan ke presisi 0,1 piksel untuk menjaga ukuran tanpa mengubah timeline. JSON ponsel 59.929 byte; bersama jurnal 147.379 byte, di bawah batas tes 150 KB. Poster SVG menampilkan buku dan tanaman pada reduced motion, kegagalan pemuatan, dan tanpa JavaScript.
 
 Player tetap lokal, berhenti di luar viewport/tab tersembunyi, dan berjalan pada kecepatan 0,65. Jeda batas siklus ponsel 400 ms karena penahanan pose sudah masuk timeline. Tidak ada tombol pause baru; keterbatasan motion yang dicatat sebelumnya tetap berlaku.
 

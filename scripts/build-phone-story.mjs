@@ -128,6 +128,8 @@ function lettering(text, size, center, baseline, tone = "ink") {
   let cursor =
     center - run.positions.reduce((sum, p) => sum + p.xAdvance * scale, 0) / 2;
   const contours = [];
+  const compactPoints = (points) =>
+    points.map((pair) => pair.map((value) => Math.round(value * 10) / 10));
   for (let n = 0; n < run.glyphs.length; n++) {
     let v = [],
       i = [],
@@ -142,7 +144,10 @@ function lettering(text, size, center, baseline, tone = "ink") {
       o.push([0, 0]);
     };
     const finish = () => {
-      if (v.length) contours.push(path(v, true, i, o));
+      if (v.length)
+        contours.push(
+          path(compactPoints(v), true, compactPoints(i), compactPoints(o)),
+        );
       v = [];
       i = [];
       o = [];
@@ -403,7 +408,7 @@ const invitation = layer(
   [
     rect(0, 0, 168, 235, 10, "mint"),
     lettering("Jeda sebentar?", 18, 84, 65),
-    lettering("Mulai kecil.", 14, 84, 89),
+    lettering("Ayo mulai kecil.", 14, 84, 89),
     group(book(), [84, 155]),
   ],
   transform([0, 0, 0], {
