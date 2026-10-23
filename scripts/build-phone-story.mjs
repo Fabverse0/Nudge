@@ -483,7 +483,6 @@ const emergingBook = layer(
     p: keys([
       [0, [298, 248, 0]],
       [94, [298, 248, 0]],
-      [112, [230, 246, 0]],
       [132, [144, 327, 0]],
       [155, [144, 327, 0]],
       [180, [298, 248, 0]],
@@ -526,8 +525,8 @@ const plant = layer(
     r: keys([
       [0, 7],
       [110, 7],
-      [139, -4],
-      [150, 1],
+      [139, 0],
+      [150, 0],
       [158, 0],
       [180, 7],
     ]),
@@ -576,6 +575,11 @@ const animation = {
   assets: [screenAsset, phoneAsset],
   layers: [emergingBook, plant, phone, trail],
 };
+// Spatial handles keep the book's flight on one arc, without stopping midway.
+emergingBook.ks.p.k[1].to = [-74, -16, 0];
+emergingBook.ks.p.k[1].ti = [18, -68, 0];
+emergingBook.ks.p.k[3].to = [65, 0, 0];
+emergingBook.ks.p.k[3].ti = [-55, 20, 0];
 for (const [item, name] of [
   [feed, "feed"],
   [invitation, "invitation"],
