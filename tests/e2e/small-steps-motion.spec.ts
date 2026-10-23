@@ -9,7 +9,7 @@ async function startMoving(page: Page) {
   await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
 }
 
-test("new illustrations decode and decorative trails never intercept input", async ({
+test("scene artwork decodes and decorative props never intercept input", async ({
   page,
 }) => {
   await page.goto("/");
@@ -27,7 +27,7 @@ test("new illustrations decode and decorative trails never intercept input", asy
       )
       .toBe(true);
   }
-  for (const trail of await page.locator(".step-trail").all()) {
+  for (const trail of await page.locator(".scene-props").all()) {
     await expect(trail).toHaveAttribute("aria-hidden", "true");
     await expect(trail).toHaveCSS("pointer-events", "none");
   }
