@@ -1,5 +1,7 @@
 # Landing studio C1
 
+23 October 2026 refinement: the approved Duolingo-reference adaptation supersedes the earlier hero framing and section order below. See [landing-duolingo.md](./landing-duolingo.md) for the open C1 scene, scoped tactile controls, reference mapping and final 102/102 production verification. Earlier sections remain as history.
+
 Later approved refinement: three new C1 poses, footprint/shell motifs, varied entrances and bounded accent motion are recorded in [small-steps-motion.md](./small-steps-motion.md). Latest production regression: 94/94 passed. The sections below retain the original studio direction and its earlier verification history.
 
 ## Approved direction

@@ -410,6 +410,16 @@ Gerak masuk hero berlangsung sekali selama 760 ms, perpindahan 12/18 px dan skal
 
 Perluasan yang disetujui berikutnya menambahkan jejak langkah, garis lengkung tempurung, serta pose jeda, peregangan, dan penyelesaian C1. Satu aksen jejak pada landing boleh bergerak lembut tiga siklus selama total 4,8 detik, lalu diam; tidak ada loop tanpa akhir. Masuk gambar kategori mengikuti arah komposisi. Aplikasi memakai transisi maju/kembali 200 ms, konfirmasi pilihan 160 ms, serta masuk penyelesaian 560 ms sekali. Timer tetap statis. Hentikan gerak di luar layar atau ketika tab tersembunyi, hormati reduced motion, dan jangan tutupi teks/kontrol. Detail serta bukti ada di [panduan motion](./docs/small-steps-motion.md).
 
+### Landing adaptasi Duolingo, 23 Oktober 2026
+
+Pengguna menyetujui adaptasi kuat berdasarkan landing Duolingo dan dokumen referensi alpha yang diberikan. Pertahankan C1, Nunito, warna Nudge, Bahasa Indonesia dan penutup Inggris yang disetujui. Referensi memberi prinsip komposisi dan kontrol; ukurannya dipetakan ke kebutuhan responsif Nudge. Lihat [pemetaan referensi](./docs/landing-duolingo.md).
+
+Hero memakai adegan C1 transparan yang terbuka, gambar di kiri dan teks di kanan pada desktop, lalu gambar di atas teks pada mobile. Headline desktop 48–72 px, menengah 40–56 px, seluler 40–52 px; heading manfaat 28–44 px, isi 18 px desktop dan 16 px mobile. Pembesaran teks boleh menambah baris. Lebar konten maksimal 1080 px, dengan ruang kategori bergantian dan hanya kategori bergerak memakai bingkai tempurung biru. Urutan landing: hero, demo waktu, manfaat, cara pakai, kendali pengguna, penutup, footer.
+
+Header sticky memakai canvas solid; logo dan CTA tetap satu baris pada 320 px dengan teks standar. Tombol landing memakai lapisan bawah tonal 4 px dan respons tekan 2 px, bukan bayangan panel. Tinggi minimal 54 px untuk CTA utama, 46 px untuk header; lebar CTA dibatasi hingga 330 px dan dapat mengecil. Radius penutup khusus landing 48/24 px desktop, 32/20 px mobile. Gaya kontrol aplikasi tetap terpisah.
+
+Adegan baru memakai ImageGen dengan C1 sebagai referensi, diekspor WebP alpha 1200 × 900 berukuran 75.690 byte; catatan sumber/prompt ada di inventaris aset. Gerak hero 760 ms, kategori 600 ms, teks 480 ms dan jeda saudara 70–140 ms dipertahankan. Reduced motion, pembatalan gerak, fallback tanpa JavaScript, fokus, dan kontrak handoff durasi tetap berlaku.
+
 ## Do's and Don'ts
 
 ### Terapkan

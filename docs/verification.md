@@ -1,6 +1,17 @@
 # Pemeriksaan implementasi Nudge
 
-Diperbarui: 22 Oktober 2026. Status: kode MVP dan aset C1 terintegrasi; penerimaan perangkat fisik serta observasi pengguna masih menunggu.
+Diperbarui: 23 Oktober 2026. Status: kode MVP dan aset C1 terintegrasi; penerimaan perangkat fisik serta observasi pengguna masih menunggu.
+
+## Landing adaptasi Duolingo
+
+Adaptasi kuat yang disetujui memakai hero C1 baru, komposisi terbuka, manfaat sebelum cara pakai, header sticky ringkas, dan lapisan tombol tonal. Panduan alpha Duolingo disimpan sebagai referensi, lalu dipetakan ke identitas Nudge. Tidak ada perubahan kode produksi aplikasi, logika domain, penyimpanan, atau notifikasi.
+
+- Build produksi, TypeScript, ESLint, Prettier dan diff check lulus; unit **17/17**. Suite produksi final **102/102 lulus dalam 6,1 menit**, Chrome desktop dan emulasi viewport Pixel 7.
+- Regresi baru memeriksa alpha/dimensi dan anggaran aset, komposisi desktop/mobile, CTA mobile sebelum demo, header satu baris pada 320 px, anchor yang tidak tertutup, urutan bagian, bingkai kategori dan efek tekan tanpa layout shift. Regresi lama tetap memeriksa keyboard, Axe, teks 200%, fallback tanpa JavaScript, reduced motion, handoff waktu, aplikasi dan PWA.
+- WebP hero: 1200 × 900 / 75.690 byte. Pada 1920 px dan DPR 1, hint baru memilih gambar 640 px / 23.866 encoded bytes dibanding reproduksi hint `52vw` untuk aset yang sama, 1080 px / 50.888 byte. Ini pengukuran pemilihan gambar, bukan klaim peningkatan kecepatan halaman secara keseluruhan.
+- Taste source lint 0 FAIL / 0 WARN; inspector render 1440/768/390 menghasilkan 0 FAIL / 2 WARN (canvas krem tetap dan tidak ada footage). Impeccable regex scan 0 temuan utama / 15 advisory ukuran font/radius khusus landing. Screenshot langsung serta lembar inspector ditinjau pada desktop, tablet dan mobile.
+- Setup tes distabilkan: clock dibekukan sebelum assertion timer tepat, snapshot keyboard/Axe memakai reduced motion, dan skenario empat audit diberi batas total 90 detik. Seluruh assertion dipertahankan. Riwayat kegagalan awal, kritik visual, gate Anti Slop, dan bukti lengkap ada di [landing-duolingo.md](./landing-duolingo.md).
+- Pemasangan Android fisik, pembaca layar nyata dan observasi pengguna tetap memerlukan tahap tersendiri.
 
 ## Animasi dan dekorasi small steps
 

@@ -33,4 +33,57 @@ Keep the existing 760 ms once-only hero entrance and bounded footprint sequence;
 
 ## Verification
 
-Implementation in progress. Final results, browser critique and Anti Slop delivery gate will be recorded after the production review. New regression coverage targets hero placement and payload, compact sticky navigation/anchor clearance, section order and frame roles, and press feedback without layout shift.
+Final production regression: **102/102 passed in 6.1 minutes** on installed Chrome, desktop and Pixel 7 viewport emulation. Production build, TypeScript, ESLint, Prettier and diff checks passed; unit suite 17/17 passed. New coverage verifies hero alpha/dimensions/payload, placement at four widths, mobile CTA visibility, compact sticky navigation/anchor clearance, section order/frame roles, and press feedback without layout shift. Existing tests retain duration handoff, no-JavaScript behavior, reduced motion, keyboard, large text, app state, PWA and reminder checks.
+
+### Observed checks before final regression
+
+- Production build, TypeScript, ESLint and Prettier pass; six unit files / 17 tests pass. Taste source lint reports 0 FAIL / 0 WARN. Impeccable regex scan reports 0 primary findings and 15 advisory font/radius notes, which are documented landing-specific sizes rather than replacements for app tokens.
+- At 1920 px / DPR 1, the same new hero renders at 516.28 px. The explicit sizing hint selects a 640 px optimized image (23,866 encoded bytes), while the reproduced oversized `52vw` hint selects 1080 px (50,888 bytes). This compares two hints for the same asset, not overall page speed or the previous hero.
+- Direct browser review at 1440 × 900 and 390 × 844 confirms open hero composition, CTA visibility, intact art and compact mobile header. Full-page production screenshots show all three large category illustrations and the retained user-control/English closing sections.
+- One preliminary landing run found a test expectation using `studio-demo` as the first class while the incumbent first class is `hero-demo`; the expectation was corrected without changing production markup for the test.
+- The first full run had 100 passes and two mobile failures. An exact `02:00` assertion read the timer after real time had advanced; the clock now pauses before starting. Axe also sampled the existing app entrance at opacity 0.75, blending muted text to `#7B8B89`; keyboard/Axe snapshots now use reduced motion to audit settled states, with motion coverage retained separately. No app production code was changed. The four affected desktop/mobile cases passed in a focused repeat.
+- The next full run passed 101 cases; the four-Axe/two-screenshot keyboard case exceeded its original 30-second total deadline. Its deadline is now 90 seconds with all assertions retained. In the final full run, this case passed in 15.9 seconds on desktop and 11.7 seconds on mobile; all 102 cases passed together.
+- Physical Android installation/notification behavior, real screen-reader use and a new physical-device zoom check are not proven by this work. Viewport emulation and CSS text enlargement remain distinct from those checks.
+
+## Render critique
+
+ROUND 1
+
+Seen in one second: the sage C1 face and the two-line invitation to begin.
+
+Idea (one sentence): C1 takes a first step away from the phone, and each subsequent activity gets a clear place in the page.
+
+Live thing: a real duration choice changes the example and the app-entry URL.
+
+Layout words by section: hero=open split / duration=interactive panel / benefits=alternating open gallery / how-to=sequence / control=statement / close=action / footer=wordmark.
+
+Scores: design 6.5 · usability 8 · creativity 7 · content 8 → overall 7.2. Self-assessment, not independent user research or an external award score.
+
+Caps applied: the Taste photography criterion caps design at 6.5 for an illustration-only world. Keep the user-approved C1 artwork and material instead of adding unrelated photography to improve the score.
+
+Top three remaining tradeoffs, most visible first:
+
+1. The mobile gallery makes the page longer. Full mobile sheets retain all three illustrations at a useful size; the compact sticky header keeps an app entry available.
+2. The cream canvas triggers the inspector's palette warning. Preserve the fixed brand token, with existing action/ink colors and the tested contrast states.
+3. No footage is present. The hero and bounded motion carry the expressive moment; generic stock video would not explain a real Nudge capability.
+
+The inspector at 1440/768/390 reports 0 FAIL and 2 WARN (cream/no footage). It measures the headline at 72/42.2/40 px, two lines at every sampled width, Nunito throughout, about four desktop screens and ten images. Source lint: 0 FAIL / 0 WARN. All desktop/tablet/mobile page sheets were opened and compared with the actual browser review. No covered headline, broken image, blank reveal region or additional visible blocker was observed.
+
+Review artifacts are local and ignored: `.taste-skill/duolingo-review/` contains the inspector JSON and sheets; `.impeccable/review/duolingo-landing-{desktop,tablet,mobile}.png` contains direct browser captures. These are observations of emulated viewports, not physical-device results.
+
+## Anti Slop delivery gate
+
+| Block / rules | Result and evidence |
+| --- | --- |
+| Hard: R-02/R-03 | PASS: authored text has no em dash; five-width and 320 px / 200% text regressions pass without clipped text or horizontal overflow. |
+| Hard: R-17/R-18/R-23/R-36/R-38 | PASS: no metrics, testimonials or outcome claims were invented. The user approved the new scene, with C1 reference, source and exact prompt recorded. |
+| Hard: R-24/R-26/R-27/R-28/R-34 | PASS: app links and the how-to anchor are real. Preview controls, client-ready and no-JavaScript fallback states pass. No FAQ or theme switch was introduced; app loading/empty/error paths remain in the regression suite. |
+| Hard: R-25/R-32/R-35 | PASS: tested settled-state Axe and keyboard paths pass; production build, actual browser review and full 102-case suite completed. This is not a certification of physical-device or screen-reader behavior. |
+| Hard: R-33/R-37 | PASS: UI source was changed through patches, with direction/dials stated before implementation. The asset export script processes images only. |
+| Purpose: R-01/R-04/R-06/R-07/R-08/R-09/R-10/R-12/R-13/R-14 | PASS: preserve Nunito/Phosphor and Nudge tokens. The tonal CTA border supports press feedback; the one blue shell frame identifies movement. No new gradients, glow, glass, decorative grids, shadow panels or generic icon-card sections. |
+| Purpose: R-19/R-22 | PASS: original C1 art carries the small-step story; existing finite entrances and directional category motion retain cancellation/reduced-motion coverage. |
+| Liveliness | PASS: all six checks are affirmative. Dials match the approved direction; C1/headline form the hero focal point; spacing separates content roles; blue movement frame is the large color accent; footprints repeat the small-step identity; Design Read was declared before UI edits. |
+| Craft: C-1 through C-5 | PASS: decisions have product reasons, controls function, sections use real content, tested responsive/keyboard/fallback states pass, and claims are source-faithful. |
+| Consistency: R-05/R-11/R-15/R-16/R-20/R-21/R-29/R-30/R-31 | PASS: varied split/panel/gallery/sequence/statement rhythm, radius hierarchy and action-specific copy remain. Nudge retains its original character, palette and tone while applying the reference principles. |
+
+The gate covers the approved landing refinement and tested environments. Remaining physical Android, screen-reader and user-observation work stays open in the main verification record.

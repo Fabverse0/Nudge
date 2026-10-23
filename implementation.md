@@ -319,6 +319,8 @@ Jika muncul kebutuhan baru, catat masalah yang hendak diselesaikan, dampak terha
 
 ## 13. Ringkasan kesiapan peninjauan rilis
 
+23 Oktober 2026: adaptasi landing berdasarkan referensi Duolingo dan dokumen alpha pengguna selesai dalam lingkup yang disetujui. Hero transparan baru, komposisi desktop/mobile, manfaat/cara pakai, header sticky dan tombol tonal telah ditinjau. Build/pemeriksaan statis serta unit 17/17 lulus; regresi produksi final 102/102 lulus. Sumber keputusan, pemetaan referensi, kritik visual dan gate kualitas ada di docs/landing-duolingo.md. Kode produksi aplikasi dan batas penerimaan perangkat fisik tetap mengikuti catatan di bawah.
+
 Perluasan animasi/dekorasi yang disetujui berikutnya telah diimplementasikan dan dicommit bertahap: tiga ilustrasi C1 baru, motif jejak/tempurung, koreografi landing, transisi pilihan dan respons aplikasi, dengan timer tetap statis. Suite produksi terbaru 94/94 serta unit 17/17 lulus; hasil Taste/Impeccable, kritik visual, gate kualitas dan keterbatasan dicatat di docs/small-steps-motion.md. Ini tidak menutup pemeriksaan perangkat fisik yang masih terbuka di bawah.
 
 Polesan seluruh aplikasi berikutnya memakai tiga langkah pemilihan eksplisit dan presentasi konsisten untuk saran, timer, penyelesaian, favorit, serta pengingat. Implementasi dan batasnya dicatat di docs/app-polish.md; unit 17/17 dan regresi produksi 84/84 lulus. Status ini menyelesaikan lingkup polesan aplikasi yang disetujui, sementara pemeriksaan perangkat fisik dan penerimaan MVP di bawah tetap terbuka.
