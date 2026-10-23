@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-24",
+  "status": "awaiting_user_image_selection",
+  "currentCandidates": [
+    "candidate-a-v2.png",
+    "candidate-b-v2.png"
+  ],
+  "reference": "public/brand/mascot/nudge-turtle-idle.png",
+  "generator": "built-in image_gen; model name not exposed",
+  "flowVideoGenerations": 0,
+  "flowCreditsUsed": 0,
+  "assets": [
+    {
+      "file": "candidate-a-v2.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 1549778,
+      "sha256": "edf2845c4102e9ac0d93672f83bdc234ea153e39dac2d18476ac0a4ff94a5c77"
+    },
+    {
+      "file": "candidate-a.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 1549716,
+      "sha256": "08b3b81b88e1af3d5c2839dbbbc09b7faa9247c589bb56b13a2dbdb9c6f7968b"
+    },
+    {
+      "file": "candidate-b-v2.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 1532942,
+      "sha256": "47ede5fd59c2a107ffc51618868516fccd283ad26703068750f9452d30395c49"
+    },
+    {
+      "file": "candidate-b.png",
+      "width": 1672,
+      "height": 941,
+      "mode": "RGB",
+      "bytes": 1540705,
+      "sha256": "ae668a980f2c3a55284683fd60004ff5e7740f2d48861510e1aef35e899cb9a9"
+    }
+  ]
+}
