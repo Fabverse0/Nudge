@@ -274,6 +274,33 @@ test("landing has no automated accessibility violations in static mode", async (
   expect(result.violations).toEqual([]);
 });
 
+test("failed illustration downloads leave the story and duration usable", async ({
+  page,
+}) => {
+  await page.route("**/brand/landing/alive/*.webp", (route) =>
+    route.abort("failed"),
+  );
+  await page.goto("/");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Small steps.",
+  );
+  await expect(page.locator(".alive-hero-cta")).toHaveAttribute("href", "/app");
+  await page.getByRole("radio", { name: "2 menit", exact: true }).check();
+  await expect(
+    page.getByRole("link", { name: "Lanjut ke Nudge" }),
+  ).toHaveAttribute("href", "/app?minutes=2");
+  expect(
+    await page
+      .locator(".scene-hero")
+      .evaluate((node) => node.getBoundingClientRect().height),
+  ).toBeGreaterThan(150);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+});
+
 test("landing has no browser errors and no fake app store controls", async ({
   page,
 }) => {
