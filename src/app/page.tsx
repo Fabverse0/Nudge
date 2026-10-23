@@ -16,29 +16,40 @@ export default function HomePage() {
   return (
     <LandingMotion>
       <header className="site-header">
-        <Brand />
-        <nav aria-label="Navigasi utama">
-          <a href="#cara-pakai" className="desktop-link">
-            Cara pakai
-          </a>
-          <Link href="/app" className="button secondary compact">
-            Mulai kegiatan
-            <ArrowUpRightIcon size={18} />
-          </Link>
-        </nav>
+        <div className="landing-header-inner">
+          <Brand />
+          <nav aria-label="Navigasi utama">
+            <a href="#cara-pakai" className="desktop-link">
+              Cara pakai
+            </a>
+            <Link href="/app" className="button primary compact">
+              Mulai kegiatan
+            </Link>
+          </nav>
+        </div>
       </header>
       <main id="main">
         <section className="hero content-width">
+          <div className="studio-scene">
+            <Image
+              src="/brand/landing/nudge-first-step.webp"
+              alt="Kura-kura Nudge mengambil langkah kecil dari ponsel telungkup menuju jurnal dan benda yang dirapikan"
+              width={1200}
+              height={900}
+              sizes="(max-width: 700px) 280px, (max-width: 1100px) 45vw, 520px"
+              loading="eager"
+              fetchPriority="high"
+              className="studio-hero-art"
+            />
+            <StepTrail className="hero-trail" />
+          </div>
           <div className="hero-copy">
             <h1>
               Jeda dulu.
               <br />
               <span>Mulai kecil.</span>
             </h1>
-            <p>
-              Masih scrolling, padahal ingin melakukan sesuatu? Temukan satu
-              kegiatan kecil yang pas dengan mood dan waktumu.
-            </p>
+            <p>Temukan kegiatan kecil yang pas dengan mood dan waktumu.</p>
             <Link href="/app" className="button primary hero-cta">
               Mulai kegiatan
               <StartActivityIcon />
@@ -48,46 +59,8 @@ export default function HomePage() {
               Tanpa akun. Dua menit juga boleh.
             </p>
           </div>
-          <div className="studio-scene">
-            <span className="shell-echo" aria-hidden="true" />
-            <StepTrail className="hero-trail" />
-            <Image
-              src="/brand/landing/nudge-small-step.webp"
-              alt="Kura-kura Nudge beranjak dari ponsel menuju buku catatan dan kegiatan kecil"
-              width={1200}
-              height={900}
-              sizes="(max-width: 700px) calc(112vw - 72px), (max-width: 1264px) 52vw, 680px"
-              loading="eager"
-              fetchPriority="high"
-              className="studio-hero-art"
-            />
-          </div>
         </section>
         <ActivityPreview />
-        <section className="small-start content-width" id="cara-pakai">
-          <div className="section-heading">
-            <h2 data-studio-motion="copy">Tak harus langsung banyak.</h2>
-            <p data-studio-motion="copy" data-studio-delay="70">
-              Kamu tidak perlu menyusun hari yang sempurna untuk mulai melakukan
-              sesuatu.
-            </p>
-          </div>
-          <div className="how-flow">
-            <article data-studio-motion="step">
-              <span className="flow-word">Pilih.</span>
-              <p>Pilih tujuan dan waktu, dengan mood yang boleh dilewati.</p>
-            </article>
-            <article data-studio-motion="step" data-studio-delay="70">
-              <span className="flow-word">Coba.</span>
-              <p>Temukan satu kegiatan kecil atau ganti jika belum cocok.</p>
-            </article>
-            <article data-studio-motion="step" data-studio-delay="140">
-              <span className="flow-word">Jalani.</span>
-              <p>Jalani kegiatan dengan timer hingga kamu menekan Selesai.</p>
-            </article>
-          </div>
-          <StepTrail className="flow-trail" />
-        </section>
         <section className="activity-world">
           <div className="content-width world-grid">
             <div className="world-intro">
@@ -154,6 +127,30 @@ export default function HomePage() {
               </article>
             </div>
           </div>
+        </section>
+        <section className="small-start content-width" id="cara-pakai">
+          <div className="section-heading">
+            <h2 data-studio-motion="copy">Tak harus langsung banyak.</h2>
+            <p data-studio-motion="copy" data-studio-delay="70">
+              Kamu tidak perlu menyusun hari yang sempurna untuk mulai melakukan
+              sesuatu.
+            </p>
+          </div>
+          <div className="how-flow">
+            <article data-studio-motion="step">
+              <span className="flow-word">Pilih.</span>
+              <p>Pilih tujuan dan waktu, dengan mood yang boleh dilewati.</p>
+            </article>
+            <article data-studio-motion="step" data-studio-delay="70">
+              <span className="flow-word">Coba.</span>
+              <p>Temukan satu kegiatan kecil atau ganti jika belum cocok.</p>
+            </article>
+            <article data-studio-motion="step" data-studio-delay="140">
+              <span className="flow-word">Jalani.</span>
+              <p>Jalani kegiatan dengan timer hingga kamu menekan Selesai.</p>
+            </article>
+          </div>
+          <StepTrail className="flow-trail" />
         </section>
         <section className="your-pace content-width">
           <div className="pace-heading">
