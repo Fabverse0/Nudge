@@ -379,3 +379,46 @@ test("landing has no browser errors and no fake app store controls", async ({
     page.getByRole("link", { name: /app store|google play/i }),
   ).toHaveCount(0);
 });
+
+test("licensed stories keep moving after two complete cycles", async ({
+  browser,
+  baseURL,
+}, testInfo) => {
+  test.skip(
+    testInfo.project.name !== "desktop",
+    "Desktop documents the long-running cycles; mobile lifecycle is covered separately",
+  );
+  test.setTimeout(90000);
+  await mkdir(".impeccable/review/motion", { recursive: true });
+  const context = await browser.newContext({
+    viewport: { width: 1280, height: 800 },
+    serviceWorkers: "block",
+    reducedMotion: "no-preference",
+  });
+  const page = await context.newPage();
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  try {
+    await page.goto(baseURL! + "/");
+    for (const kind of ["phone", "journal"]) {
+      const scene = page.locator(`.scene-${kind}`);
+      await scene.scrollIntoViewIfNeeded();
+      const player = scene.locator("[data-motion-asset]");
+      await expect(player).toHaveAttribute("data-loaded", "true");
+      // Both source cycles, including their final rests, are shorter than eleven seconds.
+      await page.waitForTimeout(22000);
+      const sample = await player.locator(".motion-canvas").innerHTML();
+      await expect
+        .poll(() => player.locator(".motion-canvas").innerHTML(), {
+          timeout: 5000,
+        })
+        .not.toBe(sample);
+      await page.screenshot({
+        path: `.impeccable/review/motion/${kind}-cycles.png`,
+      });
+    }
+    expect(errors).toEqual([]);
+  } finally {
+    await context.close();
+  }
+});
