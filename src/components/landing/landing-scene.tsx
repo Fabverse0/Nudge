@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { LandingAnimation } from "./landing-animation";
+import { TimeStory } from "./time-story";
 
 export type LandingSceneKind =
   "hero" | "phone" | "time" | "move" | "tidy" | "journal" | "welcome";
@@ -7,7 +8,7 @@ const descriptions: Record<LandingSceneKind, string> = {
   hero: "Nudge bersama ponsel yang ditinggalkan dan satu langkah menuju kegiatan kecil",
   phone:
     "Feed berwarna bergulir pada ponsel, berhenti pada Jeda sebentar, lalu buku dan tanaman muncul dari layar",
-  time: "Jam dan kartu waktu mengikuti pilihan dua, lima, atau sepuluh menit",
+  time: "Jam, kartu durasi, dan adegan langkah, buku terbuka, atau susunan benda mengikuti pilihan waktu",
   move: "Sepasang langkah bergantian menapak dan meninggalkan jejak di jalur kecil",
   tidy: "Buku dan benda meja tersusun satu per satu ke tempatnya",
   journal:
@@ -139,68 +140,6 @@ function Tidy() {
   );
 }
 
-function Time({ minutes }: { minutes: number }) {
-  return (
-    <svg viewBox="0 0 520 430" className="object-scene" aria-hidden="true">
-      <g transform="translate(242 204)">
-        <circle r="131" fill="#679F9E" />
-        <circle r="114" fill="#FAF8F4" />
-        {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map(
-          (angle) => (
-            <path
-              key={angle}
-              d="M0-94v10"
-              transform={`rotate(${angle})`}
-              stroke="#679F9E"
-              strokeWidth="6"
-              strokeLinecap="round"
-            />
-          ),
-        )}
-        <g className="clock-minute" style={{ rotate: `${minutes * 6}deg` }}>
-          <path
-            d="M0 0V-67"
-            stroke="#315F5E"
-            strokeWidth="10"
-            strokeLinecap="round"
-          />
-        </g>
-        <path
-          d="M0 0 43 24"
-          stroke="#315F5E"
-          strokeWidth="10"
-          strokeLinecap="round"
-        />
-        <circle r="10" fill="#7EADDB" />
-      </g>
-      <g className="time-ticket" key={minutes} transform="translate(296 276)">
-        <rect y="6" width="125" height="91" rx="21" fill="#CBAF8B" />
-        <rect width="125" height="91" rx="21" fill="#E6D4BE" />
-        <text
-          x="62"
-          y="48"
-          textAnchor="middle"
-          fill="#315F5E"
-          fontSize="36"
-          fontWeight="850"
-        >
-          {minutes}
-        </text>
-        <text
-          x="62"
-          y="72"
-          textAnchor="middle"
-          fill="#315F5E"
-          fontSize="17"
-          fontWeight="750"
-        >
-          menit
-        </text>
-      </g>
-    </svg>
-  );
-}
-
 function MascotScene({
   kind,
   priority,
@@ -323,7 +262,7 @@ export function LandingScene({
       )}
       {kind === "phone" && <LandingAnimation name="phone" />}
       {kind === "journal" && <LandingAnimation name="diary" />}
-      {kind === "time" && <Time minutes={minutes} />}
+      {kind === "time" && <TimeStory minutes={minutes} />}
       {kind === "move" && <Steps />}
       {kind === "tidy" && <Tidy />}
     </div>

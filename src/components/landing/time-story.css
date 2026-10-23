@@ -1,0 +1,232 @@
+.nudge-alive .time-story {
+  --time-cycle: 9s;
+  --time-travel: cubic-bezier(0.45, 0, 0.25, 1);
+  --time-settle: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nudge-alive .scene-time .scene-ground {
+  left: 10%;
+  right: 4%;
+  bottom: 7%;
+}
+.nudge-alive .time-clock {
+  transform-origin: 231px 321px;
+  animation: time-clock-arrive var(--time-cycle) var(--time-travel) infinite;
+}
+.nudge-alive .time-sweep {
+  transform-origin: 0 0;
+  animation: time-hand-find var(--time-cycle) var(--time-settle) infinite;
+}
+.nudge-alive .scene-time .time-ticket {
+  transform-origin: 58px 91px;
+  animation: time-ticket-arrive var(--time-cycle) var(--time-settle) infinite;
+}
+.nudge-alive .time-activity {
+  animation: time-activity-arrive var(--time-cycle) var(--time-settle) infinite;
+}
+.nudge-alive .time-footprint {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: time-footfall var(--time-cycle) var(--time-settle) infinite;
+}
+.nudge-alive .time-footprint-1 {
+  animation-delay: 300ms;
+}
+.nudge-alive .time-footprint-2 {
+  animation-delay: 600ms;
+}
+.nudge-alive .time-little-shoe {
+  transform-origin: 0 12px;
+  animation: time-shoe-step var(--time-cycle) var(--time-travel) infinite;
+}
+.nudge-alive .time-open-book {
+  transform-origin: 104px 76px;
+  animation: time-book-open var(--time-cycle) var(--time-settle) infinite;
+}
+.nudge-alive .time-book-page {
+  transform-origin: 104px 1px;
+  animation: time-page-turn var(--time-cycle) var(--time-travel) infinite;
+}
+.nudge-alive .time-pencil {
+  animation: time-pencil-write var(--time-cycle) var(--time-travel) infinite;
+}
+.nudge-alive .time-stack-blue {
+  transform-origin: 81px 62px;
+  animation: time-blue-home var(--time-cycle) var(--time-travel) infinite;
+}
+.nudge-alive .time-stack-sand {
+  transform-origin: 78px 32px;
+  animation: time-sand-home var(--time-cycle) var(--time-travel) infinite;
+}
+
+@keyframes time-clock-arrive {
+  0%,
+  100% {
+    transform: rotate(-4deg) translateY(3px);
+  }
+  17%,
+  82% {
+    transform: rotate(0) translateY(0);
+  }
+}
+@keyframes time-hand-find {
+  0%,
+  100% {
+    transform: rotate(-105deg);
+  }
+  26%,
+  82% {
+    transform: rotate(0);
+  }
+}
+@keyframes time-ticket-arrive {
+  0%,
+  100% {
+    transform: translate(15px, -12px) rotate(7deg);
+  }
+  18%,
+  82% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+@keyframes time-activity-arrive {
+  0%,
+  8%,
+  100% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  24%,
+  86% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  96% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+@keyframes time-footfall {
+  0%,
+  16%,
+  100% {
+    opacity: 0;
+    transform: translate(-8px, 7px) scale(0.88);
+  }
+  27%,
+  80% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  93% {
+    opacity: 0;
+    transform: translate(0, 0) scale(1);
+  }
+}
+@keyframes time-shoe-step {
+  0%,
+  17%,
+  100% {
+    transform: translate(-28px, 12px) rotate(-10deg);
+  }
+  33% {
+    transform: translate(-12px, -28px) rotate(8deg);
+  }
+  46%,
+  83% {
+    transform: translate(0, 0) rotate(0);
+  }
+  96% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+@keyframes time-book-open {
+  0%,
+  14%,
+  100% {
+    transform: translate(0, 8px) scale(0.9);
+  }
+  33%,
+  90% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+@keyframes time-page-turn {
+  0%,
+  29%,
+  100% {
+    transform: scaleX(1);
+  }
+  48%,
+  86% {
+    transform: scaleX(-1);
+  }
+  97% {
+    transform: scaleX(-1);
+  }
+}
+@keyframes time-pencil-write {
+  0%,
+  30%,
+  100% {
+    transform: translate(0, -7px);
+  }
+  45% {
+    transform: translate(-17px, 14px);
+  }
+  52% {
+    transform: translate(-2px, 17px);
+  }
+  60%,
+  86% {
+    transform: translate(9px, 3px);
+  }
+  96% {
+    transform: translate(9px, 3px);
+  }
+}
+@keyframes time-blue-home {
+  0%,
+  17%,
+  100% {
+    transform: translate(-30px, 29px) rotate(-13deg);
+  }
+  30% {
+    transform: translate(-12px, -18px) rotate(-5deg);
+  }
+  41%,
+  91% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+@keyframes time-sand-home {
+  0%,
+  31%,
+  100% {
+    transform: translate(29px, 60px) rotate(12deg);
+  }
+  46% {
+    transform: translate(17px, -17px) rotate(6deg);
+  }
+  58%,
+  91% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+.nudge-alive .scene-time .time-story * {
+  animation-play-state: paused;
+}
+.nudge-alive .scene-time[data-running="true"] .time-story * {
+  animation-play-state: running;
+}
+.nudge-alive .scene-time:not([data-running]) .time-story * {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .nudge-alive .time-story .time-activity,
+  .nudge-alive .time-story .time-footprint {
+    opacity: 1;
+  }
+  .nudge-alive .time-book-page {
+    transform: scaleX(-1);
+  }
+}

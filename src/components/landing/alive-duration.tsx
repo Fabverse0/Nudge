@@ -9,16 +9,16 @@ import { StartActivityIcon } from "./start-activity-icon";
 const subscribe = () => () => {};
 const examples = {
   2: [
-    "Kembalikan lima benda",
-    "Satu benda, lalu satu lagi. Mulai dari yang ada di dekatmu.",
-  ],
-  5: [
     "Jalan santai sebentar",
     "Letakkan ponsel. Langkahkan kaki di rumah atau jalur aman di dekatmu.",
   ],
+  5: [
+    "Tuangkan satu pikiran",
+    "Buka buku atau kertas. Tulis satu hal yang ingin kamu ingat dari hari ini.",
+  ],
   10: [
-    "Jeda tanpa layar",
-    "Cari posisi nyaman dan beri pandanganmu jeda dari layar.",
+    "Rapikan satu sudut",
+    "Kembalikan benda di dekatmu ke tempatnya. Cukup satu sudut yang terasa lebih lega.",
   ],
 } as const;
 

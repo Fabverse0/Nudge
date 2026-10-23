@@ -11,6 +11,7 @@ import { LandingScene } from "@/components/landing/landing-scene";
 import { StartActivityIcon } from "@/components/landing/start-activity-icon";
 import "@/components/landing/landing-alive.css";
 import "@/components/landing/alive-scenes.css";
+import "@/components/landing/time-story.css";
 
 export default function HomePage() {
   return (
