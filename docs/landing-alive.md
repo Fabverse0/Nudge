@@ -67,6 +67,8 @@ Kasus lulus mencakup ketujuh adegan dan decoding, radio/keyboard/handoff, loop s
 
 Inspector akhir: `.taste-skill/alive-reviewed/report.json` dan screenshot fold/page pada folder yang sama. Laporan tanpa pengecualian eyebrow berada pada `.taste-skill/alive-final/`; bukti awal pada `.taste-skill/alive-review/`. Screenshot IAB dan tes pada `.impeccable/review/alive-*`. Berkas review lokal diabaikan Git.
 
+Arsip kritik terstruktur tersimpan di `.impeccable/critique/2026-10-23T14-12-13Z__src-app-page-tsx.md` dan disertakan Git. Trend pertama 21/28 mempertahankan skor awal A secara eksplisit, bukan skor ulang setelah polish. Dua penilaian independen, tidak adanya ignore list, detector, tidak adanya overlay mutable, serta pembersihan tab review dicatat. Berkas sementara body kritik telah dihapus setelah penyimpanan. Preview produksi tetap berjalan untuk peninjauan pengguna.
+
 ### Catatan pelaksanaan dan batas
 
 Percobaan awal dev menghasilkan timeout navigasi; hasil itu tidak dianggap lulus. Build produksi pertama memperlihatkan dua masalah yang kemudian diperbaiki: assertion fieldset dan kontras unit waktu. Pemeriksaan persetujuan build pernah gagal akibat batas penggunaan akun. Setelah waktu reset pada pesan terlewati, build dicoba ulang melalui jalur persetujuan yang sama dan berhasil; tidak ada bypass.
