@@ -126,7 +126,7 @@ function MascotScene({
           </>
         ) : (
           <>
-            <g className="welcome-sprout" transform="translate(102 299)">
+            <g className="welcome-sprout" transform="translate(65 290)">
               <path
                 d="M0 66V-5"
                 stroke="#315F5E"
@@ -137,7 +137,23 @@ function MascotScene({
                 d="M0 25C-48 18-43-20-43-20 2-21 0 25 0 25Zm0-13c1-47 47-49 47-49 1 43-47 49-47 49Z"
                 fill="#679F9E"
               />
-              <path d="M-36 41h74l-11 48h-53Z" fill="#E6D4BE" />
+              <path
+                d="M-25-6 0 24 28-28"
+                fill="none"
+                stroke="#315F5E"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path d="M-29 41h60l-9 48h-44Z" fill="#CBAF8B" />
+              <rect
+                x="-33"
+                y="38"
+                width="68"
+                height="11"
+                rx="5"
+                fill="#E6D4BE"
+              />
             </g>
             <g
               className="welcome-step"
