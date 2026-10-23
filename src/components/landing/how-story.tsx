@@ -3,21 +3,48 @@ function ChooseArt() {
     <svg viewBox="0 0 260 170" aria-hidden="true">
       <path d="M52 50q68-27 153 7l-5 92H48Z" fill="#E6D4BE" />
       <rect x="36" y="25" width="184" height="115" rx="22" fill="#FAF8F4" />
-      <circle cx="80" cy="65" r="21" fill="#E6D4BE" />
-      <circle cx="130" cy="65" r="21" fill="#7EADDB" />
-      <circle cx="180" cy="65" r="21" fill="#679F9E" />
-      <g fill="#315F5E">
-        <circle cx="74" cy="63" r="2.5" />
-        <circle cx="86" cy="63" r="2.5" />
-        <circle cx="124" cy="63" r="2.5" />
-        <circle cx="136" cy="63" r="2.5" />
-        <circle cx="174" cy="63" r="2.5" />
-        <circle cx="186" cy="63" r="2.5" />
-      </g>
-      <g fill="none" stroke="#315F5E" strokeWidth="3" strokeLinecap="round">
-        <path d="M74 72h12m38-1q6 5 12 0m38-1q6 8 12 0" />
-      </g>
+      {["#E6D4BE", "#7EADDB", "#679F9E"].map((color, index) => {
+        const x = 80 + index * 50;
+        return (
+          <g key={color} className={`how-mood how-mood-${index}`}>
+            <circle cx={x} cy="65" r="21" fill={color} />
+            <g className="how-mood-eyes" fill="#315F5E">
+              <circle cx={x - 6} cy="63" r="2.5" />
+              <circle cx={x + 6} cy="63" r="2.5" />
+            </g>
+            <path
+              d={
+                index === 0
+                  ? `M${x - 6} 72h12`
+                  : `M${x - 6} 71q6 ${index === 1 ? 5 : 8} 12 0`
+              }
+              fill="none"
+              stroke="#315F5E"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
+          </g>
+        );
+      })}
+      <circle
+        className="how-mood-focus"
+        cx="180"
+        cy="65"
+        r="27"
+        fill="none"
+        stroke="#315F5E"
+        strokeWidth="2.5"
+      />
       <rect x="57" y="105" width="138" height="10" rx="5" fill="#D5E0DB" />
+      <rect
+        className="how-choice-fill"
+        x="57"
+        y="105"
+        width="138"
+        height="10"
+        rx="5"
+        fill="#679F9E"
+      />
       <g className="how-choice">
         <circle cx="198" cy="117" r="19" fill="#315F5E" />
         <path

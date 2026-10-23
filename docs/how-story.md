@@ -10,6 +10,8 @@ Ilustrasi dekoratif bukan kontrol, tidak dapat difokuskan, dan tidak menyimulasi
 
 Gerak berdurasi sembilan detik menekankan centang pilihan, kartu saran, lalu jarum timer secara bergiliran. Lifecycle AliveMotion mengatur adegan hanya berjalan ketika terlihat dan tab aktif; default tanpa JavaScript diam. Reduced motion menghentikan animasi. Di seluler, ilustrasi berada di samping teks dalam satu kolom.
 
+Revisi setelah komentar berikutnya: bagian Pilih kini menganimasikan tiap wajah dengan anggukan kecil dan kedipan bergiliran. Cincin indikator bergerak dari opsi pertama ke kedua lalu ketiga, garis pilihan terisi, dan centang muncul setelah penetapan pilihan. Gerak berlangsung pada awal siklus, kemudian menahan hasil agar bagian Coba dan Jalani mendapat gilirannya. Ketiga wajah memakai bentuk/reaksi setara; rangkaian ini ilustratif dan tidak memilih mood pengguna. Seluruh elemen baru mengikuti pause serta reduced motion bagian yang sama. Keyframe dan status berjalan diverifikasi di preview localhost.
+
 ## Pemeriksaan
 
 Render desktop dan 390 px ditinjau. DOM 320/390 px tidak menunjukkan overflow horizontal. Pada 320 px kolom ilustrasi diperkecil menjadi 84 px untuk memberi ruang teks. Typecheck lulus. Impeccable memberi advisory ukuran/radius dan warna; ukuran serta radius diselaraskan dengan skala, sementara sage pucat dan teks pendukung mengikuti nilai khusus landing yang sudah tercatat di DESIGN.md. Detector bukan bukti penerimaan estetika. Tidak menjalankan suite pengujian aplikasi atau pemeriksaan Android untuk revisi ini.

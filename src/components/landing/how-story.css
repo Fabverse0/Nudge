@@ -61,6 +61,31 @@
   transform-origin: 198px 117px;
   animation: how-choice 9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
 }
+.nudge-alive .how-mood {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: how-mood-react 9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.nudge-alive .how-mood-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: how-mood-blink 9s linear infinite;
+}
+.nudge-alive .how-mood-1,
+.nudge-alive .how-mood-1 .how-mood-eyes {
+  animation-delay: 0.65s;
+}
+.nudge-alive .how-mood-2,
+.nudge-alive .how-mood-2 .how-mood-eyes {
+  animation-delay: 1.3s;
+}
+.nudge-alive .how-mood-focus {
+  animation: how-mood-select 9s cubic-bezier(0.45, 0, 0.22, 1) infinite;
+}
+.nudge-alive .how-choice-fill {
+  transform-origin: 57px 110px;
+  animation: how-choice-fill 9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
 .nudge-alive .how-suggestion {
   transform-origin: 130px 140px;
   animation: how-suggestion 9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
@@ -74,16 +99,91 @@
 }
 @keyframes how-choice {
   0%,
-  8%,
-  32%,
+  23%,
   100% {
-    transform: scale(1);
+    transform: scale(0.85);
+    opacity: 0.35;
   }
-  18% {
+  34%,
+  88% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  29% {
     transform: scale(1.16);
+    opacity: 1;
   }
-  26% {
-    transform: scale(1);
+}
+@keyframes how-mood-react {
+  0%,
+  3%,
+  21%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  8% {
+    transform: translateY(-5px) scale(1.1);
+  }
+  14% {
+    transform: translateY(1px) scale(0.98);
+  }
+}
+@keyframes how-mood-blink {
+  0%,
+  7%,
+  11%,
+  100% {
+    transform: scaleY(1);
+  }
+  9% {
+    transform: scaleY(0.12);
+  }
+}
+@keyframes how-mood-select {
+  0%,
+  5% {
+    transform: translateX(-100px);
+    opacity: 1;
+  }
+  12%,
+  16% {
+    transform: translateX(-50px);
+    opacity: 1;
+  }
+  23%,
+  88% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  94% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  96%,
+  100% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+}
+@keyframes how-choice-fill {
+  0%,
+  6%,
+  100% {
+    transform: scaleX(0.08);
+    opacity: 0.5;
+  }
+  14% {
+    transform: scaleX(0.5);
+    opacity: 1;
+  }
+  27%,
+  88% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  96% {
+    transform: scaleX(1);
+    opacity: 0;
   }
 }
 @keyframes how-suggestion {
