@@ -22,10 +22,15 @@ const color = (name) => [
   1,
 ];
 const fixed = (k) => ({ a: 0, k });
+const storyTime = (frame) => {
+  if (frame <= 139) return frame * 0.75;
+  if (frame <= 158) return 104.25 + (frame - 139) * 2.65;
+  return 154.6 + (frame - 158) * (25.4 / 22);
+};
 const keys = (values) => ({
   a: 1,
   k: values.map(([t, s]) => ({
-    t,
+    t: storyTime(t),
     s: Array.isArray(s) ? s : [s],
     i: { x: [0.67], y: [1] },
     o: { x: [0.33], y: [0] },

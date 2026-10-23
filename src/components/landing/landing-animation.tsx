@@ -29,7 +29,7 @@ export function LandingAnimation({ name }: { name: "phone" | "diary" }) {
               resting = false;
               player?.goToAndPlay(0, true);
             },
-            name === "phone" ? 1600 : 900,
+            name === "phone" ? 400 : 900,
           );
       } else if (running) player.play();
       else {
