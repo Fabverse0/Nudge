@@ -79,10 +79,14 @@
   opacity: 0;
 }
 .nudge-alive .motion-phone {
-  inset: -6% 8% -4%;
+  inset: -14% 1% -10%;
 }
 .nudge-alive .motion-diary {
   inset: -4% 0;
+}
+.nudge-alive .scene-tidy .object-scene {
+  scale: 1.1;
+  transform-origin: 50% 70%;
 }
 .nudge-alive .walking-route {
   fill: none;

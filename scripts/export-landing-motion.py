@@ -37,7 +37,7 @@ for name in ('phone', 'diary'):
         animation = json.loads(archive.read(next(n for n in archive.namelist() if n.startswith('animations/'))))
     recolor(animation)
     if name == 'phone':
-        animation['layers'] = [layer for layer in animation['layers'] if layer.get('nm') != 'Hand']
+        animation['layers'] = [layer for layer in animation['layers'] if layer.get('nm') != 'Hand' and layer.get('ind') not in (1, 2, 3)]
     else:
         animation['layers'] = [layer for layer in animation['layers'] if layer.get('refId') != 'comp_0']
         animation['assets'] = []
