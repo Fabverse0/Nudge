@@ -1,0 +1,580 @@
+.nudge-alive .alive-scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 520 / 430;
+  isolation: isolate;
+  pointer-events: none;
+  --cycle: 8s;
+}
+.nudge-alive .scene-props {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  z-index: 2;
+}
+.nudge-alive .scene-ground {
+  position: absolute;
+  left: 12%;
+  right: 6%;
+  bottom: 11%;
+  height: 5%;
+  background: #315f5e12;
+  border-radius: 50%;
+}
+.nudge-alive .alive-rig {
+  position: absolute;
+  left: 29%;
+  top: 20%;
+  width: 61%;
+  height: 65%;
+  z-index: 3;
+}
+.nudge-alive .alive-rig-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.nudge-alive .rig-part {
+  position: absolute;
+  height: auto;
+  user-select: none;
+}
+.nudge-alive .rig-shell {
+  left: 0;
+  top: 0;
+  width: 83%;
+  z-index: 1;
+}
+.nudge-alive .rig-back {
+  left: 0;
+  top: 65%;
+  width: 19%;
+  z-index: 0;
+}
+.nudge-alive .rig-head,
+.nudge-alive .rig-happy {
+  left: 28%;
+  top: 27%;
+  width: 68%;
+  z-index: 3;
+  transform-origin: 50% 80%;
+}
+.nudge-alive .rig-happy {
+  opacity: 0;
+  z-index: 4;
+}
+.nudge-alive .rig-left {
+  left: 24%;
+  top: 72%;
+  width: 29%;
+  z-index: 5;
+  transform-origin: 48% 15%;
+}
+.nudge-alive .rig-right {
+  left: 78%;
+  top: 65%;
+  width: 26%;
+  z-index: 2;
+  transform-origin: 40% 15%;
+}
+.nudge-alive .scene-hero .alive-rig {
+  left: 26%;
+  top: 12%;
+  width: 62%;
+}
+.nudge-alive .scene-hero .prop-phone {
+  transform: translate(-15px, 99px) scale(0.59) rotate(-15deg);
+  transform-origin: 154px 198px;
+}
+.nudge-alive .scene-hero .prop-cards {
+  transform: translate(4px, 33px);
+}
+.nudge-alive .phone-invitation {
+  opacity: 0;
+}
+.nudge-alive .scene-phone .prop-phone {
+  transform: rotate(-10deg);
+  transform-origin: 154px 198px;
+}
+.nudge-alive .scene-phone .alive-rig {
+  left: 42%;
+  top: 29%;
+  width: 51%;
+  height: 55%;
+}
+.nudge-alive .scene-phone .scene-ground {
+  left: 8%;
+}
+.nudge-alive .scene-time .alive-rig {
+  left: 43%;
+  top: 25%;
+  width: 49%;
+  height: 53%;
+}
+.nudge-alive .scene-time-cards {
+  position: absolute;
+  display: flex;
+  gap: 3%;
+  left: 10%;
+  bottom: 9%;
+  width: 52%;
+  z-index: 4;
+  transform: rotate(-8deg);
+}
+.nudge-alive .scene-time-cards > span {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  border-radius: 16%;
+  color: #315f5e;
+  background: #e8f1ec;
+  border-bottom: 5px solid #679f9e;
+  font-size: clamp(22px, 3vw, 36px);
+  font-weight: 900;
+}
+.nudge-alive .scene-time-cards > span:nth-child(2) {
+  background: #7eaddb;
+  border-color: #6898c2;
+}
+.nudge-alive .scene-time-cards small {
+  font-size: 12px;
+  font-weight: 800;
+}
+.nudge-alive .clock-hand {
+  transform-origin: 155px 145px;
+}
+.nudge-alive .scene-move .alive-rig {
+  left: 27%;
+  top: 7%;
+  width: 59%;
+  height: 64%;
+}
+.nudge-alive .scene-move .scene-ground {
+  bottom: 8%;
+}
+.nudge-alive .scene-tidy .alive-rig {
+  left: 7%;
+  top: 10%;
+  width: 59%;
+  height: 64%;
+}
+.nudge-alive .scene-tidy .scene-props {
+  z-index: 4;
+}
+.nudge-alive .scene-tidy .rig-right {
+  z-index: 5;
+}
+.nudge-alive .scene-journal .alive-rig {
+  left: 13%;
+  top: 4%;
+  width: 64%;
+  height: 68%;
+}
+.nudge-alive .scene-journal .scene-props {
+  z-index: 4;
+}
+.nudge-alive .journal-pencil {
+  transform-origin: 413px 321px;
+}
+.nudge-alive .journal-line {
+  stroke-dasharray: 70;
+}
+.nudge-alive .scene-welcome .alive-rig {
+  left: 19%;
+  top: 7%;
+  width: 62%;
+  height: 67%;
+}
+.nudge-alive .scene-welcome .prop-cards {
+  transform: translate(-26px, 20px) scale(0.9);
+}
+.nudge-alive .scene-welcome .rig-happy {
+  opacity: 1;
+}
+.nudge-alive .scene-welcome .rig-head {
+  opacity: 0;
+}
+
+.nudge-alive .alive-rig-body {
+  animation: alive-breathe var(--cycle) ease-in-out infinite;
+}
+.nudge-alive .rig-head {
+  animation: alive-look var(--cycle) ease-in-out infinite;
+}
+.nudge-alive .rig-happy {
+  animation: alive-smile var(--cycle) ease-in-out infinite;
+}
+.nudge-alive .scene-hero .rig-left,
+.nudge-alive .scene-move .rig-left {
+  animation: alive-step-left var(--cycle) ease-in-out infinite;
+}
+.nudge-alive .scene-hero .rig-right,
+.nudge-alive .scene-move .rig-right {
+  animation: alive-step-right var(--cycle) ease-in-out infinite;
+}
+.nudge-alive .scene-move .alive-rig {
+  animation: alive-walk var(--cycle) ease-in-out infinite;
+}
+.nudge-alive .scene-move .rig-back {
+  animation: alive-back-step var(--cycle) ease-in-out infinite;
+}
+.nudge-alive .scene-phone .phone-feed {
+  animation: alive-feed 9s ease-in-out infinite;
+}
+.nudge-alive .scene-phone .phone-invitation {
+  animation: alive-invitation 9s ease-in-out infinite;
+}
+.nudge-alive .scene-phone .prop-phone {
+  animation: alive-phone-settle 9s ease-in-out infinite;
+}
+.nudge-alive .scene-phone .rig-left {
+  animation: alive-phone-reach 9s ease-in-out infinite;
+}
+.nudge-alive .scene-time .clock-hand {
+  animation: alive-clock 8s ease-in-out infinite;
+}
+.nudge-alive .scene-time-cards > span {
+  animation: alive-time-card 8s ease-in-out infinite;
+}
+.nudge-alive .scene-time-cards > span:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.nudge-alive .scene-time-cards > span:nth-child(3) {
+  animation-delay: 0.8s;
+}
+.nudge-alive .scene-tidy .rig-right {
+  animation: alive-tidy-reach 8s ease-in-out infinite;
+}
+.nudge-alive .tidy-object {
+  animation: alive-tidy-object 8s ease-in-out infinite;
+}
+.nudge-alive .scene-journal .rig-right {
+  animation: alive-write-foot 8s ease-in-out infinite;
+}
+.nudge-alive .journal-pencil {
+  animation: alive-write 8s ease-in-out infinite;
+}
+.nudge-alive .journal-line {
+  animation: alive-line 8s ease-in-out infinite;
+}
+.nudge-alive .line-two {
+  animation-delay: 0.6s;
+}
+.nudge-alive .line-three {
+  animation-delay: 1.2s;
+}
+.nudge-alive .scene-welcome .rig-right {
+  animation: alive-wave 7s ease-in-out infinite;
+}
+.nudge-alive .scene-welcome .rig-happy {
+  animation: none;
+}
+.nudge-alive .scene-welcome .rig-head {
+  animation: none;
+}
+.nudge-alive .alive-scene *,
+.nudge-alive .alive-scene {
+  animation-play-state: paused !important;
+}
+.nudge-alive .alive-scene[data-running="true"] *,
+.nudge-alive .alive-scene[data-running="true"] {
+  animation-play-state: running !important;
+}
+
+@keyframes alive-breathe {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  18%,
+  40% {
+    transform: translateY(-5px) rotate(-1deg);
+  }
+}
+@keyframes alive-look {
+  0%,
+  65%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  40% {
+    transform: rotate(-5deg) translateY(-3px);
+  }
+}
+@keyframes alive-smile {
+  0%,
+  38%,
+  49%,
+  100% {
+    opacity: 0;
+  }
+  42%,
+  46% {
+    opacity: 1;
+  }
+}
+@keyframes alive-step-left {
+  0%,
+  12%,
+  48%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  32% {
+    transform: rotate(24deg) translateY(-6px);
+  }
+  60%,
+  68% {
+    transform: rotate(-14deg);
+  }
+}
+@keyframes alive-step-right {
+  0%,
+  24%,
+  60%,
+  100% {
+    transform: rotate(0);
+  }
+  32%,
+  44% {
+    transform: rotate(-28deg) translateY(-8px);
+  }
+  65%,
+  72% {
+    transform: rotate(17deg);
+  }
+}
+@keyframes alive-back-step {
+  0%,
+  35%,
+  100% {
+    transform: rotate(0);
+  }
+  15%,
+  25% {
+    transform: rotate(-20deg);
+  }
+  47%,
+  57% {
+    transform: rotate(20deg);
+  }
+}
+@keyframes alive-walk {
+  0%,
+  100% {
+    transform: translate(-8px, 8px);
+  }
+  25% {
+    transform: translate(7px, -3px);
+  }
+  50%,
+  75% {
+    transform: translate(23px, -12px) rotate(-3deg);
+  }
+}
+@keyframes alive-feed {
+  0%,
+  8% {
+    transform: translateY(0);
+  }
+  28% {
+    transform: translateY(-108px);
+  }
+  46%,
+  93% {
+    transform: translateY(-225px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes alive-invitation {
+  0%,
+  48%,
+  97%,
+  100% {
+    opacity: 0;
+  }
+  57%,
+  91% {
+    opacity: 1;
+  }
+}
+@keyframes alive-phone-settle {
+  0%,
+  44%,
+  100% {
+    transform: rotate(-10deg);
+  }
+  60%,
+  89% {
+    transform: rotate(2deg) translateY(12px);
+  }
+}
+@keyframes alive-phone-reach {
+  0%,
+  40%,
+  95%,
+  100% {
+    transform: rotate(0);
+  }
+  52%,
+  70% {
+    transform: rotate(35deg) translate(-10px, -7px);
+  }
+}
+@keyframes alive-clock {
+  0%,
+  15% {
+    transform: rotate(0);
+  }
+  55%,
+  90% {
+    transform: rotate(120deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+@keyframes alive-time-card {
+  0%,
+  15%,
+  65%,
+  100% {
+    transform: translateY(0);
+  }
+  30%,
+  42% {
+    transform: translateY(-15px) rotate(3deg);
+  }
+}
+@keyframes alive-tidy-reach {
+  0%,
+  10%,
+  90%,
+  100% {
+    transform: rotate(0);
+  }
+  22% {
+    transform: rotate(-22deg) translate(0, 5px);
+  }
+  45%,
+  60% {
+    transform: rotate(-65deg) translate(15px, -12px);
+  }
+}
+@keyframes alive-tidy-object {
+  0%,
+  18%,
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  30% {
+    transform: translate(10px, -35px);
+    opacity: 1;
+  }
+  48% {
+    transform: translate(105px, -58px);
+    opacity: 1;
+  }
+  60%,
+  87% {
+    transform: translate(117px, 14px);
+    opacity: 0;
+  }
+  95% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+}
+@keyframes alive-write {
+  0%,
+  12%,
+  80%,
+  100% {
+    transform: rotate(-12deg);
+  }
+  20%,
+  35%,
+  50% {
+    transform: translate(-12px, 4px) rotate(-18deg);
+  }
+  28%,
+  43%,
+  58% {
+    transform: translate(5px, -2px) rotate(-8deg);
+  }
+}
+@keyframes alive-write-foot {
+  0%,
+  10%,
+  80%,
+  100% {
+    transform: rotate(-10deg);
+  }
+  20%,
+  35%,
+  50% {
+    transform: rotate(-30deg) translate(4px, 0);
+  }
+  28%,
+  43%,
+  58% {
+    transform: rotate(-20deg);
+  }
+}
+@keyframes alive-line {
+  0%,
+  12% {
+    stroke-dashoffset: 70;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  54%,
+  88% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  99%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+@keyframes alive-wave {
+  0%,
+  68%,
+  100% {
+    transform: rotate(-20deg);
+  }
+  17%,
+  33%,
+  49% {
+    transform: rotate(-100deg) translateY(-9px);
+  }
+  25%,
+  41% {
+    transform: rotate(-65deg) translateY(-9px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nudge-alive .alive-scene,
+  .nudge-alive .alive-scene * {
+    animation: none !important;
+  }
+  .nudge-alive .phone-invitation {
+    opacity: 1;
+  }
+}
