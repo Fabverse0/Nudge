@@ -17,7 +17,7 @@ Ekspor memakai `node scripts/export-landing-rig.mjs <atlas-png>`. Pemotongan men
 
 ## Vektor ekspresif
 
-Ponsel dan layar feed, kartu, jam, pijakan, jurnal, pensil, serta benda yang dirapikan dibuat sebagai SVG/HTML khusus landing. Tidak memakai aset, logo, karakter, atau file animasi Duolingo. Komponen adegan akan menyusun properti ini bersama rig 3D.
+Ponsel dan layar feed, kartu, jam, pijakan, jurnal, pensil, serta benda yang dirapikan dibuat sebagai SVG/HTML khusus landing. Tidak memakai aset, logo, karakter, atau file animasi Duolingo. Komponen adegan menyusun properti ini bersama rig 3D. Kaki dan properti yang dipegang berbagi transform; kedua ekspresi kepala memakai transform yang sama dan berganti secara diskret agar tidak menghasilkan mata ganda.
 
 ## Batas
 

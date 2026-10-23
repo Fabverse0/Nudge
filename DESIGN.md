@@ -452,3 +452,23 @@ Jalankan pemeriksaan logika/alur sesuai PRD dan pemeriksaan visual pada hasil re
 - [Nunito, sumber Google Fonts](https://github.com/google/fonts/tree/main/ofl/nunito): berkas font dan lisensi yang perlu dipertahankan saat integrasi.
 - [Phosphor Icons](https://github.com/phosphor-icons/core): sumber keluarga ikon dan lisensinya.
 - [WCAG 2.2, Contrast Minimum](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html): ambang kontras teks.
+
+## Landing hidup, keputusan 23 Oktober 2026
+
+Keputusan pengguna ini menggantikan pembatasan loop landing pada catatan versi sebelumnya. Seluruh aplikasi dan aturan timer tetap di luar perubahan.
+
+Landing mengikuti komposisi Duolingo dengan ilustrasi besar, teks pendek, ruang antarseksi, bagian yang bergantian sisi, dan tombol berefek tekan. Identitas tetap Nudge: Nunito, sage, biru, sand, dan karakter C1. Hero memakai “Small steps. A fuller life.”; penutup memakai “Your next small step starts here.” Keduanya ditandai `lang="en"`, sedangkan isi dan tombol berbahasa Indonesia.
+
+Tujuh adegan: langkah awal, ponsel/feed, pilihan waktu, bergerak, merapikan, journaling, dan sambutan penutup. Kura-kura memakai ilustrasi 3D clay berlapis; ponsel, jam, kartu, jurnal, serta properti lain memakai vektor ekspresif. Kepala dan kaki bergerak sendiri. Properti yang dipegang disatukan dengan kaki dalam koordinat adegan.
+
+Adegan berulang selama terlihat, berhenti di luar viewport/tab tersembunyi, dan memakai poster statis untuk reduced motion atau tanpa JavaScript. Siklus 6–10 detik mencakup momen tenang. Tidak menambahkan tombol jeda sesuai pilihan pengguna. Batas pause/stop/hide dicatat secara terbuka; reduced motion tidak menjadi klaim kepatuhan penuh.
+
+Semua stylesheet baru dibatasi `.nudge-alive`; lifecycle baru tidak mengubah utilitas motion bersama. Aset baru khusus landing berada pada `public/brand/landing/alive/`. Lihat [brief dan bukti](./docs/landing-alive.md) serta [inventaris aset](./docs/assets/landing-alive/README.md).
+
+### Nilai implementasi khusus landing
+
+Skala desktop: display 68 px; heading bagian 48 px; penutup 44 px; judul kendali/jam dekoratif 36 px; angka durasi dan langkah 28 px; judul contoh 20 px; paragraf 18 px; isi pendukung/tombol 16 px; label/catatan 14 px. Nilai display dan heading memakai clamp serta menyesuaikan mobile; pembesaran teks tetap boleh menambah baris. Ini bukan perubahan token aplikasi.
+
+Warna utama: `#315F5E`, `#679F9E`, `#7EADDB`, `#E6D4BE`, `#FAF8F4`; teks `#17393B`, teks pendukung `#4C6E6C`, bidang sage pucat `#E8F1EC`. Turunan properti memakai `#6898C2`, `#5A8D8B`, `#CBAF8B`, `#F0E2CC`, `#F7ECD9`. Depth kontrol memakai tepi bawah gelap `#234948`; pilihan durasi memakai garis `#C9DCD7`, `#B5CECA`, `#93B5B0`. Radius kontrol 13–16 px, bidang kendali 28–36 px, dan penutup 48/24 px desktop atau 36/20 px mobile.
+
+Tepi bawah 4–6 px pada CTA, radio, dan kartu ilustrasi adalah kedalaman tekan yang diminta melalui referensi Duolingo, bukan border aksen dekoratif. Pertahankan ketika detector menandainya sebagai `border-accent-on-rounded`.

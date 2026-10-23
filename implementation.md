@@ -1,5 +1,15 @@
 # Rencana Implementasi Nudge
 
+## Pembaruan landing, 23 Oktober 2026
+
+Lingkup landing hidup selesai: komposisi Duolingo dengan identitas Nudge, tujuh adegan, rig C1 3D lembut dan properti vektor, loop saat terlihat, serta poster statis untuk reduced motion/tanpa JavaScript. Pertukaran ekspresi diskret menghindari wajah ganda. Semua perubahan UI berada pada route dan komponen landing; aplikasi, utilitas bersama, dan aset aplikasi tidak diubah.
+
+Bukti: build webpack termasuk TypeScript, ESLint, dan format berhasil; 30/30 pemeriksaan landing serta 4/4 kasus landing lama lulus pada desktop dan profil mobile. Taste selesai dengan pengecualian komposisi serta label fieldset yang dicatat, dan dua WARN identitas/footage. Impeccable menjalankan dua penilaian independen dan review lanjutan; kontak properti serta ghosting sudah diperbaiki. Lihat [laporan landing](./docs/landing-alive.md) dan [inventaris](./docs/assets/landing-alive/README.md).
+
+Tidak ada perubahan API, rekomendasi, timer, localStorage, atau pengingat. Preview lokal memakai port 3100. Tidak ada push atau publikasi hosting. Status perangkat fisik dan penerimaan MVP di bawah tetap terpisah dari penyelesaian landing ini.
+
+## Status proyek keseluruhan
+
 Status: kode MVP, aset C1, dan integrasinya dapat ditinjau; penerimaan menyeluruh masih menunggu pemeriksaan manual. Pengguna memilih C1; pose, ilustrasi, logo, dan ikon turunannya tersedia dalam docs/assets/turtle-c1/README.md.
 Tanggal: 18 Oktober 2026.  
 Cakupan: MVP web responsif dan PWA dalam satu codebase.

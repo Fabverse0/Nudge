@@ -2,6 +2,18 @@
 
 Diperbarui: 23 Oktober 2026. Status: kode MVP dan aset C1 terintegrasi; penerimaan perangkat fisik serta observasi pengguna masih menunggu.
 
+## Landing hidup, pemeriksaan terbaru 23 Oktober 2026
+
+- Build `npm run build -- --webpack` berhasil pada kode UI akhir, termasuk TypeScript. ESLint, format target perubahan, dan diff whitespace berhasil.
+- `npx playwright test --config playwright.landing.config.ts`: 30/30 lulus dalam 1,4 menit. Dua kasus landing pada small-steps-motion dengan config review terfilter: 4/4 lulus dalam 12,4 detik. Pengujian ini tidak membuka aplikasi.
+- Cakupan: tujuh adegan dan gambar, lifecycle viewport/hidden/reduced motion, ekspresi tanpa ghosting pada sampel timeline, keyboard/radio/handoff, 320/390/710/768/1440 px, pembesaran CSS 200%, tanpa JavaScript, kegagalan gambar, header/anchor, efek tekan, dan Axe pada mode statis.
+- Taste akhir: 0 FAIL setelah pengecualian `empty-screens` untuk komposisi Duolingo dan `eyebrow` untuk legend formulir nyata. Dua WARN dipertahankan: canvas cream dan tanpa footage. Laporan tanpa pengecualian serta alasan lengkap disimpan dalam laporan landing; tidak diklaim lolos tanpa pengecualian.
+- Detector Impeccable setelah perbaikan kontak: 0 error, 3 warning primer tentang tepi bawah kontrol, 35 advisory token. Exit 1 memiliki output lengkap, bukan crash; bentuk depth disengaja dan nilai kemudian dicatat di DESIGN.md. Review independen lanjutan menemukan ghosting yang kemudian diperbaiki dan diperiksa regresinya.
+- Hasil render desktop, tablet, mobile dan kontak properti ditinjau. Isolasi Git membuktikan tidak ada perubahan aplikasi, globals, root layout, UI bersama, domain, Brand, atau aset aplikasi lama.
+- Batas: tidak ada pemeriksaan Android fisik, pembaca layar nyata, pengukuran frame rate, atau zoom browser fisik baru. Hidden-document dan pembesaran teks diuji secara simulasi. Loop tanpa tombol jeda mengikuti keputusan pengguna dan bukan klaim kepatuhan aksesibilitas penuh.
+
+Rincian, riwayat kegagalan yang diperbaiki, sumber aset, kritik, dan Anti Slop Delivery Gate: [landing-alive.md](./landing-alive.md). Bukti ini menggantikan acuan visual landing lama pada bagian berikutnya, tanpa mengubah hasil historis aplikasi.
+
 ## Landing adaptasi Duolingo
 
 Adaptasi kuat yang disetujui memakai hero C1 baru, komposisi terbuka, manfaat sebelum cara pakai, header sticky ringkas, dan lapisan tombol tonal. Panduan alpha Duolingo disimpan sebagai referensi, lalu dipetakan ke identitas Nudge. Tidak ada perubahan kode produksi aplikasi, logika domain, penyimpanan, atau notifikasi.
