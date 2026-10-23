@@ -140,6 +140,7 @@
 .nudge-alive .scene-time-cards > span:nth-child(2) {
   background: #7eaddb;
   border-color: #6898c2;
+  color: #17393b;
 }
 .nudge-alive .scene-time-cards small {
   font-size: 12px;

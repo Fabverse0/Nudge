@@ -310,15 +310,9 @@ export function LandingScene({
       <TurtleRig priority={priority} />
       {kind === "time" && (
         <div className="scene-time-cards" aria-hidden="true">
-          <span>
-            2<small>menit</small>
-          </span>
-          <span>
-            5<small>menit</small>
-          </span>
-          <span>
-            10<small>menit</small>
-          </span>
+          <span>2</span>
+          <span>5</span>
+          <span>10</span>
         </div>
       )}
     </div>

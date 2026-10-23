@@ -147,11 +147,7 @@ export default function HomePage() {
           </div>
         </section>
         <section className="alive-control" aria-labelledby="control-title">
-          <h2 id="control-title">
-            Pelan juga boleh.
-            <br />
-            Kamu pegang kendalinya.
-          </h2>
+          <h2 id="control-title">Kamu pegang kendalinya.</h2>
           <div className="alive-control-points">
             <p>
               <HeartIcon size={26} weight="fill" aria-hidden="true" />

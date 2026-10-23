@@ -34,7 +34,6 @@
   top: 0;
   z-index: 20;
   background: var(--alive-canvas);
-  border-bottom: 1px solid #315f5e16;
 }
 .nudge-alive .alive-header-inner {
   max-width: 1120px;

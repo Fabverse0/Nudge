@@ -235,7 +235,10 @@ test("without JavaScript the complete story and native links remain available", 
       "Small steps.",
     );
     await expect(page.locator("[data-alive-scene]")).toHaveCount(7);
-    await expect(page.locator("fieldset")).toBeDisabled();
+    await expect(page.locator("fieldset")).toHaveAttribute("disabled", "");
+    for (const radio of await page.getByRole("radio").all()) {
+      await expect(radio).toBeDisabled();
+    }
     await expect(
       page.getByRole("link", { name: "Lanjut ke Nudge" }),
     ).toHaveAttribute("href", "/app?minutes=5");
