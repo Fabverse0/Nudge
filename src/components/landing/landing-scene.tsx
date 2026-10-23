@@ -287,7 +287,7 @@ function MascotScene({
       </svg>
       <div className={`c1-portrait c1-${kind}`}>
         <Image
-          src={`/brand/mascot/nudge-turtle-${kind === "hero" ? "idle" : "wave"}.png`}
+          src={`/brand/landing/motion/c1-${kind === "hero" ? "idle" : "wave"}.webp`}
           alt=""
           width={800}
           height={800}
