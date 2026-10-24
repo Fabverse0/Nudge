@@ -135,7 +135,7 @@ Aset sementara boleh membantu pengembangan jika diberi label jujur. Placeholder 
 **Kebutuhan terkait:** FR-01, FR-02, FR-03, FR-04, FR-05, FR-07.
 
 - [x] **P3-01:** tipe dan kontrak domain tersedia; D-03/D-04 tercatat.
-- [x] **P3-02:** katalog 14 aktivitas, termasuk journaling dan refleksi tanpa alat, diuji pada setiap tujuan/waktu.
+- [x] **P3-02:** katalog diperluas dari 14 menjadi 50 aktivitas pada 24 Oktober 2026, termasuk variasi gerak, kegiatan praktis, kreativitas, journaling, dan refleksi tanpa alat. Setiap tujuan/durasi memiliki minimal empat pilihan dan minimal dua pilihan dalam ruangan tanpa alat khusus. ID lama dipertahankan. Sebaran dan bukti pemeriksaan ada di [katalog kegiatan](./docs/activity-catalog.md).
 - [x] **P3-03:** filter, ranking, penolakan, alternatif berbeda kondisi, dan keadaan habis tersedia dengan pengujian.
 - [x] **P3-04:** timer memakai deadline, jeda/lanjut, habis tanpa auto-selesai, berhenti/ganti dan selesai manual diuji.
 - [x] **P3-05:** mood setelah selesai mengikuti pilihan; Lewati mempertahankan mood atau kondisi kosong. Reload menghapus state sesi.
