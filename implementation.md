@@ -2,6 +2,8 @@
 
 ## Pembaruan landing, 23 Oktober 2026
 
+Pembaruan redesign hero 24 Oktober: pengguna menolak kualitas gerak hero 2D pertama dan meminta implementasi rencana bertahap. Referensi primer, evaluasi awal Lottie/Rive, serta storyboard lima pose tersedia di [rencana dan hasil pengembangan hero](./docs/hero-redesign.md). Status saat ini menunggu persetujuan bentuk/storyboard sebelum produksi cuplikan gerak, sesuai gerbang rencana yang disetujui. Hero aktif dan aplikasi belum diubah pada tahap ini. Belum ada instalasi atau push.
+
 Lingkup landing hidup selesai: komposisi Duolingo dengan identitas Nudge, tujuh adegan, rig C1 3D lembut dan properti vektor, loop saat terlihat, serta poster statis untuk reduced motion/tanpa JavaScript. Pertukaran ekspresi diskret menghindari wajah ganda. Semua perubahan UI berada pada route dan komponen landing; aplikasi, utilitas bersama, dan aset aplikasi tidak diubah.
 
 Bukti: build webpack termasuk TypeScript, ESLint, dan format berhasil; 30/30 pemeriksaan landing serta 4/4 kasus landing lama lulus pada desktop dan profil mobile. Taste selesai dengan pengecualian komposisi serta label fieldset yang dicatat, dan dua WARN identitas/footage. Impeccable menjalankan dua penilaian independen dan review lanjutan; kontak properti serta ghosting sudah diperbaiki. Lihat [laporan landing](./docs/landing-alive.md) dan [inventaris](./docs/assets/landing-alive/README.md).
