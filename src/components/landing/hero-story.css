@@ -1,6 +1,7 @@
 .nudge-alive .hero-story {
-  --hero-cycle: 10.8s;
-  --hero-ease: cubic-bezier(0.45, 0, 0.22, 1);
+  --hero-duration: 9.4s;
+  --hero-play-state: paused;
+  --hero-ease: cubic-bezier(0.22, 0.78, 0.2, 1);
 }
 .nudge-alive .hero-greeting {
   position: relative;
@@ -23,330 +24,377 @@
 .nudge-alive .hero-greeting:disabled {
   cursor: default;
 }
+.nudge-alive .hero-story-art,
+.nudge-alive .hero-story-sequence {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: visible;
+}
 .nudge-alive .hero-story-art {
+  overflow: hidden;
+  border-radius: 24px;
+  isolation: isolate;
+}
+.nudge-alive .hero-story-sequence > * {
+  position: absolute;
+  display: block;
+  animation-play-state: paused;
+  animation-fill-mode: both;
+}
+.nudge-alive .hero-story-backdrop {
+  z-index: 0;
+  left: 15%;
+  top: 7%;
+  width: 76%;
+  height: 77%;
+  border-radius: 54% 46% 45% 55% / 51% 46% 54% 49%;
+  background: #7eaddb;
+  opacity: 0.28;
+  transform: rotate(-7deg);
+}
+.nudge-alive .hero-story-ground {
+  z-index: 1;
+  left: 12%;
+  right: 8%;
+  bottom: 9%;
+  height: 10%;
+  border-radius: 50%;
+  background: #679f9e20;
+  box-shadow: 0 10px 0 #e6d4be70;
+}
+.nudge-alive .hero-phone {
+  z-index: 4;
+  left: 8%;
+  bottom: 12%;
+  width: 16%;
+  aspect-ratio: 190 / 330;
+  transform: rotate(-13deg);
+  transform-origin: 50% 85%;
+}
+.nudge-alive .hero-phone-art {
   display: block;
   width: 100%;
   height: 100%;
   overflow: visible;
+  filter: drop-shadow(0 9px 0 #23494824);
+}
+.nudge-alive .hero-phone-feed-content {
+  transform: translateY(0);
+}
+.nudge-alive .hero-phone-back,
+.nudge-alive .hero-phone-camera {
+  opacity: 0;
+}
+.nudge-alive .hero-mascot {
+  z-index: 3;
+  left: 13%;
+  top: -3%;
+  width: 87%;
+  height: 103%;
+  transform-origin: 53% 84%;
+  pointer-events: none;
+}
+.nudge-alive .hero-mascot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+.nudge-alive .hero-mascot-wave {
+  opacity: 1;
+}
+.nudge-alive .hero-mascot-think,
+.nudge-alive .hero-mascot-journal {
+  opacity: 0;
+}
+.nudge-alive .hero-journal-ink {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: #315f5e;
+  stroke-width: 5;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+.nudge-alive .hero-journal-ink path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.nudge-alive .hero-story-footsteps {
+  z-index: 2;
+  left: 23%;
+  bottom: 19%;
+  display: flex !important;
+  gap: 3.6%;
+  align-items: center;
+  width: 25%;
+  height: 8%;
+  opacity: 0;
+  transform: rotate(-17deg);
+}
+.nudge-alive .hero-story-footsteps i {
+  position: relative;
+  display: block;
+  width: 14%;
+  height: 54%;
+  border-radius: 56% 46% 58% 44%;
+  background: #679f9e;
+  transform: rotate(-22deg);
+}
+.nudge-alive .hero-story-footsteps i::before {
+  position: absolute;
+  top: -24%;
+  left: 29%;
+  width: 42%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: inherit;
+  box-shadow:
+    -5px 3px 0 -1px #679f9e,
+    5px 3px 0 -1px #679f9e;
+  content: "";
+}
+.nudge-alive .hero-story-footsteps i:nth-child(2) {
+  margin-top: 12%;
+  background: #7eaddb;
+}
+.nudge-alive .hero-story-footsteps i:nth-child(2)::before {
+  box-shadow:
+    -5px 3px 0 -1px #7eaddb,
+    5px 3px 0 -1px #7eaddb;
+}
+.nudge-alive .hero-story-footsteps i:nth-child(3) {
+  margin-top: -6%;
+  background: #679f9e;
 }
 .nudge-alive .hero-replay-hint {
   position: absolute;
-  left: 42%;
-  bottom: -3%;
+  z-index: 8;
+  left: 50%;
+  bottom: 1%;
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 8px 10px;
+  padding: 8px 12px;
+  border: 1px solid #6b8583;
+  border-radius: 999px;
+  background: #faf8f4;
+  color: #315f5e;
   font-size: 14px;
   font-weight: 800;
-  opacity: 0.8;
-  transition: opacity 180ms ease;
+  opacity: 0.94;
+  transform: translateX(-50%);
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease;
 }
 .nudge-alive .hero-greeting:hover .hero-replay-hint {
+  border-color: #679f9e;
+  background: #e8f1ec;
   opacity: 1;
 }
 .nudge-alive .hero-greeting:disabled .hero-replay-hint {
   visibility: hidden;
 }
-.nudge-alive .hero-core {
-  transform-origin: 180px 333px;
-  animation: hero-weight var(--hero-cycle) var(--hero-ease) infinite;
+.nudge-alive .hero-story[data-running] .hero-phone {
+  animation: hero-phone-set-down var(--hero-duration) var(--hero-ease) 1 both
+    var(--hero-play-state);
 }
-.nudge-alive .hero-head {
-  transform-origin: 277px 300px;
-  animation: hero-look var(--hero-cycle) var(--hero-ease) infinite;
+.nudge-alive .hero-story[data-running] .hero-phone-feed-content {
+  animation: hero-feed-slow var(--hero-duration) cubic-bezier(0.4, 0, 0.2, 1) 1
+    both var(--hero-play-state);
 }
-.nudge-alive .hero-wave-arm {
-  transform-origin: 350px 288px;
-  animation: hero-wave var(--hero-cycle) var(--hero-ease) infinite;
+.nudge-alive .hero-story[data-running] .hero-phone-back {
+  animation: hero-phone-back var(--hero-duration) ease 1 both
+    var(--hero-play-state);
 }
-.nudge-alive .hero-eye {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: hero-blink var(--hero-cycle) linear infinite;
+.nudge-alive .hero-story[data-running] .hero-phone-camera {
+  animation: hero-camera-show var(--hero-duration) ease 1 both
+    var(--hero-play-state);
 }
-.nudge-alive .hero-eye-right {
-  animation-name: hero-wink;
+.nudge-alive .hero-story[data-running] .hero-mascot-wave {
+  animation: hero-wave-arrive var(--hero-duration) var(--hero-ease) 1 both
+    var(--hero-play-state);
 }
-.nudge-alive .hero-gaze {
-  animation: hero-gaze var(--hero-cycle) var(--hero-ease) infinite;
+.nudge-alive .hero-story[data-running] .hero-mascot-think {
+  animation: hero-think-pose var(--hero-duration) var(--hero-ease) 1 both
+    var(--hero-play-state);
 }
-.nudge-alive .hero-soft-smile {
-  animation: hero-smile-soft var(--hero-cycle) ease infinite;
+.nudge-alive .hero-story[data-running] .hero-mascot-journal {
+  animation: hero-journal-pose var(--hero-duration) var(--hero-ease) 1 both
+    var(--hero-play-state);
 }
-.nudge-alive .hero-happy-smile {
-  opacity: 0;
-  animation: hero-smile-happy var(--hero-cycle) ease infinite;
+.nudge-alive .hero-story[data-running] .hero-journal-ink path:first-child {
+  animation: hero-write-line 1s 7.05s ease-out 1 both var(--hero-play-state);
 }
-.nudge-alive .hero-phone-away {
-  transform-origin: 75px 380px;
-  animation: hero-phone-away var(--hero-cycle) var(--hero-ease) infinite;
+.nudge-alive .hero-story[data-running] .hero-journal-ink path:last-child {
+  animation: hero-write-line 0.8s 7.55s ease-out 1 both var(--hero-play-state);
 }
-.nudge-alive .hero-phone-feed {
-  opacity: 0.35;
-  animation: hero-screen-rest var(--hero-cycle) ease infinite;
-}
-.nudge-alive .hero-book-arrival {
-  transform-origin: 400px 390px;
-  animation: hero-book-arrival var(--hero-cycle) var(--hero-ease) infinite;
-}
-.nudge-alive .hero-turning-page {
-  transform-origin: 70px 26px;
-  animation: hero-page-turn var(--hero-cycle) var(--hero-ease) infinite;
-}
-.nudge-alive .hero-wave-marks {
-  opacity: 0;
-  animation: hero-wave-marks var(--hero-cycle) ease infinite;
-}
-.nudge-alive .hero-contact {
-  transform-origin: 263px 354px;
-  animation: hero-weight-shadow var(--hero-cycle) var(--hero-ease) infinite;
-}
-.nudge-alive .hero-little-step-one {
-  animation: hero-step-one var(--hero-cycle) ease infinite;
-}
-.nudge-alive .hero-little-step-two {
-  animation: hero-step-two var(--hero-cycle) ease infinite;
+.nudge-alive .hero-story[data-running] .hero-story-footsteps {
+  animation: hero-footsteps 2.3s 5.2s ease 1 both var(--hero-play-state);
 }
 .nudge-alive .hero-story:not([data-running="true"]) * {
   animation-play-state: paused;
 }
-@keyframes hero-weight {
+@keyframes hero-phone-set-down {
   0%,
-  7%,
-  100% {
-    transform: translate(0, 2px) rotate(1deg);
-  }
-  16%,
-  33% {
-    transform: translate(-2px, -4px) rotate(-2deg);
-  }
-  43%,
-  55% {
-    transform: translate(0, 0) rotate(0);
-  }
-  70% {
-    transform: translate(0, -2px) rotate(-0.3deg);
-  }
-  86% {
-    transform: translate(0, 1px) rotate(0.2deg);
-  }
-}
-@keyframes hero-look {
-  0%,
-  5%,
-  100% {
-    transform: rotate(6deg) translate(-2px, 3px);
-  }
-  14%,
-  33% {
-    transform: rotate(-5deg) translate(1px, -4px);
-  }
-  46%,
-  86% {
-    transform: rotate(0) translate(0, 0);
-  }
-}
-@keyframes hero-wave {
-  0%,
-  7%,
-  60%,
-  100% {
-    transform: rotate(25deg);
-  }
-  15%,
-  25%,
-  35% {
-    transform: rotate(-12deg);
+  7% {
+    transform: translate(16%, -12%) rotate(-13deg) scale(0.94);
   }
   20%,
+  39% {
+    transform: translate(0, 0) rotate(-8deg) scale(1);
+  }
+  51% {
+    transform: translate(-3%, 11%) rotate(35deg) scale(0.96);
+  }
+  64%,
+  100% {
+    transform: translate(-20%, 19%) rotate(82deg) scale(0.82);
+  }
+}
+@keyframes hero-feed-slow {
+  0%,
+  8% {
+    transform: translateY(0);
+  }
+  18% {
+    transform: translateY(-26px);
+  }
   30% {
-    transform: rotate(10deg);
+    transform: translateY(-55px);
   }
+  39%,
   43%,
-  48% {
-    transform: rotate(0);
-  }
-}
-@keyframes hero-blink {
-  0%,
-  4%,
-  7%,
-  52%,
-  55%,
   100% {
-    transform: scaleY(1);
-  }
-  5.5%,
-  53.5% {
-    transform: scaleY(0.08);
+    transform: translateY(-70px);
   }
 }
-@keyframes hero-wink {
+@keyframes hero-phone-back {
   0%,
-  4%,
-  7%,
-  28%,
-  34%,
-  52%,
-  55%,
-  100% {
-    transform: scaleY(1);
+  43% {
+    opacity: 0;
   }
-  5.5%,
-  30%,
-  32%,
-  53.5% {
-    transform: scaleY(0.08);
-  }
-}
-@keyframes hero-gaze {
-  0%,
-  6%,
-  100% {
-    transform: translate(-5px, 2px);
-  }
-  14%,
-  86% {
-    transform: translate(0, 0);
-  }
-}
-@keyframes hero-smile-soft {
-  0%,
-  10%,
-  42%,
+  53%,
   100% {
     opacity: 1;
   }
-  16%,
-  35% {
-    opacity: 0;
-  }
 }
-@keyframes hero-smile-happy {
+@keyframes hero-camera-show {
   0%,
-  10%,
-  42%,
-  100% {
+  46% {
     opacity: 0;
   }
-  16%,
-  35% {
+  54%,
+  100% {
     opacity: 1;
   }
 }
-@keyframes hero-phone-away {
-  0%,
-  4%,
-  100% {
-    transform: translate(18px, -4px) rotate(8deg);
+@keyframes hero-wave-arrive {
+  0% {
+    opacity: 0;
+    transform: translate(-3%, 7%) rotate(2deg) scale(0.94);
   }
-  16%,
-  88% {
-    transform: translate(-8px, 3px) rotate(-5deg);
+  9% {
+    opacity: 1;
+  }
+  17%,
+  31% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0) scale(1);
+  }
+  39% {
+    opacity: 0;
+    transform: translate(2%, -2%) rotate(-1deg) scale(0.98);
+  }
+  100% {
+    opacity: 0;
   }
 }
-@keyframes hero-screen-rest {
+@keyframes hero-think-pose {
   0%,
-  5%,
-  100% {
-    opacity: 0.6;
+  28% {
+    opacity: 0;
+    transform: translate(2%, 4%) rotate(1deg) scale(0.96);
   }
-  15%,
-  88% {
-    opacity: 0.12;
+  37% {
+    opacity: 1;
+  }
+  46%,
+  53% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0) scale(1);
+  }
+  63% {
+    opacity: 0;
+    transform: translate(-2%, 2%) rotate(-1deg) scale(0.98);
+  }
+  100% {
+    opacity: 0;
   }
 }
-@keyframes hero-book-arrival {
+@keyframes hero-journal-pose {
   0%,
-  9%,
-  100% {
-    transform: translate(-14px, 9px) rotate(-8deg) scale(0.84);
+  53% {
+    opacity: 0;
+    transform: translate(5%, 5%) rotate(2deg) scale(0.95);
   }
-  27%,
-  86% {
+  69% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0) scale(1);
+  }
+  100% {
+    opacity: 1;
     transform: translate(0, 0) rotate(0) scale(1);
   }
 }
-@keyframes hero-page-turn {
-  0%,
-  18%,
-  100% {
-    transform: scaleX(0.08);
-  }
-  30% {
-    transform: scaleX(1);
-  }
-  43%,
-  88% {
-    transform: scaleX(0.03);
+@keyframes hero-write-line {
+  to {
+    stroke-dashoffset: 0;
   }
 }
-@keyframes hero-wave-marks {
+@keyframes hero-footsteps {
   0%,
-  11%,
-  42%,
-  100% {
+  12% {
     opacity: 0;
-  }
-  17%,
-  23%,
-  29%,
-  35% {
-    opacity: 0.85;
-  }
-  20%,
-  26%,
-  32% {
-    opacity: 0.3;
-  }
-}
-@keyframes hero-weight-shadow {
-  0%,
-  7%,
-  100% {
-    transform: scaleX(1);
-    opacity: 0.09;
-  }
-  18%,
-  33% {
-    transform: scaleX(0.94);
-    opacity: 0.065;
-  }
-  46%,
-  86% {
-    transform: scaleX(1.02);
-    opacity: 0.1;
-  }
-}
-@keyframes hero-step-one {
-  0%,
-  27%,
-  94%,
-  100% {
-    opacity: 0.12;
+    clip-path: inset(0 100% 0 0);
   }
   36%,
-  87% {
-    opacity: 0.8;
-  }
-}
-@keyframes hero-step-two {
-  0%,
-  34%,
-  94%,
   100% {
-    opacity: 0.12;
-  }
-  43%,
-  87% {
-    opacity: 0.8;
+    opacity: 0.9;
+    clip-path: inset(0 0 0 0);
   }
 }
 @media (max-width: 620px) {
+  .nudge-alive .hero-story-art {
+    border-radius: 24px;
+  }
+  .nudge-alive .hero-mascot {
+    left: 9%;
+    top: -7%;
+    width: 95%;
+    height: 110%;
+  }
+  .nudge-alive .hero-phone {
+    left: 4%;
+    bottom: 13%;
+    width: 17%;
+  }
+  .nudge-alive .hero-story-footsteps {
+    left: 20%;
+    bottom: 18%;
+  }
   .nudge-alive .hero-replay-hint {
-    bottom: -5%;
-    left: 37%;
+    bottom: 0;
+    font-size: 14px;
+    padding: 7px 10px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -354,10 +402,32 @@
     animation: none !important;
     transition: none !important;
   }
-  .nudge-alive .hero-turning-page {
-    transform: scaleX(0.03);
+  .nudge-alive .hero-story .hero-mascot-wave,
+  .nudge-alive .hero-story .hero-mascot-think {
+    opacity: 0;
   }
-  .nudge-alive .hero-wave-marks {
-    opacity: 0.55;
+  .nudge-alive .hero-story .hero-mascot-journal {
+    opacity: 1;
+    transform: none;
   }
+  .nudge-alive .hero-story .hero-phone {
+    transform: translate(-20%, 19%) rotate(82deg) scale(0.82);
+  }
+  .nudge-alive .hero-story .hero-phone-feed {
+    opacity: 0;
+  }
+  .nudge-alive .hero-story .hero-phone-back,
+  .nudge-alive .hero-story .hero-phone-camera,
+  .nudge-alive .hero-story .hero-journal-ink path {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  .nudge-alive .hero-story .hero-story-footsteps {
+    opacity: 0.9;
+    clip-path: none;
+  }
+}
+
+.nudge-alive .hero-story[data-running="true"] {
+  --hero-play-state: running;
 }
