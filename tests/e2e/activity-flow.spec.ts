@@ -113,11 +113,21 @@ test("alternatives explain differing filters, exhaust, and restart", async ({
   await page.getByText("Tempat dan alat", { exact: false }).click();
   await page.getByLabel("Tempat", { exact: true }).selectOption("outdoor");
   await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
-  await page.getByRole("button", { name: "Kurang cocok" }).click();
+  const choices = activities.filter(
+    (activity) => activity.goal === "productive" && activity.minutes <= 2,
+  );
+  const outdoorChoices = choices.filter((activity) =>
+    activity.places.includes("outdoor"),
+  );
+  for (let index = 0; index < outdoorChoices.length; index += 1) {
+    await page.getByRole("button", { name: "Kurang cocok" }).click();
+  }
   await expect(
     page.getByText("Alternatif dengan kondisi berbeda"),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Kurang cocok" }).click();
+  for (let index = outdoorChoices.length; index < choices.length; index += 1) {
+    await page.getByRole("button", { name: "Kurang cocok" }).click();
+  }
   await expect(
     page.getByRole("heading", { name: "Pilihan sesi ini sudah dicoba." }),
   ).toBeVisible();

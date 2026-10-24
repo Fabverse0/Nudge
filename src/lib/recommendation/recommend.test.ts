@@ -72,4 +72,42 @@ describe("recommendations", () => {
       "notice-5",
     );
   });
+  it("can offer every matching indoor no-tool alternative without repeating a rejected activity", () => {
+    for (const goal of ["productive", "move", "reflect"] as Goal[]) {
+      for (const minutes of [2, 5, 10] as const) {
+        const pool = activities.filter(
+          (activity) =>
+            activity.goal === goal &&
+            activity.minutes <= minutes &&
+            activity.places.includes("indoor") &&
+            activity.requiredTools.length === 0,
+        );
+        const feedback = emptyFeedback();
+        for (let index = 0; index < pool.length; index += 1) {
+          const result = recommend(
+            {
+              ...context,
+              goal,
+              minutes,
+              place: "indoor",
+              tools: "none",
+              mood: "Bosan",
+            },
+            feedback,
+            pool,
+          );
+          if (result.kind !== "suggestion")
+            throw new Error(`Missing alternative ${goal}/${minutes}/${index}`);
+          expect(feedback.rejected).not.toContain(
+            result.suggestion.activity.id,
+          );
+          feedback.rejected.push(result.suggestion.activity.id);
+        }
+        expect(new Set(feedback.rejected).size).toBe(pool.length);
+        expect(
+          recommend({ ...context, goal, minutes }, feedback, pool).kind,
+        ).toBe("exhausted");
+      }
+    }
+  });
 });
