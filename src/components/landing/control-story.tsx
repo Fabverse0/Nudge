@@ -156,8 +156,8 @@ export function ControlStory({ examples }: { examples: Example[] }) {
                   size={22}
                   weight="bold"
                   aria-hidden="true"
-                />{" "}
-                Ganti contoh kegiatan
+                />
+                <span>Ganti contoh kegiatan</span>
               </button>
             </>
           )}
@@ -187,7 +187,9 @@ export function ControlStory({ examples }: { examples: Example[] }) {
                     aria-hidden="true"
                   />
                 )}
-                {saved ? "Ditandai. Boleh batalkan." : "Coba tandai favorit"}
+                <span>
+                  {saved ? "Ditandai. Boleh batalkan." : "Coba tandai favorit"}
+                </span>
               </button>
             </>
           )}
@@ -209,7 +211,7 @@ export function ControlStory({ examples }: { examples: Example[] }) {
                 <span className="control-switch-track" aria-hidden="true">
                   <span />
                 </span>
-                {reminder ? "Contoh aktif" : "Contoh nonaktif"}
+                <span>{reminder ? "Contoh aktif" : "Contoh nonaktif"}</span>
               </button>
             </>
           )}

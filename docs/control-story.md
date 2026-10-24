@@ -23,3 +23,9 @@ Bidang sage pucat menyatukan judul dan tiga pemilih. Buku vektor serta simbol ya
 - Belum menjalankan suite aplikasi, build produksi baru, pengujian tanpa JavaScript/reduced motion di browser, atau pemeriksaan Android. Fallback tersebut diperiksa dari source. Penilaian artistik menunggu pengguna.
 
 State demo hilang ketika halaman dimuat ulang. Pekerjaan ini tidak mengubah `/app`, konfigurasi PWA, atau service worker.
+
+## Perbaikan laporan hydration
+
+Pengguna melaporkan recoverable hydration error pada label tombol, dengan diff spasi server versus teks klien. Pada inspeksi awal, tombol berisi SVG, node spasi, komentar pemisah SSR, lalu node label. Error lengkap belum terulang pada reload agen, sehingga pemicu persisnya (termasuk kemungkinan Fast Refresh/aset lama) belum dipastikan. Label tindakan ganti, favorit, dan switch kini masing-masing berada dalam span eksplisit; jarak ikon-label memakai CSS gap tanpa node spasi terpisah. Tidak menambahkan suppressHydrationWarning atau mematikan SSR.
+
+Sesudah perubahan, dua reload preview localhost serta satu aksi ganti diperiksa: label ganti menjadi anak `svg + span`, tidak ada node teks langsung di tombol, hidrasi mengaktifkan kontrol, dan log error browser kosong. Typecheck serta ESLint komponen lulus. Ini membuktikan hasil pemeriksaan tersebut, bukan bahwa seluruh kemungkinan error hidrasi telah dieliminasi. Cache PWA, penyimpanan favorit, dan perilaku aplikasi tidak diubah.
