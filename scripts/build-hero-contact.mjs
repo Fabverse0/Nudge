@@ -292,36 +292,9 @@ const handPoses = [
   [258, [309, 323]],
   [end, [309, 323]],
 ];
-function armOutline([x, y]) {
-  const shoulder = [300, 299];
-  const dx = x - shoulder[0],
-    dy = y - shoulder[1];
-  const length = Math.hypot(dx, dy);
-  const normal = [-dy / length, dx / length];
-  const middle = [shoulder[0] + dx * 0.53 - 4, shoulder[1] + dy * 0.53 + 10];
-  const offset = (point, width) =>
-    point.map((v, a) => round(v + normal[a] * width));
-  return curve(
-    [
-      offset(shoulder, -23),
-      offset(middle, -19),
-      offset([x, y], -17),
-      [round(x + (dx / length) * 17), round(y + (dy / length) * 17)],
-      offset([x, y], 17),
-      offset(middle, 19),
-      offset(shoulder, 23),
-    ],
-    0.92,
-  );
-}
-
 paint("Ground contact", [
   ellipse(277, 346, 213, 24, "mint"),
   ellipse(208, 334, 122, 9, "ink", 8),
-]);
-paint("Rear feet planted", [
-  ellipse(113, 319, 28, 18, "sand"),
-  ellipse(240, 322, 26, 17, "sand"),
 ]);
 paint("Phone thickness", [
   group([
@@ -423,271 +396,6 @@ paint(
   },
 );
 
-paint("Soft belly", [
-  drawn(
-    [
-      [122, 278],
-      [170, 259],
-      [235, 265],
-      [269, 300],
-      [244, 327],
-      [160, 328],
-      [123, 310],
-    ],
-    "sand",
-  ),
-]);
-const shell = [
-  [92, 280],
-  [104, 201],
-  [160, 133],
-  [239, 120],
-  [313, 155],
-  [350, 217],
-  [351, 291],
-  [195, 318],
-];
-const shellDeform = (dx, dy, squash) =>
-  curve(
-    shell.map(([x, y]) => [round(x + dx + (y - 280) * squash), round(y + dy)]),
-  );
-paint(
-  "Shell contour deformation",
-  [
-    group([
-      morph([
-        [0, shellDeform(0, 1, 0.025)],
-        [47, shellDeform(-3, -1, -0.015)],
-        [72, shellDeform(-4, -5, -0.02)],
-        [107, shellDeform(1, 0, 0.02)],
-        [158, shellDeform(5, 5, 0.05)],
-        [195, shellDeform(1, 1, 0.01)],
-        [239, shellDeform(0, 0, 0)],
-        [end, shellDeform(0, 0, 0)],
-      ]),
-      fill("sage"),
-    ]),
-    drawn(
-      [
-        [96, 270],
-        [137, 286],
-        [172, 262],
-        [196, 233],
-        [185, 271],
-        [166, 302],
-        [110, 306],
-      ],
-      "edge",
-      0.75,
-    ),
-  ],
-  {
-    p: keys([
-      [0, [0, 0]],
-      [70, [-2, -2]],
-      [156, [3, 3]],
-      [220, [0, 0]],
-      [end, [0, 0]],
-    ]),
-  },
-);
-paint(
-  "Shell light plane",
-  [
-    group([
-      shape(
-        curve(
-          [
-            [120, 196],
-            [161, 151],
-            [209, 133],
-          ],
-          0.8,
-          false,
-        ),
-      ),
-      stroke("light", 9),
-    ]),
-  ],
-  {
-    p: keys([
-      [0, [0, 0]],
-      [70, [-4, -5]],
-      [156, [4, 5]],
-      [220, [0, 0]],
-      [end, [0, 0]],
-    ]),
-  },
-);
-
-paint("Far front foot planted", [ellipse(245, 324, 29, 19, "sand")]);
-const headPosition = keys([
-  [0, [262, 250]],
-  [38, [263, 253]],
-  [58, [252, 237]],
-  [79, [256, 238]],
-  [107, [273, 255]],
-  [160, [279, 270]],
-  [191, [278, 266]],
-  [224, [265, 252]],
-  [251, [266, 254]],
-  [end, [266, 254]],
-]);
-const headRotation = keys([
-  [0, -5],
-  [38, -3],
-  [58, -12],
-  [79, -8],
-  [112, 0],
-  [160, 10],
-  [191, 5],
-  [224, -4],
-  [end, -4],
-]);
-const face = [
-  [-78, -17],
-  [-50, -62],
-  [6, -72],
-  [62, -48],
-  [81, 0],
-  [58, 53],
-  [0, 68],
-  [-59, 47],
-];
-paint(
-  "Head and acting",
-  [
-    drawn(face, "sand"),
-    group([
-      shape(
-        curve(
-          [
-            [-52, -31],
-            [-32, -52],
-            [-4, -59],
-          ],
-          0.8,
-          false,
-        ),
-      ),
-      stroke("warm", 9),
-    ]),
-    ellipse(-57, 24, 10, 4, "binding", 40),
-    ellipse(58, 17, 9, 4, "binding", 40),
-    group(
-      [
-        group([ellipse(0, 0, 14, 20, "edge"), ellipse(4, -7, 4, 5, "paper")], {
-          p: fixed([-40, -6]),
-          r: fixed(15),
-        }),
-        group(
-          [ellipse(0, 0, 12, 18, "edge"), ellipse(4, -6, 3.6, 4.8, "paper")],
-          { p: fixed([44, -9]), r: fixed(12) },
-        ),
-      ],
-      {
-        p: keys([
-          [0, [4, 1]],
-          [41, [4, 2]],
-          [61, [-2, -4]],
-          [87, [0, -2]],
-          [126, [4, 3]],
-          [183, [3, 4]],
-          [223, [-1, 0]],
-          [end, [-1, 0]],
-        ]),
-        s: keys([
-          [0, [100, 100]],
-          [22, [100, 100]],
-          [26, [100, 9]],
-          [30, [100, 100]],
-          [53, [100, 100]],
-          [66, [108, 113]],
-          [90, [100, 100]],
-          [207, [100, 100]],
-          [211, [100, 7]],
-          [215, [100, 100]],
-          [end, [100, 100]],
-        ]),
-      },
-    ),
-    group(
-      [
-        shape(
-          curve(
-            [
-              [-16, 26],
-              [-2, 33],
-              [12, 33],
-              [26, 25],
-              [26, 34],
-              [14, 44],
-              [0, 43],
-              [-13, 35],
-            ],
-            0.95,
-            true,
-          ),
-        ),
-        fill("edge"),
-      ],
-      {
-        o: keys([
-          [0, 100],
-          [49, 100],
-          [52, 0],
-          [92, 0],
-          [96, 100],
-          [end, 100],
-        ]),
-      },
-    ),
-    group([ellipse(7, 28, 5, 7.5, "edge")], {
-      o: keys([
-        [0, 0],
-        [52, 0],
-        [56, 100],
-        [88, 100],
-        [92, 0],
-        [end, 0],
-      ]),
-    }),
-  ],
-  { p: headPosition, r: headRotation },
-);
-paint("Reaching arm", [
-  group([morph(handPoses.map(([t, p]) => [t, armOutline(p)])), fill("sand")]),
-]);
-paint(
-  "Contact paw",
-  [ellipse(0, 0, 23, 19, "sand"), ellipse(3, -5, 12, 5, "warm", 45)],
-  {
-    p: keys(handPoses),
-    s: keys([
-      [0, [100, 100]],
-      [90, [97, 105]],
-      [171, [110, 86]],
-      [208, [100, 100]],
-      [end, [100, 100]],
-    ]),
-  },
-);
-paint(
-  "Near supporting foot",
-  [ellipse(175, 323, 38, 27, "sand"), ellipse(167, 309, 16, 6, "warm", 35)],
-  {
-    s: keys([
-      [0, [100, 100]],
-      [70, [100, 100]],
-      [157, [103, 97]],
-      [221, [100, 100]],
-      [end, [100, 100]],
-    ]),
-    a: fixed([177, 338]),
-    p: fixed([177, 338]),
-  },
-);
-
 mkdirSync(destination, { recursive: true });
 for (const item of layers) {
   if (item.ks.p.a === 0)
@@ -706,6 +414,36 @@ const animation = {
   nm: "C1 contact study: reach, lower, release",
   ddd: 0,
   assets: [],
+  c1Motion: {
+    source: "/c1-master.webp",
+    sourceSize: 1280,
+    origin: [26, 25],
+    width: 360,
+    offset: [20, 65],
+    hand: keys(handPoses),
+    head: keys([
+      [0, [0, 0]],
+      [38, [1, 1]],
+      [58, [-3, -5]],
+      [79, [-2, -4]],
+      [107, [2, 0]],
+      [160, [5, 4]],
+      [191, [3, 2]],
+      [224, [0, 0]],
+      [251, [0, 1]],
+      [end, [0, 1]],
+    ]),
+    bend: keys([
+      [0, 1],
+      [58, 3],
+      [91, -3],
+      [133, 5],
+      [170, 2],
+      [208, -1],
+      [237, 0],
+      [end, 0],
+    ]),
+  },
   layers: layers.reverse(),
   markers: [
     { tm: 0, cm: "observe", dr: 42 },
