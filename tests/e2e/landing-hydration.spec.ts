@@ -98,9 +98,10 @@ test("development recovers from a cached hero bundle and hydrates cleanly after 
       "tagName",
       "SPAN",
     );
-    await expect(
-      page.getByRole("button", { name: "Putar cerita Nudge", exact: true }),
-    ).toBeEnabled();
+    await expect(page.locator(".scene-hero")).toHaveAttribute(
+      "data-art-ready",
+      "true",
+    );
     expect(
       await page.evaluate(() =>
         localStorage.getItem("hydration-regression-sentinel"),
@@ -108,9 +109,10 @@ test("development recovers from a cached hero bundle and hydrates cleanly after 
     ).toBe("keep");
     expect(hydrationErrors).toEqual([]);
     await page.reload();
-    await expect(
-      page.getByRole("button", { name: "Putar cerita Nudge", exact: true }),
-    ).toBeEnabled();
+    await expect(page.locator(".scene-hero")).toHaveAttribute(
+      "data-art-ready",
+      "true",
+    );
     expect(hydrationErrors).toEqual([]);
   } finally {
     await context.close();

@@ -134,11 +134,10 @@ test("all scene loops run in view and pause offscreen without resetting", async 
     );
     if (kind === "hero") {
       expect(animations.length).toBeGreaterThan(0);
-      expect(animations.some((a) => !a.infinite && a.state === "running")).toBe(
+      expect(animations.some((a) => a.infinite && a.state === "running")).toBe(
         true,
       );
-      expect(animations.some((a) => a.duration === 9400)).toBe(true);
-      expect(animations.every((a) => a.duration <= 9400)).toBe(true);
+      expect(animations.every((a) => a.duration === 12000)).toBe(true);
       continue;
     }
     expect(animations.some((a) => a.infinite && a.state === "running")).toBe(
@@ -187,31 +186,38 @@ test("hero keeps C1 visible when animated pose downloads fail", async ({
     )
     .toBe(true);
   await expect(hero.locator(".hero-mascot-wave")).toHaveCSS("opacity", "1");
-  await expect(
-    page.getByRole("button", { name: "Putar cerita Nudge" }),
-  ).toBeDisabled();
+  await expect(hero.locator("button")).toHaveCount(0);
   expect(
     await hero.evaluate((node) => node.getAnimations({ subtree: true }).length),
   ).toBe(0);
   await expect(page.locator(".alive-hero-cta")).toHaveAttribute("href", "/app");
 });
 
-test("hero replay restarts the complete C1 story", async ({ page }) => {
+test("hero loops automatically and pauses its timeline offscreen", async ({
+  page,
+}) => {
   test.setTimeout(60000);
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
   const hero = page.locator(".scene-hero");
   await hero.scrollIntoViewIfNeeded();
-  const replay = page.getByRole("button", { name: "Putar cerita Nudge" });
-  await expect(replay).toBeEnabled();
+  await expect(hero).toHaveAttribute("data-art-ready", "true");
   await expect(hero).toHaveAttribute("data-running", "true");
-  await page.waitForTimeout(9500);
-  await expect(hero.locator(".hero-mascot-journal")).toHaveCSS("opacity", "1");
-  await replay.click();
-  await expect(hero.locator(".hero-mascot-wave")).toHaveCSS("opacity", "1");
-  await expect(hero.locator(".hero-mascot-journal")).toHaveCSS("opacity", "0");
-  await expect(page.getByRole("status")).toContainText("diputar ulang");
-  await page.waitForTimeout(500);
+  await expect(hero.locator("button")).toHaveCount(0);
+  await expect(page.getByText("Putar cerita", { exact: true })).toHaveCount(0);
+  await expect
+    .poll(
+      () =>
+        hero
+          .locator(".hero-phone")
+          .evaluate(
+            (node) =>
+              node.getAnimations()[0]?.effect?.getComputedTiming()
+                .currentIteration ?? 0,
+          ),
+      { timeout: 16000 },
+    )
+    .toBeGreaterThanOrEqual(1);
   await page.locator(".scene-welcome").scrollIntoViewIfNeeded();
   await expect(hero).toHaveAttribute("data-running", "false");
   const elapsed = () =>
@@ -224,9 +230,6 @@ test("hero replay restarts the complete C1 story", async ({ page }) => {
   await hero.scrollIntoViewIfNeeded();
   await expect(hero).toHaveAttribute("data-running", "true");
   expect(await elapsed()).toBeGreaterThanOrEqual(pausedAt);
-  await expect(hero.locator(".hero-mascot-journal")).toHaveCSS("opacity", "1", {
-    timeout: 11000,
-  });
 });
 
 test("licensed players pause offscreen and leave visible static posters", async ({
