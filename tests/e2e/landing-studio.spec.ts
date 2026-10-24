@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { mkdir } from "node:fs/promises";
 
-test("landing tells seven distinct stories with decoded artwork", async ({
+test("landing tells eight distinct stories with decoded artwork", async ({
   page,
 }) => {
   await page.goto("/");
@@ -11,19 +11,34 @@ test("landing tells seven distinct stories with decoded artwork", async ({
   );
   await expect(page.locator("h1")).toHaveAttribute("lang", "en");
   const scenes = page.locator("[data-alive-scene]");
-  await expect(scenes).toHaveCount(7);
+  await expect(scenes).toHaveCount(8);
   expect(
     await scenes.evaluateAll((nodes) =>
       nodes.map((node) => node.getAttribute("data-alive-scene")),
     ),
-  ).toEqual(["hero", "phone", "time", "move", "tidy", "journal", "welcome"]);
+  ).toEqual([
+    "hero",
+    "phone",
+    "time",
+    "how",
+    "move",
+    "tidy",
+    "journal",
+    "welcome",
+  ]);
   for (const scene of await scenes.all()) {
     await scene.scrollIntoViewIfNeeded();
-    await expect(scene).toHaveAttribute("aria-label", /.+/);
+    expect(
+      await scene.evaluate(
+        (node) =>
+          Boolean(node.getAttribute("aria-label")) ||
+          Boolean(node.getAttribute("aria-labelledby")),
+      ),
+    ).toBe(true);
     const kind = await scene.getAttribute("data-alive-scene");
-    await expect(scene.locator(".c1-portrait")).toHaveCount(
-      kind === "hero" || kind === "welcome" ? 1 : 0,
-    );
+    await expect(
+      scene.locator(kind === "hero" ? ".hero-mascot-wave" : ".c1-portrait"),
+    ).toHaveCount(kind === "hero" || kind === "welcome" ? 1 : 0);
     await expect
       .poll(() =>
         scene
@@ -33,7 +48,9 @@ test("landing tells seven distinct stories with decoded artwork", async ({
           ),
       )
       .toBe(true);
-    await expect(scene).toHaveCSS("pointer-events", "none");
+    if (kind !== "how") {
+      await expect(scene).toHaveCSS("pointer-events", "none");
+    }
   }
   await expect(
     page.getByText("Tulisanmu tetap milikmu. Nudge tidak menyimpannya."),
@@ -115,6 +132,15 @@ test("all scene loops run in view and pause offscreen without resetting", async 
         state: a.playState,
       })),
     );
+    if (kind === "hero") {
+      expect(animations.length).toBeGreaterThan(0);
+      expect(animations.some((a) => !a.infinite && a.state === "running")).toBe(
+        true,
+      );
+      expect(animations.some((a) => a.duration === 9400)).toBe(true);
+      expect(animations.every((a) => a.duration <= 9400)).toBe(true);
+      continue;
+    }
     expect(animations.some((a) => a.infinite && a.state === "running")).toBe(
       true,
     );
@@ -123,12 +149,13 @@ test("all scene loops run in view and pause offscreen without resetting", async 
     ).toBe(true);
   }
   const hero = page.locator(".scene-hero");
+  await page.locator(".scene-welcome").scrollIntoViewIfNeeded();
   await expect(hero).toHaveAttribute("data-running", "false");
   expect(
     await hero.evaluate((node) =>
       node
         .getAnimations({ subtree: true })
-        .every((a) => a.playState === "paused"),
+        .every((a) => a.playState !== "running"),
     ),
   ).toBe(true);
   await hero.scrollIntoViewIfNeeded();
@@ -136,6 +163,70 @@ test("all scene loops run in view and pause offscreen without resetting", async 
   await expect(page.getByRole("button", { name: /jeda|pause/i })).toHaveCount(
     0,
   );
+});
+
+test("hero keeps C1 visible when animated pose downloads fail", async ({
+  page,
+}) => {
+  await page.route("**/brand/landing/motion/c1-*.webp", (route) =>
+    route.abort("failed"),
+  );
+  await page.goto("/");
+  const hero = page.locator(".scene-hero");
+  await expect(hero).toHaveAttribute("data-static", "true");
+  const fallback = hero.locator(".hero-mascot-wave img");
+  await expect(fallback).toHaveAttribute(
+    "src",
+    "/brand/mascot/nudge-turtle-wave.png",
+  );
+  await expect
+    .poll(() =>
+      fallback.evaluate(
+        (image: HTMLImageElement) => image.complete && image.naturalWidth > 0,
+      ),
+    )
+    .toBe(true);
+  await expect(hero.locator(".hero-mascot-wave")).toHaveCSS("opacity", "1");
+  await expect(
+    page.getByRole("button", { name: "Putar cerita Nudge" }),
+  ).toBeDisabled();
+  expect(
+    await hero.evaluate((node) => node.getAnimations({ subtree: true }).length),
+  ).toBe(0);
+  await expect(page.locator(".alive-hero-cta")).toHaveAttribute("href", "/app");
+});
+
+test("hero replay restarts the complete C1 story", async ({ page }) => {
+  test.setTimeout(60000);
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/");
+  const hero = page.locator(".scene-hero");
+  await hero.scrollIntoViewIfNeeded();
+  const replay = page.getByRole("button", { name: "Putar cerita Nudge" });
+  await expect(replay).toBeEnabled();
+  await expect(hero).toHaveAttribute("data-running", "true");
+  await page.waitForTimeout(9500);
+  await expect(hero.locator(".hero-mascot-journal")).toHaveCSS("opacity", "1");
+  await replay.click();
+  await expect(hero.locator(".hero-mascot-wave")).toHaveCSS("opacity", "1");
+  await expect(hero.locator(".hero-mascot-journal")).toHaveCSS("opacity", "0");
+  await expect(page.getByRole("status")).toContainText("diputar ulang");
+  await page.waitForTimeout(500);
+  await page.locator(".scene-welcome").scrollIntoViewIfNeeded();
+  await expect(hero).toHaveAttribute("data-running", "false");
+  const elapsed = () =>
+    hero
+      .locator(".hero-phone")
+      .evaluate((node) => Number(node.getAnimations()[0].currentTime));
+  const pausedAt = await elapsed();
+  await page.waitForTimeout(250);
+  expect(await elapsed()).toBeCloseTo(pausedAt, 0);
+  await hero.scrollIntoViewIfNeeded();
+  await expect(hero).toHaveAttribute("data-running", "true");
+  expect(await elapsed()).toBeGreaterThanOrEqual(pausedAt);
+  await expect(hero.locator(".hero-mascot-journal")).toHaveCSS("opacity", "1", {
+    timeout: 11000,
+  });
 });
 
 test("licensed players pause offscreen and leave visible static posters", async ({
@@ -189,7 +280,7 @@ test("runtime reduced motion and hidden document halt all scene motion", async (
     await hero.evaluate((node) =>
       node
         .getAnimations({ subtree: true })
-        .every((a) => a.playState === "paused"),
+        .every((a) => a.playState !== "running"),
     ),
   ).toBe(true);
   await page.evaluate(() => {
@@ -283,7 +374,7 @@ test("without JavaScript the complete story and native links remain available", 
     await expect(page.getByRole("heading", { level: 1 })).toContainText(
       "Small steps.",
     );
-    await expect(page.locator("[data-alive-scene]")).toHaveCount(7);
+    await expect(page.locator("[data-alive-scene]")).toHaveCount(8);
     await expect(page.locator("fieldset")).toHaveAttribute("disabled", "");
     for (const radio of await page.getByRole("radio").all()) {
       await expect(radio).toBeDisabled();
@@ -293,11 +384,13 @@ test("without JavaScript the complete story and native links remain available", 
     ).toHaveAttribute("href", "/app?minutes=5");
     expect(
       await page
-        .locator(".nudge-alive")
-        .evaluate((node) =>
-          node
-            .getAnimations({ subtree: true })
-            .every((a) => a.playState === "paused"),
+        .locator("[data-alive-scene]")
+        .evaluateAll((nodes) =>
+          nodes.every((node) =>
+            node
+              .getAnimations({ subtree: true })
+              .every((a) => a.playState !== "running"),
+          ),
         ),
     ).toBe(true);
     await expect(page.locator(".alive-hero-cta")).toHaveAttribute(
