@@ -7,6 +7,15 @@ function ChooseArt() {
         const x = 80 + index * 50;
         return (
           <g key={color} className={`how-mood how-mood-${index}`}>
+            <circle
+              className="how-mood-focus"
+              cx={x}
+              cy="65"
+              r="27"
+              fill="none"
+              stroke="#315F5E"
+              strokeWidth="2.5"
+            />
             <circle cx={x} cy="65" r="21" fill={color} />
             <g className="how-mood-eyes" fill="#315F5E">
               <circle cx={x - 6} cy="63" r="2.5" />
@@ -26,15 +35,6 @@ function ChooseArt() {
           </g>
         );
       })}
-      <circle
-        className="how-mood-focus"
-        cx="180"
-        cy="65"
-        r="27"
-        fill="none"
-        stroke="#315F5E"
-        strokeWidth="2.5"
-      />
       <rect x="57" y="105" width="138" height="10" rx="5" fill="#D5E0DB" />
       <rect
         className="how-choice-fill"

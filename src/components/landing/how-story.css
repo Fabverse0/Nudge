@@ -80,7 +80,15 @@
   animation-delay: 1.3s;
 }
 .nudge-alive .how-mood-focus {
-  animation: how-mood-select 9s cubic-bezier(0.45, 0, 0.22, 1) infinite;
+  opacity: 0;
+  animation: how-focus-first 9s ease infinite;
+}
+.nudge-alive .how-mood-1 .how-mood-focus {
+  animation-name: how-focus-second;
+}
+.nudge-alive .how-mood-2 .how-mood-focus {
+  opacity: 1;
+  animation-name: how-focus-third;
 }
 .nudge-alive .how-choice-fill {
   transform-origin: 57px 110px;
@@ -139,30 +147,38 @@
     transform: scaleY(0.12);
   }
 }
-@keyframes how-mood-select {
+@keyframes how-focus-first {
   0%,
   5% {
-    transform: translateX(-100px);
     opacity: 1;
   }
-  12%,
-  16% {
-    transform: translateX(-50px);
-    opacity: 1;
-  }
-  23%,
-  88% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  94% {
-    transform: translateX(0);
-    opacity: 0;
-  }
-  96%,
+  10%,
   100% {
-    transform: translateX(-100px);
     opacity: 0;
+  }
+}
+@keyframes how-focus-second {
+  0%,
+  6%,
+  20%,
+  100% {
+    opacity: 0;
+  }
+  11%,
+  16% {
+    opacity: 1;
+  }
+}
+@keyframes how-focus-third {
+  0%,
+  17%,
+  94%,
+  100% {
+    opacity: 0;
+  }
+  22%,
+  88% {
+    opacity: 1;
   }
 }
 @keyframes how-choice-fill {

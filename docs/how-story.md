@@ -14,6 +14,8 @@ Revisi setelah komentar berikutnya: bagian Pilih kini menganimasikan tiap wajah 
 
 ## Pemeriksaan
 
+Koreksi presisi cincin: pengguna melihat cincin meleset ketika wajah mengangguk. Cincin tunggal sebelumnya berada di luar grup wajah dan memiliki translasi sendiri. Kini tiap wajah memiliki cincin konsentris dalam grup yang sama; opacity menyorot ketiganya bergiliran. Pemeriksaan DOM sebelum perbaikan gagal (1 cincin, 0 menempel ke grup wajah). Sesudah perbaikan lulus (3 cincin di grup masing-masing), dengan selisih pusat X/Y setiap cincin dan wajah kurang dari 0,1 CSS px pada preview desktop. Reduced motion tetap menampilkan hanya cincin wajah ketiga.
+
 Render desktop dan 390 px ditinjau. DOM 320/390 px tidak menunjukkan overflow horizontal. Pada 320 px kolom ilustrasi diperkecil menjadi 84 px untuk memberi ruang teks. Typecheck lulus. Impeccable memberi advisory ukuran/radius dan warna; ukuran serta radius diselaraskan dengan skala, sementara sage pucat dan teks pendukung mengikuti nilai khusus landing yang sudah tercatat di DESIGN.md. Detector bukan bukti penerimaan estetika. Tidak menjalankan suite pengujian aplikasi atau pemeriksaan Android untuk revisi ini.
 
 Preview localhost dipakai untuk menghindari CSS lama pada cache preview 127.0.0.1. Tidak mengubah service worker. Penerimaan visual menunggu peninjauan pengguna.
