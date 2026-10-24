@@ -288,3 +288,21 @@ Peringatan hydration lain muncul ketika pengujian mengambil screenshot sebelum i
 - Tujuh cerita memiliki bentuk berbeda; hanya hero dan penutup memakai C1. Dua animasi Lottie diperiksa terus bergerak setelah lebih dari dua siklus, dengan fallback SVG dan pemuatan lokal.
 - Taste: source lint 0 FAIL/0 WARN; inspector final 0 FAIL/2 WARN setelah tiga pengecualian terdokumentasi, bukan kelulusan tanpa pengecualian. Rubric internal 7,2 dengan keterbatasan campuran gaya dan ruang terbuka.
 - Sumber/lisensi, pengecualian, screenshot, kritik visual, serta batas bukti lengkap ada di [revisi motion landing](./landing-motion-revision.md). Android fisik dan kualitas artistik menurut pengguna tidak disimpulkan dari tes otomatis.
+
+## Pemulihan hydration dari cache development, 24 Oktober 2026
+
+Tab pengguna memperlihatkan HTML hero v7 berhadapan dengan kode klien hero SVG lama. Worker `nudge-static-v3` menyimpan seluruh `/_next/static/` secara cache-first, termasuk respons development `no-store` yang URL-nya dapat digunakan kembali setelah perubahan kode. Reproduksi browser dengan worker cache-first lama dan bundle hero yang sengaja dibedakan menghasilkan hydration mismatch yang sama.
+
+Perbaikan:
+
+- Cache `nudge-static-v4` hanya menyimpan dan menggunakan ulang bundle Next yang responsnya bertanda `immutable`. Halaman offline dan ikon tetap masuk cache statis.
+- Root layout memuat loader `beforeInteractive` khusus development untuk membatalkan registrasi `/sw.js` milik Nudge dan menghapus cache dengan awalan `nudge-static-`. Jika dokumen masih dikendalikan worker lama, satu reload melepaskan controller tersebut dan mengambil kode terbaru. Pemulihan mengganti dokumen yang telanjur memakai bundle lama; validasi hydration dilakukan pada dokumen sesudah pemulihan.
+- Loader tidak mengakses localStorage. Regresi memeriksa bahwa nilai localStorage tetap ada setelah pemulihan.
+
+Bukti pemeriksaan:
+
+- `npx vitest run src/lib/service-worker.test.ts`: 3 lulus, mencakup bundle development yang berubah, cache mutable lama, dan penggunaan cache bundle produksi immutable saat offline.
+- `tests/e2e/landing-hydration.spec.ts`: desktop Chrome dan emulasi Pixel 7 lulus. Worker lama serta bundle yang berbeda dipasang hanya dalam profil pengujian terpisah. Sesudah pemulihan, controller/registrasi/cache Nudge development sudah tidak aktif, markup hero sesuai, dan reload berikutnya tidak menghasilkan hydration error.
+- Tab in-app browser pengguna dimuat ulang. Tombol hero aktif dan tidak ada log error baru setelah reload; log historis dipisahkan dari hasil pemeriksaan baru.
+- Build produksi `npm run build -- --webpack` berhasil, termasuk TypeScript. ESLint file yang diubah dan pemeriksaan whitespace Git lulus.
+- Server produksi sementara pada port 3102 diperiksa melalui Chrome: tidak ada error hydration, loader development tidak ada dalam HTML produksi, 13 chunk immutable tersimpan di cache v4, serta navigasi offline menampilkan halaman “Koneksi sedang terputus”. Server development utama tetap di port 3100. Ini bukan pemeriksaan instalasi Android fisik.
