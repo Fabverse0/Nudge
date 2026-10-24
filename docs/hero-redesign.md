@@ -1,6 +1,6 @@
 # Hero Nudge: dari scrolling ke satu kegiatan
 
-Status: referensi dan storyboard v1 tersedia untuk persetujuan pengguna. Hero aktif belum diganti. Tanggal pemeriksaan: 24 Oktober 2026.
+Status: pengguna menyetujui storyboard v1; cuplikan kontak ponsel tersedia untuk ditinjau dalam keadaan bergerak. Hero aktif belum diganti. Tanggal pemeriksaan: 24 Oktober 2026.
 
 ## Masalah yang ditangani
 
@@ -52,7 +52,7 @@ Tidak ada jaminan format tertentu akan menghasilkan animasi bagus tanpa pekerjaa
 - [x] Source hero, player Lottie, sumber ponsel, serta identitas C1 diperiksa.
 - [x] Referensi primer dan satu kandidat aset gratis diteliti; keterbatasan visual dicatat.
 - [x] Lima pose konsep tersedia secara lokal.
-- [ ] Pengguna menyetujui bentuk dan storyboard.
+- [x] Pengguna menyetujui bentuk dan storyboard melalui jawaban “Setuju, lanjut ke cuplikan animasi”.
 - [ ] Cuplikan interaksi ponsel dibuat dan disetujui dalam keadaan bergerak.
 - [ ] Adegan lengkap diproduksi dan diintegrasikan khusus hero.
 - [ ] Replay, pause, reduced motion, tanpa JavaScript, kegagalan pemuatan, dan hidrasi diperiksa.
@@ -61,3 +61,24 @@ Tidak ada jaminan format tertentu akan menghasilkan animasi bagus tanpa pekerjaa
 - [ ] Pengguna menerima kualitas artistik animasi final.
 
 Tidak ada tes runtime baru pada tahap referensi/storyboard karena kode runtime belum berubah. Belum ada instalasi, biaya layanan animasi, push, atau klaim kelancaran Android fisik.
+
+## Cuplikan kontak ponsel
+
+Preview terpisah dapat dijalankan melalui `node scripts/preview-hero-contact.mjs`, lalu dibuka pada `http://127.0.0.1:3101/`. Preview ini tidak menambah route Next.js atau mengubah hero aktif. Regenerasi JSON melalui `node scripts/build-hero-contact.mjs`.
+
+Cuplikan Lottie asli sepanjang 5,6 detik memuat fase mengamati, bersiap, meraih, menyentuh, menurunkan, melepas, serta menenangkan badan. Path tempurung dan kaki berubah bentuk, kepala memiliki ekspresi dan pandangan terpisah, serta bidang ponsel berubah perspektif ketika diletakkan. Koreografi disampel dari spline monoton agar gerak tidak berhenti pada setiap pose perantara. Spesifikasi 60 fps adalah timeline ekspor, bukan klaim pengukuran 60 fps pada perangkat.
+
+Kontrol preview mencakup replay, jeda/lanjut, kecepatan normal/setengah, scrubber, dan enam pose kunci. Runtime Lottie dan font dilayani dari dependensi lokal yang sudah ada. Tidak ada pemasangan atau permintaan ke layanan pihak ketiga. Reduced motion menampilkan pose akhir sampai pengguna memilih putar; tab tersembunyi menjeda player.
+
+Bukti tahap cuplikan:
+
+- JSON dirender oleh `lottie_light` yang sudah terpasang; 15 layer, 551.664 byte mentah dan 107.643 byte gzip pada keluaran saat pemeriksaan. Preview lokal menyajikan JSON tanpa kompresi. Optimasi produksi masih terbuka.
+- ESLint pada kedua script lulus. Format file produksi cuplikan diperiksa dengan Prettier.
+- Replay melalui Enter, jeda, kecepatan setengah, dan tombol pose kunci berfungsi dalam browser.
+- Pose menyentuh, menurunkan, dan meletakkan ditinjau secara visual. Lebar 390 dan 320 px tidak menunjukkan overflow horizontal.
+- Pemeriksaan numerik pada 94 frame kontak menunjukkan jarak pusat kaki ke sisi ponsel maksimal 2,824 unit artboard; radius kaki 17 unit. Ini bukti keterhubungan kontak, bukan bukti kualitas estetika.
+- Log error browser kosong pada pemeriksaan playback.
+
+Saat review awal, urutan layer menutupi wajah; susunan layer dan gaya telah diperbaiki dan wajah diperiksa ulang setelah reload. Gerak meraih juga diperpanjang supaya tidak berpindah jauh dalam delapan frame.
+
+Cuplikan belum mencakup penggeseran ponsel ke kiri atau aktivitas jurnal. Bentuk vektornya masih perlu penilaian pengguna terhadap storyboard. Reduced motion dan perpindahan tab tersedia dalam source tetapi belum diperiksa lewat emulasi browser pada tahap ini. Build aplikasi, suite landing produksi, dan Android fisik belum dijalankan untuk cuplikan yang belum terintegrasi ini. Persetujuan artistik cuplikan tetap menjadi gerbang sebelum produksi adegan penuh.

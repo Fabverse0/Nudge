@@ -15,3 +15,11 @@ Brief generasi: satu lembar storyboard lima panel berurutan, C1 quadruped dengan
 Gambar diperiksa langsung setelah generasi: lima pose terbaca, ekspresi berubah, ponsel telungkup pada akhir, dan jurnal terlihat. Ada beberapa bidang shading lembut. Posisi ponsel dan ukuran properti antarpanel belum menjadi koordinat produksi; normalisasi serta gerak penghubung diperlukan sebelum integrasi.
 
 Rincian referensi, keputusan teknik, dan gerbang berikutnya ada di [hero-redesign.md](../../hero-redesign.md).
+
+## contact-study.json dan contact-preview.html
+
+Cuplikan vektor asli yang dibuat melalui `scripts/build-hero-contact.mjs`, bukan hasil konversi raster storyboard. Tidak ada aset karakter pihak ketiga. Runtime preview memakai `lottie-web` dan font Nunito yang sudah tersedia pada proyek; file runtime tidak disalin ke folder ini.
+
+Jalankan `node scripts/build-hero-contact.mjs` untuk regenerasi. Jalankan `node scripts/preview-hero-contact.mjs` untuk membuka preview lokal pada port 3101. Server hanya melayani daftar file preview yang ditentukan dan bind ke loopback.
+
+Status: storyboard disetujui; cuplikan gerak menunggu penilaian pengguna sebelum produksi adegan penuh. File ini belum dipakai oleh route landing atau aplikasi.
