@@ -1,12 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useSyncExternalStore } from "react";
-import { ArrowCounterClockwiseIcon } from "@phosphor-icons/react";
-
-const subscribe = () => () => {};
-const clientReady = () => true;
-const serverReady = () => false;
+import { useState } from "react";
 
 function PhoneIllustration() {
   return (
@@ -121,10 +116,8 @@ function PhoneIllustration() {
 }
 
 export function HeroStory() {
-  const [replay, setReplay] = useState(0);
   const [loadedPoses, setLoadedPoses] = useState(0);
   const [assetFailed, setAssetFailed] = useState(false);
-  const ready = useSyncExternalStore(subscribe, clientReady, serverReady);
 
   return (
     <div
@@ -132,87 +125,69 @@ export function HeroStory() {
       data-alive-scene="hero"
       data-art-ready={loadedPoses === 7 ? "true" : undefined}
       data-static={assetFailed ? "true" : undefined}
+      role="img"
       aria-label="Nudge meletakkan ponsel, memilih kegiatan, dan mulai menulis jurnal"
     >
-      <button
-        type="button"
-        className="hero-greeting"
-        aria-label="Putar cerita Nudge"
-        disabled={!ready || loadedPoses !== 7 || assetFailed}
-        onClick={() => setReplay((value) => value + 1)}
-      >
-        <span className="hero-story-art" aria-hidden="true">
-          <span className="hero-story-sequence" key={replay}>
-            <span className="hero-story-backdrop" />
-            <span className="hero-story-ground" />
-            <span className="hero-phone">
-              <PhoneIllustration />
-            </span>
-            <span className="hero-mascot hero-mascot-wave">
-              <Image
-                src={
-                  assetFailed
-                    ? "/brand/mascot/nudge-turtle-wave.png"
-                    : "/brand/landing/motion/c1-wave.webp"
-                }
-                alt=""
-                width={1280}
-                height={1280}
-                priority
-                unoptimized
-                draggable={false}
-                onLoad={() => setLoadedPoses((value) => value | 1)}
-                onError={() => setAssetFailed(true)}
-              />
-            </span>
-            <span className="hero-mascot hero-mascot-think">
-              <Image
-                src="/brand/landing/motion/c1-think.webp"
-                alt=""
-                width={1254}
-                height={1254}
-                priority
-                unoptimized
-                draggable={false}
-                onLoad={() => setLoadedPoses((value) => value | 2)}
-                onError={() => setAssetFailed(true)}
-              />
-            </span>
-            <span className="hero-mascot hero-mascot-journal">
-              <Image
-                src="/brand/landing/motion/c1-journal.webp"
-                alt=""
-                width={1254}
-                height={1254}
-                priority
-                unoptimized
-                draggable={false}
-                onLoad={() => setLoadedPoses((value) => value | 4)}
-                onError={() => setAssetFailed(true)}
-              />
-              <svg className="hero-journal-ink" viewBox="0 0 1254 1254">
-                <path pathLength={1} d="M570 1000c30-6 50 2 75-7" />
-                <path pathLength={1} d="M585 1020c22-3 40 1 63-4" />
-              </svg>
-            </span>
-            <span className="hero-story-footsteps">
-              <i />
-              <i />
-              <i />
-            </span>
+      <span className="hero-story-art" aria-hidden="true">
+        <span className="hero-story-sequence">
+          <span className="hero-story-backdrop" />
+          <span className="hero-story-ground" />
+          <span className="hero-phone">
+            <PhoneIllustration />
+          </span>
+          <span className="hero-mascot hero-mascot-wave">
+            <Image
+              src={
+                assetFailed
+                  ? "/brand/mascot/nudge-turtle-wave.png"
+                  : "/brand/landing/motion/c1-wave.webp"
+              }
+              alt=""
+              width={1280}
+              height={1280}
+              priority
+              unoptimized
+              draggable={false}
+              onLoad={() => setLoadedPoses((value) => value | 1)}
+              onError={() => setAssetFailed(true)}
+            />
+          </span>
+          <span className="hero-mascot hero-mascot-think">
+            <Image
+              src="/brand/landing/motion/c1-think.webp"
+              alt=""
+              width={1254}
+              height={1254}
+              priority
+              unoptimized
+              draggable={false}
+              onLoad={() => setLoadedPoses((value) => value | 2)}
+              onError={() => setAssetFailed(true)}
+            />
+          </span>
+          <span className="hero-mascot hero-mascot-journal">
+            <Image
+              src="/brand/landing/motion/c1-journal.webp"
+              alt=""
+              width={1254}
+              height={1254}
+              priority
+              unoptimized
+              draggable={false}
+              onLoad={() => setLoadedPoses((value) => value | 4)}
+              onError={() => setAssetFailed(true)}
+            />
+            <svg className="hero-journal-ink" viewBox="0 0 1254 1254">
+              <path pathLength={1} d="M570 1000c30-6 50 2 75-7" />
+              <path pathLength={1} d="M585 1020c22-3 40 1 63-4" />
+            </svg>
+          </span>
+          <span className="hero-story-footsteps">
+            <i />
+            <i />
+            <i />
           </span>
         </span>
-        <span className="hero-replay-hint">
-          <ArrowCounterClockwiseIcon
-            size={16}
-            weight="bold"
-            aria-hidden="true"
-          />
-          <span>Putar cerita</span>
-        </span>
-      </button>
-      <span className="sr-only" role="status" aria-live="polite" key={replay}>
-        {replay > 0 ? "Cerita C1 diputar ulang." : ""}
       </span>
     </div>
   );

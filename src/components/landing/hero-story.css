@@ -1,28 +1,7 @@
 .nudge-alive .hero-story {
-  --hero-duration: 9.4s;
+  --hero-duration: 12s;
   --hero-play-state: paused;
   --hero-ease: cubic-bezier(0.22, 0.78, 0.2, 1);
-}
-.nudge-alive .hero-greeting {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  border-radius: 24px;
-  background: transparent;
-  color: #315f5e;
-  cursor: pointer;
-  pointer-events: auto;
-  -webkit-tap-highlight-color: transparent;
-}
-.nudge-alive .hero-greeting:focus-visible {
-  outline: 3px solid #315f5e;
-  outline-offset: 6px;
-}
-.nudge-alive .hero-greeting:disabled {
-  cursor: default;
 }
 .nudge-alive .hero-story-art,
 .nudge-alive .hero-story-sequence {
@@ -173,108 +152,82 @@
   margin-top: -6%;
   background: #679f9e;
 }
-.nudge-alive .hero-replay-hint {
-  position: absolute;
-  z-index: 8;
-  left: 50%;
-  bottom: 1%;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 8px 12px;
-  border: 1px solid #6b8583;
-  border-radius: 999px;
-  background: #faf8f4;
-  color: #315f5e;
-  font-size: 14px;
-  font-weight: 800;
-  opacity: 0.94;
-  transform: translateX(-50%);
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    opacity 180ms ease;
-}
-.nudge-alive .hero-greeting:hover .hero-replay-hint {
-  border-color: #679f9e;
-  background: #e8f1ec;
-  opacity: 1;
-}
-.nudge-alive .hero-greeting:disabled .hero-replay-hint {
-  visibility: hidden;
-}
 .nudge-alive .hero-story[data-running][data-art-ready="true"] .hero-phone {
-  animation: hero-phone-set-down var(--hero-duration) var(--hero-ease) 1 both
-    var(--hero-play-state);
+  animation: hero-phone-set-down var(--hero-duration) var(--hero-ease) infinite
+    both var(--hero-play-state);
 }
 .nudge-alive
   .hero-story[data-running][data-art-ready="true"]
   .hero-phone-feed-content {
-  animation: hero-feed-slow var(--hero-duration) cubic-bezier(0.4, 0, 0.2, 1) 1
-    both var(--hero-play-state);
+  animation: hero-feed-slow var(--hero-duration) cubic-bezier(0.4, 0, 0.2, 1)
+    infinite both var(--hero-play-state);
 }
 .nudge-alive .hero-story[data-running][data-art-ready="true"] .hero-phone-back {
-  animation: hero-phone-back var(--hero-duration) ease 1 both
+  animation: hero-phone-back var(--hero-duration) ease infinite both
     var(--hero-play-state);
 }
 .nudge-alive
   .hero-story[data-running][data-art-ready="true"]
   .hero-phone-camera {
-  animation: hero-camera-show var(--hero-duration) ease 1 both
+  animation: hero-camera-show var(--hero-duration) ease infinite both
     var(--hero-play-state);
 }
 .nudge-alive
   .hero-story[data-running][data-art-ready="true"]
   .hero-mascot-wave {
-  animation: hero-wave-arrive var(--hero-duration) var(--hero-ease) 1 both
-    var(--hero-play-state);
+  animation: hero-wave-arrive var(--hero-duration) var(--hero-ease) infinite
+    both var(--hero-play-state);
 }
 .nudge-alive
   .hero-story[data-running][data-art-ready="true"]
   .hero-mascot-think {
-  animation: hero-think-pose var(--hero-duration) var(--hero-ease) 1 both
+  animation: hero-think-pose var(--hero-duration) var(--hero-ease) infinite both
     var(--hero-play-state);
 }
 .nudge-alive
   .hero-story[data-running][data-art-ready="true"]
   .hero-mascot-journal {
-  animation: hero-journal-pose var(--hero-duration) var(--hero-ease) 1 both
-    var(--hero-play-state);
+  animation: hero-journal-pose var(--hero-duration) var(--hero-ease) infinite
+    both var(--hero-play-state);
 }
 .nudge-alive
   .hero-story[data-running][data-art-ready="true"]
   .hero-journal-ink
   path:first-child {
-  animation: hero-write-line 1s 7.05s ease-out 1 both var(--hero-play-state);
+  animation: hero-write-first-line var(--hero-duration) linear infinite both
+    var(--hero-play-state);
 }
 .nudge-alive
   .hero-story[data-running][data-art-ready="true"]
   .hero-journal-ink
   path:last-child {
-  animation: hero-write-line 0.8s 7.55s ease-out 1 both var(--hero-play-state);
+  animation: hero-write-second-line var(--hero-duration) linear infinite both
+    var(--hero-play-state);
 }
 .nudge-alive
   .hero-story[data-running][data-art-ready="true"]
   .hero-story-footsteps {
-  animation: hero-footsteps 2.3s 5.2s ease 1 both var(--hero-play-state);
+  animation: hero-footsteps var(--hero-duration) ease infinite both
+    var(--hero-play-state);
 }
 .nudge-alive .hero-story:not([data-running="true"]) * {
   animation-play-state: paused;
 }
 @keyframes hero-phone-set-down {
   0%,
-  7% {
+  5.5%,
+  100% {
     transform: translate(16%, -12%) rotate(-13deg) scale(0.94);
   }
-  20%,
-  39% {
+  15.7%,
+  30.6% {
     transform: translate(0, 0) rotate(-8deg) scale(1);
   }
-  51% {
+  40% {
     transform: translate(-3%, 11%) rotate(35deg) scale(0.96);
   }
-  64%,
-  100% {
+  50%,
+  88% {
     transform: translate(-20%, 19%) rotate(82deg) scale(0.82);
   }
 }
@@ -293,113 +246,131 @@
 }
 @keyframes hero-feed-slow {
   0%,
-  8% {
+  6%,
+  96%,
+  100% {
     transform: translateY(0);
   }
-  18% {
+  14% {
     transform: translateY(-26px);
   }
-  30% {
+  24% {
     transform: translateY(-55px);
   }
-  39%,
-  43%,
-  100% {
+  31%,
+  88% {
     transform: translateY(-70px);
   }
 }
 @keyframes hero-phone-back {
   0%,
-  43% {
+  34%,
+  97%,
+  100% {
     opacity: 0;
   }
-  53%,
-  100% {
+  42%,
+  88% {
     opacity: 1;
   }
 }
 @keyframes hero-camera-show {
   0%,
-  46% {
+  36%,
+  97%,
+  100% {
     opacity: 0;
   }
-  54%,
-  100% {
+  43%,
+  88% {
     opacity: 1;
   }
 }
 @keyframes hero-wave-arrive {
-  0% {
-    opacity: 0;
-    transform: translate(-3%, 7%) rotate(2deg) scale(0.94);
-  }
-  9% {
-    opacity: 1;
-  }
-  17%,
-  31% {
+  0%,
+  24%,
+  97%,
+  100% {
     opacity: 1;
     transform: translate(0, 0) rotate(0) scale(1);
   }
-  39% {
+  31%,
+  88% {
     opacity: 0;
     transform: translate(2%, -2%) rotate(-1deg) scale(0.98);
-  }
-  100% {
-    opacity: 0;
   }
 }
 @keyframes hero-think-pose {
   0%,
-  28% {
+  22% {
     opacity: 0;
     transform: translate(2%, 4%) rotate(1deg) scale(0.96);
   }
-  37% {
+  29% {
     opacity: 1;
   }
-  46%,
-  53% {
+  36%,
+  42% {
     opacity: 1;
     transform: translate(0, 0) rotate(0) scale(1);
   }
-  63% {
-    opacity: 0;
-    transform: translate(-2%, 2%) rotate(-1deg) scale(0.98);
-  }
+  49%,
   100% {
     opacity: 0;
+    transform: translate(-2%, 2%) rotate(-1deg) scale(0.98);
   }
 }
 @keyframes hero-journal-pose {
   0%,
-  53% {
+  42% {
     opacity: 0;
     transform: translate(5%, 5%) rotate(2deg) scale(0.95);
   }
-  69% {
+  54%,
+  88% {
     opacity: 1;
     transform: translate(0, 0) rotate(0) scale(1);
   }
+  97%,
   100% {
-    opacity: 1;
-    transform: translate(0, 0) rotate(0) scale(1);
+    opacity: 0;
+    transform: translate(2%, 3%) rotate(-1deg) scale(0.98);
   }
 }
-@keyframes hero-write-line {
-  to {
+@keyframes hero-write-first-line {
+  0%,
+  58.75% {
+    stroke-dashoffset: 1;
+  }
+  67.1%,
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes hero-write-second-line {
+  0%,
+  62.9% {
+    stroke-dashoffset: 1;
+  }
+  69.6%,
+  100% {
     stroke-dashoffset: 0;
   }
 }
 @keyframes hero-footsteps {
   0%,
-  12% {
+  43% {
     opacity: 0;
     clip-path: inset(0 100% 0 0);
   }
-  36%,
-  100% {
+  50%,
+  86% {
     opacity: 0.9;
+    clip-path: inset(0 0 0 0);
+  }
+  94%,
+  100% {
+    opacity: 0;
     clip-path: inset(0 0 0 0);
   }
 }
@@ -421,11 +392,6 @@
   .nudge-alive .hero-story-footsteps {
     left: 20%;
     bottom: 18%;
-  }
-  .nudge-alive .hero-replay-hint {
-    bottom: 0;
-    font-size: 14px;
-    padding: 7px 10px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
