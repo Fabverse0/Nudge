@@ -22,9 +22,6 @@ void main() {
   vec2 world;
   if (uReference > 0.5) {
     world = uOrigin + point * uScale;
-  } else if (uArm > 1.5) {
-    vec2 root = uOrigin + vec2(955.0, 885.0) * uScale + uHead * 0.2;
-    world = root + (source - vec2(860.0, 980.0)) * vec2(0.22, 0.28);
   } else if (uArm > 0.5) {
     vec2 pivot = vec2(955.0, 885.0);
     vec2 contact = vec2(1135.0, 700.0);
@@ -55,33 +52,69 @@ varying vec2 vUV;
 uniform sampler2D uImage;
 uniform float uArm;
 uniform float uReference;
-float boundary(float y) {
-  if (y < 650.0) return mix(1112.0, 1060.0, clamp((y - 610.0) / 40.0, 0.0, 1.0));
-  if (y < 700.0) return mix(1060.0, 1018.0, (y - 650.0) / 50.0);
-  if (y < 760.0) return mix(1018.0, 1006.0, (y - 700.0) / 60.0);
-  if (y < 820.0) return mix(1006.0, 982.0, (y - 760.0) / 60.0);
-  if (y < 870.0) return mix(982.0, 949.0, (y - 820.0) / 50.0);
-  return mix(949.0, 914.0, clamp((y - 870.0) / 40.0, 0.0, 1.0));
-}
 void main() {
   vec4 pixel = texture2D(uImage, vUV);
   if (pixel.a < 0.01) discard;
-  if (uReference > 0.5) {
-    if (uArm > 0.5) discard;
-  } else if (uArm > 1.5) {
-    float radius = length((vUV * 1280.0 - vec2(860.0, 980.0)) / vec2(115.0, 70.0));
-    if (radius > 1.0) discard;
-    pixel.a *= 1.0 - smoothstep(0.85, 1.0, radius);
-  } else {
-    vec2 source = vUV * 1280.0;
-    float along = dot(source - vec2(955.0, 885.0), normalize(vec2(180.0, -185.0)));
-    bool warmSkin = pixel.r > pixel.g * 1.03 && pixel.g > pixel.b * 1.02;
-    bool arm = source.y >= 610.0 && source.y <= 910.0 && source.x >= boundary(source.y) && warmSkin && along > 12.0;
-    if ((uArm > 0.5) != arm) discard;
-    if (uArm > 0.5) pixel.a *= smoothstep(12.0, 45.0, along);
-  }
   gl_FragColor = pixel;
 }`;
+
+// This curve follows the original cheek, retaining its pixels in the body
+// plate. The moving foreleg has its own complete texture, without face pixels.
+const removalOutline =
+  "M 1018 688 C 1027 776 998 854 929 895 " +
+  "L 1280 940 L 1280 605 L 1130 605 C 1084 605 1035 648 1018 688 Z";
+
+function makeParts(image, repair, foreleg) {
+  function plate() {
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 1280;
+    return [canvas, canvas.getContext("2d")];
+  }
+  const removal = new Path2D(removalOutline);
+  const [bodyOriginal, bodyContext] = plate();
+  bodyContext.drawImage(image, 0, 0, 1280, 1280);
+  bodyContext.globalCompositeOperation = "destination-out";
+  bodyContext.fill(removal);
+  const [arm, armContext] = plate();
+  armContext.drawImage(foreleg, 0, 0, 1280, 1280);
+  const pixels = armContext.getImageData(0, 0, 1280, 1280).data;
+  let left = 1280,
+    top = 1280,
+    right = 0,
+    bottom = 0;
+  for (let y = 0; y < 1280; y++) {
+    for (let x = 0; x < 1280; x++) {
+      if (pixels[(y * 1280 + x) * 4 + 3] < 32) continue;
+      left = Math.min(left, x);
+      right = Math.max(right, x);
+      top = Math.min(top, y);
+      bottom = Math.max(bottom, y);
+    }
+  }
+  if (right <= left || bottom <= top) throw new Error("Aset kaki C1 kosong.");
+  armContext.clearRect(0, 0, 1280, 1280);
+  const imageScaleX = foreleg.naturalWidth / 1280;
+  const imageScaleY = foreleg.naturalHeight / 1280;
+  armContext.drawImage(
+    foreleg,
+    left * imageScaleX,
+    top * imageScaleY,
+    (right - left + 1) * imageScaleX,
+    (bottom - top + 1) * imageScaleY,
+    910,
+    625,
+    300,
+    310,
+  );
+
+  const [body, repairedContext] = plate();
+  repairedContext.save();
+  repairedContext.clip(removal);
+  repairedContext.drawImage(repair, 0, 0, 1280, 1280);
+  repairedContext.restore();
+  repairedContext.drawImage(bodyOriginal, 0, 0);
+  return { body, arm };
+}
 
 function sample(track, frame) {
   const values = track.k;
@@ -99,7 +132,7 @@ function sample(track, frame) {
   return a.s.map((value, axis) => value + (b.s[axis] - value) * progress);
 }
 
-export function createOriginalC1Rig(canvas, image, motion) {
+export function createOriginalC1Rig(canvas, image, motion, repair, foreleg) {
   canvas.width = 1040;
   canvas.height = 660;
   const gl = canvas.getContext("webgl", {
@@ -141,13 +174,17 @@ export function createOriginalC1Rig(canvas, image, motion) {
   const uv = gl.getAttribLocation(program, "aUV");
   gl.enableVertexAttribArray(uv);
   gl.vertexAttribPointer(uv, 2, gl.FLOAT, false, 0, 0);
-  const texture = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+  const parts = makeParts(image, repair, foreleg);
+  const textures = [image, parts.body, parts.arm].map((part) => {
+    const texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, part);
+    return texture;
+  });
   gl.enable(gl.BLEND);
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
   gl.viewport(0, 0, canvas.width, canvas.height);
@@ -183,13 +220,14 @@ export function createOriginalC1Rig(canvas, image, motion) {
       gl.uniform2fv(location.uHand, sample(motion.hand, frame));
       gl.uniform1f(location.uBend, sample(motion.bend, frame)[0]);
       gl.uniform1f(location.uReference, reference ? 1 : 0);
-      for (const arm of [1, 2, 0]) {
+      for (const arm of reference ? [0] : [1, 0]) {
+        gl.bindTexture(gl.TEXTURE_2D, textures[reference ? 0 : arm ? 2 : 1]);
         gl.uniform1f(location.uArm, arm);
         gl.drawArrays(gl.TRIANGLES, 0, vertices.length / 2);
       }
     },
     destroy() {
-      gl.deleteTexture(texture);
+      textures.forEach((texture) => gl.deleteTexture(texture));
       gl.deleteBuffer(buffer);
       gl.deleteProgram(program);
       gl.deleteShader(vertex);

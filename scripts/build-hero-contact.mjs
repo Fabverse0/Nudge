@@ -415,7 +415,7 @@ const animation = {
   ddd: 0,
   assets: [],
   c1Motion: {
-    source: "/c1-master.webp",
+    source: "/c1-master.png",
     sourceSize: 1280,
     origin: [26, 25],
     width: 360,

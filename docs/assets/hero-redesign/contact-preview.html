@@ -194,7 +194,7 @@
     <main>
       <header>
         <strong>nudge.</strong>
-        <p>C1 asli, studi gerak v3. Belum hero final.</p>
+        <p>C1 asli, studi gerak v4. Belum hero final.</p>
       </header>
       <section class="study" aria-labelledby="study-title">
         <div
@@ -208,7 +208,7 @@
           <canvas id="c1-canvas" class="c1-canvas" aria-hidden="true"></canvas>
           <img
             class="c1-fallback"
-            src="/c1-master.webp"
+            src="/c1-master.png"
             width="800"
             height="800"
             alt=""
@@ -221,8 +221,9 @@
             tubuh yang kembali tenang.
           </p>
           <p>
-            Wajah, tempurung, warna, dan shading berasal dari aset C1 asli yang
-            sudah disepakati. Adegan jurnal belum dibuat.
+            Wajah dan tempurung memakai aset C1 asli. Kaki bergerak memakai aset
+            terpisah yang dilengkapi agar tidak menarik pipi. Adegan jurnal
+            belum dibuat.
           </p>
           <div class="controls">
             <button class="primary" id="replay" disabled>Putar ulang</button>
@@ -390,8 +391,22 @@
         .then(async (data) => {
           const image = new Image();
           image.src = data.c1Motion.source;
-          await image.decode();
-          rig = createOriginalC1Rig(canvas, image, data.c1Motion);
+          const repair = new Image();
+          repair.src = "/c1-body-repair.png";
+          const foreleg = new Image();
+          foreleg.src = "/c1-foreleg.png";
+          await Promise.all([
+            image.decode(),
+            repair.decode(),
+            foreleg.decode(),
+          ]);
+          rig = createOriginalC1Rig(
+            canvas,
+            image,
+            data.c1Motion,
+            repair,
+            foreleg,
+          );
           player = lottie.loadAnimation({
             container: document.querySelector("#phone-stage"),
             renderer: "svg",
