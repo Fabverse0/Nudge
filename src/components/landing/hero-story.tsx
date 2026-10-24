@@ -122,19 +122,23 @@ function PhoneIllustration() {
 
 export function HeroStory() {
   const [replay, setReplay] = useState(0);
+  const [loadedPoses, setLoadedPoses] = useState(0);
+  const [assetFailed, setAssetFailed] = useState(false);
   const ready = useSyncExternalStore(subscribe, clientReady, serverReady);
 
   return (
     <div
       className="alive-scene scene-hero hero-story"
       data-alive-scene="hero"
+      data-art-ready={loadedPoses === 7 ? "true" : undefined}
+      data-static={assetFailed ? "true" : undefined}
       aria-label="Nudge meletakkan ponsel, memilih kegiatan, dan mulai menulis jurnal"
     >
       <button
         type="button"
         className="hero-greeting"
         aria-label="Putar cerita Nudge"
-        disabled={!ready}
+        disabled={!ready || loadedPoses !== 7 || assetFailed}
         onClick={() => setReplay((value) => value + 1)}
       >
         <span className="hero-story-art" aria-hidden="true">
@@ -146,13 +150,19 @@ export function HeroStory() {
             </span>
             <span className="hero-mascot hero-mascot-wave">
               <Image
-                src="/brand/landing/motion/c1-wave.webp"
+                src={
+                  assetFailed
+                    ? "/brand/mascot/nudge-turtle-wave.png"
+                    : "/brand/landing/motion/c1-wave.webp"
+                }
                 alt=""
                 width={1280}
                 height={1280}
                 priority
                 unoptimized
                 draggable={false}
+                onLoad={() => setLoadedPoses((value) => value | 1)}
+                onError={() => setAssetFailed(true)}
               />
             </span>
             <span className="hero-mascot hero-mascot-think">
@@ -164,6 +174,8 @@ export function HeroStory() {
                 priority
                 unoptimized
                 draggable={false}
+                onLoad={() => setLoadedPoses((value) => value | 2)}
+                onError={() => setAssetFailed(true)}
               />
             </span>
             <span className="hero-mascot hero-mascot-journal">
@@ -175,6 +187,8 @@ export function HeroStory() {
                 priority
                 unoptimized
                 draggable={false}
+                onLoad={() => setLoadedPoses((value) => value | 4)}
+                onError={() => setAssetFailed(true)}
               />
               <svg className="hero-journal-ink" viewBox="0 0 1254 1254">
                 <path pathLength={1} d="M570 1000c30-6 50 2 75-7" />

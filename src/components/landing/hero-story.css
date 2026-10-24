@@ -203,41 +203,59 @@
 .nudge-alive .hero-greeting:disabled .hero-replay-hint {
   visibility: hidden;
 }
-.nudge-alive .hero-story[data-running] .hero-phone {
+.nudge-alive .hero-story[data-running][data-art-ready="true"] .hero-phone {
   animation: hero-phone-set-down var(--hero-duration) var(--hero-ease) 1 both
     var(--hero-play-state);
 }
-.nudge-alive .hero-story[data-running] .hero-phone-feed-content {
+.nudge-alive
+  .hero-story[data-running][data-art-ready="true"]
+  .hero-phone-feed-content {
   animation: hero-feed-slow var(--hero-duration) cubic-bezier(0.4, 0, 0.2, 1) 1
     both var(--hero-play-state);
 }
-.nudge-alive .hero-story[data-running] .hero-phone-back {
+.nudge-alive .hero-story[data-running][data-art-ready="true"] .hero-phone-back {
   animation: hero-phone-back var(--hero-duration) ease 1 both
     var(--hero-play-state);
 }
-.nudge-alive .hero-story[data-running] .hero-phone-camera {
+.nudge-alive
+  .hero-story[data-running][data-art-ready="true"]
+  .hero-phone-camera {
   animation: hero-camera-show var(--hero-duration) ease 1 both
     var(--hero-play-state);
 }
-.nudge-alive .hero-story[data-running] .hero-mascot-wave {
+.nudge-alive
+  .hero-story[data-running][data-art-ready="true"]
+  .hero-mascot-wave {
   animation: hero-wave-arrive var(--hero-duration) var(--hero-ease) 1 both
     var(--hero-play-state);
 }
-.nudge-alive .hero-story[data-running] .hero-mascot-think {
+.nudge-alive
+  .hero-story[data-running][data-art-ready="true"]
+  .hero-mascot-think {
   animation: hero-think-pose var(--hero-duration) var(--hero-ease) 1 both
     var(--hero-play-state);
 }
-.nudge-alive .hero-story[data-running] .hero-mascot-journal {
+.nudge-alive
+  .hero-story[data-running][data-art-ready="true"]
+  .hero-mascot-journal {
   animation: hero-journal-pose var(--hero-duration) var(--hero-ease) 1 both
     var(--hero-play-state);
 }
-.nudge-alive .hero-story[data-running] .hero-journal-ink path:first-child {
+.nudge-alive
+  .hero-story[data-running][data-art-ready="true"]
+  .hero-journal-ink
+  path:first-child {
   animation: hero-write-line 1s 7.05s ease-out 1 both var(--hero-play-state);
 }
-.nudge-alive .hero-story[data-running] .hero-journal-ink path:last-child {
+.nudge-alive
+  .hero-story[data-running][data-art-ready="true"]
+  .hero-journal-ink
+  path:last-child {
   animation: hero-write-line 0.8s 7.55s ease-out 1 both var(--hero-play-state);
 }
-.nudge-alive .hero-story[data-running] .hero-story-footsteps {
+.nudge-alive
+  .hero-story[data-running][data-art-ready="true"]
+  .hero-story-footsteps {
   animation: hero-footsteps 2.3s 5.2s ease 1 both var(--hero-play-state);
 }
 .nudge-alive .hero-story:not([data-running="true"]) * {
@@ -259,6 +277,19 @@
   100% {
     transform: translate(-20%, 19%) rotate(82deg) scale(0.82);
   }
+}
+.nudge-alive .hero-story[data-static="true"] * {
+  animation: none !important;
+}
+.nudge-alive .hero-story[data-static="true"] .hero-mascot-wave {
+  opacity: 1;
+  transform: none;
+}
+.nudge-alive .hero-story[data-static="true"] .hero-mascot-think,
+.nudge-alive .hero-story[data-static="true"] .hero-mascot-journal,
+.nudge-alive .hero-story[data-static="true"] .hero-journal-ink,
+.nudge-alive .hero-story[data-static="true"] .hero-story-footsteps {
+  opacity: 0;
 }
 @keyframes hero-feed-slow {
   0%,
