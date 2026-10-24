@@ -1,6 +1,6 @@
 # Hero Nudge: dari scrolling ke satu kegiatan
 
-Status: pengguna menyukai gerak ponsel, menolak bentuk vektor v1/v2, lalu meminta penggunaan C1 asli yang disepakati. Preview v3 memakai piksel aset C1 asli. Hero aktif belum diganti. Tanggal pemeriksaan: 24 Oktober 2026.
+Status: pengguna menerima bentuk C1 asli pada v3 tetapi meminta perbaikan pipi terpotong dan sambungan kaki. Preview v4 memakai master PNG, bagian tubuh yang dilengkapi, serta kaki utuh terpisah. Hero aktif belum diganti. Tanggal pemeriksaan: 24 Oktober 2026.
 
 ## Masalah yang ditangani
 
@@ -125,3 +125,13 @@ Bukti v3:
 Fallback menampilkan gambar C1 asli sebelum pemuatan, jika WebGL gagal, atau jika konteks grafis hilang. Gerak mengikuti clock Lottie yang sama dengan ponsel; reduced motion mempertahankan pose diam dan tab tersembunyi menjeda clock. Jalur kegagalan grafis, reduced motion, tanpa JavaScript, serta Android fisik belum diperiksa melalui browser pada revisi ini. Belum ada klaim framerate perangkat.
 
 V3 masih berupa cuplikan peninjauan. Keputusan gerak ponsel sudah diterima, sedangkan kualitas sambungan kaki dan hasil penerapan C1 asli perlu penilaian pengguna sebelum adegan jurnal serta integrasi hero lengkap. Route aplikasi, source aset aplikasi, dan hero aktif tidak diubah. Tidak ada push.
+
+## V4: memperbaiki pemisahan pipi dan kaki
+
+Pengguna menerima bentuk karakter tetapi memperlihatkan pipi terpotong dan bagian bulat bertumpuk di pangkal kaki. Seleksi warna v3 mengambil sebagian wajah bersama kaki; tambalan tekstur pangkal kaki juga bertumpuk dengan kaki penyangga.
+
+Perbaikan memakai batas bentuk untuk mempertahankan wajah pada badan, menghapus tambalan bulat, serta memakai dua keluaran ImageGen: bagian badan tanpa kaki terangkat untuk melengkapi area tertutup, dan kaki utuh dengan pangkal yang selesai. Percobaan memotong kaki asli masih menghasilkan tepi cekung pipi, sehingga diganti dengan kaki lengkap. Badan asli dan kaki bergerak kini texture plate terpisah, dengan wajah/badan menutupi pangkal kaki. Identitas utama tetap dari master PNG asli; sumbernya tidak diedit.
+
+![Pose meletakkan setelah pemisahan bagian tubuh v4](./assets/hero-redesign/c1-parts-v4-laydown.png)
+
+Prompt, sumber, batas teknik, dan bukti pemeriksaan tercatat di [catatan aset v4](./assets/hero-redesign/c1-parts-v4.md). Layer ponsel/alas dan lintasan kaki dibandingkan dengan `60f9dd4` dan tetap identik. Pose kunci, replay, desktop, dan reflow 390/320 px ditinjau melalui browser. V4 masih menunggu penilaian artistik sebelum adegan jurnal dan integrasi hero. Tidak ada perubahan aplikasi atau push.

@@ -32,8 +32,14 @@ Pengguna menerima kualitas gerak meletakkan ponsel, tetapi meminta bentuk karakt
 
 V2 kemudian ditolak pengguna. Jangan memakai bentuk vektor ini sebagai identitas C1 berikutnya.
 
-## V3: master C1 asli
+## V3: master C1 asli, digantikan v4
 
 `contact-preview.html` kini memakai `c1-original-rig.js` untuk merender WebP C1 asli yang sudah ada di proyek. Server memetakan `/c1-master.webp` langsung ke `public/brand/landing/motion/c1-wave.webp`; tidak ada salinan atau hasil generasi karakter baru. Wajah, tempurung, warna, dan shading berasal dari gambar tersebut. Mask serta deformasi hanya berlangsung saat rendering.
 
 `contact-study.json` sekarang berisi ponsel/alas dan data sinkronisasi C1, tanpa gambar karakter vektor. Bukti perbandingan berupa `c1-original-reference.png` dan `c1-original-motion-v3.png`, keduanya screenshot dari preview. Tombol **Lihat aset asli** menyediakan pembanding gambar utuh tanpa deformasi. Source gambar, kode aplikasi, dan hero aktif tidak diubah.
+
+## V4: badan dan kaki terpisah
+
+Pengguna menerima bentuk v3 tetapi meminta perbaikan pipi yang ikut terpotong dan tambalan pangkal kaki. Preview saat ini memakai `/c1-master.png` dari `public/brand/mascot/nudge-turtle-wave.png`. Dua keluaran edit ImageGen, `c1-body-repair.png` dan `c1-foreleg.png`, melengkapi area tersembunyi dan kaki utuh. Rendering mempertahankan master di luar area perbaikan, memisahkan tekstur badan/kaki, dan menghapus tambalan pangkal kaki v3.
+
+Sumber, prompt lengkap, dan pemeriksaan tersedia di [c1-parts-v4.md](./c1-parts-v4.md). Screenshot final: `c1-parts-v4-contact.png` dan `c1-parts-v4-laydown.png`. Bukti v3 dipertahankan sebagai riwayat, bukan hasil versi terkini. Gerak ponsel dan track kaki tidak berubah. V4 tetap preview peninjauan, belum hero final.
