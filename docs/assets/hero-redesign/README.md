@@ -26,7 +26,7 @@ Status: storyboard disetujui; preview v6 menyambung gerak ponsel ke pose jurnal 
 
 V6 memperpanjang cuplikan menjadi 7,5 detik. Setelah ponsel diletakkan, ponsel bergeser ke kiri, aset raster `public/brand/illustrations/nudge-turtle-journal.png` masuk sebagai gambar utuh, lalu dua guratan tampil di halaman. Preview menggunakan aset lokal yang sudah ada; tidak ada gambar karakter yang digambar ulang atau dependensi yang dipasang.
 
-Untuk runtime landing, gambar jurnal diekspor tanpa mengubah sumber PNG ke `public/brand/landing/motion/c1-journal.webp` dengan `node scripts/export-hero-journal-pose.mjs`. WebP transparan berukuran 1.254 × 1.254 dan 102.904 byte pada keluaran ini; sumber PNG 1.085.466 byte. Wave memakai WebP C1 landing yang sudah ada, 48.490 byte.
+Untuk runtime landing, pose berpikir dan jurnal diekspor tanpa mengubah sumber PNG ke `public/brand/landing/motion/c1-think.webp` dan `c1-journal.webp` dengan `node scripts/export-hero-poses.mjs`. WebP transparan jurnal berukuran 1.254 × 1.254 dan 102.904 byte pada keluaran ini; sumber PNG 1.085.466 byte. Wave memakai WebP C1 landing yang sudah ada, 48.490 byte.
 
 ## Revisi bentuk v2
 
