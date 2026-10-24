@@ -23,3 +23,9 @@ Cuplikan vektor asli yang dibuat melalui `scripts/build-hero-contact.mjs`, bukan
 Jalankan `node scripts/build-hero-contact.mjs` untuk regenerasi. Jalankan `node scripts/preview-hero-contact.mjs` untuk membuka preview lokal pada port 3101. Server hanya melayani daftar file preview yang ditentukan dan bind ke loopback.
 
 Status: storyboard disetujui; cuplikan gerak menunggu penilaian pengguna sebelum produksi adegan penuh. File ini belum dipakai oleh route landing atau aplikasi.
+
+## Revisi bentuk v2
+
+Pengguna menerima kualitas gerak meletakkan ponsel, tetapi meminta bentuk karakter diperbaiki. `contact-study.json` kini memakai proporsi v2 dengan wajah lebih lebar, tempurung yang membingkai wajah, mata/mulut mendekati C1 asli, dan kaki yang lebih membulat. Koreografi ponsel dan lintasan kontak dipertahankan.
+
+`c1-proportions-v2.png` adalah screenshot area ilustrasi pada pose awal dari preview lokal, disimpan untuk membandingkan bentuk. Ini bukti render, bukan aset runtime atau gambar master pengganti C1. Penilaian bentuk oleh pengguna masih terbuka.

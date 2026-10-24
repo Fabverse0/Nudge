@@ -1,6 +1,6 @@
 # Hero Nudge: dari scrolling ke satu kegiatan
 
-Status: pengguna menyetujui storyboard v1; cuplikan kontak ponsel tersedia untuk ditinjau dalam keadaan bergerak. Hero aktif belum diganti. Tanggal pemeriksaan: 24 Oktober 2026.
+Status: pengguna menyukai gerak meletakkan ponsel, tetapi menolak proporsi C1 pada cuplikan pertama. Revisi bentuk v2 tersedia untuk peninjauan. Hero aktif belum diganti. Tanggal pemeriksaan: 24 Oktober 2026.
 
 ## Masalah yang ditangani
 
@@ -82,3 +82,21 @@ Bukti tahap cuplikan:
 Saat review awal, urutan layer menutupi wajah; susunan layer dan gaya telah diperbaiki dan wajah diperiksa ulang setelah reload. Gerak meraih juga diperpanjang supaya tidak berpindah jauh dalam delapan frame.
 
 Cuplikan belum mencakup penggeseran ponsel ke kiri atau aktivitas jurnal. Bentuk vektornya masih perlu penilaian pengguna terhadap storyboard. Reduced motion dan perpindahan tab tersedia dalam source tetapi belum diperiksa lewat emulasi browser pada tahap ini. Build aplikasi, suite landing produksi, dan Android fisik belum dijalankan untuk cuplikan yang belum terintegrasi ini. Persetujuan artistik cuplikan tetap menjadi gerbang sebelum produksi adegan penuh.
+
+## Revisi proporsi C1 v2
+
+Pengguna menilai gerak meletakkan ponsel sudah bagus, tetapi bentuk karakter tidak proporsional dan berbeda dari C1 di web. Referensi identitas diperiksa langsung dari `public/brand/landing/motion/c1-idle.webp` dan storyboard yang sudah disetujui.
+
+Revisi memperlebar wajah, memperbesar bidang tempurung hingga membingkai sisi kanan wajah, serta menghilangkan garis bayangan yang membuat kepala tampak seperti keping terpisah. Mata dibuat lebih besar, berjarak lebih lebar, dan sedikit miring; senyum menjadi bentuk melengkung berisi seperti identitas C1. Kaki depan dan belakang diperbesar serta dibulatkan. Pangkal kaki yang meraih dipindahkan ke bawah sisi kanan wajah dan ditampilkan di depan badan agar tidak terlihat tumbuh dari pelipis. Dua bentuk mulut tidak lagi memudar bersamaan sehingga tidak muncul wajah ganda.
+
+![Pose netral revisi v2 dari preview](./assets/hero-redesign/c1-proportions-v2.png)
+
+Pemeriksaan revisi:
+
+- Perbandingan JSON dengan commit sebelumnya menunjukkan lima layer ponsel tetap identik, termasuk bentuk, posisi, perspektif, dan timing.
+- Transform lintasan kaki kontak juga identik; durasi tetap 5,6 detik. Geometri kaki serta posisi kepala disesuaikan untuk proporsi baru.
+- Pose awal, menyentuh, dan meletakkan diperiksa ulang melalui render browser. Wajah, mata, kaki depan, serta ponsel terlihat.
+- ESLint script dan pemeriksaan whitespace Git lulus; log error browser kosong pada pemeriksaan render revisi.
+- Bukti gambar di atas adalah screenshot pose netral, bukan hasil generasi atau bukti kelancaran pada perangkat fisik.
+
+Pemeriksaan browser awal sempat tidak dijalankan karena peninjauan persetujuan otomatis mencapai batas penggunaan. Setelah waktu reset berlalu, preview lokal dijalankan kembali dan pemeriksaan render dapat diteruskan. Revisi bentuk v2 masih menunggu penilaian pengguna; persetujuan gerak tidak dianggap sebagai persetujuan bentuk. Tidak ada instalasi, perubahan aplikasi, integrasi hero, atau push pada revisi ini.

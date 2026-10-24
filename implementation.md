@@ -2,7 +2,7 @@
 
 ## Pembaruan landing, 23 Oktober 2026
 
-Pembaruan redesign hero 24 Oktober: pengguna menolak kualitas gerak hero 2D pertama dan meminta implementasi rencana bertahap. Storyboard lima pose sudah disetujui; cuplikan Lottie kontak ponsel sepanjang 5,6 detik kini tersedia melalui preview terpisah pada port 3101. Cuplikan menunggu penilaian artistik sebelum produksi adegan penuh, sesuai gerbang rencana. Referensi, cara menjalankan, bukti dan keterbatasan ada di [hasil pengembangan hero](./docs/hero-redesign.md). Hero aktif dan aplikasi belum diubah. Belum ada instalasi atau push.
+Pembaruan redesign hero 24 Oktober: storyboard lima pose disetujui, lalu pengguna menyukai gerak meletakkan ponsel pada cuplikan 5,6 detik tetapi menolak proporsi C1. Revisi bentuk v2 tersedia melalui preview terpisah pada port 3101, dengan koreografi ponsel dan lintasan kontak dipertahankan. Bentuk masih menunggu penilaian pengguna sebelum produksi adegan penuh. Referensi, cara menjalankan, bukti dan keterbatasan ada di [hasil pengembangan hero](./docs/hero-redesign.md). Hero aktif dan aplikasi belum diubah. Belum ada instalasi atau push.
 
 Lingkup landing hidup selesai: komposisi Duolingo dengan identitas Nudge, tujuh adegan, rig C1 3D lembut dan properti vektor, loop saat terlihat, serta poster statis untuk reduced motion/tanpa JavaScript. Pertukaran ekspresi diskret menghindari wajah ganda. Semua perubahan UI berada pada route dan komponen landing; aplikasi, utilitas bersama, dan aset aplikasi tidak diubah.
 
