@@ -354,6 +354,8 @@ Polesan landing studio yang disetujui 22 Oktober 2026 telah diimplementasikan: s
 
 ## Revisi animasi landing setelah kritik pengguna, 23 Oktober 2026
 
+Pembaruan integrasi hero 24 Oktober: hero aktif kini memakai tiga pose C1 utuh dari aset asli, transisi ponsel menuju jurnal selama 9,4 detik, dan guratan yang mengikuti koordinat halaman. Timeline menunggu gambar siap, mendukung replay, pause/resume saat keluar layar atau tab tersembunyi, serta fallback statis untuk reduced motion dan kegagalan unduhan. Build produksi webpack berhasil. Suite landing desktop/emulasi ponsel menghasilkan 25 lulus/1 dilewati sebelum pemeriksaan tambahan fallback dan replay. Rincian bukti, screenshot, serta batas teknik dan penerimaan artistik ada di [hero v7](./docs/hero-redesign.md#v7-integrasi-c1-utuh-pada-hero-landing). Perubahan source dibatasi pada landing.
+
 Pembaruan hero 24 Oktober: sesuai pilihan pengguna, hero memakai C1 2D ekspresif dengan sapaan, kedipan, perpindahan berat badan, serta ponsel dan buku yang bergerak berurutan. Replay melalui klik/Enter, ukuran 320/390 px, dan pause offscreen telah diperiksa di preview desktop. Typecheck dan lint file terkait lulus. Build produksi, pemeriksaan perangkat fisik, dan penerimaan estetika versi ini belum dilakukan. Lihat [sapaan hero](./docs/hero-story.md).
 
 Pembaruan 24 Oktober: pengguna menolak hasil video dan membatalkan pendekatan tersebut. Scene bergerak kini memakai SVG kura-kura meregangkan badan di atas alas, dengan ponsel di samping. Implementasi terbatas landing dan dicommit bertahap; bukti aktual serta pemeriksaan yang belum dilakukan ada di [adegan regangan](./docs/stretch-story.md). Penerimaan estetika menunggu pengguna.

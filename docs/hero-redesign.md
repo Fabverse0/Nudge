@@ -1,6 +1,6 @@
 # Hero Nudge: dari scrolling ke satu kegiatan
 
-Status: preview v6 menyambung adegan ponsel ke pose jurnal C1 yang utuh. Hero aktif belum diganti; preview masih menunggu penilaian visual. Tanggal pemeriksaan: 24 Oktober 2026.
+Status: v7 terintegrasi pada hero landing memakai tiga pose C1 utuh, gerak ponsel, dan guratan jurnal. Pemeriksaan teknis tercatat di bagian v7; penerimaan artistik tetap menunggu pengguna. Tanggal pemeriksaan: 24 Oktober 2026.
 
 ## Masalah yang ditangani
 
@@ -54,10 +54,10 @@ Tidak ada jaminan format tertentu akan menghasilkan animasi bagus tanpa pekerjaa
 - [x] Lima pose konsep tersedia secara lokal.
 - [x] Pengguna menyetujui bentuk dan storyboard melalui jawaban “Setuju, lanjut ke cuplikan animasi”.
 - [ ] Cuplikan interaksi ponsel dibuat dan disetujui dalam keadaan bergerak.
-- [ ] Adegan lengkap diproduksi dan diintegrasikan khusus hero.
-- [ ] Replay, pause, reduced motion, tanpa JavaScript, kegagalan pemuatan, dan hidrasi diperiksa.
-- [ ] Typecheck, lint, dan Playwright landing yang relevan dijalankan.
-- [ ] Dua siklus ditinjau pada 1440/768/390 px serta reflow 320 px.
+- [x] Adegan lengkap diproduksi dan diintegrasikan khusus hero, dengan penyesuaian teknik v7 di bawah.
+- [x] Replay, pause, reduced motion, tanpa JavaScript, kegagalan pemuatan, dan hidrasi diperiksa.
+- [x] Typecheck, lint, dan Playwright landing yang relevan dijalankan.
+- [x] Dua siklus ditinjau pada 1440/768/390 px serta reflow 320 px.
 - [ ] Pengguna menerima kualitas artistik animasi final.
 
 Tidak ada tes runtime baru pada tahap referensi/storyboard karena kode runtime belum berubah. Belum ada instalasi, biaya layanan animasi, push, atau klaim kelancaran Android fisik.
@@ -147,3 +147,25 @@ Preview v5 diperiksa pada pose awal, menyentuh, meletakkan, dan tenang setelah r
 Preview lokal menyambungkan akhir adegan ponsel dengan pose C1 yang sedang menulis pada aset `public/brand/illustrations/nudge-turtle-journal.png`. C1 tetap berupa gambar utuh; tidak ada anggota tubuh yang dipisah atau digambar ulang. Ponsel bergeser ke kiri, pose jurnal masuk, lalu dua guratan pendek muncul pada halaman. Timeline diperpanjang menjadi 7,5 detik dan menyediakan pose kunci **Awal**, **Menyentuh**, **Meletakkan**, **Jurnal**, dan **Satu garis**.
 
 Pemeriksaan visual pada preview lokal menunjukkan pose jurnal dan alat tulis terbaca, ponsel masih tampak setelah diletakkan, dan guratan jatuh pada area halaman. Ini hanya pemeriksaan pada preview lokal; animasi belum dinilai pengguna, dan reduced motion, reflow tambahan, serta perangkat Android belum diperiksa. Belum ada perubahan hero aktif maupun route aplikasi. Tahap berikutnya adalah meminta penilaian pengguna atas cuplikan sebelum integrasi landing.
+
+## V7: integrasi C1 utuh pada hero landing
+
+Instruksi pengguna untuk melanjutkan implementasi diterapkan pada komponen hero aktif. Wave, think, dan journal memakai gambar C1 utuh dalam WebP transparan. Tangan, wajah, serta tempurung tidak dipotong atau dideformasi. Versi ini menggunakan transisi antarpose, pergeseran kecil seluruh gambar, dan gerak benda; artikulasi tubuh penuh pada storyboard awal belum direalisasikan. Adegan ponsel lain pada landing tetap menjadi referensi gerak.
+
+Cerita sepanjang 9,4 detik memperlihatkan feed yang melambat, ponsel berputar hingga bagian belakangnya terlihat, C1 beralih ke pose berpikir dan menulis, lalu dua guratan muncul pada jurnal. Guratan berada dalam koordinat gambar jurnal sehingga mengikuti ukuran dan posisi C1 pada layar kecil. Timeline berhenti pada pose akhir dan dapat diputar ulang melalui tombol, klik, Enter, atau Space.
+
+Ketiga pose harus selesai dimuat sebelum timeline dimulai. Jika unduhan WebP gagal, hero memakai gambar wave PNG asli sebagai fallback statis. Tanpa JavaScript, C1 dan ponsel tetap tersedia sebagai ilustrasi diam. Reduced motion menampilkan pose jurnal statis. Timeline dijeda saat adegan keluar layar atau tab tersembunyi, lalu dilanjutkan dari waktunya semula.
+
+| Desktop, pose akhir | Ponsel, pose akhir |
+| --- | --- |
+| ![C1 menulis pada hero desktop](./assets/hero-redesign/hero-integrated-1440.png) | ![C1 menulis pada hero ponsel](./assets/hero-redesign/hero-integrated-390.png) |
+
+Bukti pemeriksaan:
+
+- Build produksi `npm run build -- --webpack` berhasil, termasuk TypeScript dan pembuatan halaman statis. Percobaan awal gagal karena izin sandbox untuk folder `.next`; pengulangan dengan izin yang sesuai berhasil.
+- Suite landing pada Chrome desktop dan emulasi Pixel 7 menghasilkan 25 lulus dan 1 dilewati. Kasus mobile dua siklus player berlisensi dilewati karena pemeriksaan panjang itu dicakup desktop. Setelah penambahan fallback aset, 12 kasus terkait kegagalan WebP, replay, reduced motion, tanpa JavaScript, hidrasi, dan Axe diperiksa kembali dan lulus. Dua kasus replay diulang dengan batas 60 detik setelah satu kasus melewati batas 30 detik ketika build berjalan bersamaan.
+- Lebar 1440, 768, 390, dan 320 px ditinjau tanpa overflow horizontal. Screenshot merupakan hasil browser lokal, bukan bukti perangkat Android fisik.
+- Tiga pose dan posisi tinta jurnal diperiksa melalui snapshot timeline. Pemeriksaan Axe tidak menemukan pelanggaran otomatis pada mode statis. ESLint dan format file yang diubah diperiksa; detector Impeccable tidak melaporkan temuan pada komponen dan CSS hero.
+- Dua putaran penuh melalui replay selesai pada lebar 1440, 768, dan 390 px tanpa error browser. Ini adalah pengamatan browser desktop pada viewport berbeda, bukan pengukuran framerate atau pengujian perangkat fisik.
+
+Pengujian menggunakan preview development pada `127.0.0.1:3100` dengan service worker diblokir dalam konteks browser pengujian yang terpisah. Build produksi berhasil dikompilasi, tetapi suite ini tidak dijalankan ulang melalui server produksi. Tidak ada instalasi dependensi, perubahan source aplikasi, atau push pada integrasi ini. Penilaian keluwesan dan kualitas artistik final tetap memerlukan peninjauan pengguna.
