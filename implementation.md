@@ -2,7 +2,7 @@
 
 ## Pembaruan landing, 23 Oktober 2026
 
-Pembaruan redesign hero 24 Oktober: storyboard lima pose disetujui, lalu pengguna menyukai gerak meletakkan ponsel pada cuplikan 5,6 detik tetapi menolak proporsi C1. Revisi bentuk v2 tersedia melalui preview terpisah pada port 3101, dengan koreografi ponsel dan lintasan kontak dipertahankan. Bentuk masih menunggu penilaian pengguna sebelum produksi adegan penuh. Referensi, cara menjalankan, bukti dan keterbatasan ada di [hasil pengembangan hero](./docs/hero-redesign.md). Hero aktif dan aplikasi belum diubah. Belum ada instalasi atau push.
+Pembaruan redesign hero 24 Oktober: storyboard dan gerak meletakkan ponsel disukai, tetapi gambar ulang karakter v1/v2 ditolak. Atas permintaan pengguna, preview v3 kini memakai gambar C1 asli melalui deformasi mesh, dengan geometri/timing ponsel dan track kontak dipertahankan. Tombol pembanding aset asli tersedia pada port 3101. Kualitas penerapan C1 perlu penilaian sebelum adegan lengkap. Referensi, reproduksi, bukti, dan keterbatasan ada di [hasil pengembangan hero](./docs/hero-redesign.md). Hero aktif dan aplikasi belum diubah. Tidak ada instalasi atau push.
 
 Lingkup landing hidup selesai: komposisi Duolingo dengan identitas Nudge, tujuh adegan, rig C1 3D lembut dan properti vektor, loop saat terlihat, serta poster statis untuk reduced motion/tanpa JavaScript. Pertukaran ekspresi diskret menghindari wajah ganda. Semua perubahan UI berada pada route dan komponen landing; aplikasi, utilitas bersama, dan aset aplikasi tidak diubah.
 
@@ -20,14 +20,14 @@ Cakupan: MVP web responsif dan PWA dalam satu codebase.
 
 Dokumen ini menerjemahkan kebutuhan produk menjadi pekerjaan berurutan, dependensi, kriteria selesai, dan bukti verifikasi. Gunakan sebagai daftar kerja yang diperbarui selama pengembangan. Dokumen ini tidak menggantikan aturan perilaku atau identitas visual yang sudah disepakati.
 
-| Acuan | Peran |
-| --- | --- |
-| [prd.md](./prd.md) | Kebutuhan MVP, FR-01 sampai FR-09, batas produk, dan penerimaan rilis. |
-| [DESIGN.md](./DESIGN.md) | Keputusan visual tetap, token awal, ruang eksplorasi, dan kebutuhan aset. |
-| [AGENTS.md](./AGENTS.md) | Aturan kontribusi, izin tindakan, struktur, dan verifikasi. |
-| [GLOSSARY.md](./GLOSSARY.md) | Istilah produk yang digunakan dalam kode dan antarmuka. |
-| [docs/skills.md](./docs/skills.md) | Pemilihan skill dan batas runtime lokal. |
-| [Riset stack](./docs/research/stack-feasibility.md) | Dasar teknis dan batas notifikasi browser. |
+| Acuan                                               | Peran                                                                     |
+| --------------------------------------------------- | ------------------------------------------------------------------------- |
+| [prd.md](./prd.md)                                  | Kebutuhan MVP, FR-01 sampai FR-09, batas produk, dan penerimaan rilis.    |
+| [DESIGN.md](./DESIGN.md)                            | Keputusan visual tetap, token awal, ruang eksplorasi, dan kebutuhan aset. |
+| [AGENTS.md](./AGENTS.md)                            | Aturan kontribusi, izin tindakan, struktur, dan verifikasi.               |
+| [GLOSSARY.md](./GLOSSARY.md)                        | Istilah produk yang digunakan dalam kode dan antarmuka.                   |
+| [docs/skills.md](./docs/skills.md)                  | Pemilihan skill dan batas runtime lokal.                                  |
+| [Riset stack](./docs/research/stack-feasibility.md) | Dasar teknis dan batas notifikasi browser.                                |
 
 Jika rencana berbeda dengan PRD, sesuaikan rencana atau ajukan perubahan kebutuhan secara eksplisit. Jangan mengubah perilaku produk hanya untuk memudahkan penyelesaian tahap.
 
@@ -35,14 +35,14 @@ Pembuatan rencana ini tidak menjalankan scaffolding, pemasangan paket, generasi 
 
 ## 2. Kondisi awal yang diperiksa
 
-| Bagian | Kondisi saat penyusunan |
-| --- | --- |
-| Dokumen produk/desain | PRD, konsep, glossary, DESIGN.md, dan panduan kontribusi tersedia. |
-| Skill | Skill pengembangan dan sembilan skill UI/desain tersedia lokal; rujuk panduan skill untuk peran. |
-| Impeccable | Engine lokal dan manifest hook tersedia; persetujuan dilaporkan pengguna. Keberhasilan pemicu saat edit UI tetap perlu dibuktikan. |
-| Kode aplikasi | Belum ada source aplikasi, `package.json`, lockfile, atau script build/test. |
-| Aset Nudge | Logo, maskot, ilustrasi, font, dan ikon aplikasi belum dibuat/diintegrasikan. Aset contoh upstream adalah referensi. |
-| Hosting dan perangkat uji | Belum dipilih atau dikonfirmasi. |
+| Bagian                    | Kondisi saat penyusunan                                                                                                            |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| Dokumen produk/desain     | PRD, konsep, glossary, DESIGN.md, dan panduan kontribusi tersedia.                                                                 |
+| Skill                     | Skill pengembangan dan sembilan skill UI/desain tersedia lokal; rujuk panduan skill untuk peran.                                   |
+| Impeccable                | Engine lokal dan manifest hook tersedia; persetujuan dilaporkan pengguna. Keberhasilan pemicu saat edit UI tetap perlu dibuktikan. |
+| Kode aplikasi             | Belum ada source aplikasi, `package.json`, lockfile, atau script build/test.                                                       |
+| Aset Nudge                | Logo, maskot, ilustrasi, font, dan ikon aplikasi belum dibuat/diintegrasikan. Aset contoh upstream adalah referensi.               |
+| Hosting dan perangkat uji | Belum dipilih atau dikonfirmasi.                                                                                                   |
 
 Stack produk yang dipilih: Next.js App Router, TypeScript, Tailwind CSS, manifest/service worker, localStorage, Vitest, dan Playwright. Vite tidak menjadi build server aplikasi terpisah.
 
@@ -59,32 +59,32 @@ Perbarui status, tanggal, hasil verifikasi, dan keputusan terkait setelah menyel
 
 ## 4. Keputusan teknis sebelum bagian terkait dikerjakan
 
-| ID | Keputusan dan usulan awal | Batas waktu keputusan | Status |
-| --- | --- | --- | --- |
-| D-01 | npm dipilih pengguna, satu package-lock.json. | Sebelum P1 | Ditetapkan |
-| D-02 | Versi kompatibel diperiksa pada registry/dokumentasi resmi, terkunci dalam package-lock.json; lihat docs/verification.md. | P1 | Ditetapkan |
-| D-03 | State klien di memori. Kembali ke pemilihan mempertahankan konteks/feedback; reload mengakhiri sesi. | P3 | Ditetapkan dan diuji |
-| D-04 | Tujuan/waktu wajib; ranking mood 2 dan aktivitas disukai 1; urutan katalog memecah nilai sama. | P3 | Ditetapkan dan diuji |
-| D-05 | Jam lokal, pemeriksaan 15 detik/visibility, deduplikasi lokal dan Web Locks bila tersedia, tanpa susulan jadwal terlewat. | P6 | Kode dan simulasi diperiksa; perangkat nyata menunggu |
-| D-06 | Cache aset statis lokal dan halaman offline, tanpa cache navigasi/data pribadi. Worker baru tidak memaksa reload sesi. | P7 | Implementasi dan uji produksi otomatis lulus |
-| D-07 | Chrome Windows dan viewport Pixel 7 untuk otomatis. Pengguna memilih Android dengan Chrome untuk pemeriksaan fisik; model dan versi perangkat belum dicatat. | Sebelum pemeriksaan P6/P7 | Otomatis tersedia; manual menunggu perangkat dan URL HTTPS |
-| D-08 | Hosting HTTPS dan distribusi preview. Pilih berdasarkan kebutuhan deploy Next.js serta PWA; publikasi mengikuti instruksi pengguna. | Sebelum pemeriksaan deployment | Belum ditetapkan |
+| ID   | Keputusan dan usulan awal                                                                                                                                    | Batas waktu keputusan          | Status                                                     |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------ | ---------------------------------------------------------- |
+| D-01 | npm dipilih pengguna, satu package-lock.json.                                                                                                                | Sebelum P1                     | Ditetapkan                                                 |
+| D-02 | Versi kompatibel diperiksa pada registry/dokumentasi resmi, terkunci dalam package-lock.json; lihat docs/verification.md.                                    | P1                             | Ditetapkan                                                 |
+| D-03 | State klien di memori. Kembali ke pemilihan mempertahankan konteks/feedback; reload mengakhiri sesi.                                                         | P3                             | Ditetapkan dan diuji                                       |
+| D-04 | Tujuan/waktu wajib; ranking mood 2 dan aktivitas disukai 1; urutan katalog memecah nilai sama.                                                               | P3                             | Ditetapkan dan diuji                                       |
+| D-05 | Jam lokal, pemeriksaan 15 detik/visibility, deduplikasi lokal dan Web Locks bila tersedia, tanpa susulan jadwal terlewat.                                    | P6                             | Kode dan simulasi diperiksa; perangkat nyata menunggu      |
+| D-06 | Cache aset statis lokal dan halaman offline, tanpa cache navigasi/data pribadi. Worker baru tidak memaksa reload sesi.                                       | P7                             | Implementasi dan uji produksi otomatis lulus               |
+| D-07 | Chrome Windows dan viewport Pixel 7 untuk otomatis. Pengguna memilih Android dengan Chrome untuk pemeriksaan fisik; model dan versi perangkat belum dicatat. | Sebelum pemeriksaan P6/P7      | Otomatis tersedia; manual menunggu perangkat dan URL HTTPS |
+| D-08 | Hosting HTTPS dan distribusi preview. Pilih berdasarkan kebutuhan deploy Next.js serta PWA; publikasi mengikuti instruksi pengguna.                          | Sebelum pemeriksaan deployment | Belum ditetapkan                                           |
 
 Keputusan yang sudah diterapkan dijelaskan di docs/implementation-decisions.md dan dibuktikan di docs/verification.md. Pilihan rutin mengikuti izin implementasi yang diberikan. Keputusan yang memperluas perilaku produk, pengumpulan data, atau layanan eksternal tetap membutuhkan pembahasan pengguna.
 
 ## 5. Urutan tahap dan dependensi
 
-| Tahap | Fokus | Dependensi | Status implementasi |
-| --- | --- | --- | --- |
-| P0 | Persiapan pelaksanaan dan keputusan awal | Dokumen tersedia dan izin pelaksanaan | Selesai |
-| P1 | Fondasi proyek dan alat pemeriksaan | P0 | Selesai |
-| P2 | Token visual, komponen dasar, dan aset induk | P0; kode komponen memerlukan P1 | C1 dipilih; pose, ilustrasi, logo, ikon, dan inventaris sudah dibuat serta diintegrasikan |
-| P3 | Katalog, rekomendasi, state sesi, dan timer | P1 serta keputusan D-03/D-04 | Selesai |
-| P4 | Alur aplikasi utama | P2 komponen, P3 | Alur teruji; pendamping kura-kura masih ikon sementara |
-| P5 | Landing page | P1, P2, P4 | Fungsional, dipoles, dan memakai logo serta ilustrasi C1 |
-| P6 | Favorit dan pengingat opt-in | P3/P4/P7 | Otomatis diuji; notifikasi OS nyata belum diperiksa |
-| P7 | PWA dan integrasi browser/perangkat | P1, P2, P4/P5 | Delapan skenario produksi lulus; instalasi nyata menunggu |
-| P8 | Pemeriksaan rilis dan pemolesan | P4 sampai P7 | Aset dan bukti otomatis tersedia; penerimaan manual masih menunggu, lihat docs/verification.md |
+| Tahap | Fokus                                        | Dependensi                            | Status implementasi                                                                            |
+| ----- | -------------------------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| P0    | Persiapan pelaksanaan dan keputusan awal     | Dokumen tersedia dan izin pelaksanaan | Selesai                                                                                        |
+| P1    | Fondasi proyek dan alat pemeriksaan          | P0                                    | Selesai                                                                                        |
+| P2    | Token visual, komponen dasar, dan aset induk | P0; kode komponen memerlukan P1       | C1 dipilih; pose, ilustrasi, logo, ikon, dan inventaris sudah dibuat serta diintegrasikan      |
+| P3    | Katalog, rekomendasi, state sesi, dan timer  | P1 serta keputusan D-03/D-04          | Selesai                                                                                        |
+| P4    | Alur aplikasi utama                          | P2 komponen, P3                       | Alur teruji; pendamping kura-kura masih ikon sementara                                         |
+| P5    | Landing page                                 | P1, P2, P4                            | Fungsional, dipoles, dan memakai logo serta ilustrasi C1                                       |
+| P6    | Favorit dan pengingat opt-in                 | P3/P4/P7                              | Otomatis diuji; notifikasi OS nyata belum diperiksa                                            |
+| P7    | PWA dan integrasi browser/perangkat          | P1, P2, P4/P5                         | Delapan skenario produksi lulus; instalasi nyata menunggu                                      |
+| P8    | Pemeriksaan rilis dan pemolesan              | P4 sampai P7                          | Aset dan bukti otomatis tersedia; penerimaan manual masih menunggu, lihat docs/verification.md |
 
 Eksplorasi aset P2 dapat berlangsung sebelum atau bersama fondasi kode. Logika murni P3 tidak harus menunggu logo final. P7 dapat mulai sebelum P6 selesai, lalu keduanya digabungkan untuk memeriksa notifikasi yang membutuhkan service worker. Tabel dependensi tidak memerintahkan penggunaan subagent otomatis.
 
@@ -213,17 +213,17 @@ Aset sementara boleh membantu pengembangan jika diberi label jujur. Placeholder 
 
 ## 7. Pemetaan kebutuhan ke pekerjaan
 
-| FR | Pekerjaan utama | Bukti penerimaan yang diperlukan |
-| --- | --- | --- |
-| FR-01 Konteks | P3-01, P3-05, P4-01 | Mood opsional; tujuan/waktu dan filter bekerja serta dapat diubah. |
-| FR-02 Saran/alternatif | P3-02/P3-03, P4-02 | Satu saran; penolakan memberi alternatif; perbedaan filter dan keadaan kosong dijelaskan. |
-| FR-03 Feedback | P3-03/P3-05, P4-02 | Cocok tidak memulai timer; feedback memengaruhi sesi tanpa profil lintas sesi. |
-| FR-04 Timer | P3-04, P4-03 | Mulai/jeda/lanjut/ganti/berhenti konsisten; waktu habis menunggu Selesai. |
-| FR-05 Siklus berikutnya | P3-05, P4-04 | Mood dapat diperbarui/dilewati, lalu kembali ke awal aplikasi. |
-| FR-06 Favorit | P6-01/P6-02 | Simpan/hapus/reload tanpa duplikasi; error penyimpanan tidak memblokir. |
-| FR-07 Journaling | P3-02, P4-05 | Prompt dan timer tersedia tanpa mengumpulkan isi jurnal. |
-| FR-08 Pengingat | P6-03 sampai P6-05, P7-03 | Opt-in, hari/waktu, izin setelah tindakan pengguna, perubahan/pembatalan, batas platform jelas. |
-| FR-09 Web/PWA | P1-02, P4, P5, P7 | CTA landing menuju aplikasi; PWA meluncurkan `/app` tanpa mulai otomatis. |
+| FR                      | Pekerjaan utama           | Bukti penerimaan yang diperlukan                                                                |
+| ----------------------- | ------------------------- | ----------------------------------------------------------------------------------------------- |
+| FR-01 Konteks           | P3-01, P3-05, P4-01       | Mood opsional; tujuan/waktu dan filter bekerja serta dapat diubah.                              |
+| FR-02 Saran/alternatif  | P3-02/P3-03, P4-02        | Satu saran; penolakan memberi alternatif; perbedaan filter dan keadaan kosong dijelaskan.       |
+| FR-03 Feedback          | P3-03/P3-05, P4-02        | Cocok tidak memulai timer; feedback memengaruhi sesi tanpa profil lintas sesi.                  |
+| FR-04 Timer             | P3-04, P4-03              | Mulai/jeda/lanjut/ganti/berhenti konsisten; waktu habis menunggu Selesai.                       |
+| FR-05 Siklus berikutnya | P3-05, P4-04              | Mood dapat diperbarui/dilewati, lalu kembali ke awal aplikasi.                                  |
+| FR-06 Favorit           | P6-01/P6-02               | Simpan/hapus/reload tanpa duplikasi; error penyimpanan tidak memblokir.                         |
+| FR-07 Journaling        | P3-02, P4-05              | Prompt dan timer tersedia tanpa mengumpulkan isi jurnal.                                        |
+| FR-08 Pengingat         | P6-03 sampai P6-05, P7-03 | Opt-in, hari/waktu, izin setelah tindakan pengguna, perubahan/pembatalan, batas platform jelas. |
+| FR-09 Web/PWA           | P1-02, P4, P5, P7         | CTA landing menuju aplikasi; PWA meluncurkan `/app` tanpa mulai otomatis.                       |
 
 P8 memeriksa integrasi seluruh baris. Rincian kriteria penerimaan tetap dibaca dari PRD, bukan diganti oleh ringkasan tabel ini.
 
@@ -269,14 +269,14 @@ Landing page memanfaatkan render server bila sesuai. State interaktif, timer, pe
 
 Nama berikut adalah rancangan teknis, bukan terminologi UI final:
 
-| Area | State/data minimum | Aturan yang wajib dipertahankan |
-| --- | --- | --- |
-| Konteks | Mood opsional, tujuan, waktu, tempat/alat opsional | Mood boleh kosong; filter terlihat dan terkendali pengguna. |
+| Area        | State/data minimum                                        | Aturan yang wajib dipertahankan                                             |
+| ----------- | --------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Konteks     | Mood opsional, tujuan, waktu, tempat/alat opsional        | Mood boleh kosong; filter terlihat dan terkendali pengguna.                 |
 | Rekomendasi | Kandidat, alasan, ketidakcocokan filter, kandidat ditolak | Waktu/tujuan tidak dilonggarkan diam-diam; daftar penolakan mengikuti sesi. |
-| Timer | Belum mulai, berjalan, jeda, habis, selesai, berhenti | Habis dan selesai berbeda; pergantian menghentikan timer sebelumnya. |
-| Siklus mood | Mood sebelumnya dan keputusan pembaruan | Lewati tidak sama dengan menghapus mood. |
-| Favorit | ID aktivitas stabil dan versi format | Deduplicasi; aktivitas yang hilang tidak merusak daftar. |
-| Pengingat | Aktif, hari/waktu, status izin, penanda pengiriman | Pengaturan lokal, pencegahan duplikasi, dan pembatalan jadwal lama. |
+| Timer       | Belum mulai, berjalan, jeda, habis, selesai, berhenti     | Habis dan selesai berbeda; pergantian menghentikan timer sebelumnya.        |
+| Siklus mood | Mood sebelumnya dan keputusan pembaruan                   | Lewati tidak sama dengan menghapus mood.                                    |
+| Favorit     | ID aktivitas stabil dan versi format                      | Deduplicasi; aktivitas yang hilang tidak merusak daftar.                    |
+| Pengingat   | Aktif, hari/waktu, status izin, penanda pengiriman        | Pengaturan lokal, pencegahan duplikasi, dan pembatalan jadwal lama.         |
 
 Penyelesaian tidak membutuhkan riwayat permanen pada MVP. Reload atau tutup browser tidak dijanjikan memulihkan timer. Jangan menyimpan mood, feedback, atau tulisan jurnal hanya untuk menyederhanakan pemulihan state.
 
@@ -284,13 +284,13 @@ Penyelesaian tidak membutuhkan riwayat permanen pada MVP. Reload atau tutup brow
 
 ### Pembagian pemeriksaan
 
-| Cara | Fokus |
-| --- | --- |
-| Vitest | Logika katalog/filter/ranking, batas sesi, timer dengan waktu terkendali, storage, dan scheduler. |
-| Playwright | Integrasi rute, pilihan, saran, timer, siklus selesai, favorit, pengaturan, dan perilaku izin yang dapat disimulasikan. |
-| Pemeriksaan visual | Identitas, hierarki, maskot, reflow, kontras state, dan keterbacaan pada hasil render. |
-| Keyboard/pembaca layar | Urutan fokus, nama kontrol, status, dan timer yang tidak diumumkan tiap detik. |
-| Perangkat nyata | Instalasi/peluncuran PWA, izin OS/browser, notifikasi, sleep/resume, dan update worker. |
+| Cara                   | Fokus                                                                                                                   |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Vitest                 | Logika katalog/filter/ranking, batas sesi, timer dengan waktu terkendali, storage, dan scheduler.                       |
+| Playwright             | Integrasi rute, pilihan, saran, timer, siklus selesai, favorit, pengaturan, dan perilaku izin yang dapat disimulasikan. |
+| Pemeriksaan visual     | Identitas, hierarki, maskot, reflow, kontras state, dan keterbacaan pada hasil render.                                  |
+| Keyboard/pembaca layar | Urutan fokus, nama kontrol, status, dan timer yang tidak diumumkan tiap detik.                                          |
+| Perangkat nyata        | Instalasi/peluncuran PWA, izin OS/browser, notifikasi, sleep/resume, dan update worker.                                 |
 
 Pengujian tidak menyalin detail implementasi internal sebagai satu-satunya bukti. Periksa kontrak dan hasil yang dapat diamati. Gunakan TDD jika pendekatan tersebut dipilih; catat pengecualian pengujian yang memang belum didukung, seperti batas tool pada async Server Components. Tidak perlu menambah runtime analytics untuk memperoleh bukti uji.
 
@@ -311,17 +311,17 @@ Saat laporan/screenshot mulai diproduksi, pilih lokasi yang jelas dan bedakan bu
 
 ## 11. Risiko dan penanganan
 
-| Risiko | Tindakan dan tahap terkait |
-| --- | --- |
-| Scaffold menimpa dokumen atau konfigurasi lokal | Tinjau direktori dan keluaran generator; pertahankan berkas yang sudah ada pada P0/P1. |
-| Katalog terlalu sedikit untuk alternatif | Uji kombinasi filter, lengkapi variasi yang relevan, dan tangani keadaan habis pada P3/P4. |
-| Timer melambat saat tab tidak aktif | Gunakan referensi waktu; periksa kembali saat aktif dan uji jeda/resume pada P3/P4/P8. |
-| Storage diblokir, rusak, atau hilang | Adapter defensif, pesan jujur, dan alur manual tetap tersedia pada P6. |
-| Notifikasi ditunda atau tidak didukung | Feature detection, keputusan D-05, integrasi P7, dan penjelasan batas pada P6/P7. |
-| Service worker menyajikan versi lama | Strategi update dan pemeriksaan versi pada P7; jangan memaksa reload yang memutus kegiatan aktif tanpa penanganan. |
-| Aset berbeda proporsi atau tampak terlalu mirip referensi | Tetapkan bentuk induk, periksa penggunaan nyata, dan simpan inventaris pada P2/P8. |
-| Hook tidak terpicu meski engine sehat | Periksa trust/config dan buktikan event UI; gunakan detector manual bila perlu pada P8. |
-| Perangkat sasaran tidak tersedia | Catat batas bukti dan tunda klaim penerimaan untuk lingkungan tersebut. |
+| Risiko                                                    | Tindakan dan tahap terkait                                                                                         |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| Scaffold menimpa dokumen atau konfigurasi lokal           | Tinjau direktori dan keluaran generator; pertahankan berkas yang sudah ada pada P0/P1.                             |
+| Katalog terlalu sedikit untuk alternatif                  | Uji kombinasi filter, lengkapi variasi yang relevan, dan tangani keadaan habis pada P3/P4.                         |
+| Timer melambat saat tab tidak aktif                       | Gunakan referensi waktu; periksa kembali saat aktif dan uji jeda/resume pada P3/P4/P8.                             |
+| Storage diblokir, rusak, atau hilang                      | Adapter defensif, pesan jujur, dan alur manual tetap tersedia pada P6.                                             |
+| Notifikasi ditunda atau tidak didukung                    | Feature detection, keputusan D-05, integrasi P7, dan penjelasan batas pada P6/P7.                                  |
+| Service worker menyajikan versi lama                      | Strategi update dan pemeriksaan versi pada P7; jangan memaksa reload yang memutus kegiatan aktif tanpa penanganan. |
+| Aset berbeda proporsi atau tampak terlalu mirip referensi | Tetapkan bentuk induk, periksa penggunaan nyata, dan simpan inventaris pada P2/P8.                                 |
+| Hook tidak terpicu meski engine sehat                     | Periksa trust/config dan buktikan event UI; gunakan detector manual bila perlu pada P8.                            |
+| Perangkat sasaran tidak tersedia                          | Catat batas bukti dan tunda klaim penerimaan untuk lingkungan tersebut.                                            |
 
 ## 12. Batas MVP dan kendali perubahan
 

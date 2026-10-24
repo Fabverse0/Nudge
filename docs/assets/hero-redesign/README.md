@@ -29,3 +29,11 @@ Status: storyboard disetujui; cuplikan gerak menunggu penilaian pengguna sebelum
 Pengguna menerima kualitas gerak meletakkan ponsel, tetapi meminta bentuk karakter diperbaiki. `contact-study.json` kini memakai proporsi v2 dengan wajah lebih lebar, tempurung yang membingkai wajah, mata/mulut mendekati C1 asli, dan kaki yang lebih membulat. Koreografi ponsel dan lintasan kontak dipertahankan.
 
 `c1-proportions-v2.png` adalah screenshot area ilustrasi pada pose awal dari preview lokal, disimpan untuk membandingkan bentuk. Ini bukti render, bukan aset runtime atau gambar master pengganti C1. Penilaian bentuk oleh pengguna masih terbuka.
+
+V2 kemudian ditolak pengguna. Jangan memakai bentuk vektor ini sebagai identitas C1 berikutnya.
+
+## V3: master C1 asli
+
+`contact-preview.html` kini memakai `c1-original-rig.js` untuk merender WebP C1 asli yang sudah ada di proyek. Server memetakan `/c1-master.webp` langsung ke `public/brand/landing/motion/c1-wave.webp`; tidak ada salinan atau hasil generasi karakter baru. Wajah, tempurung, warna, dan shading berasal dari gambar tersebut. Mask serta deformasi hanya berlangsung saat rendering.
+
+`contact-study.json` sekarang berisi ponsel/alas dan data sinkronisasi C1, tanpa gambar karakter vektor. Bukti perbandingan berupa `c1-original-reference.png` dan `c1-original-motion-v3.png`, keduanya screenshot dari preview. Tombol **Lihat aset asli** menyediakan pembanding gambar utuh tanpa deformasi. Source gambar, kode aplikasi, dan hero aktif tidak diubah.

@@ -20,7 +20,7 @@ Revisi ini hanya mengubah landing `/`, komponennya, dan aset khusus landing. Jan
 
 ## Identitas yang dikonfirmasi
 
-Nama Nudge, karakter kura-kura C1, Nunito, palet sage, biru, dan sand. Pengguna memilih C1 2D yang ekspresif untuk hero dan adegan regangan; penutup mempertahankan C1 3D lembut. Referensi visual utama adalah Duolingo; gunakan aset asli Nudge.
+Nama Nudge, karakter kura-kura C1, Nunito, palet sage, biru, dan sand. Setelah menolak gambar ulang vektor pada cuplikan hero, pengguna menetapkan aset C1 asli dengan tampilan 3D lembut sebagai acuan bentuk, warna, dan shading hero berikutnya. Adegan regangan 2D yang telah diterima tetap terpisah. Referensi komposisi adalah Duolingo; gunakan aset asli Nudge.
 
 ## Acuan
 

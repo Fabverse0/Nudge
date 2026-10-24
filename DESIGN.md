@@ -125,16 +125,16 @@ Dokumen ini menetapkan arah visual dan perilaku presentasi. [prd.md](./prd.md) t
 
 ### Keputusan tetap dan ruang eksplorasi
 
-| Status | Keputusan |
-| --- | --- |
-| Tetap | Karakter playful, membulat, hangat, dan tenang; ramah untuk pengguna umum. |
-| Tetap | Palet identitas Tidal Sage, Glacial Periwinkle, dan Toasted Sand; tema terang untuk MVP. |
-| Tetap | Maskot kura-kura induk C1 yang hadir juga di aplikasi, termasuk saat timer berjalan. |
-| Tetap | Landing page lebih ekspresif; layar aplikasi mengutamakan pemilihan dan pelaksanaan aktivitas. |
-| Tetap | Bahasa tidak menghakimi, pilihan mood setara, serta kontrol lewati dan berhenti yang jelas. |
+| Status     | Keputusan                                                                                            |
+| ---------- | ---------------------------------------------------------------------------------------------------- |
+| Tetap      | Karakter playful, membulat, hangat, dan tenang; ramah untuk pengguna umum.                           |
+| Tetap      | Palet identitas Tidal Sage, Glacial Periwinkle, dan Toasted Sand; tema terang untuk MVP.             |
+| Tetap      | Maskot kura-kura induk C1 yang hadir juga di aplikasi, termasuk saat timer berjalan.                 |
+| Tetap      | Landing page lebih ekspresif; layar aplikasi mengutamakan pemilihan dan pelaksanaan aktivitas.       |
+| Tetap      | Bahasa tidak menghakimi, pilihan mood setara, serta kontrol lewati dan berhenti yang jelas.          |
 | Nilai awal | Nunito, turunan warna aksesibel, skala ukuran, radius, jarak, dan durasi transisi dalam dokumen ini. |
 | Eksplorasi | Nama karakter, pose tambahan, dan detail ilustrasi; identitas serta proporsi induk C1 dipertahankan. |
-| Eksplorasi | Komposisi hero, susunan bagian landing page, detail logo, dan penyempurnaan layout tiap layar. |
+| Eksplorasi | Komposisi hero, susunan bagian landing page, detail logo, dan penyempurnaan layout tiap layar.       |
 
 Nilai awal dipakai konsisten sampai ada alasan dan hasil pemeriksaan untuk mengubahnya. Eksplorasi memperluas pilihan di dalam identitas yang sudah disepakati; jangan mengganti spesies maskot atau palet utama secara sepihak.
 
@@ -153,16 +153,16 @@ Pembuatan dokumen ini tidak berarti gambar atau komponen telah dibuat. Ikuti oto
 
 ### Palet identitas dan netral
 
-| Token | Warna | Peran dan alasan |
-| --- | --- | --- |
-| `primary` | Tidal Sage `#679F9E` | Identitas utama; bidang aksen, ilustrasi, dan bagian pilihan yang membutuhkan penekanan ramah. |
-| `secondary` | Glacial Periwinkle `#7EADDB` | Bidang pendamping dan ilustrasi agar tampilan memiliki variasi yang tetap tenang. |
-| `tertiary` | Toasted Sand `#E6D4BE` | Bidang hangat, bagian refleksi, dan area ilustrasi. |
-| `canvas` | Putih hangat `#FAF8F4` | Latar utama yang memberi ruang bagi palet identitas. |
-| `surface` | Putih `#FFFFFF` | Kartu, panel, dan latar kontrol. |
-| `ink` | Hijau sangat gelap `#182B2A` | Judul, teks utama, label, dan ikon penting. |
-| `ink-muted` | Hijau abu `#506765` | Deskripsi dan metadata pada latar netral terang. |
-| `action` | Sage gelap `#315F5E` | Tombol utama dan link agar terbaca dengan jelas. |
+| Token       | Warna                        | Peran dan alasan                                                                               |
+| ----------- | ---------------------------- | ---------------------------------------------------------------------------------------------- |
+| `primary`   | Tidal Sage `#679F9E`         | Identitas utama; bidang aksen, ilustrasi, dan bagian pilihan yang membutuhkan penekanan ramah. |
+| `secondary` | Glacial Periwinkle `#7EADDB` | Bidang pendamping dan ilustrasi agar tampilan memiliki variasi yang tetap tenang.              |
+| `tertiary`  | Toasted Sand `#E6D4BE`       | Bidang hangat, bagian refleksi, dan area ilustrasi.                                            |
+| `canvas`    | Putih hangat `#FAF8F4`       | Latar utama yang memberi ruang bagi palet identitas.                                           |
+| `surface`   | Putih `#FFFFFF`              | Kartu, panel, dan latar kontrol.                                                               |
+| `ink`       | Hijau sangat gelap `#182B2A` | Judul, teks utama, label, dan ikon penting.                                                    |
+| `ink-muted` | Hijau abu `#506765`          | Deskripsi dan metadata pada latar netral terang.                                               |
+| `action`    | Sage gelap `#315F5E`         | Tombol utama dan link agar terbaca dengan jelas.                                               |
 
 Warna identitas menentukan suasana; warna semantik menentukan status. Jangan mengartikan sage sebagai mood yang lebih baik, biru sebagai mood buruk, atau sand sebagai pilihan yang kurang dianjurkan. Semua pilihan mood mendapat perlakuan visual setara.
 
@@ -180,18 +180,18 @@ Warna identitas menentukan suasana; warna semantik menentukan status. Jangan men
 
 Rasio berikut dihitung dari hex solid menggunakan checker kontras Anti Slop. Rasio ditampilkan dalam pembulatan, sedangkan keputusan memakai hasil sebelum pembulatan.
 
-| Teks/batas | Latar | Rasio sekitar | Penggunaan |
-| --- | --- | --- | --- |
-| `ink` | `canvas` | 13,96:1 | Teks utama. |
-| `ink` | `primary` | 4,96:1 | Label pada bidang sage. |
-| `ink` | `secondary` | 6,27:1 | Label pada bidang biru. |
-| `ink` | `tertiary` | 10,24:1 | Label pada bidang sand. |
-| `ink-muted` | `canvas` | 5,71:1 | Deskripsi pada latar utama. |
-| Putih | `action` | 7,17:1 | Tombol utama. |
-| Putih | `action-hover` / `action-pressed` | 9,06:1 / 10,93:1 | State tombol utama. |
-| `error-ink` | `error-surface` | 5,99:1 | Pesan error. |
-| `warning-ink` | `warning-surface` | 6,33:1 | Pesan peringatan. |
-| `border-control` | Putih | 3,96:1 | Batas kontrol, bukan teks normal. |
+| Teks/batas       | Latar                             | Rasio sekitar    | Penggunaan                        |
+| ---------------- | --------------------------------- | ---------------- | --------------------------------- |
+| `ink`            | `canvas`                          | 13,96:1          | Teks utama.                       |
+| `ink`            | `primary`                         | 4,96:1           | Label pada bidang sage.           |
+| `ink`            | `secondary`                       | 6,27:1           | Label pada bidang biru.           |
+| `ink`            | `tertiary`                        | 10,24:1          | Label pada bidang sand.           |
+| `ink-muted`      | `canvas`                          | 5,71:1           | Deskripsi pada latar utama.       |
+| Putih            | `action`                          | 7,17:1           | Tombol utama.                     |
+| Putih            | `action-hover` / `action-pressed` | 9,06:1 / 10,93:1 | State tombol utama.               |
+| `error-ink`      | `error-surface`                   | 5,99:1           | Pesan error.                      |
+| `warning-ink`    | `warning-surface`                 | 6,33:1           | Pesan peringatan.                 |
+| `border-control` | Putih                             | 3,96:1           | Batas kontrol, bukan teks normal. |
 
 Targetkan minimal 4,5:1 untuk teks normal, 3:1 untuk teks besar yang memenuhi definisi WCAG, serta 3:1 untuk bagian nonteks penting yang dikenai kriteria tersebut. Jangan memakai putih sebagai label kecil di atas ketiga warna identitas. Periksa ulang ketika opacity, gradasi, gambar, atau latar berubah. Tabel ini bukan sertifikasi aksesibilitas seluruh aplikasi.
 
@@ -203,15 +203,15 @@ Gunakan **Nunito** untuk judul dan UI. Bentuknya mendukung karakter membulat; sa
 
 Gunakan berkas berlisensi jelas dari sumber resmi dan simpan pemberitahuan lisensinya saat integrasi. Hindari ketergantungan pada font khusus Duolingo. Fallback awal: `Nunito, ui-rounded, system-ui, sans-serif`. Saat font belum dimuat, teks dan kontrol harus tetap terbaca tanpa layout rusak.
 
-| Peran | Ukuran awal | Aturan |
-| --- | --- | --- |
-| Hero landing | 40 px seluler, sampai 92 px desktop pada studio C1 | Tebal 800, line-height 1,02; responsif, dua baris pada ukuran teks standar. |
-| Judul bagian landing | 28 px seluler, sampai 40 px desktop | Line-height 1,2; lebih kecil dari hero. |
-| Judul layar aplikasi | 28–32 px | Tebal 800; tujuan layar terbaca sebelum pilihan. |
-| Judul kartu | 20–24 px | Tebal 700, line-height 1,3. |
-| Isi dan label | 16 px | Isi line-height 1,6, label 1,4; instruksi panjang dapat memakai 18 px bila membantu. |
-| Keterangan | 14 px | Line-height 1,5; jangan gunakan untuk instruksi atau tindakan utama. |
-| Angka timer | 64 px seluler, sampai 80 px desktop | Tebal 800, line-height 1,1; tetap muat ketika zoom. |
+| Peran                | Ukuran awal                                        | Aturan                                                                               |
+| -------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Hero landing         | 40 px seluler, sampai 92 px desktop pada studio C1 | Tebal 800, line-height 1,02; responsif, dua baris pada ukuran teks standar.          |
+| Judul bagian landing | 28 px seluler, sampai 40 px desktop                | Line-height 1,2; lebih kecil dari hero.                                              |
+| Judul layar aplikasi | 28–32 px                                           | Tebal 800; tujuan layar terbaca sebelum pilihan.                                     |
+| Judul kartu          | 20–24 px                                           | Tebal 700, line-height 1,3.                                                          |
+| Isi dan label        | 16 px                                              | Isi line-height 1,6, label 1,4; instruksi panjang dapat memakai 18 px bila membantu. |
+| Keterangan           | 14 px                                              | Line-height 1,5; jangan gunakan untuk instruksi atau tindakan utama.                 |
+| Angka timer          | 64 px seluler, sampai 80 px desktop                | Tebal 800, line-height 1,1; tetap muat ketika zoom.                                  |
 
 Frontmatter memuat nilai dasar; penyesuaian responsif di tabel ini berlaku pada peran terkait. Saat implementasi, gunakan nilai CSS valid seperti `clamp()` atau breakpoint, bukan rentang literal seperti `28-32px`.
 
@@ -248,14 +248,14 @@ Header cukup memuat identitas Nudge dan akses masuk aplikasi yang diperlukan. Ti
 
 Mode permukaan: **Operate**. Gunakan satu pusat perhatian pada setiap langkah. Pengguna memilih alur bertahap Mood, Tujuan, lalu Waktu dengan tombol Lanjut eksplisit. Pemilihan tidak otomatis memindahkan langkah. Mood memiliki Lewati; tujuan dan waktu wajib. Tempat/alat berada pada langkah Waktu. Pilihan dan langkah bertahan ketika berpindah menu dalam sesi, sedangkan penyelesaian kembali ke langkah Mood. Rincian ada di [polish aplikasi](./docs/app-polish.md).
 
-| Layar/keadaan | Fokus dan komposisi |
-| --- | --- |
+| Layar/keadaan   | Fokus dan komposisi                                                                                                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Memilih konteks | Tiga langkah dengan progres tekstual, pilihan native, Lanjut/Kembali, dan Lewati mood. Durasi dari landing tetap terpilih pada langkah Waktu. Akses Favorit dan Pengingat tetap mudah ditemukan. |
-| Saran | Satu kartu utama berisi judul, durasi, instruksi, kondisi, dan alasan. Mulai paling menonjol; Kurang cocok dan Favorit menjadi pendamping. |
-| Timer | Judul aktivitas, angka waktu, status berjalan/jeda/habis, kontrol yang jelas, dan maskot kecil. Instruksi tetap dapat dilihat kembali. |
-| Setelah selesai | Respons singkat, “Mood kamu berubah?”, pilihan mood setara dan Lewati, kemudian kembali ke awal aplikasi. |
-| Favorit | Daftar ringkas yang membuka detail aktivitas melalui alur yang sama; keadaan kosong memiliki jalan kembali ke pemilihan. |
-| Pengingat | Status aktif/nonaktif, hari/waktu, status izin, batas pengiriman, dan kontrol ubah/matikan. |
+| Saran           | Satu kartu utama berisi judul, durasi, instruksi, kondisi, dan alasan. Mulai paling menonjol; Kurang cocok dan Favorit menjadi pendamping.                                                       |
+| Timer           | Judul aktivitas, angka waktu, status berjalan/jeda/habis, kontrol yang jelas, dan maskot kecil. Instruksi tetap dapat dilihat kembali.                                                           |
+| Setelah selesai | Respons singkat, “Mood kamu berubah?”, pilihan mood setara dan Lewati, kemudian kembali ke awal aplikasi.                                                                                        |
+| Favorit         | Daftar ringkas yang membuka detail aktivitas melalui alur yang sama; keadaan kosong memiliki jalan kembali ke pemilihan.                                                                         |
+| Pengingat       | Status aktif/nonaktif, hari/waktu, status izin, batas pengiriman, dan kontrol ubah/matikan.                                                                                                      |
 
 Desktop tidak perlu menjadi dashboard dengan banyak panel. Pada seluler, tindakan utama dekat dengan konten yang diputuskan dan mudah dijangkau. Jika memakai action bar melekat, sediakan ruang konten dan safe area agar tidak menutup instruksi, maskot, fokus, atau kontrol terakhir.
 
@@ -295,13 +295,13 @@ Induk terpilih C1: tempurung berupa lengkungan sage lebar tanpa pola, wajah sand
 
 Pembagian warna terpilih: sage untuk tempurung serta mata/senyum, sand untuk tubuh/wajah, serta periwinkle untuk objek pendamping dan bidang ikon. Versi ringkas membesarkan wajah; versi monokrom mengandalkan bidang dan ruang negatif.
 
-| Konteks | Kehadiran dan perilaku |
-| --- | --- |
-| Landing page | Lebih besar dan ekspresif; pose mengajak atau sedang melakukan aktivitas. |
-| Pemilihan konteks dan saran | Maskot kecil di dekat judul atau area bantuan, tanpa menggantikan label. |
-| Timer berjalan/jeda | Tetap hadir, sekitar 32–48 px sebagai titik awal; pose tenang atau statis, tanpa animasi berulang. |
-| Penyelesaian | Ekspresi senang yang singkat, kemudian diam. Tidak menutupi pertanyaan mood atau tombol. |
-| Lewati, ganti, atau berhenti | Tetap ramah dan menerima; tidak sedih, marah, menuduh, atau menunjukkan kehilangan pencapaian. |
+| Konteks                       | Kehadiran dan perilaku                                                                                                   |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Landing page                  | Lebih besar dan ekspresif; pose mengajak atau sedang melakukan aktivitas.                                                |
+| Pemilihan konteks dan saran   | Maskot kecil di dekat judul atau area bantuan, tanpa menggantikan label.                                                 |
+| Timer berjalan/jeda           | Tetap hadir, sekitar 32–48 px sebagai titik awal; pose tenang atau statis, tanpa animasi berulang.                       |
+| Penyelesaian                  | Ekspresi senang yang singkat, kemudian diam. Tidak menutupi pertanyaan mood atau tombol.                                 |
+| Lewati, ganti, atau berhenti  | Tetap ramah dan menerima; tidak sedih, marah, menuduh, atau menunjukkan kehilangan pencapaian.                           |
 | Favorit, pengingat, dan error | Kehadiran kecil yang konsisten melalui header/pendamping; ilustrasi lebih besar hanya bila membantu menjelaskan keadaan. |
 
 Maskot harus hadir dalam layar aplikasi, meskipun kecil. Pada layar sempit, pertahankan bentuk ringkas di header atau area status, tanpa mengurangi keterbacaan dan akses tindakan. Jangan memakai maskot untuk menyampaikan error atau status penting tanpa teks.
@@ -314,15 +314,15 @@ Rencanakan simbol + tulisan, tulisan saja, simbol saja, serta versi satu warna. 
 
 Gunakan satu keluarga **Phosphor Icons Regular** untuk ikon kontrol, dengan ukuran 20–24 px dan bobot konsisten. Paket sudah diintegrasikan untuk bentuk yang ramah dan cakupan tindakan umum. Pasangkan ikon dengan label pada tindakan utama. Jangan menambah ikon sekadar untuk mengisi ruang.
 
-| Kebutuhan | Status saat dokumen dibuat | Ketentuan produksi |
-| --- | --- | --- |
-| Maskot utama dan pose ringkas | Perlu dibuat | Tetapkan bentuk induk agar proporsi antargambar konsisten. |
-| Ekspresi menyapa, berpikir, istirahat, selesai | Perlu dibuat | Prioritaskan ekspresi yang benar-benar dipakai. |
-| Ilustrasi Produktif ringan, Bergerak, Refleksi/jeda layar | Perlu dibuat | Gunakan kura-kura yang sama dalam kegiatan berbeda. |
-| Logo dan wordmark | Perlu dibuat | Eksplorasi simbol melalui IP as Logo; susun tulisan dan varian terpisah. |
-| Favicon dan ikon PWA | Perlu dibuat | Turunkan dari desain terpilih, periksa ukuran kecil dan area aman. |
-| Font Nunito dan ikon kontrol | Sumber dipilih, belum diintegrasikan | Ambil dari sumber resmi, simpan lisensi, periksa hasil render. |
-| Dokumen Duolingo dan gambar showcase skill | Referensi saja | Bukan berkas aset Nudge siap pakai. |
+| Kebutuhan                                                 | Status saat dokumen dibuat           | Ketentuan produksi                                                       |
+| --------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------ |
+| Maskot utama dan pose ringkas                             | Perlu dibuat                         | Tetapkan bentuk induk agar proporsi antargambar konsisten.               |
+| Ekspresi menyapa, berpikir, istirahat, selesai            | Perlu dibuat                         | Prioritaskan ekspresi yang benar-benar dipakai.                          |
+| Ilustrasi Produktif ringan, Bergerak, Refleksi/jeda layar | Perlu dibuat                         | Gunakan kura-kura yang sama dalam kegiatan berbeda.                      |
+| Logo dan wordmark                                         | Perlu dibuat                         | Eksplorasi simbol melalui IP as Logo; susun tulisan dan varian terpisah. |
+| Favicon dan ikon PWA                                      | Perlu dibuat                         | Turunkan dari desain terpilih, periksa ukuran kecil dan area aman.       |
+| Font Nunito dan ikon kontrol                              | Sumber dipilih, belum diintegrasikan | Ambil dari sumber resmi, simpan lisensi, periksa hasil render.           |
+| Dokumen Duolingo dan gambar showcase skill                | Referensi saja                       | Bukan berkas aset Nudge siap pakai.                                      |
 
 Setiap aset yang diproduksi nanti dicatat dengan lokasi, fungsi, varian, sumber/model bila dihasilkan, dan lisensi/atribusi yang relevan. Nama berkas yang disarankan: `nudge-turtle-idle`, `nudge-turtle-complete`, `nudge-logo-horizontal`, dan `nudge-icon-maskable`; contoh nama ini belum menunjuk berkas nyata. SVG cocok untuk ikon/wordmark yang memang dibuat sebagai vektor; gunakan PNG/WebP untuk hasil raster. Jangan menyebut gambar raster sebagai logo vektor hanya karena dimasukkan ke pembungkus SVG.
 
@@ -372,27 +372,27 @@ Pengingat default nonaktif. Gunakan label dan status switch yang eksplisit. Hari
 
 Gunakan “kamu” secara konsisten, dengan kalimat pendek dan konkret. Contoh tulisan kerja berikut dapat dipoles tanpa mengubah perilaku:
 
-| Situasi | Contoh |
-| --- | --- |
-| Memilih konteks | “Mau melakukan apa sebentar ini?” |
-| Mood | “Lagi merasa bagaimana?” dengan Lewati. |
-| Saran kurang cocok | “Cari kegiatan lain” sebagai penjelasan tindakan Kurang cocok. |
-| Waktu habis | “Waktunya habis. Sudah selesai?” dengan tombol Selesai. |
-| Berhenti | “Boleh berhenti dulu. Kamu bisa mulai lagi nanti.” |
-| Favorit kosong | “Belum ada favorit. Simpan kegiatan yang ingin kamu coba lagi.” |
+| Situasi            | Contoh                                                                        |
+| ------------------ | ----------------------------------------------------------------------------- |
+| Memilih konteks    | “Mau melakukan apa sebentar ini?”                                             |
+| Mood               | “Lagi merasa bagaimana?” dengan Lewati.                                       |
+| Saran kurang cocok | “Cari kegiatan lain” sebagai penjelasan tindakan Kurang cocok.                |
+| Waktu habis        | “Waktunya habis. Sudah selesai?” dengan tombol Selesai.                       |
+| Berhenti           | “Boleh berhenti dulu. Kamu bisa mulai lagi nanti.”                            |
+| Favorit kosong     | “Belum ada favorit. Simpan kegiatan yang ingin kamu coba lagi.”               |
 | Tidak ada kandidat | “Belum ada kegiatan yang sesuai pilihan ini. Coba ubah waktu atau filternya.” |
-| Izin ditolak | “Notifikasi belum diizinkan. Kamu tetap bisa memulai kegiatan kapan saja.” |
+| Izin ditolak       | “Notifikasi belum diizinkan. Kamu tetap bisa memulai kegiatan kapan saja.”    |
 
 Hindari diagnosis, janji menghilangkan brainrot, janji penurunan screen time, angka manfaat, testimoni palsu, dan tekanan mempertahankan streak. Jangan menambahkan fitur hanya agar contoh teks dapat digunakan.
 
 ### Motion
 
-| Kegunaan | Nilai awal | Batas |
-| --- | --- | --- |
-| Feedback tombol/pilihan | 120–160 ms | Perubahan warna atau gerak tekan kecil; tidak menunda aksi. |
-| Pergantian panel | 180–220 ms | Fade atau perpindahan 4–8 px; tanpa perubahan alur fokus yang membingungkan. |
-| Respons selesai | 300–500 ms | Satu gerakan maskot ringan, kemudian diam; tidak mengunci tombol. |
-| Timer dan maskot pendamping | Statis saat idle | Tanpa kedipan, bounce berulang, gerak angka, atau animasi latar. |
+| Kegunaan                    | Nilai awal       | Batas                                                                        |
+| --------------------------- | ---------------- | ---------------------------------------------------------------------------- |
+| Feedback tombol/pilihan     | 120–160 ms       | Perubahan warna atau gerak tekan kecil; tidak menunda aksi.                  |
+| Pergantian panel            | 180–220 ms       | Fade atau perpindahan 4–8 px; tanpa perubahan alur fokus yang membingungkan. |
+| Respons selesai             | 300–500 ms       | Satu gerakan maskot ringan, kemudian diam; tidak mengunci tombol.            |
+| Timer dan maskot pendamping | Statis saat idle | Tanpa kedipan, bounce berulang, gerak angka, atau animasi latar.             |
 
 Easing awal `cubic-bezier(0.2, 0.8, 0.2, 1)`. Utamakan opacity dan transform. Dengan `prefers-reduced-motion: reduce`, hilangkan perpindahan, perayaan, dan efek tekan bergerak; pertahankan feedback instan melalui warna, border, teks, dan ikon. Konten muncul tanpa menunggu scroll animation. Animasi tidak menjadi prasyarat memahami hasil tindakan.
 
@@ -480,6 +480,8 @@ Pembaruan 24 Oktober 2026: pengguna membatalkan pendekatan video dan menyetujui 
 Revisi ini menggantikan arahan rig tubuh terpisah pada tujuh adegan landing. Arah terbaru memakai C1 2D pada hero dan bagian bergerak, C1 3D di penutup, serta ilustrasi benda pada bagian cerita lainnya, tanpa karakter manusia. Potret penutup tetap memakai gerak kecil dan bukan animasi karakter 3D penuh.
 
 Hero 2D memakai sapaan dengan gerak kepala, kedipan, perubahan senyum, ayunan kaki depan, dan perpindahan berat badan. Kaki yang menapak mempertahankan kontak dengan tanah. Ponsel bergeser menjauh dan buku membuka halaman dalam siklus 10,8 detik. Pengguna dapat mengulang sapaan melalui tombol ilustrasi. Gerak berhenti ketika bagian tidak terlihat atau tab tersembunyi; reduced motion menampilkan komposisi statis. Ini keputusan khusus hero landing dan tidak mengubah maskot aplikasi.
+
+Koreksi pengguna 24 Oktober 2026 menggantikan arahan gambar ulang hero di atas: bentuk vektor pada cuplikan v1/v2 ditolak karena berbeda dari C1 yang disepakati. Gunakan master C1 asli yang tampil di penutup sebagai acuan wajib untuk siluet, wajah, proporsi, warna, dan shading. Preview v3 memakai piksel `c1-wave.webp` dengan mask serta deformasi saat render, tanpa menggambar ulang karakter. Gerak ponsel tetap mengikuti cuplikan yang disukai. Ini masih preview terpisah; integrasi hero dan penerimaan artistik belum selesai. Lihat [perkembangan hero](./docs/hero-redesign.md). Arahan ini tidak mengganti adegan regangan yang sudah diterima atau aset aplikasi.
 
 Ponsel memakai adaptasi Scrolling Phone oleh Nafta R; jurnal memakai adaptasi Diary oleh Brian Karungani, dengan Lottie Simple License dan kredit pada footer. Tangan serta sisa garis gestur ponsel dihapus. Afirmasi jurnal diganti goresan netral. Lima adegan cerita tidak mengulang satu siluet kura-kura. Jam/tiket mengikuti durasi pengguna; sepatu dan benda meja memiliki gerak tersendiri.
 

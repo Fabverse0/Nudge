@@ -1,6 +1,6 @@
 # Hero Nudge: dari scrolling ke satu kegiatan
 
-Status: pengguna menyukai gerak meletakkan ponsel, tetapi menolak proporsi C1 pada cuplikan pertama. Revisi bentuk v2 tersedia untuk peninjauan. Hero aktif belum diganti. Tanggal pemeriksaan: 24 Oktober 2026.
+Status: pengguna menyukai gerak ponsel, menolak bentuk vektor v1/v2, lalu meminta penggunaan C1 asli yang disepakati. Preview v3 memakai piksel aset C1 asli. Hero aktif belum diganti. Tanggal pemeriksaan: 24 Oktober 2026.
 
 ## Masalah yang ditangani
 
@@ -62,7 +62,7 @@ Tidak ada jaminan format tertentu akan menghasilkan animasi bagus tanpa pekerjaa
 
 Tidak ada tes runtime baru pada tahap referensi/storyboard karena kode runtime belum berubah. Belum ada instalasi, biaya layanan animasi, push, atau klaim kelancaran Android fisik.
 
-## Cuplikan kontak ponsel
+## Cuplikan kontak ponsel vektor v1, ditolak
 
 Preview terpisah dapat dijalankan melalui `node scripts/preview-hero-contact.mjs`, lalu dibuka pada `http://127.0.0.1:3101/`. Preview ini tidak menambah route Next.js atau mengubah hero aktif. Regenerasi JSON melalui `node scripts/build-hero-contact.mjs`.
 
@@ -83,7 +83,7 @@ Saat review awal, urutan layer menutupi wajah; susunan layer dan gaya telah dipe
 
 Cuplikan belum mencakup penggeseran ponsel ke kiri atau aktivitas jurnal. Bentuk vektornya masih perlu penilaian pengguna terhadap storyboard. Reduced motion dan perpindahan tab tersedia dalam source tetapi belum diperiksa lewat emulasi browser pada tahap ini. Build aplikasi, suite landing produksi, dan Android fisik belum dijalankan untuk cuplikan yang belum terintegrasi ini. Persetujuan artistik cuplikan tetap menjadi gerbang sebelum produksi adegan penuh.
 
-## Revisi proporsi C1 v2
+## Revisi proporsi C1 v2, ditolak
 
 Pengguna menilai gerak meletakkan ponsel sudah bagus, tetapi bentuk karakter tidak proporsional dan berbeda dari C1 di web. Referensi identitas diperiksa langsung dari `public/brand/landing/motion/c1-idle.webp` dan storyboard yang sudah disetujui.
 
@@ -99,4 +99,29 @@ Pemeriksaan revisi:
 - ESLint script dan pemeriksaan whitespace Git lulus; log error browser kosong pada pemeriksaan render revisi.
 - Bukti gambar di atas adalah screenshot pose netral, bukan hasil generasi atau bukti kelancaran pada perangkat fisik.
 
-Pemeriksaan browser awal sempat tidak dijalankan karena peninjauan persetujuan otomatis mencapai batas penggunaan. Setelah waktu reset berlalu, preview lokal dijalankan kembali dan pemeriksaan render dapat diteruskan. Revisi bentuk v2 masih menunggu penilaian pengguna; persetujuan gerak tidak dianggap sebagai persetujuan bentuk. Tidak ada instalasi, perubahan aplikasi, integrasi hero, atau push pada revisi ini.
+Pemeriksaan browser awal sempat tidak dijalankan karena peninjauan persetujuan otomatis mencapai batas penggunaan. Setelah waktu reset berlalu, preview lokal dijalankan kembali dan pemeriksaan render dapat diteruskan. Pengguna kemudian menolak bentuk v2 karena masih berbeda dari C1 yang disepakati. Tidak ada instalasi, perubahan aplikasi, integrasi hero, atau push pada revisi ini.
+
+## V3: piksel C1 asli, tanpa menggambar ulang karakter
+
+Pengguna kembali menunjukkan C1 pada penutup landing sebagai acuan, lalu meminta implementasi. Arah terbaru menggunakan `public/brand/landing/motion/c1-wave.webp`, ekspor existing dari `nudge-turtle-wave.png`. File sumber tidak diedit. SHA256 WebP: `D7DD4678FB6D4DF57B3DF1FF4BE10CEE47BEDC95257B4903617C09A356D2385D`.
+
+Generator tidak lagi membuat wajah, tempurung, mata, atau kaki sebagai gambar vektor. JSON kini memuat enam layer Lottie untuk ponsel/alas dan track posisi yang menyinkronkan C1. Module `c1-original-rig.js` merender gambar asli ke mesh WebGL bawaan browser: badan/kepala bergeser kecil, kaki dipisah melalui mask saat render dan mengikuti lintasan kontak yang sudah disukai. Area pangkal kaki diisi dari tekstur kaki pada gambar yang sama untuk mengurangi celah. Ini gambar 2D bertekstur pada mesh, bukan model 3D atau file rig profesional.
+
+Tombol **Lihat aset asli** menonaktifkan deformasi dan pemisahan kaki sehingga gambar utuh yang sama dapat dibandingkan langsung dengan cuplikan. Tidak ada gambar generasi baru, atlas lama, dependensi baru, akun, atau biaya layanan animasi. Percobaan kedipan melalui deformasi piksel dibuang setelah inspeksi karena merusak bentuk mata; versi ini mempertahankan ekspresi mata dan senyum asli.
+
+| Aset asli, tanpa deformasi                                     | Pose menyentuh pada cuplikan                                        |
+| -------------------------------------------------------------- | ------------------------------------------------------------------- |
+| ![Aset asli](./assets/hero-redesign/c1-original-reference.png) | ![Pose kontak v3](./assets/hero-redesign/c1-original-motion-v3.png) |
+
+Bukti v3:
+
+- Shader berhasil dikompilasi dan preview mencapai status rig siap dalam browser.
+- Pose awal, menyentuh, dan meletakkan ditinjau; replay melalui Enter dan kontrol aset asli bekerja.
+- Lima layer ponsel memiliki geometri serta timing identik dengan versi yang disukai; indeks internal layer boleh berubah. Track posisi kaki juga identik setelah offset koordinat.
+- Lebar 390 dan 320 px diperiksa tanpa overflow horizontal; canvas tetap aktif.
+- Log error browser kosong pada pemeriksaan tersebut. ESLint script/module, Prettier, dan pemeriksaan whitespace Git lulus.
+- JSON: 225.325 byte mentah, 44.467 byte gzip saat pengukuran; WebP asli: 48.490 byte. Server preview belum menerapkan kompresi.
+
+Fallback menampilkan gambar C1 asli sebelum pemuatan, jika WebGL gagal, atau jika konteks grafis hilang. Gerak mengikuti clock Lottie yang sama dengan ponsel; reduced motion mempertahankan pose diam dan tab tersembunyi menjeda clock. Jalur kegagalan grafis, reduced motion, tanpa JavaScript, serta Android fisik belum diperiksa melalui browser pada revisi ini. Belum ada klaim framerate perangkat.
+
+V3 masih berupa cuplikan peninjauan. Keputusan gerak ponsel sudah diterima, sedangkan kualitas sambungan kaki dan hasil penerapan C1 asli perlu penilaian pengguna sebelum adegan jurnal serta integrasi hero lengkap. Route aplikasi, source aset aplikasi, dan hero aktif tidak diubah. Tidak ada push.
