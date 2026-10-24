@@ -182,11 +182,6 @@ export function HeroStory() {
               <path pathLength={1} d="M585 1020c22-3 40 1 63-4" />
             </svg>
           </span>
-          <span className="hero-story-footsteps">
-            <i />
-            <i />
-            <i />
-          </span>
         </span>
       </span>
     </div>
