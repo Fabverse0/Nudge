@@ -1,6 +1,6 @@
 # Hero Nudge: dari scrolling ke satu kegiatan
 
-Status: v7 terintegrasi pada hero landing memakai tiga pose C1 utuh, gerak ponsel, dan guratan jurnal. Pemeriksaan teknis tercatat di bagian v7; penerimaan artistik tetap menunggu pengguna. Tanggal pemeriksaan: 24 Oktober 2026.
+Status: selesai untuk lingkup hero landing v7. Pengguna menerima bentuk dan geraknya pada 24 Oktober 2026 melalui jawaban “Bentuk dan geraknya sudah cocok”. Bukti teknis dan penyesuaian teknik tercatat di bagian v7.
 
 ## Masalah yang ditangani
 
@@ -53,12 +53,12 @@ Tidak ada jaminan format tertentu akan menghasilkan animasi bagus tanpa pekerjaa
 - [x] Referensi primer dan satu kandidat aset gratis diteliti; keterbatasan visual dicatat.
 - [x] Lima pose konsep tersedia secara lokal.
 - [x] Pengguna menyetujui bentuk dan storyboard melalui jawaban “Setuju, lanjut ke cuplikan animasi”.
-- [ ] Cuplikan interaksi ponsel dibuat dan disetujui dalam keadaan bergerak.
+- [x] Interaksi ponsel dibuat dan diterima melalui hero final v7; persetujuan ini menggantikan gerbang cuplikan versi terdahulu yang ditolak.
 - [x] Adegan lengkap diproduksi dan diintegrasikan khusus hero, dengan penyesuaian teknik v7 di bawah.
 - [x] Replay, pause, reduced motion, tanpa JavaScript, kegagalan pemuatan, dan hidrasi diperiksa.
 - [x] Typecheck, lint, dan Playwright landing yang relevan dijalankan.
 - [x] Dua siklus ditinjau pada 1440/768/390 px serta reflow 320 px.
-- [ ] Pengguna menerima kualitas artistik animasi final.
+- [x] Pengguna menerima kualitas artistik animasi final v7 melalui jawaban “Bentuk dan geraknya sudah cocok” pada 24 Oktober 2026.
 
 Tidak ada tes runtime baru pada tahap referensi/storyboard karena kode runtime belum berubah. Belum ada instalasi, biaya layanan animasi, push, atau klaim kelancaran Android fisik.
 
@@ -168,4 +168,6 @@ Bukti pemeriksaan:
 - Tiga pose dan posisi tinta jurnal diperiksa melalui snapshot timeline. Pemeriksaan Axe tidak menemukan pelanggaran otomatis pada mode statis. ESLint dan format file yang diubah diperiksa; detector Impeccable tidak melaporkan temuan pada komponen dan CSS hero.
 - Dua putaran penuh melalui replay selesai pada lebar 1440, 768, dan 390 px tanpa error browser. Ini adalah pengamatan browser desktop pada viewport berbeda, bukan pengukuran framerate atau pengujian perangkat fisik.
 
-Pengujian menggunakan preview development pada `127.0.0.1:3100` dengan service worker diblokir dalam konteks browser pengujian yang terpisah. Build produksi berhasil dikompilasi, tetapi suite ini tidak dijalankan ulang melalui server produksi. Tidak ada instalasi dependensi, perubahan source aplikasi, atau push pada integrasi ini. Penilaian keluwesan dan kualitas artistik final tetap memerlukan peninjauan pengguna.
+Pengujian menggunakan preview development pada `127.0.0.1:3100` dengan service worker diblokir dalam konteks browser pengujian yang terpisah. Build produksi berhasil dikompilasi, tetapi suite ini tidak dijalankan ulang melalui server produksi. Tidak ada instalasi dependensi, perubahan source aplikasi, atau push pada integrasi ini.
+
+Penerimaan final: pada 24 Oktober 2026 pengguna menjawab “Bentuk dan geraknya sudah cocok” setelah diminta meninjau satu putaran serta mencoba replay. Persetujuan berlaku pada hasil v7 dengan tiga pose utuh dan transisi benda yang dijelaskan di atas. Ini menutup pekerjaan hero landing dan tidak mengubah status pemeriksaan Android atau lingkup MVP lain.
