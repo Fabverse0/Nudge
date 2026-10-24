@@ -13,6 +13,7 @@ import "@/components/landing/time-story.css";
 import "@/components/landing/stretch-story.css";
 import "@/components/landing/how-story.css";
 import "@/components/landing/control-story.css";
+import "@/components/landing/hero-story.css";
 
 export default function HomePage() {
   return (

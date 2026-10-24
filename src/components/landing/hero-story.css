@@ -1,0 +1,363 @@
+.nudge-alive .hero-story {
+  --hero-cycle: 10.8s;
+  --hero-ease: cubic-bezier(0.45, 0, 0.22, 1);
+}
+.nudge-alive .hero-greeting {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 24px;
+  background: transparent;
+  color: #315f5e;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+.nudge-alive .hero-greeting:focus-visible {
+  outline: 3px solid #315f5e;
+  outline-offset: 6px;
+}
+.nudge-alive .hero-greeting:disabled {
+  cursor: default;
+}
+.nudge-alive .hero-story-art {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.nudge-alive .hero-replay-hint {
+  position: absolute;
+  left: 42%;
+  bottom: -3%;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 10px;
+  font-size: 14px;
+  font-weight: 800;
+  opacity: 0.8;
+  transition: opacity 180ms ease;
+}
+.nudge-alive .hero-greeting:hover .hero-replay-hint {
+  opacity: 1;
+}
+.nudge-alive .hero-greeting:disabled .hero-replay-hint {
+  visibility: hidden;
+}
+.nudge-alive .hero-core {
+  transform-origin: 180px 333px;
+  animation: hero-weight var(--hero-cycle) var(--hero-ease) infinite;
+}
+.nudge-alive .hero-head {
+  transform-origin: 277px 300px;
+  animation: hero-look var(--hero-cycle) var(--hero-ease) infinite;
+}
+.nudge-alive .hero-wave-arm {
+  transform-origin: 350px 288px;
+  animation: hero-wave var(--hero-cycle) var(--hero-ease) infinite;
+}
+.nudge-alive .hero-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hero-blink var(--hero-cycle) linear infinite;
+}
+.nudge-alive .hero-eye-right {
+  animation-name: hero-wink;
+}
+.nudge-alive .hero-gaze {
+  animation: hero-gaze var(--hero-cycle) var(--hero-ease) infinite;
+}
+.nudge-alive .hero-soft-smile {
+  animation: hero-smile-soft var(--hero-cycle) ease infinite;
+}
+.nudge-alive .hero-happy-smile {
+  opacity: 0;
+  animation: hero-smile-happy var(--hero-cycle) ease infinite;
+}
+.nudge-alive .hero-phone-away {
+  transform-origin: 75px 380px;
+  animation: hero-phone-away var(--hero-cycle) var(--hero-ease) infinite;
+}
+.nudge-alive .hero-phone-feed {
+  opacity: 0.35;
+  animation: hero-screen-rest var(--hero-cycle) ease infinite;
+}
+.nudge-alive .hero-book-arrival {
+  transform-origin: 400px 390px;
+  animation: hero-book-arrival var(--hero-cycle) var(--hero-ease) infinite;
+}
+.nudge-alive .hero-turning-page {
+  transform-origin: 70px 26px;
+  animation: hero-page-turn var(--hero-cycle) var(--hero-ease) infinite;
+}
+.nudge-alive .hero-wave-marks {
+  opacity: 0;
+  animation: hero-wave-marks var(--hero-cycle) ease infinite;
+}
+.nudge-alive .hero-contact {
+  transform-origin: 263px 354px;
+  animation: hero-weight-shadow var(--hero-cycle) var(--hero-ease) infinite;
+}
+.nudge-alive .hero-little-step-one {
+  animation: hero-step-one var(--hero-cycle) ease infinite;
+}
+.nudge-alive .hero-little-step-two {
+  animation: hero-step-two var(--hero-cycle) ease infinite;
+}
+.nudge-alive .hero-story:not([data-running="true"]) * {
+  animation-play-state: paused;
+}
+@keyframes hero-weight {
+  0%,
+  7%,
+  100% {
+    transform: translate(0, 2px) rotate(1deg);
+  }
+  16%,
+  33% {
+    transform: translate(-2px, -4px) rotate(-2deg);
+  }
+  43%,
+  55% {
+    transform: translate(0, 0) rotate(0);
+  }
+  70% {
+    transform: translate(0, -2px) rotate(-0.3deg);
+  }
+  86% {
+    transform: translate(0, 1px) rotate(0.2deg);
+  }
+}
+@keyframes hero-look {
+  0%,
+  5%,
+  100% {
+    transform: rotate(6deg) translate(-2px, 3px);
+  }
+  14%,
+  33% {
+    transform: rotate(-5deg) translate(1px, -4px);
+  }
+  46%,
+  86% {
+    transform: rotate(0) translate(0, 0);
+  }
+}
+@keyframes hero-wave {
+  0%,
+  7%,
+  60%,
+  100% {
+    transform: rotate(25deg);
+  }
+  15%,
+  25%,
+  35% {
+    transform: rotate(-12deg);
+  }
+  20%,
+  30% {
+    transform: rotate(10deg);
+  }
+  43%,
+  48% {
+    transform: rotate(0);
+  }
+}
+@keyframes hero-blink {
+  0%,
+  4%,
+  7%,
+  52%,
+  55%,
+  100% {
+    transform: scaleY(1);
+  }
+  5.5%,
+  53.5% {
+    transform: scaleY(0.08);
+  }
+}
+@keyframes hero-wink {
+  0%,
+  4%,
+  7%,
+  28%,
+  34%,
+  52%,
+  55%,
+  100% {
+    transform: scaleY(1);
+  }
+  5.5%,
+  30%,
+  32%,
+  53.5% {
+    transform: scaleY(0.08);
+  }
+}
+@keyframes hero-gaze {
+  0%,
+  6%,
+  100% {
+    transform: translate(-5px, 2px);
+  }
+  14%,
+  86% {
+    transform: translate(0, 0);
+  }
+}
+@keyframes hero-smile-soft {
+  0%,
+  10%,
+  42%,
+  100% {
+    opacity: 1;
+  }
+  16%,
+  35% {
+    opacity: 0;
+  }
+}
+@keyframes hero-smile-happy {
+  0%,
+  10%,
+  42%,
+  100% {
+    opacity: 0;
+  }
+  16%,
+  35% {
+    opacity: 1;
+  }
+}
+@keyframes hero-phone-away {
+  0%,
+  4%,
+  100% {
+    transform: translate(18px, -4px) rotate(8deg);
+  }
+  16%,
+  88% {
+    transform: translate(-8px, 3px) rotate(-5deg);
+  }
+}
+@keyframes hero-screen-rest {
+  0%,
+  5%,
+  100% {
+    opacity: 0.6;
+  }
+  15%,
+  88% {
+    opacity: 0.12;
+  }
+}
+@keyframes hero-book-arrival {
+  0%,
+  9%,
+  100% {
+    transform: translate(-14px, 9px) rotate(-8deg) scale(0.84);
+  }
+  27%,
+  86% {
+    transform: translate(0, 0) rotate(0) scale(1);
+  }
+}
+@keyframes hero-page-turn {
+  0%,
+  18%,
+  100% {
+    transform: scaleX(0.08);
+  }
+  30% {
+    transform: scaleX(1);
+  }
+  43%,
+  88% {
+    transform: scaleX(0.03);
+  }
+}
+@keyframes hero-wave-marks {
+  0%,
+  11%,
+  42%,
+  100% {
+    opacity: 0;
+  }
+  17%,
+  23%,
+  29%,
+  35% {
+    opacity: 0.85;
+  }
+  20%,
+  26%,
+  32% {
+    opacity: 0.3;
+  }
+}
+@keyframes hero-weight-shadow {
+  0%,
+  7%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.09;
+  }
+  18%,
+  33% {
+    transform: scaleX(0.94);
+    opacity: 0.065;
+  }
+  46%,
+  86% {
+    transform: scaleX(1.02);
+    opacity: 0.1;
+  }
+}
+@keyframes hero-step-one {
+  0%,
+  27%,
+  94%,
+  100% {
+    opacity: 0.12;
+  }
+  36%,
+  87% {
+    opacity: 0.8;
+  }
+}
+@keyframes hero-step-two {
+  0%,
+  34%,
+  94%,
+  100% {
+    opacity: 0.12;
+  }
+  43%,
+  87% {
+    opacity: 0.8;
+  }
+}
+@media (max-width: 620px) {
+  .nudge-alive .hero-replay-hint {
+    bottom: -5%;
+    left: 37%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nudge-alive .hero-story * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .nudge-alive .hero-turning-page {
+    transform: scaleX(0.03);
+  }
+  .nudge-alive .hero-wave-marks {
+    opacity: 0.55;
+  }
+}

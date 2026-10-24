@@ -2,6 +2,7 @@ import Image from "next/image";
 import { LandingAnimation } from "./landing-animation";
 import { TimeStory } from "./time-story";
 import { StretchStory } from "./stretch-story";
+import { HeroStory } from "./hero-story";
 
 export type LandingSceneKind =
   "hero" | "phone" | "time" | "move" | "tidy" | "journal" | "welcome";
@@ -197,6 +198,7 @@ export function LandingScene({
   priority?: boolean;
   minutes?: number;
 }) {
+  if (kind === "hero") return <HeroStory />;
   return (
     <div
       className={`alive-scene scene-${kind}`}
@@ -205,9 +207,7 @@ export function LandingScene({
       aria-label={descriptions[kind]}
     >
       <div className="scene-ground" aria-hidden="true" />
-      {(kind === "hero" || kind === "welcome") && (
-        <MascotScene kind={kind} priority={priority} />
-      )}
+      {kind === "welcome" && <MascotScene kind={kind} priority={priority} />}
       {kind === "phone" && <LandingAnimation name="phone" />}
       {kind === "journal" && <LandingAnimation name="diary" />}
       {kind === "time" && <TimeStory minutes={minutes} />}
