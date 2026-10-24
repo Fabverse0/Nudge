@@ -1,6 +1,6 @@
 # Hero Nudge: dari scrolling ke satu kegiatan
 
-Status: pengguna menolak proporsi kaki hasil rig v4. Preview v5 mempertahankan master C1 sebagai satu gambar utuh dan memusatkan gerak pada animasi ponsel. Hero aktif belum diganti. Tanggal pemeriksaan: 24 Oktober 2026.
+Status: preview v6 menyambung adegan ponsel ke pose jurnal C1 yang utuh. Hero aktif belum diganti; preview masih menunggu penilaian visual. Tanggal pemeriksaan: 24 Oktober 2026.
 
 ## Masalah yang ditangani
 
@@ -141,3 +141,9 @@ Prompt, sumber, batas teknik, dan bukti pemeriksaan tercatat di [catatan aset v4
 Review terbaru menunjukkan kaki rig v4 masih tampak terpisah dan mengubah pose C1 dari gambar yang disetujui. Renderer v5 membuang pemisahan dan deformasi kaki. Ia menampilkan master `public/brand/mascot/nudge-turtle-wave.png` sebagai satu tekstur, dengan napas seragam yang nyaris tak mengubah siluet. Gerak ponsel yang disukai tetap sama. Copy preview kini menjelaskan bahwa ponsel berubah dari layar aktif menjadi jeda; pose kunci membantu meninjau perubahan tersebut.
 
 Preview v5 diperiksa pada pose awal, menyentuh, meletakkan, dan tenang setelah reload di browser lokal. Karakter kembali proporsional sesuai master, sementara ponsel tetap terlihat di samping C1 pada pose akhir. Pemeriksaan ini hanya visual pada preview lokal; gerak napas halus belum dinilai oleh pengguna. Belum ada integrasi hero atau perubahan aplikasi. Adegan jurnal, integrasi landing, reduced-motion visual, reflow tambahan, dan pengujian akhir masih menunggu.
+
+## V6: dari ponsel ke jurnal
+
+Preview lokal menyambungkan akhir adegan ponsel dengan pose C1 yang sedang menulis pada aset `public/brand/illustrations/nudge-turtle-journal.png`. C1 tetap berupa gambar utuh; tidak ada anggota tubuh yang dipisah atau digambar ulang. Ponsel bergeser ke kiri, pose jurnal masuk, lalu dua guratan pendek muncul pada halaman. Timeline diperpanjang menjadi 7,5 detik dan menyediakan pose kunci **Awal**, **Menyentuh**, **Meletakkan**, **Jurnal**, dan **Satu garis**.
+
+Pemeriksaan visual pada preview lokal menunjukkan pose jurnal dan alat tulis terbaca, ponsel masih tampak setelah diletakkan, dan guratan jatuh pada area halaman. Ini hanya pemeriksaan pada preview lokal; animasi belum dinilai pengguna, dan reduced motion, reflow tambahan, serta perangkat Android belum diperiksa. Belum ada perubahan hero aktif maupun route aplikasi. Tahap berikutnya adalah meminta penilaian pengguna atas cuplikan sebelum integrasi landing.

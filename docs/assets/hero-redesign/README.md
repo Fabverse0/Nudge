@@ -22,7 +22,9 @@ Cuplikan vektor asli yang dibuat melalui `scripts/build-hero-contact.mjs`, bukan
 
 Jalankan `node scripts/build-hero-contact.mjs` untuk regenerasi. Jalankan `node scripts/preview-hero-contact.mjs` untuk membuka preview lokal pada port 3101. Server hanya melayani daftar file preview yang ditentukan dan bind ke loopback.
 
-Status: storyboard disetujui; preview v5 memakai master C1 utuh dengan gerak napas lembut dan fokus animasi pada ponsel. Preview menunggu penilaian pengguna sebelum produksi adegan penuh. File ini belum dipakai oleh route landing atau aplikasi.
+Status: storyboard disetujui; preview v6 menyambung gerak ponsel ke pose jurnal C1 utuh dan memperlihatkan dua guratan pada halaman. Preview lokal menunggu penilaian pengguna sebelum integrasi landing. File ini belum dipakai oleh route landing atau aplikasi.
+
+V6 memperpanjang cuplikan menjadi 7,5 detik. Setelah ponsel diletakkan, ponsel bergeser ke kiri, aset raster `public/brand/illustrations/nudge-turtle-journal.png` masuk sebagai gambar utuh, lalu dua guratan tampil di halaman. Preview menggunakan aset lokal yang sudah ada; tidak ada gambar karakter yang digambar ulang atau dependensi yang dipasang.
 
 ## Revisi bentuk v2
 

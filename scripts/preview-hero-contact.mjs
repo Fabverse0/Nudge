@@ -9,6 +9,10 @@ const files = {
     "text/javascript",
   ],
   "/c1-master.png": ["public/brand/mascot/nudge-turtle-wave.png", "image/png"],
+  "/c1-journal.png": [
+    "public/brand/illustrations/nudge-turtle-journal.png",
+    "image/png",
+  ],
   "/": [
     "docs/assets/hero-redesign/contact-preview.html",
     "text/html; charset=utf-8",

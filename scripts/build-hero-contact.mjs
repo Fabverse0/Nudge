@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 
 const destination = "docs/assets/hero-redesign";
 const fps = 60;
-const end = 336;
+const end = 450;
 const palette = {
   ink: "#315F5E",
   sage: "#679F9E",
@@ -411,7 +411,7 @@ const animation = {
   op: end,
   w: 520,
   h: 330,
-  nm: "C1 contact study: reach, lower, release",
+  nm: "C1 contact to journal study",
   ddd: 0,
   assets: [],
   c1Motion: {
@@ -452,6 +452,8 @@ const animation = {
     { tm: 91, cm: "contact", dr: 93 },
     { tm: 184, cm: "release", dr: 53 },
     { tm: 237, cm: "settle", dr: 99 },
+    { tm: 336, cm: "open-journal", dr: 54 },
+    { tm: 390, cm: "make-first-mark", dr: 60 },
   ],
 };
 writeFileSync(`${destination}/contact-study.json`, JSON.stringify(animation));

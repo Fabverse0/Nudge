@@ -71,6 +71,36 @@
         height: 109.091%;
         pointer-events: none;
       }
+      .journal-pose {
+        position: absolute;
+        z-index: 2;
+        left: 1.154%;
+        top: -12.121%;
+        width: 69.231%;
+        height: 109.091%;
+        opacity: 0;
+        transform: translateX(18px) scale(0.97);
+        transform-origin: 50% 85%;
+        pointer-events: none;
+      }
+      .ink-overlay {
+        position: absolute;
+        z-index: 3;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+      }
+      .ink-line {
+        fill: none;
+        stroke: #315f5e;
+        stroke-width: 2.6;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 1;
+        stroke-dashoffset: calc(1 - var(--writing-progress, 0));
+      }
       .art[data-rig-ready="true"] .c1-fallback {
         display: none;
       }
@@ -194,7 +224,7 @@
     <main>
       <header>
         <strong>nudge.</strong>
-        <p>C1 asli, studi gerak v5. Belum hero final.</p>
+        <p>C1 utuh, preview v6. Belum hero final.</p>
       </header>
       <section class="study" aria-labelledby="study-title">
         <div
@@ -213,16 +243,39 @@
             height="800"
             alt=""
           />
+          <img
+            id="journal-pose"
+            class="journal-pose"
+            src="/c1-journal.png"
+            width="800"
+            height="800"
+            alt=""
+            aria-hidden="true"
+          />
+          <svg class="ink-overlay" viewBox="0 0 520 330" aria-hidden="true">
+            <path
+              class="ink-line"
+              pathLength="1"
+              d="M 169 246 C 175 244 180 247 186 245"
+            />
+            <path
+              class="ink-line"
+              pathLength="1"
+              d="M 171 252 C 176 251 181 253 187 251"
+              style="--writing-progress: 0"
+              id="ink-line-two"
+            />
+          </svg>
         </div>
         <div class="copy">
           <h1 id="study-title">Satu gerakan.<br />Satu niat yang jelas.</h1>
           <p>
-            C1 tetap utuh seperti gambar yang disepakati. Perhatikan ponsel
-            yang berubah dari layar aktif menjadi jeda.
+            Ponsel mereda ke samping; C1 beralih ke jurnal dan membuat satu
+            garis kecil.
           </p>
           <p>
-            Maskot bergerak lembut sebagai satu gambar utuh. Adegan jurnal
-            belum dibuat.
+            Kedua pose memakai aset C1 utuh. Ponsel tetap terlihat setelah
+            diletakkan.
           </p>
           <div class="controls">
             <button class="primary" id="replay" disabled>Putar ulang</button>
@@ -248,28 +301,27 @@
           id="timeline"
           type="range"
           min="0"
-          max="335"
+          max="449"
           value="0"
           aria-label="Posisi cuplikan"
           disabled
-        /><output id="time" for="timeline">0,0 / 5,6 dtk</output>
+        /><output id="time" for="timeline">0,0 / 7,5 dtk</output>
       </div>
       <section class="poses" aria-label="Periksa pose kunci">
-        <p>Hentikan pada pose kunci untuk memeriksa perubahan gerak ponsel.</p>
+        <p>Periksa saat ponsel diletakkan, pose jurnal masuk, dan garis pertama dibuat.</p>
         <div class="pose-buttons">
           <button data-frame="0" disabled>Awal</button
-          ><button data-frame="65" disabled>Bersiap</button
           ><button data-frame="91" disabled>Menyentuh</button
-          ><button data-frame="145" disabled>Menurunkan</button
           ><button data-frame="184" disabled>Meletakkan</button
-          ><button data-frame="275" disabled>Tenang</button>
+          ><button data-frame="375" disabled>Jurnal</button
+          ><button data-frame="449" disabled>Satu garis</button>
         </div>
       </section>
       <p class="note">
         Ini preview lokal terpisah dari landing dan aplikasi. Tidak ada video,
         akun, atau pemasangan baru. Cuplikan berjalan sekali dan dapat diulang.
-        Preferensi reduced motion menampilkan pose akhir sampai kamu memilih
-        putar.
+        Preferensi reduced motion menampilkan pose jurnal akhir sampai kamu
+        memilih putar.
       </p>
       <noscript
         ><p>
@@ -283,6 +335,11 @@
       import { createOriginalC1Rig } from "/c1-original-rig.js";
       const root = document.querySelector("#art");
       const canvas = document.querySelector("#c1-canvas");
+      const fallback = document.querySelector(".c1-fallback");
+      const journalPose = document.querySelector("#journal-pose");
+      const inkOverlay = document.querySelector(".ink-overlay");
+      const secondInkLine = document.querySelector("#ink-line-two");
+      const phoneStage = document.querySelector("#phone-stage");
       const replay = document.querySelector("#replay");
       const pause = document.querySelector("#pause");
       const speed = document.querySelector("#speed");
@@ -306,10 +363,41 @@
         paused = true,
         resumeAfterVisibility = false;
       function syncFrame() {
-        const frame = Math.min(335, Math.round(player.currentFrame));
+        const frame = Math.min(449, Math.round(player.currentFrame));
         timeline.value = frame;
-        clock.value = `${(frame / 60).toFixed(1).replace(".", ",")} / 5,6 dtk`;
+        clock.value = `${(frame / 60).toFixed(1).replace(".", ",")} / 7,5 dtk`;
         rig?.render(player.currentFrame);
+        const clamp01 = (value) => Math.min(1, Math.max(0, value));
+        const ease = (value) => {
+          const t = clamp01(value);
+          return 1 - (1 - t) ** 3;
+        };
+        const phoneMove = ease((frame - 336) / 32);
+        phoneStage.style.transformOrigin = "60% 78%";
+        phoneStage.style.transform = `translateX(${-phoneMove * root.clientWidth * 0.56}px) scale(${1 - phoneMove * 0.2})`;
+        const oldPoseExit = ease((frame - 334) / 16);
+        for (const pose of [canvas, fallback]) {
+          pose.style.opacity = String(1 - oldPoseExit);
+          pose.style.transform = `translateX(${-oldPoseExit * 12}px) scale(${1 - oldPoseExit * 0.02})`;
+        }
+        const journalEnter = ease((frame - 354) / 32);
+        journalPose.style.opacity = String(journalEnter);
+        journalPose.style.transform = `translateX(${18 * (1 - journalEnter)}px) scale(${0.97 + journalEnter * 0.03})`;
+        const firstMark = ease((frame - 390) / 34);
+        const secondMark = ease((frame - 407) / 30);
+        inkOverlay.style.setProperty("--writing-progress", String(firstMark));
+        secondInkLine.style.setProperty("--writing-progress", String(secondMark));
+        if (journalEnter > 0.5) {
+          root.setAttribute(
+            "aria-label",
+            "C1 menulis satu garis di jurnal; ponsel sudah diletakkan di samping.",
+          );
+        } else {
+          root.setAttribute(
+            "aria-label",
+            "C1 menurunkan ponsel, lalu beralih ke jurnal.",
+          );
+        }
       }
       function stopAt(frame) {
         player.goToAndStop(frame, true);
@@ -318,7 +406,7 @@
         syncFrame();
       }
       function play() {
-        if (player.currentFrame >= 335) player.goToAndStop(0, true);
+        if (player.currentFrame >= 449) player.goToAndStop(0, true);
         paused = false;
         pause.textContent = "Jeda";
         player.play();
@@ -359,7 +447,7 @@
       preference.addEventListener("change", () => {
         if (ready && preference.matches) {
           resumeAfterVisibility = false;
-          stopAt(275);
+          stopAt(449);
         }
       });
       fetch("/contact-study.json")
@@ -388,7 +476,7 @@
               .forEach((control) => (control.disabled = false));
             status.textContent =
               "Siap ditinjau. Gunakan pose kunci atau putar ulang.";
-            if (preference.matches) stopAt(275);
+            if (preference.matches) stopAt(449);
             else play();
           });
           player.addEventListener("enterFrame", syncFrame);

@@ -2,7 +2,7 @@
 
 ## Pembaruan landing, 23 Oktober 2026
 
-Pembaruan redesign hero 24 Oktober: storyboard dan gerak ponsel disukai, tetapi deformasi kaki membuat C1 tampak berbeda dari master. Preview v5 sekarang memakai gambar master utuh dengan gerak napas sangat halus; animasi ponsel dipertahankan. Pengguna perlu meninjau hasil sebelum adegan jurnal dan integrasi hero. Referensi, reproduksi, bukti, dan keterbatasan ada di [hasil pengembangan hero](./docs/hero-redesign.md). Hero aktif dan aplikasi belum diubah. Tidak ada instalasi atau push.
+Pembaruan redesign hero 24 Oktober: preview v6 menyambung gerak ponsel ke pose jurnal dari aset C1 utuh, lalu menampilkan dua guratan kecil. Pengguna perlu meninjau cuplikan sebelum integrasi hero. Referensi, reproduksi, bukti, dan keterbatasan ada di [hasil pengembangan hero](./docs/hero-redesign.md). Hero aktif dan aplikasi belum diubah. Tidak ada instalasi atau push.
 
 Lingkup landing hidup selesai: komposisi Duolingo dengan identitas Nudge, tujuh adegan, rig C1 3D lembut dan properti vektor, loop saat terlihat, serta poster statis untuk reduced motion/tanpa JavaScript. Pertukaran ekspresi diskret menghindari wajah ganda. Semua perubahan UI berada pada route dan komponen landing; aplikasi, utilitas bersama, dan aset aplikasi tidak diubah.
 
