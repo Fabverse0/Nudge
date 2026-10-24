@@ -293,7 +293,7 @@ const handPoses = [
   [end, [309, 323]],
 ];
 function armOutline([x, y]) {
-  const shoulder = [267, 292];
+  const shoulder = [300, 299];
   const dx = x - shoulder[0],
     dy = y - shoulder[1];
   const length = Math.hypot(dx, dy);
@@ -303,13 +303,13 @@ function armOutline([x, y]) {
     point.map((v, a) => round(v + normal[a] * width));
   return curve(
     [
-      offset(shoulder, -16),
-      offset(middle, -14),
-      offset([x, y], -12),
-      [round(x + (dx / length) * 12), round(y + (dy / length) * 12)],
-      offset([x, y], 12),
-      offset(middle, 14),
-      offset(shoulder, 16),
+      offset(shoulder, -23),
+      offset(middle, -19),
+      offset([x, y], -17),
+      [round(x + (dx / length) * 17), round(y + (dy / length) * 17)],
+      offset([x, y], 17),
+      offset(middle, 19),
+      offset(shoulder, 23),
     ],
     0.92,
   );
@@ -320,8 +320,8 @@ paint("Ground contact", [
   ellipse(208, 334, 122, 9, "ink", 8),
 ]);
 paint("Rear feet planted", [
-  ellipse(118, 319, 24, 17, "binding"),
-  ellipse(230, 321, 23, 15, "binding"),
+  ellipse(113, 319, 28, 18, "sand"),
+  ellipse(240, 322, 26, 17, "sand"),
 ]);
 paint("Phone thickness", [
   group([
@@ -438,14 +438,14 @@ paint("Soft belly", [
   ),
 ]);
 const shell = [
-  [105, 283],
-  [105, 220],
-  [140, 164],
-  [201, 150],
-  [254, 178],
-  [278, 239],
-  [262, 299],
-  [177, 312],
+  [92, 280],
+  [104, 201],
+  [160, 133],
+  [239, 120],
+  [313, 155],
+  [350, 217],
+  [351, 291],
+  [195, 318],
 ];
 const shellDeform = (dx, dy, squash) =>
   curve(
@@ -469,13 +469,13 @@ paint(
     ]),
     drawn(
       [
-        [108, 275],
-        [164, 292],
-        [221, 288],
-        [259, 270],
-        [262, 299],
-        [177, 312],
-        [118, 297],
+        [96, 270],
+        [137, 286],
+        [172, 262],
+        [196, 233],
+        [185, 271],
+        [166, 302],
+        [110, 306],
       ],
       "edge",
       0.75,
@@ -498,9 +498,9 @@ paint(
       shape(
         curve(
           [
-            [126, 218],
-            [153, 183],
-            [186, 173],
+            [120, 196],
+            [161, 151],
+            [209, 133],
           ],
           0.8,
           false,
@@ -520,36 +520,18 @@ paint(
   },
 );
 
-paint("Far front foot planted", [ellipse(237, 323, 24, 16, "sand")]);
-paint("Reaching arm", [
-  group([morph(handPoses.map(([t, p]) => [t, armOutline(p)])), fill("sand")]),
-]);
-paint(
-  "Contact paw",
-  [ellipse(0, 0, 17, 14, "sand"), ellipse(3, -4, 9, 4, "warm", 55)],
-  {
-    p: keys(handPoses),
-    s: keys([
-      [0, [100, 100]],
-      [90, [97, 105]],
-      [171, [110, 86]],
-      [208, [100, 100]],
-      [end, [100, 100]],
-    ]),
-  },
-);
-
+paint("Far front foot planted", [ellipse(245, 324, 29, 19, "sand")]);
 const headPosition = keys([
-  [0, [262, 261]],
-  [38, [263, 264]],
-  [58, [252, 248]],
-  [79, [256, 249]],
-  [107, [273, 266]],
-  [160, [279, 282]],
-  [191, [278, 278]],
-  [224, [265, 263]],
-  [251, [266, 266]],
-  [end, [266, 266]],
+  [0, [262, 250]],
+  [38, [263, 253]],
+  [58, [252, 237]],
+  [79, [256, 238]],
+  [107, [273, 255]],
+  [160, [279, 270]],
+  [191, [278, 266]],
+  [224, [265, 252]],
+  [251, [266, 254]],
+  [end, [266, 254]],
 ]);
 const headRotation = keys([
   [0, -5],
@@ -563,45 +545,45 @@ const headRotation = keys([
   [end, -4],
 ]);
 const face = [
-  [-57, -19],
-  [-31, -60],
-  [17, -63],
-  [55, -35],
-  [63, 10],
-  [34, 53],
-  [-15, 59],
-  [-52, 31],
+  [-78, -17],
+  [-50, -62],
+  [6, -72],
+  [62, -48],
+  [81, 0],
+  [58, 53],
+  [0, 68],
+  [-59, 47],
 ];
 paint(
   "Head and acting",
   [
-    drawn(
-      face.map(([x, y]) => [x + 1, y + 4]),
-      "binding",
-    ),
     drawn(face, "sand"),
     group([
       shape(
         curve(
           [
-            [-41, -26],
-            [-25, -43],
-            [-6, -49],
+            [-52, -31],
+            [-32, -52],
+            [-4, -59],
           ],
           0.8,
           false,
         ),
       ),
-      stroke("warm", 7),
+      stroke("warm", 9),
     ]),
-    ellipse(-38, 19, 8, 3.5, "binding", 58),
-    ellipse(44, 12, 7, 3.5, "binding", 58),
+    ellipse(-57, 24, 10, 4, "binding", 40),
+    ellipse(58, 17, 9, 4, "binding", 40),
     group(
       [
-        ellipse(-18, -7, 9, 14, "ink"),
-        ellipse(25, -14, 8, 13, "ink"),
-        ellipse(-15, -12, 2.7, 4, "paper"),
-        ellipse(28, -19, 2.5, 3.7, "paper"),
+        group([ellipse(0, 0, 14, 20, "edge"), ellipse(4, -7, 4, 5, "paper")], {
+          p: fixed([-40, -6]),
+          r: fixed(15),
+        }),
+        group(
+          [ellipse(0, 0, 12, 18, "edge"), ellipse(4, -6, 3.6, 4.8, "paper")],
+          { p: fixed([44, -9]), r: fixed(12) },
+        ),
       ],
       {
         p: keys([
@@ -634,69 +616,65 @@ paint(
         shape(
           curve(
             [
-              [-4, 24],
-              [8, 30],
-              [22, 19],
+              [-16, 26],
+              [-2, 33],
+              [12, 33],
+              [26, 25],
+              [26, 34],
+              [14, 44],
+              [0, 43],
+              [-13, 35],
             ],
             0.95,
-            false,
+            true,
           ),
         ),
-        stroke("ink", 4.8),
+        fill("edge"),
       ],
       {
         o: keys([
           [0, 100],
           [49, 100],
-          [58, 0],
-          [85, 0],
-          [105, 100],
+          [52, 0],
+          [92, 0],
+          [96, 100],
           [end, 100],
         ]),
       },
     ),
-    group([ellipse(7, 23, 4, 6.5, "ink")], {
+    group([ellipse(7, 28, 5, 7.5, "edge")], {
       o: keys([
         [0, 0],
-        [49, 0],
-        [58, 100],
-        [85, 100],
-        [105, 0],
+        [52, 0],
+        [56, 100],
+        [88, 100],
+        [92, 0],
         [end, 0],
       ]),
     }),
   ],
   { p: headPosition, r: headRotation },
 );
+paint("Reaching arm", [
+  group([morph(handPoses.map(([t, p]) => [t, armOutline(p)])), fill("sand")]),
+]);
+paint(
+  "Contact paw",
+  [ellipse(0, 0, 23, 19, "sand"), ellipse(3, -5, 12, 5, "warm", 45)],
+  {
+    p: keys(handPoses),
+    s: keys([
+      [0, [100, 100]],
+      [90, [97, 105]],
+      [171, [110, 86]],
+      [208, [100, 100]],
+      [end, [100, 100]],
+    ]),
+  },
+);
 paint(
   "Near supporting foot",
-  [
-    drawn(
-      [
-        [156, 307],
-        [181, 301],
-        [201, 314],
-        [203, 335],
-        [177, 342],
-        [146, 334],
-      ],
-      "sand",
-    ),
-    group([
-      shape(
-        curve(
-          [
-            [155, 332],
-            [175, 337],
-            [191, 334],
-          ],
-          0.75,
-          false,
-        ),
-      ),
-      stroke("binding", 3),
-    ]),
-  ],
+  [ellipse(175, 323, 38, 27, "sand"), ellipse(167, 309, 16, 6, "warm", 35)],
   {
     s: keys([
       [0, [100, 100]],
