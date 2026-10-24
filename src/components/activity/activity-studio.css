@@ -238,7 +238,19 @@
 }
 
 .app-studio .goal-choice > svg:first-of-type {
+  box-sizing: border-box;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  padding: 10px;
+  border: 1px solid var(--subtle);
+  border-radius: 16px;
+  background: var(--selection);
   color: var(--action);
+}
+
+.app-studio .goal-choice:has(input:checked) > svg:first-of-type {
+  background: var(--surface);
 }
 
 .app-studio .goal-choice > span {

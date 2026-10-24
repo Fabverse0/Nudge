@@ -314,6 +314,8 @@ Rencanakan simbol + tulisan, tulisan saja, simbol saja, serta versi satu warna. 
 
 Gunakan satu keluarga **Phosphor Icons Regular** untuk ikon kontrol, dengan ukuran 20–24 px dan bobot konsisten. Paket sudah diintegrasikan untuk bentuk yang ramah dan cakupan tindakan umum. Pasangkan ikon dengan label pada tindakan utama. Jangan menambah ikon sekadar untuk mengisi ruang.
 
+Ikon tujuan “Produktif ringan” memakai `ClipboardText` untuk mewakili catatan dan urusan praktis; “Bergerak” memakai jejak kaki dan “Refleksi/jeda layar” memakai daun. Pada kartu pemilihan tujuan, ketiganya berada dalam bidang membulat 48 px dengan latar sage lembut agar mudah dipindai. Centang di sisi kanan tetap menjadi penanda pilihan aktif.
+
 | Kebutuhan                                                 | Status saat dokumen dibuat           | Ketentuan produksi                                                       |
 | --------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------ |
 | Maskot utama dan pose ringkas                             | Perlu dibuat                         | Tetapkan bentuk induk agar proporsi antargambar konsisten.               |

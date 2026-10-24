@@ -1,4 +1,8 @@
-import { CheckIcon, FootprintsIcon, LeafIcon } from "@phosphor-icons/react";
+import {
+  ClipboardTextIcon,
+  FootprintsIcon,
+  LeafIcon,
+} from "@phosphor-icons/react";
 import Image from "next/image";
 import { TurtleMascot } from "@/components/ui/turtle-mascot";
 import {
@@ -14,7 +18,7 @@ export function GoalIcon({ goal, size = 24 }: { goal: Goal; size?: number }) {
       ? FootprintsIcon
       : goal === "reflect"
         ? LeafIcon
-        : CheckIcon;
+        : ClipboardTextIcon;
   return <Icon size={size} aria-hidden="true" />;
 }
 
