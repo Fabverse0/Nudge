@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nudge | Studi gerak C1</title>
+    <style>
+      @font-face {
+        font-family: Nunito;
+        src: url("/font.woff2") format("woff2");
+        font-weight: 200 1000;
+        font-display: swap;
+      }
+      :root {
+        font-family: Nunito, sans-serif;
+        color: #315f5e;
+        background: #faf8f4;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 1100px;
+        margin: auto;
+        padding: 36px 24px 60px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: baseline;
+      }
+      header strong {
+        font-size: 28px;
+        font-weight: 950;
+      }
+      header p {
+        font-size: 16px;
+        margin: 0;
+      }
+      .study {
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+        gap: 32px;
+        align-items: center;
+        margin-top: 40px;
+      }
+      .art {
+        aspect-ratio: 520 / 330;
+        width: 100%;
+      }
+      .art svg {
+        display: block;
+      }
+      h1 {
+        font-size: clamp(32px, 4vw, 48px);
+        line-height: 1.1;
+        margin: 0 0 22px;
+        font-weight: 900;
+      }
+      .copy p {
+        font-size: 18px;
+        line-height: 1.7;
+        margin: 0 0 18px;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin-top: 28px;
+      }
+      button,
+      select {
+        font: inherit;
+        font-weight: 800;
+        min-height: 46px;
+        padding: 10px 16px;
+        border: 2px solid #679f9e;
+        border-radius: 12px;
+        color: #315f5e;
+        background: #faf8f4;
+        cursor: pointer;
+      }
+      button.primary {
+        background: #315f5e;
+        border-color: #315f5e;
+        color: #faf8f4;
+      }
+      button:focus-visible,
+      select:focus-visible,
+      input:focus-visible {
+        outline: 3px solid #315f5e;
+        outline-offset: 4px;
+      }
+      button:disabled,
+      select:disabled,
+      input:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      label {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        font-size: 16px;
+      }
+      .timeline {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 16px;
+        align-items: center;
+        margin-top: 24px;
+      }
+      input {
+        width: 100%;
+        min-height: 44px;
+        accent-color: #315f5e;
+      }
+      output {
+        min-width: 90px;
+        font-size: 16px;
+        font-variant-numeric: tabular-nums;
+      }
+      .poses {
+        border-top: 1px solid #cedfda;
+        padding-top: 20px;
+        margin-top: 28px;
+      }
+      .poses p {
+        margin: 0 0 12px;
+        line-height: 1.6;
+      }
+      .pose-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .note {
+        max-width: 800px;
+        line-height: 1.7;
+        margin: 28px 0 0;
+      }
+      @media (max-width: 700px) {
+        main {
+          padding: 22px 18px 40px;
+        }
+        header {
+          display: block;
+        }
+        header p {
+          margin-top: 6px;
+        }
+        .study {
+          grid-template-columns: 1fr;
+          margin-top: 16px;
+          gap: 12px;
+        }
+        .copy p {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <strong>nudge.</strong>
+        <p>Studi gerak C1, belum hero final.</p>
+      </header>
+      <section class="study" aria-labelledby="study-title">
+        <div
+          id="art"
+          class="art"
+          role="img"
+          aria-label="C1 meraih ponsel, menurunkannya ke tanah, lalu melepasnya."
+          aria-busy="true"
+        ></div>
+        <div class="copy">
+          <h1 id="study-title">Satu gerakan.<br />Satu niat yang jelas.</h1>
+          <p>
+            Perhatikan kepala yang memimpin, kaki yang menyentuh ponsel, lalu
+            tubuh yang kembali tenang.
+          </p>
+          <p>
+            Cuplikan ini menguji kontak dan kelenturan. Adegan jurnal serta alur
+            hero lengkap belum dibuat.
+          </p>
+          <div class="controls">
+            <button class="primary" id="replay" disabled>Putar ulang</button>
+            <button id="pause" disabled>Jeda</button>
+            <label
+              >Kecepatan<select id="speed" disabled>
+                <option value="1">Normal</option>
+                <option value="0.5">Setengah</option>
+              </select></label
+            >
+          </div>
+          <p
+            id="status"
+            role="status"
+            style="font-size: 16px; margin-top: 18px"
+          >
+            Memuat studi gerak…
+          </p>
+        </div>
+      </section>
+      <div class="timeline">
+        <input
+          id="timeline"
+          type="range"
+          min="0"
+          max="335"
+          value="0"
+          aria-label="Posisi cuplikan"
+          disabled
+        /><output id="time" for="timeline">0,0 / 5,6 dtk</output>
+      </div>
+      <section class="poses" aria-label="Periksa pose kunci">
+        <p>Hentikan pada pose kunci untuk melihat kontak kaki dan ponsel.</p>
+        <div class="pose-buttons">
+          <button data-frame="0" disabled>Awal</button
+          ><button data-frame="65" disabled>Bersiap</button
+          ><button data-frame="91" disabled>Menyentuh</button
+          ><button data-frame="145" disabled>Menurunkan</button
+          ><button data-frame="184" disabled>Meletakkan</button
+          ><button data-frame="275" disabled>Tenang</button>
+        </div>
+      </section>
+      <p class="note">
+        Ini preview lokal terpisah dari landing dan aplikasi. Tidak ada video,
+        akun, atau pemasangan baru. Cuplikan berjalan sekali dan dapat diulang.
+        Preferensi reduced motion menampilkan pose akhir sampai kamu memilih
+        putar.
+      </p>
+      <noscript
+        ><p>
+          JavaScript diperlukan untuk preview animasi. Lihat storyboard-v1.png
+          untuk lima pose konsep.
+        </p></noscript
+      >
+    </main>
+    <script src="/player.js"></script>
+    <script>
+      const root = document.querySelector("#art");
+      const replay = document.querySelector("#replay");
+      const pause = document.querySelector("#pause");
+      const speed = document.querySelector("#speed");
+      const timeline = document.querySelector("#timeline");
+      const clock = document.querySelector("#time");
+      const status = document.querySelector("#status");
+      const preference = matchMedia("(prefers-reduced-motion: reduce)");
+      let player,
+        ready = false,
+        paused = true,
+        resumeAfterVisibility = false;
+      function syncFrame() {
+        const frame = Math.min(335, Math.round(player.currentFrame));
+        timeline.value = frame;
+        clock.value = `${(frame / 60).toFixed(1).replace(".", ",")} / 5,6 dtk`;
+      }
+      function stopAt(frame) {
+        player.goToAndStop(frame, true);
+        paused = true;
+        pause.textContent = "Lanjutkan";
+        syncFrame();
+      }
+      function play() {
+        if (player.currentFrame >= 335) player.goToAndStop(0, true);
+        paused = false;
+        pause.textContent = "Jeda";
+        player.play();
+      }
+      replay.addEventListener("click", () => {
+        if (!ready) return;
+        player.goToAndStop(0, true);
+        play();
+        status.textContent = "Cuplikan diputar ulang.";
+      });
+      pause.addEventListener("click", () => {
+        if (paused) play();
+        else stopAt(player.currentFrame);
+      });
+      speed.addEventListener("change", () =>
+        player.setSpeed(Number(speed.value)),
+      );
+      timeline.addEventListener("input", () => stopAt(Number(timeline.value)));
+      document.querySelectorAll("[data-frame]").forEach((button) =>
+        button.addEventListener("click", () => {
+          stopAt(Number(button.dataset.frame));
+          status.textContent = `Pose: ${button.textContent}.`;
+        }),
+      );
+      document.addEventListener("visibilitychange", () => {
+        if (!ready) return;
+        if (document.hidden) {
+          resumeAfterVisibility = !paused;
+          player.pause();
+        } else if (resumeAfterVisibility && !preference.matches) {
+          resumeAfterVisibility = false;
+          play();
+        }
+      });
+      preference.addEventListener("change", () => {
+        if (ready && preference.matches) {
+          resumeAfterVisibility = false;
+          stopAt(275);
+        }
+      });
+      fetch("/contact-study.json")
+        .then((response) => {
+          if (!response.ok) throw new Error();
+          return response.json();
+        })
+        .then((data) => {
+          player = lottie.loadAnimation({
+            container: root,
+            renderer: "svg",
+            loop: false,
+            autoplay: false,
+            animationData: data,
+          });
+          player.addEventListener("DOMLoaded", () => {
+            ready = true;
+            root.setAttribute("aria-busy", "false");
+            document
+              .querySelectorAll("button,select,input")
+              .forEach((control) => (control.disabled = false));
+            status.textContent =
+              "Siap ditinjau. Gunakan pose kunci atau putar ulang.";
+            if (preference.matches) stopAt(275);
+            else play();
+          });
+          player.addEventListener("enterFrame", syncFrame);
+          player.addEventListener("complete", () => {
+            paused = true;
+            pause.textContent = "Lanjutkan";
+            status.textContent =
+              "Cuplikan selesai. Putar ulang untuk membandingkan geraknya.";
+          });
+        })
+        .catch(() => {
+          status.textContent =
+            "Cuplikan belum bisa dimuat. Muat ulang preview atau buka storyboard-v1.png.";
+          root.setAttribute("aria-busy", "false");
+        });
+    </script>
+  </body>
+</html>
