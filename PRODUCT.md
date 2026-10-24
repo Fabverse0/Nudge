@@ -20,7 +20,7 @@ Revisi ini hanya mengubah landing `/`, komponennya, dan aset khusus landing. Jan
 
 ## Identitas yang dikonfirmasi
 
-Nama Nudge, karakter kura-kura C1, Nunito, palet sage, biru, dan sand. Pengguna menyetujui karakter 3D lembut bersama properti vektor ekspresif untuk landing. Referensi visual utama adalah Duolingo; gunakan aset asli Nudge.
+Nama Nudge, karakter kura-kura C1, Nunito, palet sage, biru, dan sand. Pengguna memilih C1 2D yang ekspresif untuk hero dan adegan regangan; penutup mempertahankan C1 3D lembut. Referensi visual utama adalah Duolingo; gunakan aset asli Nudge.
 
 ## Acuan
 

@@ -475,9 +475,11 @@ Tepi bawah 4–6 px pada CTA, radio, dan kartu ilustrasi adalah kedalaman tekan 
 
 ### Revisi gerak landing setelah kritik pengguna
 
-Pembaruan 24 Oktober 2026: pengguna membatalkan pendekatan video dan menyetujui satu adegan karakter SVG khusus pada bagian bergerak. C1 2D meregangkan badan di atas alas dengan ponsel di samping, sebagai pengganti sepatu melayang. Ini pengecualian terbatas terhadap arahan benda tanpa karakter di bawah; hero dan penutup tetap memakai C1 3D. Detail koreografi dan bukti ada di [adegan regangan](./docs/stretch-story.md).
+Pembaruan 24 Oktober 2026: pengguna membatalkan pendekatan video dan menyetujui adegan karakter SVG pada bagian bergerak. C1 2D meregangkan badan di atas alas dengan ponsel di samping, sebagai pengganti sepatu melayang. Pengguna kemudian memilih C1 2D ekspresif untuk hero; penutup tetap memakai C1 3D. Detail koreografi dan bukti ada di [adegan regangan](./docs/stretch-story.md) dan [sapaan hero](./docs/hero-story.md).
 
-Revisi ini menggantikan arahan rig tubuh terpisah pada tujuh adegan landing. Pengguna memilih campuran terarah: C1 3D di hero dan penutup, ilustrasi benda pada bagian cerita, aset gratis, tanpa karakter manusia. C1 memakai potret utuh yang berbeda pada hero dan penutup, dengan gerak kecil. Tidak mengklaim potret tersebut sebagai animasi karakter 3D penuh.
+Revisi ini menggantikan arahan rig tubuh terpisah pada tujuh adegan landing. Arah terbaru memakai C1 2D pada hero dan bagian bergerak, C1 3D di penutup, serta ilustrasi benda pada bagian cerita lainnya, tanpa karakter manusia. Potret penutup tetap memakai gerak kecil dan bukan animasi karakter 3D penuh.
+
+Hero 2D memakai sapaan dengan gerak kepala, kedipan, perubahan senyum, ayunan kaki depan, dan perpindahan berat badan. Kaki yang menapak mempertahankan kontak dengan tanah. Ponsel bergeser menjauh dan buku membuka halaman dalam siklus 10,8 detik. Pengguna dapat mengulang sapaan melalui tombol ilustrasi. Gerak berhenti ketika bagian tidak terlihat atau tab tersembunyi; reduced motion menampilkan komposisi statis. Ini keputusan khusus hero landing dan tidak mengubah maskot aplikasi.
 
 Ponsel memakai adaptasi Scrolling Phone oleh Nafta R; jurnal memakai adaptasi Diary oleh Brian Karungani, dengan Lottie Simple License dan kredit pada footer. Tangan serta sisa garis gestur ponsel dihapus. Afirmasi jurnal diganti goresan netral. Lima adegan cerita tidak mengulang satu siluet kura-kura. Jam/tiket mengikuti durasi pengguna; sepatu dan benda meja memiliki gerak tersendiri.
 
