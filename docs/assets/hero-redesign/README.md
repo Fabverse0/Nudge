@@ -22,7 +22,7 @@ Cuplikan vektor asli yang dibuat melalui `scripts/build-hero-contact.mjs`, bukan
 
 Jalankan `node scripts/build-hero-contact.mjs` untuk regenerasi. Jalankan `node scripts/preview-hero-contact.mjs` untuk membuka preview lokal pada port 3101. Server hanya melayani daftar file preview yang ditentukan dan bind ke loopback.
 
-Status: storyboard disetujui; cuplikan gerak menunggu penilaian pengguna sebelum produksi adegan penuh. File ini belum dipakai oleh route landing atau aplikasi.
+Status: storyboard disetujui; preview v5 memakai master C1 utuh dengan gerak napas lembut dan fokus animasi pada ponsel. Preview menunggu penilaian pengguna sebelum produksi adegan penuh. File ini belum dipakai oleh route landing atau aplikasi.
 
 ## Revisi bentuk v2
 
@@ -38,8 +38,12 @@ V2 kemudian ditolak pengguna. Jangan memakai bentuk vektor ini sebagai identitas
 
 `contact-study.json` sekarang berisi ponsel/alas dan data sinkronisasi C1, tanpa gambar karakter vektor. Bukti perbandingan berupa `c1-original-reference.png` dan `c1-original-motion-v3.png`, keduanya screenshot dari preview. Tombol **Lihat aset asli** menyediakan pembanding gambar utuh tanpa deformasi. Source gambar, kode aplikasi, dan hero aktif tidak diubah.
 
-## V4: badan dan kaki terpisah
+## V4: badan dan kaki terpisah, diganti v5
 
 Pengguna menerima bentuk v3 tetapi meminta perbaikan pipi yang ikut terpotong dan tambalan pangkal kaki. Preview saat ini memakai `/c1-master.png` dari `public/brand/mascot/nudge-turtle-wave.png`. Dua keluaran edit ImageGen, `c1-body-repair.png` dan `c1-foreleg.png`, melengkapi area tersembunyi dan kaki utuh. Rendering mempertahankan master di luar area perbaikan, memisahkan tekstur badan/kaki, dan menghapus tambalan pangkal kaki v3.
 
-Sumber, prompt lengkap, dan pemeriksaan tersedia di [c1-parts-v4.md](./c1-parts-v4.md). Screenshot final: `c1-parts-v4-contact.png` dan `c1-parts-v4-laydown.png`. Bukti v3 dipertahankan sebagai riwayat, bukan hasil versi terkini. Gerak ponsel dan track kaki tidak berubah. V4 tetap preview peninjauan, belum hero final.
+Sumber, prompt lengkap, dan pemeriksaan tersedia di [c1-parts-v4.md](./c1-parts-v4.md). Screenshot v4 dipertahankan sebagai riwayat. Review lanjutan menunjukkan pemisahan dan deformasi kaki masih mengubah proporsi maskot, sehingga rig bagian tubuh diganti pada v5.
+
+## V5: C1 utuh dan gerak ponsel
+
+Renderer kini memakai master `public/brand/mascot/nudge-turtle-wave.png` sebagai satu tekstur utuh. Deformasi serta pemisahan kaki dihapus agar bentuk, warna, shading, dan proporsi C1 sama dengan gambar yang disetujui. Gerak napas sangat ringan diterapkan seragam pada seluruh gambar. Animasi ponsel tetap menggunakan layer dan timing v4 yang sudah disukai. Tidak ada perubahan pada landing aktif atau aplikasi.

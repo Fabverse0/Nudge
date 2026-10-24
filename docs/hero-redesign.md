@@ -1,6 +1,6 @@
 # Hero Nudge: dari scrolling ke satu kegiatan
 
-Status: pengguna menerima bentuk C1 asli pada v3 tetapi meminta perbaikan pipi terpotong dan sambungan kaki. Preview v4 memakai master PNG, bagian tubuh yang dilengkapi, serta kaki utuh terpisah. Hero aktif belum diganti. Tanggal pemeriksaan: 24 Oktober 2026.
+Status: pengguna menolak proporsi kaki hasil rig v4. Preview v5 mempertahankan master C1 sebagai satu gambar utuh dan memusatkan gerak pada animasi ponsel. Hero aktif belum diganti. Tanggal pemeriksaan: 24 Oktober 2026.
 
 ## Masalah yang ditangani
 
@@ -135,3 +135,9 @@ Perbaikan memakai batas bentuk untuk mempertahankan wajah pada badan, menghapus 
 ![Pose meletakkan setelah pemisahan bagian tubuh v4](./assets/hero-redesign/c1-parts-v4-laydown.png)
 
 Prompt, sumber, batas teknik, dan bukti pemeriksaan tercatat di [catatan aset v4](./assets/hero-redesign/c1-parts-v4.md). Layer ponsel/alas dan lintasan kaki dibandingkan dengan `60f9dd4` dan tetap identik. Pose kunci, replay, desktop, dan reflow 390/320 px ditinjau melalui browser. V4 masih menunggu penilaian artistik sebelum adegan jurnal dan integrasi hero. Tidak ada perubahan aplikasi atau push.
+
+## V5: karakter utuh, ponsel sebagai gerak utama
+
+Review terbaru menunjukkan kaki rig v4 masih tampak terpisah dan mengubah pose C1 dari gambar yang disetujui. Renderer v5 membuang pemisahan dan deformasi kaki. Ia menampilkan master `public/brand/mascot/nudge-turtle-wave.png` sebagai satu tekstur, dengan napas seragam yang nyaris tak mengubah siluet. Gerak ponsel yang disukai tetap sama. Copy preview kini menjelaskan bahwa ponsel berubah dari layar aktif menjadi jeda; pose kunci membantu meninjau perubahan tersebut.
+
+Preview v5 diperiksa pada pose awal, menyentuh, meletakkan, dan tenang setelah reload di browser lokal. Karakter kembali proporsional sesuai master, sementara ponsel tetap terlihat di samping C1 pada pose akhir. Pemeriksaan ini hanya visual pada preview lokal; gerak napas halus belum dinilai oleh pengguna. Belum ada integrasi hero atau perubahan aplikasi. Adegan jurnal, integrasi landing, reduced-motion visual, reflow tambahan, dan pengujian akhir masih menunggu.

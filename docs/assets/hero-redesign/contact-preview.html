@@ -194,14 +194,14 @@
     <main>
       <header>
         <strong>nudge.</strong>
-        <p>C1 asli, studi gerak v4. Belum hero final.</p>
+        <p>C1 asli, studi gerak v5. Belum hero final.</p>
       </header>
       <section class="study" aria-labelledby="study-title">
         <div
           id="art"
           class="art"
           role="img"
-          aria-label="C1 meraih ponsel, menurunkannya ke tanah, lalu melepasnya."
+          aria-label="C1 bergerak lembut saat ponsel berubah dari layar aktif menjadi jeda."
           aria-busy="true"
         >
           <div id="phone-stage" class="phone-stage"></div>
@@ -217,20 +217,16 @@
         <div class="copy">
           <h1 id="study-title">Satu gerakan.<br />Satu niat yang jelas.</h1>
           <p>
-            Perhatikan kepala yang memimpin, kaki yang menyentuh ponsel, lalu
-            tubuh yang kembali tenang.
+            C1 tetap utuh seperti gambar yang disepakati. Perhatikan ponsel
+            yang berubah dari layar aktif menjadi jeda.
           </p>
           <p>
-            Wajah dan tempurung memakai aset C1 asli. Kaki bergerak memakai aset
-            terpisah yang dilengkapi agar tidak menarik pipi. Adegan jurnal
+            Maskot bergerak lembut sebagai satu gambar utuh. Adegan jurnal
             belum dibuat.
           </p>
           <div class="controls">
             <button class="primary" id="replay" disabled>Putar ulang</button>
             <button id="pause" disabled>Jeda</button>
-            <button id="reference" aria-pressed="false" disabled>
-              Lihat aset asli
-            </button>
             <label
               >Kecepatan<select id="speed" disabled>
                 <option value="1">Normal</option>
@@ -259,7 +255,7 @@
         /><output id="time" for="timeline">0,0 / 5,6 dtk</output>
       </div>
       <section class="poses" aria-label="Periksa pose kunci">
-        <p>Hentikan pada pose kunci untuk melihat kontak kaki dan ponsel.</p>
+        <p>Hentikan pada pose kunci untuk memeriksa perubahan gerak ponsel.</p>
         <div class="pose-buttons">
           <button data-frame="0" disabled>Awal</button
           ><button data-frame="65" disabled>Bersiap</button
@@ -287,7 +283,6 @@
       import { createOriginalC1Rig } from "/c1-original-rig.js";
       const root = document.querySelector("#art");
       const canvas = document.querySelector("#c1-canvas");
-      const referenceButton = document.querySelector("#reference");
       const replay = document.querySelector("#replay");
       const pause = document.querySelector("#pause");
       const speed = document.querySelector("#speed");
@@ -303,11 +298,10 @@
           .querySelectorAll("button,select,input")
           .forEach((control) => (control.disabled = true));
         status.textContent =
-          "Gerak tubuh tidak tersedia. Aset C1 asli tetap ditampilkan; muat ulang untuk mencoba lagi.";
+          "Gerak maskot tidak tersedia. Aset C1 asli tetap ditampilkan; muat ulang untuk mencoba lagi.";
       });
       let player,
         rig,
-        referenceMode = false,
         ready = false,
         paused = true,
         resumeAfterVisibility = false;
@@ -315,19 +309,15 @@
         const frame = Math.min(335, Math.round(player.currentFrame));
         timeline.value = frame;
         clock.value = `${(frame / 60).toFixed(1).replace(".", ",")} / 5,6 dtk`;
-        rig?.render(player.currentFrame, referenceMode);
+        rig?.render(player.currentFrame);
       }
       function stopAt(frame) {
-        referenceMode = false;
-        referenceButton.setAttribute("aria-pressed", "false");
         player.goToAndStop(frame, true);
         paused = true;
         pause.textContent = "Lanjutkan";
         syncFrame();
       }
       function play() {
-        referenceMode = false;
-        referenceButton.setAttribute("aria-pressed", "false");
         if (player.currentFrame >= 335) player.goToAndStop(0, true);
         paused = false;
         pause.textContent = "Jeda";
@@ -338,17 +328,6 @@
         player.goToAndStop(0, true);
         play();
         status.textContent = "Cuplikan diputar ulang.";
-      });
-      referenceButton.addEventListener("click", () => {
-        player.pause();
-        paused = true;
-        pause.textContent = "Lanjutkan";
-        referenceMode = !referenceMode;
-        referenceButton.setAttribute("aria-pressed", String(referenceMode));
-        rig.render(player.currentFrame, referenceMode);
-        status.textContent = referenceMode
-          ? "Aset C1 asli tanpa deformasi. Tekan lagi untuk membandingkan."
-          : "Kembali ke pose cuplikan.";
       });
       pause.addEventListener("click", () => {
         if (paused) play();
@@ -391,22 +370,8 @@
         .then(async (data) => {
           const image = new Image();
           image.src = data.c1Motion.source;
-          const repair = new Image();
-          repair.src = "/c1-body-repair.png";
-          const foreleg = new Image();
-          foreleg.src = "/c1-foreleg.png";
-          await Promise.all([
-            image.decode(),
-            repair.decode(),
-            foreleg.decode(),
-          ]);
-          rig = createOriginalC1Rig(
-            canvas,
-            image,
-            data.c1Motion,
-            repair,
-            foreleg,
-          );
+          await image.decode();
+          rig = createOriginalC1Rig(canvas, image, data.c1Motion);
           player = lottie.loadAnimation({
             container: document.querySelector("#phone-stage"),
             renderer: "svg",
