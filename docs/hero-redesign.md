@@ -2,6 +2,8 @@
 
 Status: selesai untuk lingkup hero landing v7. Pengguna menerima bentuk dan geraknya pada 24 Oktober 2026 melalui jawaban “Bentuk dan geraknya sudah cocok”. Bukti teknis dan penyesuaian teknik tercatat di bagian v7.
 
+Perilaku terbaru: atas permintaan pengguna berikutnya pada 24 Oktober 2026, hero berulang otomatis selama terlihat, tanpa tombol replay. Siklus 12 detik dan bukti pemeriksaannya tercatat pada pembaruan loop di akhir dokumen; penjelasan replay v7 di bawah merupakan riwayat versi sebelumnya.
+
 ## Masalah yang ditangani
 
 Pengguna menolak hero SVG sebelumnya karena terasa kaku dan kurang menarik dibandingkan adegan ponsel. Perubahan berikutnya harus memperbaiki pose, tindakan, dan hubungan karakter dengan benda. Menambah jumlah keyframe atau mengganti format file saja tidak membuktikan perbaikan artistik.
@@ -171,3 +173,11 @@ Bukti pemeriksaan:
 Pengujian menggunakan preview development pada `127.0.0.1:3100` dengan service worker diblokir dalam konteks browser pengujian yang terpisah. Build produksi berhasil dikompilasi, tetapi suite ini tidak dijalankan ulang melalui server produksi. Tidak ada instalasi dependensi, perubahan source aplikasi, atau push pada integrasi ini.
 
 Penerimaan final: pada 24 Oktober 2026 pengguna menjawab “Bentuk dan geraknya sudah cocok” setelah diminta meninjau satu putaran serta mencoba replay. Persetujuan berlaku pada hasil v7 dengan tiga pose utuh dan transisi benda yang dijelaskan di atas. Ini menutup pekerjaan hero landing dan tidak mengubah status pemeriksaan Android atau lingkup MVP lain.
+
+## Pembaruan: loop otomatis tanpa tombol replay
+
+Pengguna meminta label “Putar cerita” dihapus, cerita mengulang otomatis setelah selesai, serta gerak dihentikan saat tidak terlihat. Tombol ilustrasi, state replay, dan pengumuman live pengulangan dihapus. Hero sekarang berupa ilustrasi berlabel tanpa kontrol interaktif.
+
+Seluruh gerak memakai siklus CSS 12 detik yang sama: adegan ponsel, peralihan pose, guratan jurnal, penahanan pose akhir, lalu peralihan kembali ke pose awal. Awal dan akhir properti yang terlihat dibuat sama agar batas putaran tidak melompat. Observer yang sudah ada menjeda clock saat keluar viewport atau tab tersembunyi dan melanjutkannya saat terlihat kembali. Tidak ada timer JavaScript untuk mengulang adegan. Pemuatan aset, fallback, dan reduced motion tetap tersedia.
+
+Pemeriksaan pada Chrome desktop dan emulasi Pixel 7: 12 kasus terkait loop, berhenti di luar layar, tab tersembunyi, fallback, reduced motion, tanpa JavaScript, Axe, dan regresi hydration lulus. Dua kasus tambahan lifecycle seluruh scene juga lulus, sehingga total pemeriksaan terkait adalah 14 lulus. TypeScript, ESLint file yang diubah, dan detector Impeccable lulus tanpa temuan. Ini pemeriksaan development pada port 3100, bukan build produksi baru atau pemeriksaan Android fisik.
