@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/nunito";
 import "./globals.css";
 import { PwaRegistration } from "@/components/pwa-registration";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: { default: "Nudge | Satu langkah kecil", template: "%s | Nudge" },
@@ -22,6 +23,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="id" data-scroll-behavior="smooth">
+      <head>
+        {process.env.NODE_ENV === "development" ? (
+          <Script
+            id="nudge-development-worker-reset"
+            src="/development-worker-reset.js"
+            strategy="beforeInteractive"
+          />
+        ) : null}
+      </head>
       <body>
         <a className="skip-link" href="#main">
           Lewati ke isi
