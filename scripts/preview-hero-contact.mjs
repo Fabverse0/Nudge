@@ -4,6 +4,11 @@ import { fileURLToPath } from "node:url";
 
 const root = new URL("../", import.meta.url);
 const files = {
+  "/c1-original-rig.js": [
+    "docs/assets/hero-redesign/c1-original-rig.js",
+    "text/javascript",
+  ],
+  "/c1-master.webp": ["public/brand/landing/motion/c1-wave.webp", "image/webp"],
   "/": [
     "docs/assets/hero-redesign/contact-preview.html",
     "text/html; charset=utf-8",

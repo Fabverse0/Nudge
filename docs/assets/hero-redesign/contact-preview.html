@@ -49,8 +49,30 @@
         margin-top: 40px;
       }
       .art {
+        position: relative;
         aspect-ratio: 520 / 330;
         width: 100%;
+      }
+      .phone-stage,
+      .c1-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .c1-canvas {
+        pointer-events: none;
+      }
+      .c1-fallback {
+        position: absolute;
+        left: 1.154%;
+        top: -12.121%;
+        width: 69.231%;
+        height: 109.091%;
+        pointer-events: none;
+      }
+      .art[data-rig-ready="true"] .c1-fallback {
+        display: none;
       }
       .art svg {
         display: block;
@@ -65,6 +87,9 @@
         font-size: 18px;
         line-height: 1.7;
         margin: 0 0 18px;
+      }
+      #status {
+        min-height: 3.4em;
       }
       .controls {
         display: flex;
@@ -169,7 +194,7 @@
     <main>
       <header>
         <strong>nudge.</strong>
-        <p>Revisi bentuk C1 v2, belum hero final.</p>
+        <p>C1 asli, studi gerak v3. Belum hero final.</p>
       </header>
       <section class="study" aria-labelledby="study-title">
         <div
@@ -178,7 +203,17 @@
           role="img"
           aria-label="C1 meraih ponsel, menurunkannya ke tanah, lalu melepasnya."
           aria-busy="true"
-        ></div>
+        >
+          <div id="phone-stage" class="phone-stage"></div>
+          <canvas id="c1-canvas" class="c1-canvas" aria-hidden="true"></canvas>
+          <img
+            class="c1-fallback"
+            src="/c1-master.webp"
+            width="800"
+            height="800"
+            alt=""
+          />
+        </div>
         <div class="copy">
           <h1 id="study-title">Satu gerakan.<br />Satu niat yang jelas.</h1>
           <p>
@@ -186,12 +221,15 @@
             tubuh yang kembali tenang.
           </p>
           <p>
-            Cuplikan ini menguji kontak dan kelenturan. Adegan jurnal serta alur
-            hero lengkap belum dibuat.
+            Wajah, tempurung, warna, dan shading berasal dari aset C1 asli yang
+            sudah disepakati. Adegan jurnal belum dibuat.
           </p>
           <div class="controls">
             <button class="primary" id="replay" disabled>Putar ulang</button>
             <button id="pause" disabled>Jeda</button>
+            <button id="reference" aria-pressed="false" disabled>
+              Lihat aset asli
+            </button>
             <label
               >Kecepatan<select id="speed" disabled>
                 <option value="1">Normal</option>
@@ -244,8 +282,11 @@
       >
     </main>
     <script src="/player.js"></script>
-    <script>
+    <script type="module">
+      import { createOriginalC1Rig } from "/c1-original-rig.js";
       const root = document.querySelector("#art");
+      const canvas = document.querySelector("#c1-canvas");
+      const referenceButton = document.querySelector("#reference");
       const replay = document.querySelector("#replay");
       const pause = document.querySelector("#pause");
       const speed = document.querySelector("#speed");
@@ -253,7 +294,19 @@
       const clock = document.querySelector("#time");
       const status = document.querySelector("#status");
       const preference = matchMedia("(prefers-reduced-motion: reduce)");
+      canvas.addEventListener("webglcontextlost", () => {
+        root.dataset.rigReady = "false";
+        ready = false;
+        player?.pause();
+        document
+          .querySelectorAll("button,select,input")
+          .forEach((control) => (control.disabled = true));
+        status.textContent =
+          "Gerak tubuh tidak tersedia. Aset C1 asli tetap ditampilkan; muat ulang untuk mencoba lagi.";
+      });
       let player,
+        rig,
+        referenceMode = false,
         ready = false,
         paused = true,
         resumeAfterVisibility = false;
@@ -261,14 +314,19 @@
         const frame = Math.min(335, Math.round(player.currentFrame));
         timeline.value = frame;
         clock.value = `${(frame / 60).toFixed(1).replace(".", ",")} / 5,6 dtk`;
+        rig?.render(player.currentFrame, referenceMode);
       }
       function stopAt(frame) {
+        referenceMode = false;
+        referenceButton.setAttribute("aria-pressed", "false");
         player.goToAndStop(frame, true);
         paused = true;
         pause.textContent = "Lanjutkan";
         syncFrame();
       }
       function play() {
+        referenceMode = false;
+        referenceButton.setAttribute("aria-pressed", "false");
         if (player.currentFrame >= 335) player.goToAndStop(0, true);
         paused = false;
         pause.textContent = "Jeda";
@@ -280,6 +338,17 @@
         play();
         status.textContent = "Cuplikan diputar ulang.";
       });
+      referenceButton.addEventListener("click", () => {
+        player.pause();
+        paused = true;
+        pause.textContent = "Lanjutkan";
+        referenceMode = !referenceMode;
+        referenceButton.setAttribute("aria-pressed", String(referenceMode));
+        rig.render(player.currentFrame, referenceMode);
+        status.textContent = referenceMode
+          ? "Aset C1 asli tanpa deformasi. Tekan lagi untuk membandingkan."
+          : "Kembali ke pose cuplikan.";
+      });
       pause.addEventListener("click", () => {
         if (paused) play();
         else stopAt(player.currentFrame);
@@ -287,7 +356,10 @@
       speed.addEventListener("change", () =>
         player.setSpeed(Number(speed.value)),
       );
-      timeline.addEventListener("input", () => stopAt(Number(timeline.value)));
+      timeline.addEventListener("input", () => {
+        stopAt(Number(timeline.value));
+        status.textContent = "Cuplikan dijeda pada posisi pilihanmu.";
+      });
       document.querySelectorAll("[data-frame]").forEach((button) =>
         button.addEventListener("click", () => {
           stopAt(Number(button.dataset.frame));
@@ -315,9 +387,13 @@
           if (!response.ok) throw new Error();
           return response.json();
         })
-        .then((data) => {
+        .then(async (data) => {
+          const image = new Image();
+          image.src = data.c1Motion.source;
+          await image.decode();
+          rig = createOriginalC1Rig(canvas, image, data.c1Motion);
           player = lottie.loadAnimation({
-            container: root,
+            container: document.querySelector("#phone-stage"),
             renderer: "svg",
             loop: false,
             autoplay: false,
@@ -325,6 +401,7 @@
           });
           player.addEventListener("DOMLoaded", () => {
             ready = true;
+            root.dataset.rigReady = "true";
             root.setAttribute("aria-busy", "false");
             document
               .querySelectorAll("button,select,input")
@@ -344,7 +421,7 @@
         })
         .catch(() => {
           status.textContent =
-            "Cuplikan belum bisa dimuat. Muat ulang preview atau buka storyboard-v1.png.";
+            "Cuplikan belum bisa dimuat. Aset C1 asli tetap ditampilkan; muat ulang preview untuk mencoba lagi.";
           root.setAttribute("aria-busy", "false");
         });
     </script>
