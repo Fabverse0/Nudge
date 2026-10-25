@@ -452,7 +452,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  padding: 12px 24px;
+  min-height: 152px;
+  padding: 12px 32px;
   border-radius: var(--card-radius) var(--card-radius) 0 0;
 }
 
@@ -461,6 +462,14 @@
   align-items: center;
   gap: 12px;
   font-weight: 800;
+  order: -1;
+  font-size: 1.125rem;
+  max-width: 18ch;
+}
+
+.app-studio .activity-art > .turtle-mascot {
+  width: 128px;
+  height: auto;
 }
 
 .app-studio .activity-content {
@@ -484,6 +493,8 @@
 
 .app-studio .activity-content h2 {
   margin-bottom: 12px;
+  font-size: 1.75rem;
+  color: var(--action);
 }
 
 .app-studio .activity-content .warning-note {
@@ -516,8 +527,8 @@
 }
 
 .app-studio .reason {
-  padding-top: 20px;
-  border-top: 1px solid var(--subtle);
+  padding: 20px 0;
+  border-block: 1px solid var(--subtle);
   font-size: 0.875rem;
 }
 
