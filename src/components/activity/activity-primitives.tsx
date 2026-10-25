@@ -78,8 +78,13 @@ export function ActivityDetails({ activity }: { activity: Activity }) {
         </span>
       </div>
       <ol className="activity-steps" role="list">
-        {activity.steps.map((step) => (
-          <li key={step}>{step}</li>
+        {activity.steps.map((step, index) => (
+          <li key={step}>
+            <span className="activity-step-number" aria-hidden="true">
+              {index + 1}
+            </span>
+            {step}
+          </li>
         ))}
       </ol>
       {activity.id.startsWith("journal") && (

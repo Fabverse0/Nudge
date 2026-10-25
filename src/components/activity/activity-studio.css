@@ -522,7 +522,6 @@
   padding: 0;
   margin: 24px 0;
   list-style: none;
-  counter-reset: activity-step;
 }
 
 .app-studio .activity-steps li {
@@ -530,11 +529,9 @@
   padding: 4px 0 4px 44px;
   margin-block: 16px;
   min-height: 32px;
-  counter-increment: activity-step;
 }
 
-.app-studio .activity-steps li::before {
-  content: counter(activity-step);
+.app-studio .activity-step-number {
   position: absolute;
   left: 0;
   top: 2px;
