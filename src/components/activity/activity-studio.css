@@ -453,6 +453,7 @@
 
 .app-studio .activity-art {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
@@ -469,6 +470,8 @@
   order: -1;
   font-size: 1.125rem;
   max-width: 18ch;
+  flex: 1 1 7rem;
+  min-width: 0;
 }
 
 .app-studio .activity-art > .turtle-mascot {
