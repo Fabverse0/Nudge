@@ -314,7 +314,9 @@ Rencanakan simbol + tulisan, tulisan saja, simbol saja, serta versi satu warna. 
 
 Gunakan satu keluarga **Phosphor Icons Regular** untuk ikon kontrol, dengan ukuran 20–24 px dan bobot konsisten. Paket sudah diintegrasikan untuk bentuk yang ramah dan cakupan tindakan umum. Pasangkan ikon dengan label pada tindakan utama. Jangan menambah ikon sekadar untuk mengisi ruang.
 
-Ikon tujuan “Produktif ringan” memakai `ClipboardText` untuk mewakili catatan dan urusan praktis; “Bergerak” memakai jejak kaki dan “Refleksi/jeda layar” memakai daun. Pada kartu pemilihan tujuan, ketiganya berada dalam bidang membulat 48 px dengan latar sage lembut agar mudah dipindai. Centang di sisi kanan tetap menjadi penanda pilihan aktif.
+Ikon kategori “Produktif ringan” memakai `ClipboardText` untuk mewakili catatan dan urusan praktis; “Bergerak” memakai jejak kaki dan “Refleksi/jeda layar” memakai daun. Pada kartu pemilihan tujuan, polesan aplikasi 25 Oktober memakai ilustrasi C1 utuh dalam bidang 80 px, diperkecil menjadi 56 px pada layar sempit. Centang di sisi kanan tetap menjadi penanda pilihan aktif. Ikon kategori tetap dipakai pada saran, timer, dan daftar favorit.
+
+Polesan aplikasi yang lebih ekspresif memakai pembuka sand, wajah mood Phosphor yang setara, ilustrasi kategori pada saran 128 px, dan respons pilihan yang singkat. Lebar kolom tugas menjadi 720 px; timer tetap dibatasi 560 px dan statis. Judul kartu saran dapat memakai 28 px untuk memperkuat fokus, sedangkan metadata kategori dan judul favorit memakai 18 px. Detail keputusan, variasi radius sesuai peran, serta bukti pemeriksaan dicatat di [polish aplikasi ekspresif](./docs/app-expressive.md).
 
 | Kebutuhan                                                 | Status saat dokumen dibuat           | Ketentuan produksi                                                       |
 | --------------------------------------------------------- | ------------------------------------ | ------------------------------------------------------------------------ |
