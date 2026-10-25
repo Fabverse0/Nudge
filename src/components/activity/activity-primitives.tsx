@@ -39,20 +39,26 @@ export function GoalIcon({ goal, size = 24 }: { goal: Goal; size?: number }) {
   return <Icon size={size} aria-hidden="true" />;
 }
 
-export function ActivityArtwork({ goal }: { goal: Goal }) {
+export function ActivityArtwork({
+  goal,
+  size = 64,
+}: {
+  goal: Goal;
+  size?: number;
+}) {
   return goal === "move" ? (
     <Image
       src="/brand/small-steps/stretch.webp"
-      width={64}
-      height={64}
-      sizes="64px"
+      width={size}
+      height={size}
+      sizes={`${size}px`}
       alt=""
       className="turtle-mascot"
     />
   ) : (
     <TurtleMascot
       pose={goal === "reflect" ? "journal" : "tidy"}
-      size={64}
+      size={size}
       eager
     />
   );

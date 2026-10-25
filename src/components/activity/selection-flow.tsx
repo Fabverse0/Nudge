@@ -15,7 +15,7 @@ import {
   type Mood,
 } from "@/lib/activities/catalog";
 import type { Context } from "@/lib/recommendation/recommend";
-import { GoalIcon, MoodIcon } from "./activity-primitives";
+import { ActivityArtwork, MoodIcon } from "./activity-primitives";
 
 export type SelectionStep = "mood" | "goal" | "time";
 const steps: SelectionStep[] = ["mood", "goal", "time"];
@@ -165,14 +165,23 @@ export function SelectionFlow(props: SelectionFlowProps) {
           {step === "goal" && (
             <div className="goal-options">
               {(Object.keys(goals) as Goal[]).map((value) => (
-                <label className="choice goal-choice" key={value}>
+                <label
+                  className="choice goal-choice"
+                  data-goal={value}
+                  key={value}
+                >
                   <input
                     type="radio"
                     name="goal"
                     checked={goal === value}
                     onChange={() => props.onGoalChange(value)}
                   />
-                  <GoalIcon goal={value} />
+                  <div
+                    className={`goal-artwork ${goals[value].color}`}
+                    aria-hidden="true"
+                  >
+                    <ActivityArtwork goal={value} size={80} />
+                  </div>
                   <span>
                     <strong>{goals[value].label}</strong>
                     <small>{goals[value].description}</small>
