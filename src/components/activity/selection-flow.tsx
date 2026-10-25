@@ -177,12 +177,12 @@ export function SelectionFlow(props: SelectionFlowProps) {
                     checked={goal === value}
                     onChange={() => props.onGoalChange(value)}
                   />
-                  <div
+                  <span
                     className={`goal-artwork ${goals[value].color}`}
                     aria-hidden="true"
                   >
                     <ActivityArtwork goal={value} size={80} />
-                  </div>
+                  </span>
                   <span>
                     <strong>{goals[value].label}</strong>
                     <small>{goals[value].description}</small>
