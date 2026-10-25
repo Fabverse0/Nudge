@@ -337,9 +337,15 @@
   flex-direction: column;
   justify-content: center;
   min-width: 0;
-  min-height: 104px;
-  padding: 20px 8px 16px;
+  min-height: 144px;
+  padding: 24px 8px 20px;
   gap: 4px;
+  background: var(--canvas);
+}
+
+.app-studio .duration-clock {
+  margin-bottom: 8px;
+  color: var(--action);
 }
 
 .app-studio .duration-choice strong {

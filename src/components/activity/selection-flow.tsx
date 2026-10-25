@@ -5,6 +5,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   CheckCircleIcon,
+  ClockIcon,
   SlidersHorizontalIcon,
 } from "@phosphor-icons/react";
 import {
@@ -201,6 +202,7 @@ export function SelectionFlow(props: SelectionFlowProps) {
                     checked={minutes === value}
                     onChange={() => props.onMinutesChange(value)}
                   />
+                  <ClockIcon size={24} aria-hidden="true" className="duration-clock" />
                   <strong>{value}</strong>
                   <span>menit</span>
                   <SelectionCheck />
