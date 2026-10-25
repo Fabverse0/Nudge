@@ -77,7 +77,7 @@ export function ActivityDetails({ activity }: { activity: Activity }) {
             : "Tanpa alat"}
         </span>
       </div>
-      <ol className="activity-steps">
+      <ol className="activity-steps" role="list">
         {activity.steps.map((step) => (
           <li key={step}>{step}</li>
         ))}
