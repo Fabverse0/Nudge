@@ -10,21 +10,21 @@ Taste dibaca untuk prinsip komposisi dan identitas; alur khusus landing, pemilih
 
 ## Keputusan dan alasan
 
-| Bagian | Keputusan | Alasan |
-| --- | --- | --- |
-| Pembuka | Bidang sand dan C1 menyapa 144 px, diperkecil pada ponsel. | Membawa karakter Nudge ke titik mulai tanpa adegan panjang. |
-| Navigasi | Tiga menu dalam satu bidang, menu aktif sage gelap. | Membedakan navigasi dari kelompok radio di bawahnya. |
-| Kolom tugas | Lebar maksimum 720 px. | Memberi ruang untuk ilustrasi dan label sambil mempertahankan satu kolom keputusan. |
-| Progres | Nomor bulat, label, serta centang langkah yang dilewati. | Menjelaskan urutan dan posisi tanpa bergantung pada warna. |
-| Mood | Empat ikon wajah Phosphor duotone dengan ukuran dan warna setara. | Membantu mengenali konteks tanpa memberi peringkat mood. |
-| Tujuan | Ilustrasi C1 berbeda untuk produktivitas, gerak, dan refleksi. | Menghubungkan label dengan aktivitas yang dapat dibayangkan. |
-| Durasi | Ikon jam, angka besar, label menit, dan centang terpilih. | Menjadikan batas waktu mudah dipindai. |
-| Saran | Ilustrasi 128 px, kategori, judul, dan instruksi bernomor. | Memberi karakter pada saran sekaligus memperjelas pelaksanaannya. |
-| Timer | Permukaan putih, angka sage gelap, pendamping statis. | Mengurangi distraksi setelah kegiatan dimulai. |
-| Penyelesaian | Bidang sage lembut di belakang C1 dan ekspresi mood yang konsisten. | Menandai akhir kegiatan dengan ramah tanpa tekanan. |
-| Favorit | Ikon kategori tetap hadir pada ponsel, baris dan judul jelas. | Memudahkan pemindaian daftar nyata yang disimpan pengguna. |
-| Pengingat | Header sage lembut, formulir putih, status tersimpan terpisah. | Membedakan jadwal tersimpan dari draft yang belum disimpan. |
-| Gerak | Pilihan mood merespons satu kali selama 220 ms; transisi warna 160 ms. | Mengakui tindakan tanpa loop atau menahan kontrol. |
+| Bagian       | Keputusan                                                                          | Alasan                                                                              |
+| ------------ | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Pembuka      | Bidang sand dan C1 menyapa 144 px, diperkecil pada ponsel.                         | Membawa karakter Nudge ke titik mulai tanpa adegan panjang.                         |
+| Navigasi     | Tiga menu dalam satu bidang, menu aktif sage gelap.                                | Membedakan navigasi dari kelompok radio di bawahnya.                                |
+| Kolom tugas  | Lebar maksimum 720 px.                                                             | Memberi ruang untuk ilustrasi dan label sambil mempertahankan satu kolom keputusan. |
+| Progres      | Nomor bulat, label, serta centang langkah yang dilewati.                           | Menjelaskan urutan dan posisi tanpa bergantung pada warna.                          |
+| Mood         | Empat ikon wajah Phosphor duotone dengan ukuran dan warna setara.                  | Membantu mengenali konteks tanpa memberi peringkat mood.                            |
+| Tujuan       | Ilustrasi C1 berbeda untuk produktivitas, gerak, dan refleksi.                     | Menghubungkan label dengan aktivitas yang dapat dibayangkan.                        |
+| Durasi       | Ikon jam, angka besar, label menit, centang terpilih, dan respons gerak satu kali. | Menjadikan batas waktu mudah dipindai; pilihan terasa hidup tanpa animasi berulang. |
+| Saran        | Ilustrasi 128 px, kategori, judul, dan instruksi bernomor.                         | Memberi karakter pada saran sekaligus memperjelas pelaksanaannya.                   |
+| Timer        | Permukaan putih, angka sage gelap, pendamping statis.                              | Mengurangi distraksi setelah kegiatan dimulai.                                      |
+| Penyelesaian | Bidang sage lembut di belakang C1 dan ekspresi mood yang konsisten.                | Menandai akhir kegiatan dengan ramah tanpa tekanan.                                 |
+| Favorit      | Ikon kategori tetap hadir pada ponsel, baris dan judul jelas.                      | Memudahkan pemindaian daftar nyata yang disimpan pengguna.                          |
+| Pengingat    | Header sage lembut, formulir putih, status tersimpan terpisah.                     | Membedakan jadwal tersimpan dari draft yang belum disimpan.                         |
+| Gerak        | Pilihan mood merespons satu kali selama 220 ms; transisi warna 160 ms.             | Mengakui tindakan tanpa loop atau menahan kontrol.                                  |
 
 Tidak ada aset baru, instalasi, API, perubahan katalog/algoritma, perubahan format penyimpanan, atau perubahan perhitungan timer. Seluruh aset C1 tetap utuh. Tiga langkah, mood opsional, penyelesaian manual, favorit lokal, serta izin pengingat setelah tindakan pengguna dipertahankan.
 
@@ -47,5 +47,7 @@ Screenshot regresi tersimpan dalam `.impeccable/review/app-expressive-{mood,goal
 Gerbang akhir: scope tetap terbatas pada empat berkas Activity UI, tanpa menyentuh landing, domain, storage, timer, paket, atau aset; standar aplikasi dipertahankan; bukti build, lint, unit, regresi UI, reflow, dan Axe tersedia; artefak sebelum/sesudah diberi label sesuai sumber; keterbatasan perangkat nyata dinyatakan di bawah. Pengujian awal development yang terputus oleh Turbopack dan percobaan fokus yang dijalankan sebelum akses localhost benar tidak dihitung sebagai lulus.
 
 Pemeriksaan Android fisik dengan Chrome, pembaca layar nyata, dan observasi pengguna belum dilakukan. Emulasi mobile adalah pemeriksaan viewport/browser automation, bukan ponsel fisik. Tidak ada klaim bahwa audit otomatis membuktikan seluruh aksesibilitas atau kegunaan.
+
+Penyempurnaan lanjutan 26 Oktober: kartu durasi masuk berurutan dalam 260 ms dengan jeda maksimum 70 ms. Memilih durasi memberi gerak kecil pada ikon jam dan angka untuk menegaskan state. Efek hanya berjalan ketika langkah Waktu tampil, di dalam preferensi gerak bawaan, tanpa loop. Reduced motion mempertahankan warna/centang tetapi menghilangkan pergeseran. Build produksi berhasil; 10/10 regresi fokus lulus (desktop dan emulasi mobile, empat lebar). Pemeriksaan Chrome mengonfirmasi urutan `duration-choice-arrive`, respons `duration-clock-tick` dan `duration-value-confirm`, serta nol animasi ketika reduced motion aktif. Tidak ada perubahan area layar lain.
 
 Referensi visual sebelum polesan tersedia pada capture historis `.impeccable/review/polish-app-*`, `goal-icons.png`, serta `timer-production-*`. Capture tersebut berasal dari pemeriksaan sebelumnya, bukan rekonstruksi sebelum/sesudah yang dibuat dengan memodifikasi DOM.
