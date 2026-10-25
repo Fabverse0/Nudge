@@ -263,7 +263,7 @@ export function ActivityApp({
                 <div className="selection-companion">
                   <TurtleMascot
                     pose="wave"
-                    size={80}
+                    size={144}
                     className="turtle-companion"
                     alt="Pendamping kura-kura"
                     eager

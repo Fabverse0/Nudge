@@ -79,6 +79,25 @@
   max-width: 42ch;
 }
 
+.app-studio .selection-intro {
+  padding: 24px;
+  border-radius: var(--card-radius);
+  background: var(--sand);
+}
+
+.app-studio .selection-intro h1 {
+  color: var(--action);
+}
+
+.app-studio .selection-intro .selection-companion {
+  width: 144px;
+}
+
+.app-studio .selection-intro .turtle-mascot {
+  width: 100%;
+  height: auto;
+}
+
 .app-studio .turtle-companion {
   flex-shrink: 0;
   color: var(--action);
@@ -860,8 +879,17 @@
   }
 
   .app-studio .selection-intro .turtle-mascot {
-    width: 64px;
+    width: 100%;
     height: auto;
+  }
+
+  .app-studio .selection-intro {
+    padding: 20px;
+    gap: 12px;
+  }
+
+  .app-studio .selection-intro .selection-companion {
+    width: 88px;
   }
 
   .app-studio .selection-progress {
