@@ -2,6 +2,10 @@ import {
   ClipboardTextIcon,
   FootprintsIcon,
   LeafIcon,
+  SmileyIcon,
+  SmileyBlankIcon,
+  SmileyMehIcon,
+  SmileyNervousIcon,
 } from "@phosphor-icons/react";
 import Image from "next/image";
 import { TurtleMascot } from "@/components/ui/turtle-mascot";
@@ -10,7 +14,20 @@ import {
   toolLabels,
   type Activity,
   type Goal,
+  type Mood,
 } from "@/lib/activities/catalog";
+
+export function MoodIcon({ mood }: { mood: Mood }) {
+  const Icon = {
+    Lelah: SmileyMehIcon,
+    Bosan: SmileyBlankIcon,
+    Gelisah: SmileyNervousIcon,
+    "Siap bergerak": SmileyIcon,
+  }[mood];
+  return (
+    <Icon size={40} weight="duotone" aria-hidden="true" className="mood-face" />
+  );
+}
 
 export function GoalIcon({ goal, size = 24 }: { goal: Goal; size?: number }) {
   const Icon =

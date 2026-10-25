@@ -15,7 +15,7 @@ import {
   type Mood,
 } from "@/lib/activities/catalog";
 import type { Context } from "@/lib/recommendation/recommend";
-import { GoalIcon } from "./activity-primitives";
+import { GoalIcon, MoodIcon } from "./activity-primitives";
 
 export type SelectionStep = "mood" | "goal" | "time";
 const steps: SelectionStep[] = ["mood", "goal", "time"];
@@ -151,6 +151,7 @@ export function SelectionFlow(props: SelectionFlowProps) {
                       checked={mood === value}
                       onChange={() => props.onMoodChange(value)}
                     />
+                    <MoodIcon mood={value} />
                     <span>{value}</span>
                     <SelectionCheck />
                   </label>

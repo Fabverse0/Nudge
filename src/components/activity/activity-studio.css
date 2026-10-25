@@ -242,9 +242,26 @@
 }
 
 .app-studio .mood-options .choice {
-  min-height: 72px;
+  min-height: 112px;
   padding: 16px;
   gap: 8px;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.app-studio .mood-face {
+  color: var(--action);
+}
+
+.app-studio .mood-options .choice:has(input:checked) {
+  background: var(--selection);
+}
+
+.app-studio .mood-options .choice .selection-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .app-studio .choice > :not(input) {
@@ -943,7 +960,12 @@
   }
 
   .app-studio .mood-options .choice {
-    min-height: 56px;
+    min-height: 72px;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 16px;
+    text-align: left;
+    padding-right: 40px;
   }
 
   .app-studio .duration-options {
