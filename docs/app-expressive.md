@@ -36,6 +36,16 @@ Detector Impeccable dijalankan sekali pada empat berkas UI. Hasilnya sepuluh adv
 
 ## Pemeriksaan
 
-Bukti akhir pengujian, screenshot, dan batas lingkungan ditambahkan setelah pemeriksaan produksi selesai. Pengujian development awal terputus oleh kompilasi Turbopack berulang dan navigasi yang menghancurkan konteks tes, sehingga tidak dihitung sebagai lulus. Validasi dialihkan ke build produksi webpack.
+Build final `npm run build -- --webpack` berhasil pada 26 Oktober 2026 setelah satu percobaan prerender gagal membuat direktori `.next` dengan `EPERM`. Percobaan ulang selesai kompilasi, TypeScript, lima halaman statis, dan build trace. Server produksi memberi HTTP 200 pada `/app`.
+
+Regresi Playwright produksi 78/78 sebelumnya lulus pada desktop dan emulasi mobile untuk alur aktivitas, polesan, pengingat, lebar 320 sampai 1440 px, teks 200%, dan Axe. Setelah itu nomor instruksi dekoratif diubah agar tersembunyi dari pohon aksesibilitas. Pada build final, 10/10 pemeriksaan fokus `app-expressive.spec.ts` kembali lulus pada desktop dan mobile, mencakup keempat lebar, alur UI penuh, gambar, overflow, Axe, keyboard, serta reduced motion. Hasil 78 dan 10 berasal dari dua pemanggilan yang tumpang tindih, bukan 88 skenario unik.
+
+Vitest lulus 25/25 pada delapan berkas. ESLint target lulus. Pemeriksaan Prettier pada sumber UI dan tes lulus; pemeriksaan dokumentasi lama `app-polish.md` dan `verification.md` melaporkan format tidak sesuai, sehingga file lama tersebut tidak diformat ulang massal. `git diff --check` lulus.
+
+Screenshot regresi tersimpan dalam `.impeccable/review/app-expressive-{mood,goal,time,suggestion,favorites,timer,completion,reminders}-{320,390,768,1440}-{desktop,mobile}.png`. Screenshot mood, saran, timer, penyelesaian, pengingat, favorit, dan tujuan ditinjau; capture yang digunakan untuk dokumentasi berasal dari regresi terbaru. Pengecekan pohon aksesibilitas manual sebelumnya mendeteksi nomor ganda pada instruksi, lalu markup diperbaiki dengan label nomor dekoratif yang tersembunyi. Pemeriksaan 10 tes sesudah perubahan mengonfirmasi ulang state aksesibilitas otomatis.
+
+Gerbang akhir: scope tetap terbatas pada empat berkas Activity UI, tanpa menyentuh landing, domain, storage, timer, paket, atau aset; standar aplikasi dipertahankan; bukti build, lint, unit, regresi UI, reflow, dan Axe tersedia; artefak sebelum/sesudah diberi label sesuai sumber; keterbatasan perangkat nyata dinyatakan di bawah. Pengujian awal development yang terputus oleh Turbopack dan percobaan fokus yang dijalankan sebelum akses localhost benar tidak dihitung sebagai lulus.
+
+Pemeriksaan Android fisik dengan Chrome, pembaca layar nyata, dan observasi pengguna belum dilakukan. Emulasi mobile adalah pemeriksaan viewport/browser automation, bukan ponsel fisik. Tidak ada klaim bahwa audit otomatis membuktikan seluruh aksesibilitas atau kegunaan.
 
 Referensi visual sebelum polesan tersedia pada capture historis `.impeccable/review/polish-app-*`, `goal-icons.png`, serta `timer-production-*`. Capture tersebut berasal dari pemeriksaan sebelumnya, bukan rekonstruksi sebelum/sesudah yang dibuat dengan memodifikasi DOM.
