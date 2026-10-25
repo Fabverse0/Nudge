@@ -43,6 +43,17 @@ Perluasan yang disetujui menambahkan tiga ilustrasi C1 transparan, jejak langkah
 
 Windows, Node.js 22.19.0, npm 11.19.0. Next.js 16.4.2, React 19.3.1, TypeScript 6.0.3, Tailwind 4.3.3, Vitest 5.0.5, Playwright 1.64.1. Versi terkunci dalam package-lock.json.
 
+## Polesan ekspresif aplikasi, 26 Oktober 2026
+
+Penyempurnaan visual `/app` dicatat beserta alasan, kritik Taste/Impeccable, gate, hasil dan batas pada [app-expressive.md](./app-expressive.md). Scope kode hanya empat berkas Activity UI; landing, domain, penyimpanan, katalog, timer, aset, paket, dan API tidak diubah.
+
+- Build final `npm run build -- --webpack` berhasil, termasuk TypeScript dan prerender lima rute. Percobaan pertama selesai kompilasi/typecheck tetapi gagal di prerender `_global-error` karena `EPERM` ketika membuat direktori `.next`; pengulangan berhasil.
+- `npm test`: 25/25 lulus pada delapan berkas. ESLint target lulus. Prettier sumber UI/test lulus. `git diff --check` lulus. Prettier pada dua dokumen legacy melaporkan format; tidak ada format ulang massal.
+- Regresi produksi 78/78 lulus pada desktop dan proyek emulasi mobile sebelum perbaikan kecil nomor aksesibel terakhir. Setelah build final dan perubahan itu, suite fokus 10/10 lulus pada kedua proyek. Suite mencakup layar penuh pada lebar 320/390/768/1440 px, gambar terdekode, overflow, Axe, reduced motion, dan keyboard. Suite 78/10 overlap dan tidak dijumlahkan sebagai kasus unik.
+- Capture UI terbaru: `.impeccable/review/app-expressive-{mood,goal,time,suggestion,favorites,timer,completion,reminders}-{320,390,768,1440}-{desktop,mobile}.png`. Gambar desktop/mobile ditinjau untuk mood, tujuan, waktu, saran, favorit, timer, penyelesaian dan pengingat.
+- Pembesaran teks 200% dan alur pengingat diuji pada suite regresi 78 kasus sebelumnya. Perubahan markup nomor dekoratif setelahnya tercakup dalam 10 suite fokus dan Axe. Tidak ada klaim uji zoom browser fisik atau pembaca layar nyata.
+- Preview produksi berjalan di `http://127.0.0.1:3100/app` dan merespons HTTP 200. Ponsel Android fisik, instalasi/ikon PWA, izin/notifikasi OS, pembaca layar nyata, dan observasi pengguna tetap belum diperiksa.
+
 ## Polesan seluruh aplikasi, 22 Oktober 2026
 
 Pengguna menyetujui [rencana aplikasi](./app-polish.md): pemilihan Mood/Tujuan/Waktu dengan Lanjut eksplisit, polesan saran, timer, penyelesaian, favorit, dan pengingat. Konteks/posisi langkah bertahan saat berpindah menu; Ubah pilihan kembali ke Waktu; filter aktif terlihat meskipun kontrol ditutup. Tidak ada perubahan file domain `src/lib`, format penyimpanan, atau pengiriman notifikasi.
