@@ -1,4 +1,19 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
+
+async function verifyManualActivitySelection(page: Page) {
+  await page.getByRole("button", { name: "Lewati", exact: true }).click();
+  await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
+  await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+  await page.getByRole("radio", { name: "2 menit", exact: true }).check();
+  await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Satu ini, mau coba?" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Mulai kegiatan", exact: true }),
+  ).toBeEnabled();
+  await expect(page.getByRole("timer")).toHaveCount(0);
+}
 
 type PermissionProbe = {
   requests: number;
@@ -122,9 +137,7 @@ test("unsupported notifications keep reminder settings and activities usable", a
     .check();
   await page.getByRole("button", { name: "Simpan pengingat" }).click();
   await page.getByRole("button", { name: "Kegiatan", exact: true }).click();
-  await expect(
-    page.getByRole("button", { name: "Cari kegiatan kecil" }),
-  ).toBeVisible();
+  await verifyManualActivitySelection(page);
 });
 
 test("visibility recheck delivers once and reload preserves deduplication", async ({
@@ -279,9 +292,7 @@ test("permission is requested after explicit opt-in, denial remains usable", asy
     ),
   ).toBe(false);
   await page.getByRole("button", { name: "Kegiatan", exact: true }).click();
-  await expect(
-    page.getByRole("button", { name: "Cari kegiatan kecil" }),
-  ).toBeVisible();
+  await verifyManualActivitySelection(page);
 });
 
 test("editing or disabling schedule prevents old notifications", async ({
