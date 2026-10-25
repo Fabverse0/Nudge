@@ -136,7 +136,7 @@
 .app-studio .selection-progress ol {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -148,8 +148,28 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  padding-bottom: 4px;
-  border-bottom: 2px solid transparent;
+  padding-block: 4px;
+}
+
+.app-studio .selection-progress li > span {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  font-weight: 800;
+}
+
+.app-studio .selection-progress li[data-current="true"] > span {
+  background: var(--action);
+  color: var(--surface);
+  border-color: var(--action);
+}
+
+.app-studio .selection-progress li[data-done="true"] > span {
+  background: var(--selection);
+  border-color: var(--action);
 }
 
 .app-studio .selection-progress li[data-current="true"] {
