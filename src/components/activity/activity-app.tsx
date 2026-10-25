@@ -335,7 +335,10 @@ export function ActivityApp({
                     <div
                       className={`activity-art ${goals[suggestion.activity.goal].color}`}
                     >
-                      <ActivityArtwork goal={suggestion.activity.goal} size={128} />
+                      <ActivityArtwork
+                        goal={suggestion.activity.goal}
+                        size={128}
+                      />
                       <span className="activity-art-label">
                         <GoalIcon goal={suggestion.activity.goal} size={20} />
                         {goals[suggestion.activity.goal].label}

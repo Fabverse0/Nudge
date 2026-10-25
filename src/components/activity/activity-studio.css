@@ -1061,11 +1061,18 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .app-studio[data-motion-allowed="true"] :is(.nav-button, .choice, .feedback-row button, .icon-button) {
-    transition: background-color 160ms ease-out, border-color 160ms ease-out, color 160ms ease-out;
+  .app-studio[data-motion-allowed="true"]
+    :is(.nav-button, .choice, .feedback-row button, .icon-button) {
+    transition:
+      background-color 160ms ease-out,
+      border-color 160ms ease-out,
+      color 160ms ease-out;
   }
 
-  .app-studio[data-motion-allowed="true"] .mood-options .choice:has(input:checked) .mood-face {
+  .app-studio[data-motion-allowed="true"]
+    .mood-options
+    .choice:has(input:checked)
+    .mood-face {
     animation: mood-acknowledge 220ms ease-out;
   }
 
@@ -1090,9 +1097,15 @@
 }
 
 @keyframes mood-acknowledge {
-  0% { transform: rotate(-8deg) scale(0.92); }
-  65% { transform: rotate(3deg) scale(1.05); }
-  100% { transform: none; }
+  0% {
+    transform: rotate(-8deg) scale(0.92);
+  }
+  65% {
+    transform: rotate(3deg) scale(1.05);
+  }
+  100% {
+    transform: none;
+  }
 }
 
 .app-studio .selection-companion {
