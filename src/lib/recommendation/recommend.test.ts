@@ -110,4 +110,35 @@ describe("recommendations", () => {
       }
     }
   });
+  it("prefers the selected duration when an exact-duration activity is available", () => {
+    for (const goal of ["reflect", "productive", "move"] as Goal[]) {
+      for (const minutes of [2, 5, 10] as const) {
+        const result = recommend(
+          { ...context, goal, minutes, tools: "none", place: "indoor" },
+          emptyFeedback(),
+        );
+        expect(result.kind).toBe("suggestion");
+        if (result.kind === "suggestion")
+          expect(result.suggestion.activity.minutes).toBe(minutes);
+      }
+    }
+  });
+  it("falls back to a shorter activity after exact-duration choices are rejected", () => {
+    const exactChoices = activities
+      .filter(
+        (activity) =>
+          activity.goal === "move" &&
+          activity.minutes === 10 &&
+          activity.places.includes("indoor") &&
+          activity.requiredTools.length === 0,
+      )
+      .map((activity) => activity.id);
+    const result = recommend(
+      { ...context, goal: "move", minutes: 10, tools: "none", place: "indoor" },
+      { rejected: exactChoices, liked: [] },
+    );
+    expect(result.kind).toBe("suggestion");
+    if (result.kind === "suggestion")
+      expect(result.suggestion.activity.minutes).toBeLessThan(10);
+  });
 });

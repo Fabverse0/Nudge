@@ -32,6 +32,23 @@ async function selectTimeStep(page: Page) {
   await page.getByRole("radio", { name: "2 menit", exact: true }).check();
 }
 
+test("a 10-minute choice recommends a 10-minute activity when one is available", async ({
+  page,
+}) => {
+  await page.goto("/app");
+  await page.getByRole("button", { name: "Lewati", exact: true }).click();
+  await page.getByRole("radio", { name: "Bergerak" }).check();
+  await next(page).click();
+  const tenMinutes = page.getByRole("radio", {
+    name: "10 menit",
+    exact: true,
+  });
+  await tenMinutes.check();
+  await expect(tenMinutes).toBeChecked();
+  await search(page).click();
+  await expect(page.locator(".activity-card")).toContainText("10 menit");
+});
+
 test("wizard advances explicitly, validates required choices, and preserves values on back", async ({
   page,
 }) => {

@@ -45,10 +45,14 @@ export function recommend(
         (a) => a.places.includes("indoor") || !a.requiredTools.length,
       );
   if (!pool.length) return { kind: "empty" };
+  const exactDuration = pool.filter(
+    (activity) => activity.minutes === context.minutes,
+  );
+  const durationPool = exactDuration.length > 0 ? exactDuration : pool;
   const score = (a: Activity) =>
     (context.mood && a.moods.includes(context.mood) ? 2 : 0) +
     (feedback.liked.includes(a.id) ? 1 : 0);
-  const activity = [...pool].sort((a, b) => score(b) - score(a))[0];
+  const activity = [...durationPool].sort((a, b) => score(b) - score(a))[0];
   const differences: string[] = [];
   if (context.place !== "any" && !activity.places.includes(context.place))
     differences.push(
