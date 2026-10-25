@@ -52,6 +52,7 @@ import {
   ActivityDetails,
   ActivityArtwork,
   GoalIcon,
+  MoodIcon,
 } from "./activity-primitives";
 import "./activity-studio.css";
 
@@ -575,6 +576,7 @@ export function ActivityApp({
                       key={next}
                       onClick={() => complete(next)}
                     >
+                      <MoodIcon mood={next} />
                       {next}
                     </button>
                   ))}

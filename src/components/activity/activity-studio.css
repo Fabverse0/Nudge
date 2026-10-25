@@ -727,6 +727,8 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
+  background: var(--selection);
+  border-radius: 48% 48% 32% 32%;
 }
 
 .app-studio .completion-screen > p {
@@ -746,6 +748,13 @@
 
 .app-studio .completion-question .text-button {
   margin-top: 20px;
+}
+
+.app-studio .completion-question .mood-options .button {
+  flex-direction: column;
+  gap: 8px;
+  padding-inline: 12px;
+  min-width: 0;
 }
 
 .app-studio .favorite-heading-mascot {
