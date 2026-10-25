@@ -91,6 +91,10 @@
   color: var(--action);
 }
 
+.app-studio .selection-intro .muted {
+  color: var(--ink);
+}
+
 .app-studio .selection-intro .selection-companion {
   width: 144px;
 }
