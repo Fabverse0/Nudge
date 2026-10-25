@@ -20,11 +20,12 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width: min(640px, calc(100% - 32px));
+  width: min(720px, calc(100% - 32px));
   margin: 8px auto 0;
   gap: 8px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--subtle);
+  padding: 6px;
+  border-radius: 20px;
+  background: var(--surface);
 }
 
 .app-studio .nav-button {
@@ -39,6 +40,7 @@
   background: transparent;
   color: var(--muted);
   font-weight: 700;
+  flex: 1;
 }
 
 .app-studio .nav-button:hover {
@@ -48,12 +50,12 @@
 
 .app-studio .nav-button.active {
   border-color: var(--action);
-  color: var(--action);
-  background: var(--selection);
+  color: var(--surface);
+  background: var(--action);
 }
 
 .app-studio .app-main {
-  width: min(640px, calc(100% - 32px));
+  width: min(720px, calc(100% - 32px));
   margin: 32px auto 0;
 }
 
