@@ -33,6 +33,9 @@ for (const width of [320, 390, 768, 1440]) {
         .include(".app-shell")
         .analyze();
       expect(accessibility.violations).toEqual([]);
+      await page.evaluate(() =>
+        window.scrollTo({ top: 0, behavior: "instant" }),
+      );
       await page.screenshot({
         path: `.impeccable/review/app-expressive-${name}-${width}-${testInfo.project.name}.png`,
         fullPage: true,
