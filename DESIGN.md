@@ -250,7 +250,7 @@ Mode permukaan: **Operate**. Gunakan satu pusat perhatian pada setiap langkah. A
 
 | Layar/keadaan   | Fokus dan komposisi                                                                                                                                                                              |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Memilih konteks | Tiga langkah dengan progres tekstual, pilihan native, Lanjut/Kembali, dan Lewati mood. Durasi dari landing tetap terpilih pada langkah Waktu. Akses Favorit dan Pengingat tetap mudah ditemukan. |
+| Memilih konteks | Empat langkah dengan progres tekstual, pilihan native, Lanjut/Kembali, serta Lewati untuk mood dan energi. Durasi dari landing tetap terpilih pada langkah Waktu. Akses Favorit dan Pengingat tetap mudah ditemukan. |
 | Saran           | Satu kartu utama berisi judul, durasi, instruksi, kondisi, dan alasan. Mulai paling menonjol; Kurang cocok dan Favorit menjadi pendamping.                                                       |
 | Timer           | Judul aktivitas, angka waktu, status berjalan/jeda/habis, kontrol yang jelas, dan maskot kecil. Instruksi tetap dapat dilihat kembali.                                                           |
 | Setelah selesai | Respons singkat, “Mood kamu berubah?”, pilihan mood setara dan Lewati, kemudian kembali ke awal aplikasi.                                                                                        |
@@ -492,3 +492,10 @@ Ponsel memakai adaptasi Scrolling Phone oleh Nafta R; jurnal memakai adaptasi Di
 Aset, runtime, pengecualian Taste, serta bukti pemeriksaan dicatat pada [revisi motion landing](./docs/landing-motion-revision.md). Loop hanya berjalan saat terlihat, berhenti ketika tab tersembunyi, dan memiliki poster statis untuk reduced motion, tanpa JavaScript, atau kegagalan unduh. Batas aplikasi tetap berlaku.
 
 Pembaruan hero 24 Oktober 2026: pengguna meminta tombol “Putar cerita” dihapus dan cerita berulang otomatis. Hero memakai tiga pose C1 utuh yang sudah diterima, dalam satu siklus 12 detik dengan penahanan pose jurnal dan transisi kembali ke awal. Ponsel, pose, dan tinta memakai clock CSS yang sama. Hentikan timeline saat hero keluar viewport atau tab tersembunyi, lalu lanjutkan dari posisi semula ketika terlihat kembali. Reduced motion dan kegagalan aset menampilkan komposisi statis. Keputusan ini menggantikan kontrol replay manual pada catatan hero sebelumnya. Atas komentar pengguna berikutnya, dekorasi jejak langkah hijau di belakang ponsel dihapus dari hero.
+
+
+### Penambahan aplikasi 26 Oktober 2026
+
+Design Read: layar Operate, ENERGY 2 / RHYTHM 2 / MOTION 1. Pembuka sand memusatkan tombol mulai cepat; formulir mempertahankan satu pertanyaan per langkah. Koleksi adalah pilihan setara dengan gambar C1 88 px (72 px pada ponsel), bukan kartu statistik. Judul bagian 24 px, judul entri/koleksi 18 px, dan panel konfirmasi memakai radius kontrol 16 px. Bidang koleksi Bergerak mencampurkan 20% token blue dengan surface agar teks tetap terbaca. Shuffle mewakili pilihan kegiatan; Lightning mewakili keterlibatan energi, tanpa klaim kesehatan. Progres empat langkah tersusun dua kolom pada ponsel.
+
+Riwayat memakai baris yang dipisahkan garis, waktu penyelesaian, durasi kegiatan yang tidak diklaim sebagai durasi aktual, serta tindakan Coba lagi/hapus. Respons C1 pada mulai cepat dan selesai berlangsung 480 ms sekali, berhenti di luar viewport atau tab tersembunyi, dan menjadi statis pada reduced motion. Alasan penolakan muncul setelah pergantian sebagai panel opsional. Rincian dan bukti: [fitur aplikasi](./docs/nudge-next-features.md).

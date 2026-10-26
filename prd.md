@@ -75,7 +75,7 @@ Landing page tidak menambahkan kewajiban mendaftar. Kemampuan pemasangan PWA men
 ### Alur pengguna
 
 1. Masuk melalui CTA landing page, URL aplikasi, atau ikon PWA.
-2. Pilih mood atau **Lewati**, lalu pilih tujuan dan waktu tersedia.
+2. Pilih mood atau **Lewati**, pilih tujuan, pilih energi atau **Lewati**, lalu waktu tersedia. Jalur Pilihkan saja dan koleksi menyediakan cara masuk yang lebih singkat.
 3. Sesuaikan tempat atau alat bila relevan.
 4. Lihat satu saran, durasi, instruksi, dan alasan kecocokannya.
 5. Pilih **Mulai**, **Kurang cocok**, atau simpan ke favorit.

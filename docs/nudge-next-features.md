@@ -14,12 +14,12 @@ Disetujui pengguna 26 Oktober 2026. Implementasi bertahap, setiap perubahan keci
 ## Status
 
 - [x] Sinkronisasi keputusan produk/desain dan rencana implementasi.
-- [ ] Model energi, metadata katalog, pemeringkatan, dan langkah Energi.
-- [ ] Mulai cepat dan variasi kandidat.
-- [ ] Definisi koleksi, pemilihan durasi, dan alternatif dalam koleksi.
-- [ ] Alasan penolakan dalam sesi dan panel opsional.
-- [ ] Penyimpanan, pencatatan, dan layar riwayat lokal.
-- [ ] Respons maskot dan penyesuaian responsif.
+- [x] Model energi, metadata katalog, pemeringkatan, dan langkah Energi.
+- [x] Mulai cepat dan variasi kandidat.
+- [x] Definisi koleksi, pemilihan durasi, dan alternatif dalam koleksi.
+- [x] Alasan penolakan dalam sesi dan panel opsional.
+- [x] Penyimpanan, pencatatan, dan layar riwayat lokal.
+- [x] Respons maskot dan penyesuaian responsif.
 - [ ] Unit, browser, lint, format, typecheck, build, audit visual dan aksesibilitas.
 
 ## Pemeriksaan penerimaan
@@ -30,4 +30,4 @@ Periksa 320/390/768 px dan desktop, keyboard/fokus, teks besar, reduced motion, 
 
 ## Bukti
 
-Belum dijalankan untuk penambahan ini.
+Pemeriksaan awal: 40 tes unit lulus. Suite produksi awal memeriksa 118 skenario desktop/emulasi ponsel: 107 lulus, 11 perlu penyesuaian harness (placeholder loading Next, mock Notification yang harus terpisah dari service worker, serta selector aset landing lama). Seluruh 22 skenario fitur baru pada putaran itu lulus. Pemeriksaan ulang harness, gerak C1, serta CSS akhir masih berjalan; status akhir dicatat setelah hasil tersedia.

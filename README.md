@@ -2,6 +2,17 @@
 
 Teman untuk memulai satu kegiatan kecil ketika sedang gabut atau ingin jeda dari scrolling. Satu codebase untuk web responsif dan PWA, dengan antarmuka Bahasa Indonesia.
 
+## Fitur aplikasi
+
+- Pilihkan saja untuk satu kegiatan ringan 2 menit tanpa alat.
+- Alur Mood, Tujuan, Energi, Waktu; Mood dan Energi bisa dilewati.
+- Tiga koleksi bertema dengan pilihan 2, 5, atau 10 menit.
+- Alasan Kurang cocok yang opsional setelah saran berganti.
+- Riwayat lokal otomatis saat Selesai, maksimal 100 catatan, dengan kontrol hapus dan nonaktif.
+- C1 memberi respons singkat; timer tetap tenang dan dimulai manual.
+
+Lihat [keputusan dan bukti fitur](./docs/nudge-next-features.md).
+
 ## Menjalankan lokal
 
 Gunakan Node.js 22.12 atau lebih baru dan npm.
@@ -40,7 +51,7 @@ Playwright memakai Chrome yang sudah terpasang, dengan profil pengujian terpisah
 - `tests/e2e`: pemeriksaan alur browser serta PWA.
 - `public`: service worker dan halaman offline.
 
-Favorit dan pengaturan pengingat disimpan lokal pada browser/perangkat ini. Mood serta feedback hanya di memori sesi. Reload mengakhiri sesi aktif; timer tidak dipulihkan. Nudge tidak menyediakan kolom jurnal, akun, sinkronisasi, atau analitik pribadi.
+Favorit, riwayat kegiatan selesai, dan pengaturan pengingat disimpan lokal pada browser/perangkat ini. Mood serta feedback hanya di memori sesi. Reload mengakhiri sesi aktif; timer tidak dipulihkan. Nudge tidak menyediakan kolom jurnal, akun, sinkronisasi, atau analitik pribadi.
 
 Pengingat default nonaktif, meminta izin hanya setelah opt-in, dan membutuhkan aplikasi terbuka/berjalan. Jadwal terlewat tidak dikirim susulan. PWA membuka pemilihan `/app`, tanpa memulai timer. Pembukaan penuh saat offline belum didukung.
 
