@@ -1,3 +1,4 @@
+import { skipOptionalEnergy } from "./helpers/selection";
 import { expect, test, type Page } from "@playwright/test";
 
 async function startMoving(page: Page) {
@@ -5,6 +6,7 @@ async function startMoving(page: Page) {
   await page.getByRole("button", { name: "Lewati", exact: true }).click();
   await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
   await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "2 menit", exact: true }).check();
   await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
 }
@@ -94,7 +96,9 @@ test("step direction, focus and repeated choices remain immediate", async ({
   await expect(page.locator(".selection-step")).toBeFocused();
   await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
   await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "2 menit", exact: true }).check();
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "10 menit", exact: true }).check();
   await page.getByRole("button", { name: "Kembali", exact: true }).click();
   await expect(page.locator(".selection-step")).toHaveAttribute(
@@ -102,7 +106,7 @@ test("step direction, focus and repeated choices remain immediate", async ({
     "backward",
   );
   await expect(page.locator(".selection-step")).toBeFocused();
-  await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+  await skipOptionalEnergy(page);
   await expect(
     page.getByRole("radio", { name: "10 menit", exact: true }),
   ).toBeChecked();

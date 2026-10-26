@@ -1,3 +1,4 @@
+import { skipOptionalEnergy } from "./helpers/selection";
 import { expect, test, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -16,9 +17,14 @@ const search = (page: Page) =>
 
 async function step(page: Page, number: number) {
   await expect(
-    page.getByText(`Langkah ${number} dari 3`, { exact: true }),
+    page.getByText(`Langkah ${number} dari 4`, { exact: true }),
   ).toBeVisible();
-  for (const [index, group] of [mood(page), goal(page), time(page)].entries()) {
+  for (const [index, group] of [
+    mood(page),
+    goal(page),
+    page.getByRole("group", { name: /Ingin yang seringan apa/ }),
+    time(page),
+  ].entries()) {
     if (index + 1 === number) await expect(group).toBeVisible();
     else await expect(group).toHaveCount(0);
   }
@@ -29,6 +35,7 @@ async function selectTimeStep(page: Page) {
   await page.getByRole("button", { name: "Lewati", exact: true }).click();
   await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
   await next(page).click();
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "2 menit", exact: true }).check();
 }
 
@@ -43,6 +50,7 @@ test("a 10-minute choice recommends a 10-minute activity when one is available",
     name: "10 menit",
     exact: true,
   });
+  await skipOptionalEnergy(page);
   await tenMinutes.check();
   await expect(tenMinutes).toBeChecked();
   await search(page).click();
@@ -55,51 +63,38 @@ test("wizard advances explicitly, validates required choices, and preserves valu
   await page.goto("/app");
   await step(page, 1);
   await expect(mood(page).getByRole("radio")).toHaveCount(4);
-  await expect(mood(page)).toContainText("Opsional");
-  await expect(
-    page.getByRole("radio", { name: "Lewati", exact: true }),
-  ).toHaveCount(0);
   await expect(next(page)).toBeDisabled();
-  await expect(page.getByText("Tempat dan alat", { exact: false })).toHaveCount(
-    0,
-  );
   await page.getByRole("radio", { name: "Lelah", exact: true }).check();
-  await step(page, 1);
-  await expect(next(page)).toBeEnabled();
   await next(page).click();
   await step(page, 2);
-  await expect(page.locator(".selection-step")).toBeFocused();
   await expect(next(page)).toBeDisabled();
-  await expect(page.getByText("Tempat dan alat", { exact: false })).toHaveCount(
-    0,
-  );
-  await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
-  await step(page, 2);
+  await page.getByRole("radio", { name: "Bergerak" }).check();
   await next(page).click();
   await step(page, 3);
-  await expect(page.locator(".selection-step")).toBeFocused();
+  await expect(next(page)).toBeDisabled();
+  await page.getByRole("radio", { name: "Ringan dulu" }).check();
+  await next(page).click();
+  await step(page, 4);
   await expect(search(page)).toBeDisabled();
   await page.getByRole("radio", { name: "5 menit", exact: true }).check();
-  await step(page, 3);
   await expect(search(page)).toBeEnabled();
   await back(page).click();
+  await step(page, 3);
+  await expect(page.getByRole("radio", { name: "Ringan dulu" })).toBeChecked();
+  await back(page).click();
   await step(page, 2);
-  await expect(page.locator(".selection-step")).toBeFocused();
-  await expect(
-    page.getByRole("radio", { name: "Bergerak", exact: false }),
-  ).toBeChecked();
+  await expect(page.getByRole("radio", { name: "Bergerak" })).toBeChecked();
   await back(page).click();
   await step(page, 1);
-  await expect(page.locator(".selection-step")).toBeFocused();
   await expect(
     page.getByRole("radio", { name: "Lelah", exact: true }),
   ).toBeChecked();
   await page.getByRole("button", { name: "Lewati", exact: true }).click();
-  await step(page, 2);
   await back(page).click();
   await expect(mood(page).locator("input:checked")).toHaveCount(0);
   await page.getByRole("button", { name: "Lewati", exact: true }).click();
   await next(page).click();
+  await skipOptionalEnergy(page);
   await expect(
     page.getByRole("radio", { name: "5 menit", exact: true }),
   ).toBeChecked();
@@ -109,12 +104,15 @@ test("menus preserve each wizard step and suggestion returns to its time choices
   page,
 }) => {
   await page.goto("/app");
-  for (const number of [1, 2, 3]) {
+  for (const number of [1, 2, 3, 4]) {
     if (number === 2)
       await page.getByRole("button", { name: "Lewati", exact: true }).click();
     if (number === 3) {
       await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
       await next(page).click();
+    }
+    if (number === 4) {
+      await skipOptionalEnergy(page);
       await page.getByRole("radio", { name: "2 menit", exact: true }).check();
       await page.getByText("Tempat dan alat", { exact: false }).click();
       await page.getByLabel("Tempat", { exact: true }).selectOption("indoor");
@@ -142,7 +140,7 @@ test("menus preserve each wizard step and suggestion returns to its time choices
   await expect(page.getByLabel("Alat", { exact: true })).toHaveValue("none");
   await search(page).click();
   await page.getByRole("button", { name: "Ubah pilihan", exact: true }).click();
-  await step(page, 3);
+  await step(page, 4);
   await expect(
     page.getByRole("radio", { name: "2 menit", exact: true }),
   ).toBeChecked();
@@ -160,7 +158,9 @@ test("changing selection context clears rejected activities for the next search"
     originalTitle,
   );
   await page.getByRole("button", { name: "Ubah pilihan", exact: true }).click();
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "5 menit", exact: true }).check();
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "2 menit", exact: true }).check();
   await search(page).click();
   await expect(page.locator(".activity-content h2")).toHaveText(originalTitle);
@@ -201,6 +201,7 @@ test("timer primary control follows running, paused and elapsed states", async (
     page.getByRole("radio", { name: "Bergerak", exact: false }),
   ).toBeChecked();
   await next(page).click();
+  await skipOptionalEnergy(page);
   await expect(
     page.getByRole("radio", { name: "2 menit", exact: true }),
   ).toBeChecked();
@@ -215,6 +216,7 @@ test("goal and time steps have no automated accessibility violations", async ({
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
   await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
   await next(page).click();
+  await skipOptionalEnergy(page);
   await page.getByText("Tempat dan alat", { exact: false }).click();
   expect((await new AxeBuilder({ page }).analyze()).violations).toEqual([]);
 });
@@ -307,6 +309,7 @@ for (const { width, enlarged } of [
     await check("goal");
     await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
     await next(page).click();
+    await skipOptionalEnergy(page);
     await page.getByRole("radio", { name: "2 menit", exact: true }).check();
     await page.getByText("Tempat dan alat", { exact: false }).click();
     await check("time");

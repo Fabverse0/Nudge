@@ -1,3 +1,4 @@
+import { skipOptionalEnergy } from "./helpers/selection";
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
@@ -48,6 +49,8 @@ for (const width of [320, 390, 768, 1440]) {
     await capture("goal");
     await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
     await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+    await capture("energy");
+    await skipOptionalEnergy(page);
     await page.getByRole("radio", { name: "2 menit", exact: true }).check();
     await capture("time");
     await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
@@ -72,6 +75,8 @@ for (const width of [320, 390, 768, 1440]) {
     await page.getByRole("button", { name: "Selesai", exact: true }).click();
     await capture("completion");
     await page.getByRole("button", { name: "Lewati", exact: true }).click();
+    await page.getByRole("button", { name: "Riwayat", exact: true }).click();
+    await capture("history");
     await page.getByRole("button", { name: "Pengingat", exact: true }).click();
     await capture("reminders");
     await expect(

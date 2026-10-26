@@ -1,9 +1,11 @@
+import { skipOptionalEnergy } from "./helpers/selection";
 import { expect, test, type Page } from "@playwright/test";
 
 async function verifyManualActivitySelection(page: Page) {
   await page.getByRole("button", { name: "Lewati", exact: true }).click();
   await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
   await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "2 menit", exact: true }).check();
   await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
   await expect(

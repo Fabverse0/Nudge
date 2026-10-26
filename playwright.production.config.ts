@@ -8,6 +8,8 @@ export default defineConfig({
     "landing-studio.spec.ts",
     "activity-flow.spec.ts",
     "app-polish.spec.ts",
+    "app-features.spec.ts",
+    "app-expressive.spec.ts",
     "reminder-polish.spec.ts",
     "small-steps-motion.spec.ts",
     "landing-reference.spec.ts",

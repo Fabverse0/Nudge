@@ -1,3 +1,4 @@
+import { skipOptionalEnergy } from "./helpers/selection";
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { activities } from "../../src/lib/activities/catalog";
@@ -25,6 +26,7 @@ async function choose(
       .check();
     await page.getByRole("button", { name: "Lanjut", exact: true }).click();
   }
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "2 menit" }).check();
   await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
 }
@@ -34,9 +36,12 @@ test("landing gives a real route to the app and never auto-starts", async ({
 }) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "Jeda dulu.",
+    "Small steps.",
   );
-  await page.locator(".hero-cta").click();
+  await page
+    .getByRole("link", { name: "Mulai kegiatan", exact: true })
+    .first()
+    .click();
   await expect(page).toHaveURL(/\/app$/);
   await expect(
     page.getByRole("heading", { name: "Mau mulai dari apa?" }),
@@ -109,6 +114,7 @@ test("alternatives explain differing filters, exhaust, and restart", async ({
     .getByRole("radio", { name: "Produktif ringan", exact: false })
     .check();
   await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "2 menit" }).check();
   await page.getByText("Tempat dan alat", { exact: false }).click();
   await page.getByLabel("Tempat", { exact: true }).selectOption("outdoor");
@@ -167,6 +173,7 @@ test("journaling keeps writing outside the application", async ({ page }) => {
     .getByRole("radio", { name: "Refleksi/jeda layar", exact: false })
     .check();
   await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "5 menit" }).check();
   await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
   await expect(
@@ -318,6 +325,7 @@ test("keyboard choices work and every remaining screen has accessible controls",
   await page
     .getByRole("button", { name: "Lanjut", exact: true })
     .press("Enter");
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "2 menit" }).press("Space");
   await page
     .getByRole("button", { name: "Cari kegiatan kecil" })

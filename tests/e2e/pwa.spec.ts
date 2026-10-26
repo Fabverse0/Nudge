@@ -1,3 +1,4 @@
+import { skipOptionalEnergy } from "./helpers/selection";
 import { expect, test } from "@playwright/test";
 
 test("production reminder is accepted by the native service worker notification API", async ({
@@ -70,6 +71,7 @@ test("production activity flow has no hydration or browser errors", async ({
     .getByRole("radio", { name: "Bergerak", exact: false })
     .check();
   await page.getByRole("button", { name: "Lanjut", exact: true }).click();
+  await skipOptionalEnergy(page);
   await page.getByRole("radio", { name: "2 menit" }).check();
   await page.getByRole("button", { name: "Cari kegiatan kecil" }).click();
   await page.getByRole("button", { name: "Mulai kegiatan" }).click();
