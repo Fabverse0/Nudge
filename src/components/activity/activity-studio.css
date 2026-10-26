@@ -74,7 +74,7 @@
 }
 .app-studio .history-confirm {
   padding: 20px;
-  border-radius: 20px;
+  border-radius: var(--control-radius);
   background: var(--sand);
   margin-block: 20px;
 }
@@ -86,7 +86,7 @@
 }
 
 @media (max-width: 600px) {
-  .app-studio .selection-progress ol {
+  .app-studio .selection-flow .selection-progress ol {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px 16px;
@@ -140,7 +140,7 @@
   border-top: 1px solid var(--subtle);
 }
 .app-studio .collection-picker h2 {
-  font-size: 1.375rem;
+  font-size: 1.5rem;
 }
 .app-studio .collection-picker > p {
   margin: 8px 0 20px;
@@ -167,7 +167,7 @@
   background: var(--sand);
 }
 .app-studio .collection-option.move {
-  background: #e7f0f8;
+  background: color-mix(in srgb, var(--blue) 20%, var(--surface));
 }
 .app-studio .collection-option:hover {
   border-color: var(--action);
