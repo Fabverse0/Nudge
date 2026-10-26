@@ -10,8 +10,14 @@ for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 960 });
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
+    page.on("console", (message) => {
+      if (message.type() === "error") errors.push(message.text());
+    });
     async function capture(name: string) {
-      await expect(page.locator(".app-main")).toBeVisible();
+      await expect(page.locator(".app-shell .app-main")).toBeVisible();
+      await expect(
+        page.getByText("Membuka Nudge...", { exact: true }),
+      ).toHaveCount(0);
       await expect
         .poll(() =>
           page
