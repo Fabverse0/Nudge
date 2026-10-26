@@ -49,6 +49,11 @@ import { updateMood } from "@/lib/session/session";
 import { pickQuickActivity } from "@/lib/recommendation/quick";
 import { findCollection, type Collection } from "@/lib/activities/collections";
 import { CollectionFlow, CollectionPicker } from "./collection-flow";
+import { RejectionReasons } from "./rejection-reasons";
+import {
+  recordRejectionReason,
+  type RejectionReason,
+} from "@/lib/recommendation/feedback";
 import { useLocalData } from "./use-local-data";
 import { ReminderPanel } from "./reminder-panel";
 import { InstallGuide } from "../install-guide";
@@ -86,6 +91,9 @@ export function ActivityApp({
   const [seenQuickIds, setSeenQuickIds] = useState<string[]>([]);
   const [collectionId, setCollectionId] = useState<string | null>(null);
   const selectedCollection = findCollection(collectionId);
+  const [pendingRejection, setPendingRejection] = useState<Activity | null>(
+    null,
+  );
   const [timer, setTimer] = useState<Timer | null>(null);
   const [now, setNow] = useState(0);
   const [formError, setFormError] = useState("");
@@ -177,6 +185,7 @@ export function ActivityApp({
     setScreen("suggestion");
   }
   function reject() {
+    setPendingRejection(activity ?? null);
     const next = {
       ...feedback,
       rejected: activity
@@ -189,6 +198,7 @@ export function ActivityApp({
     else suggest(next);
   }
   function openFavorite(item: Activity) {
+    setPendingRejection(null);
     setCollectionId(null);
     setEntryMode("saved");
     const favorite: Suggestion = {
@@ -204,6 +214,7 @@ export function ActivityApp({
     setScreen("suggestion");
   }
   function backToStart(message = "") {
+    setPendingRejection(null);
     setCollectionId(null);
     setEntryMode("normal");
     setSelectionStep("mood");
@@ -232,6 +243,36 @@ export function ActivityApp({
     setScreen("choose");
     heading.current?.focus({ preventScroll: true });
     window.scrollTo({ top: 0 });
+  }
+  function explainRejection(reason: RejectionReason) {
+    if (!pendingRejection) return;
+    const next = recordRejectionReason(feedback, pendingRejection, reason);
+    const currentContext = getContext();
+    setFeedback(next);
+    setPendingRejection(null);
+    setLiked(false);
+    if (!currentContext) return;
+    const context = {
+      ...currentContext,
+      energy: reason === "effort" ? ("light" as const) : currentContext.energy,
+    };
+    if (reason === "effort") setEnergy("light");
+    const stillFits =
+      activity &&
+      !activity.requiredTools.some((tool) =>
+        next.unavailableTools?.includes(tool),
+      ) &&
+      (reason !== "effort" || activity.energy === "light");
+    if (stillFits) setResult(recommend(context, next, [activity]));
+    else if (entryMode === "quick") quickSuggest(next);
+    else setResult(recommend(context, next));
+    local.setNotice(
+      reason === "tools"
+        ? "Alat kegiatan tadi dikecualikan dari saran selama sesi ini."
+        : reason === "effort"
+          ? "Saran berikutnya mengutamakan kegiatan yang ringan."
+          : "Kegiatan tadi tidak ditampilkan lagi selama sesi ini.",
+    );
   }
 
   return (
@@ -330,7 +371,10 @@ export function ActivityApp({
                     <div className="quick-entry">
                       <button
                         className="button primary"
-                        onClick={() => quickSuggest()}
+                        onClick={() => {
+                          setPendingRejection(null);
+                          quickSuggest();
+                        }}
                       >
                         <ShuffleIcon size={20} aria-hidden="true" />
                         Pilihkan saja
@@ -533,6 +577,7 @@ export function ActivityApp({
                       const time = Date.now();
                       setNow(time);
                       setTimer(startTimer(suggestion.activity.minutes, time));
+                      setPendingRejection(null);
                       setScreen("timer");
                     }}
                   >
@@ -551,7 +596,9 @@ export function ActivityApp({
                   <p>
                     {result?.kind === "exhausted"
                       ? "Semua kegiatan yang sesuai sudah kamu lewati. Ubah pilihan atau lihat kembali saran untuk mencoba lagi."
-                      : "Coba ubah waktu atau filter. Tujuan dan batas waktumu tetap kami ikuti."}
+                      : feedback.unavailableTools?.length
+                        ? "Belum ada kegiatan lain tanpa alat yang kamu lewati. Ubah waktu atau tujuan; alat tersebut tetap dikecualikan selama sesi ini."
+                        : "Coba ubah waktu atau filter. Tujuan dan batas waktumu tetap kami ikuti."}
                   </p>
                   <button
                     className="button primary"
@@ -572,6 +619,13 @@ export function ActivityApp({
                     </button>
                   )}
                 </div>
+              )}
+              {pendingRejection && (
+                <RejectionReasons
+                  activity={pendingRejection}
+                  onReason={explainRejection}
+                  onDismiss={() => setPendingRejection(null)}
+                />
               )}
             </>
           )}

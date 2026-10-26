@@ -23,6 +23,34 @@
   margin-top: 8px;
 }
 
+.app-studio .rejection-reasons {
+  margin-top: 28px;
+  padding: 20px 0;
+  border-top: 1px solid var(--subtle);
+}
+.app-studio .rejection-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  justify-content: space-between;
+}
+.app-studio .rejection-heading h2 {
+  font-size: 1.125rem;
+}
+.app-studio .rejection-reasons p {
+  margin: 8px 0 16px;
+  font-size: 0.875rem;
+}
+.app-studio .reason-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.app-studio .reason-options .button {
+  font-size: 0.875rem;
+  padding: 10px 16px;
+}
+
 .app-studio .collection-picker {
   margin-top: 40px;
   padding-top: 28px;
