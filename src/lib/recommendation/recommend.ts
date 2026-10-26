@@ -6,6 +6,7 @@ import {
   type Place,
   type Energy,
 } from "../activities/catalog";
+import { findCollection } from "../activities/collections";
 
 export type Context = {
   goal: Goal;
@@ -14,6 +15,7 @@ export type Context = {
   place: Place | "any";
   tools: "any" | "none";
   energy?: Energy | null;
+  collectionId?: string | null;
 };
 export type Feedback = { rejected: string[]; liked: string[] };
 export type Suggestion = {
@@ -31,8 +33,13 @@ export function recommend(
   feedback: Feedback,
   catalog = activities,
 ): Recommendation {
+  const collection = findCollection(context.collectionId);
+  if (context.collectionId && !collection) return { kind: "empty" };
   const eligible = catalog.filter(
-    (a) => a.goal === context.goal && a.minutes <= context.minutes,
+    (a) =>
+      a.goal === context.goal &&
+      a.minutes <= context.minutes &&
+      (!collection || collection.activityIds.includes(a.id)),
   );
   if (!eligible.length) return { kind: "empty" };
   const remaining = eligible.filter((a) => !feedback.rejected.includes(a.id));
