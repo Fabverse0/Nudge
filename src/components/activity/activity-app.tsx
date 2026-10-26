@@ -12,6 +12,7 @@ import {
   PlayIcon,
   SmileyIcon,
   XIcon,
+  ShuffleIcon,
 } from "@phosphor-icons/react";
 import { TurtleMascot } from "@/components/ui/turtle-mascot";
 import { StepTrail } from "@/components/ui/step-trail";
@@ -45,6 +46,7 @@ import {
   type Timer,
 } from "@/lib/timer/timer";
 import { updateMood } from "@/lib/session/session";
+import { pickQuickActivity } from "@/lib/recommendation/quick";
 import { useLocalData } from "./use-local-data";
 import { ReminderPanel } from "./reminder-panel";
 import { InstallGuide } from "../install-guide";
@@ -76,6 +78,10 @@ export function ActivityApp({
   const [result, setResult] = useState<Recommendation | null>(null);
   const [liked, setLiked] = useState(false);
   const [fromFavorite, setFromFavorite] = useState(false);
+  const [entryMode, setEntryMode] = useState<
+    "normal" | "quick" | "collection" | "saved"
+  >("normal");
+  const [seenQuickIds, setSeenQuickIds] = useState<string[]>([]);
   const [timer, setTimer] = useState<Timer | null>(null);
   const [now, setNow] = useState(0);
   const [formError, setFormError] = useState("");
@@ -139,6 +145,32 @@ export function ActivityApp({
     setLiked(false);
     setScreen("suggestion");
   }
+  function quickSuggest(nextFeedback = feedback) {
+    const item = pickQuickActivity(seenQuickIds, nextFeedback.rejected);
+    setEntryMode("quick");
+    setFromFavorite(false);
+    setLiked(false);
+    setFormError("");
+    if (item) {
+      const context: Context = {
+        goal: item.goal,
+        minutes: 2,
+        mood: null,
+        energy: "light",
+        place: "indoor",
+        tools: "none",
+      };
+      setSeenQuickIds((current) => [...new Set([...current, item.id])]);
+      setGoal(item.goal);
+      setMinutes(2);
+      setMood(null);
+      setEnergy("light");
+      setPlace("indoor");
+      setTools("none");
+      setResult(recommend(context, nextFeedback, [item]));
+    } else setResult({ kind: "exhausted" });
+    setScreen("suggestion");
+  }
   function reject() {
     const next = {
       ...feedback,
@@ -148,9 +180,11 @@ export function ActivityApp({
     };
     setFeedback(next);
     setTimer(null);
-    suggest(next);
+    if (entryMode === "quick") quickSuggest(next);
+    else suggest(next);
   }
   function openFavorite(item: Activity) {
+    setEntryMode("saved");
     const favorite: Suggestion = {
       activity: item,
       reasons: [
@@ -164,6 +198,7 @@ export function ActivityApp({
     setScreen("suggestion");
   }
   function backToStart(message = "") {
+    setEntryMode("normal");
     setSelectionStep("mood");
     setScreen("choose");
     setTimer(null);
@@ -264,6 +299,20 @@ export function ActivityApp({
                   <p className="muted">
                     Pilih yang terasa pas. Satu kegiatan kecil dulu.
                   </p>
+                  {selectionStep === "mood" && (
+                    <div className="quick-entry">
+                      <button
+                        className="button primary"
+                        onClick={() => quickSuggest()}
+                      >
+                        <ShuffleIcon size={20} aria-hidden="true" />
+                        Pilihkan saja
+                      </button>
+                      <p className="small">
+                        Kegiatan ringan, 2 menit, tanpa alat.
+                      </p>
+                    </div>
+                  )}
                 </div>
                 <div className="selection-companion">
                   <TurtleMascot
@@ -322,7 +371,12 @@ export function ActivityApp({
               <button
                 className="back-button"
                 onClick={() => {
-                  setSelectionStep("time");
+                  setSelectionStep(
+                    entryMode === "quick" || entryMode === "saved"
+                      ? "mood"
+                      : "time",
+                  );
+                  if (entryMode !== "collection") setEntryMode("normal");
                   setScreen("choose");
                 }}
               >
@@ -334,7 +388,7 @@ export function ActivityApp({
                   <div className="suggestion-heading">
                     <h1>Satu ini, mau coba?</h1>
                     <TurtleMascot
-                      pose="think"
+                      pose={entryMode === "quick" ? "wave" : "think"}
                       size={64}
                       className="turtle-companion"
                       eager

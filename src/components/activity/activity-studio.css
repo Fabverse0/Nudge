@@ -16,6 +16,13 @@
   color: var(--muted);
 }
 
+.app-studio .quick-entry {
+  margin-top: 20px;
+}
+.app-studio .quick-entry p {
+  margin-top: 8px;
+}
+
 .app-studio .app-nav {
   display: flex;
   justify-content: center;
