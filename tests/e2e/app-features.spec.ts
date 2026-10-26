@@ -173,6 +173,41 @@ test("too-heavy feedback prefers light activities without requiring another wiza
   await expect(button(page, "Mulai kegiatan")).toBeVisible();
 });
 
+test("C1 feedback plays once, stops offscreen and respects reduced motion while the timer stays still", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 500 });
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await page.goto("/app");
+  await button(page, "Pilihkan saja").click();
+  const moment = page.locator(".mascot-moment");
+  await expect(moment).toHaveAttribute("data-visible", "true");
+  await expect(moment).toHaveAttribute("data-motion-finished", "true");
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await expect(moment).toHaveAttribute("data-visible", "false");
+  expect(
+    await moment.evaluate(
+      (element) =>
+        element
+          .getAnimations({ subtree: true })
+          .filter((animation) => animation.playState === "running").length,
+    ),
+  ).toBe(0);
+  await button(page, "Mulai kegiatan").click();
+  expect(
+    await page
+      .locator(".timer-screen")
+      .evaluate((element) => element.getAnimations({ subtree: true }).length),
+  ).toBe(0);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await button(page, "Selesai").click();
+  expect(
+    await page
+      .locator(".completion-screen")
+      .evaluate((element) => element.getAnimations({ subtree: true }).length),
+  ).toBe(0);
+});
+
 test("history records explicit completion, survives reload, replays, disables and deletes", async ({
   page,
 }) => {
