@@ -57,6 +57,7 @@ import {
 } from "@/lib/recommendation/feedback";
 import { useLocalData } from "./use-local-data";
 import { HistoryPanel } from "./history-panel";
+import { MascotMoment } from "./mascot-moment";
 import { useHistory } from "./use-history";
 import { ReminderPanel } from "./reminder-panel";
 import { InstallGuide } from "../install-guide";
@@ -105,6 +106,7 @@ export function ActivityApp({
   );
   const [timer, setTimer] = useState<Timer | null>(null);
   const [now, setNow] = useState(0);
+  const [welcomePose, setWelcomePose] = useState<"wave" | "pause">("wave");
   const [formError, setFormError] = useState("");
   const heading = useRef<HTMLDivElement>(null);
   const previousScreen = useRef(screen);
@@ -230,7 +232,8 @@ export function ActivityApp({
     setLiked(false);
     setScreen("suggestion");
   }
-  function backToStart(message = "") {
+  function backToStart(message = "", pose: "wave" | "pause" = "wave") {
+    setWelcomePose(pose);
     activeRun.current = null;
     setPendingRejection(null);
     setCollectionId(null);
@@ -411,7 +414,7 @@ export function ActivityApp({
                 </div>
                 <div className="selection-companion">
                   <TurtleMascot
-                    pose="wave"
+                    pose={welcomePose}
                     size={144}
                     className="turtle-companion"
                     alt="Pendamping kura-kura"
@@ -498,12 +501,16 @@ export function ActivityApp({
                 <>
                   <div className="suggestion-heading">
                     <h1>Satu ini, mau coba?</h1>
-                    <TurtleMascot
-                      pose={entryMode === "quick" ? "wave" : "think"}
-                      size={64}
-                      className="turtle-companion"
-                      eager
-                    />
+                    {entryMode === "quick" ? (
+                      <MascotMoment kind="quick" />
+                    ) : (
+                      <TurtleMascot
+                        pose="think"
+                        size={64}
+                        className="turtle-companion"
+                        eager
+                      />
+                    )}
                   </div>
                   <article className="activity-card">
                     <div
@@ -731,6 +738,7 @@ export function ActivityApp({
                   onClick={() =>
                     backToStart(
                       "Boleh berhenti dulu. Kamu bisa mulai lagi nanti. Aktivitas belum ditandai selesai.",
+                      "pause",
                     )
                   }
                 >
@@ -750,10 +758,7 @@ export function ActivityApp({
           )}
           {screen === "complete" && (
             <section className="completion-screen">
-              <div className="completion-mark">
-                <StepTrail className="completion-trail" />
-                <TurtleMascot pose="content" size={144} eager />
-              </div>
+              <MascotMoment kind="complete" />
               <h1>Satu langkah sudah.</h1>
               <p className="muted">
                 Terima kasih sudah memberi waktu untuk dirimu.
