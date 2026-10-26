@@ -250,6 +250,7 @@ export function ActivityApp({
     );
   }
   function chooseCollection(collection: Collection) {
+    setPendingRejection(null);
     setCollectionId(collection.id);
     setEntryMode("collection");
     setGoal(collection.goal);
@@ -294,6 +295,17 @@ export function ActivityApp({
           ? "Saran berikutnya mengutamakan kegiatan yang ringan."
           : "Kegiatan tadi tidak ditampilkan lagi selama sesi ini.",
     );
+  }
+  function editChoices() {
+    setPendingRejection(null);
+    setSelectionStep(
+      entryMode === "quick" || entryMode === "saved" ? "mood" : "time",
+    );
+    if (entryMode !== "collection") {
+      setEntryMode("normal");
+      setCollectionId(null);
+    }
+    setScreen("choose");
   }
 
   return (
@@ -482,21 +494,12 @@ export function ActivityApp({
           )}
           {screen === "suggestion" && (
             <>
-              <button
-                className="back-button"
-                onClick={() => {
-                  setSelectionStep(
-                    entryMode === "quick" || entryMode === "saved"
-                      ? "mood"
-                      : "time",
-                  );
-                  if (entryMode !== "collection") setEntryMode("normal");
-                  setScreen("choose");
-                }}
-              >
-                <ArrowLeftIcon size={18} />
-                Ubah pilihan
-              </button>
+              {suggestion && (
+                <button className="back-button" onClick={editChoices}>
+                  <ArrowLeftIcon size={18} />
+                  Ubah pilihan
+                </button>
+              )}
               {suggestion ? (
                 <>
                   <div className="suggestion-heading">
@@ -632,19 +635,17 @@ export function ActivityApp({
                         ? "Belum ada kegiatan lain tanpa alat yang kamu lewati. Ubah waktu atau tujuan; alat tersebut tetap dikecualikan selama sesi ini."
                         : "Coba ubah waktu atau filter. Tujuan dan batas waktumu tetap kami ikuti."}
                   </p>
-                  <button
-                    className="button primary"
-                    onClick={() => setScreen("choose")}
-                  >
+                  <button className="button primary" onClick={editChoices}>
                     Ubah pilihan
                   </button>
                   {result?.kind === "exhausted" && (
                     <button
                       className="button secondary"
                       onClick={() => {
-                        const next = emptyFeedback();
+                        const next = { ...feedback, rejected: [] };
                         setFeedback(next);
-                        suggest(next);
+                        if (entryMode === "quick") quickSuggest(next);
+                        else suggest(next);
                       }}
                     >
                       Lihat saran lagi
