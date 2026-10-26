@@ -246,7 +246,7 @@ Header cukup memuat identitas Nudge dan akses masuk aplikasi yang diperlukan. Ti
 
 ### Aplikasi `/app`
 
-Mode permukaan: **Operate**. Gunakan satu pusat perhatian pada setiap langkah. Pengguna memilih alur bertahap Mood, Tujuan, lalu Waktu dengan tombol Lanjut eksplisit. Pemilihan tidak otomatis memindahkan langkah. Mood memiliki Lewati; tujuan dan waktu wajib. Tempat/alat berada pada langkah Waktu. Pilihan dan langkah bertahan ketika berpindah menu dalam sesi, sedangkan penyelesaian kembali ke langkah Mood. Rincian ada di [polish aplikasi](./docs/app-polish.md).
+Mode permukaan: **Operate**. Gunakan satu pusat perhatian pada setiap langkah. Alur biasa menjadi Mood, Tujuan, Energi, Waktu dengan tombol Lanjut eksplisit. Mood dan Energi memiliki Lewati; tujuan dan waktu wajib. Tempat/alat berada pada langkah Waktu. Pilihan dan langkah bertahan ketika berpindah menu dalam sesi, sedangkan penyelesaian kembali ke langkah Mood. Pembuka menawarkan Pilihkan saja dan tiga koleksi, tanpa menambah langkah wajib. Riwayat lokal otomatis memiliki menu serta kontrol hapus/nonaktif. Lihat [rencana fitur aplikasi](./docs/nudge-next-features.md), yang menggantikan aturan tiga langkah sebelumnya.
 
 | Layar/keadaan   | Fokus dan komposisi                                                                                                                                                                              |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |

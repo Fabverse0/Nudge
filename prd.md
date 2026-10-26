@@ -145,11 +145,22 @@ Landing page menjelaskan manfaat, tiga kelompok aktivitas, alur singkat, serta C
 
 **Kriteria penerimaan:** CTA menuju `/app`; URL `/app` dapat dibuka langsung. Manifest menetapkan `/app` sebagai jalur peluncuran. Pembukaan aplikasi tidak memulai timer, termasuk saat diluncurkan dari PWA.
 
+### FR-10 sampai FR-15: Penambahan aplikasi yang disetujui 26 Oktober 2026
+
+- FR-10: Pilihkan saja langsung memberi satu kegiatan ringan 2 menit, dalam ruangan, tanpa alat; timer tetap manual.
+- FR-11: Alur biasa Mood, Tujuan, Energi, Waktu. Mood dan Energi dapat dilewati. Energi adalah preferensi, bukan penilaian kesehatan.
+- FR-12: Tiga koleksi memakai alur tema, waktu, satu saran; pergantian tetap dalam koleksi.
+- FR-13: Kurang cocok langsung mengganti saran. Alasan opsional menyusul dan hanya memengaruhi sesi; alat yang dinyatakan tidak tersedia tidak disarankan kembali.
+- FR-14: Selesai mencatat kegiatan otomatis di perangkat ini, termasuk penyelesaian lebih awal. Waktu habis, Berhenti, dan Ganti tidak mencatat. Riwayat dapat dibuka ulang, dihapus, dan dinonaktifkan.
+- FR-15: C1 memberi respons kontekstual yang singkat; timer statis dan reduced motion dihormati.
+
+Kriteria penerimaan, koleksi awal, batas data, serta urutan pengerjaan ada di [rencana fitur aplikasi](./docs/nudge-next-features.md). Keputusan ini memperluas MVP sebelumnya tanpa akun, cloud, atau analitik pribadi.
+
 ## 7. Aturan rekomendasi dan alternatif
 
 1. Bentuk kandidat berdasarkan tujuan dan durasi yang tidak melebihi waktu tersedia.
 2. Terapkan filter tempat dan alat yang dipilih. Tidak memilih filter berarti tidak membatasi atribut tersebut.
-3. Urutkan kandidat berdasarkan kecocokan mood jika ada, lalu umpan balik dalam sesi. Aturan harus dapat dijelaskan dan diperiksa melalui pengujian.
+3. Utamakan durasi yang sama dengan pilihan pengguna, lalu energi opsional, kecocokan mood, dan umpan balik dalam sesi. Bila durasi tepat atau energi tidak tersedia, jelaskan alternatif yang tidak melampaui waktu pengguna. Aturan harus dapat dijelaskan dan diperiksa melalui pengujian.
 4. Tampilkan satu saran; pergantian saran memprioritaskan kandidat yang belum ditolak selama masih tersedia.
 5. Jika filter tempat atau alat mengosongkan kandidat, tawarkan alternatif dalam ruangan atau tanpa alat yang tetap memenuhi tujuan dan waktu. Jelaskan atribut mana yang berbeda dari filter pengguna sebelum pengguna memulainya.
 6. Jika tidak ada aktivitas yang memenuhi tujuan dan waktu, tampilkan keadaan kosong dan pilihan mengubah konteks. Jangan diam-diam mengubah tujuan atau melampaui waktu tersedia.
@@ -184,6 +195,7 @@ Metadata minimum aktivitas: identitas stabil, judul, tujuan, durasi, instruksi, 
 | Mood, tujuan, filter, dan umpan balik sesi | State alur penggunaan; tidak disimpan menjadi profil lintas sesi. |
 | Aktivitas dan timer aktif | State sesi; pemulihan setelah browser ditutup belum menjadi kebutuhan MVP. |
 | Favorit | Identitas aktivitas di `localStorage`, per browser/perangkat. |
+| Riwayat | Otomatis saat Selesai, maksimal 100 catatan lokal terbaru; dapat dihapus dan dimatikan. Tidak menyimpan mood, alasan penolakan, atau isi jurnal. |
 | Pengaturan pengingat | Pengaturan lokal; eksekusi jadwal bergantung pada aplikasi yang berjalan dan izin browser. |
 | Isi jurnal dan analitik pribadi | Tidak dikumpulkan. |
 

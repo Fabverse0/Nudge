@@ -278,7 +278,7 @@ Nama berikut adalah rancangan teknis, bukan terminologi UI final:
 | Favorit     | ID aktivitas stabil dan versi format                      | Deduplicasi; aktivitas yang hilang tidak merusak daftar.                    |
 | Pengingat   | Aktif, hari/waktu, status izin, penanda pengiriman        | Pengaturan lokal, pencegahan duplikasi, dan pembatalan jadwal lama.         |
 
-Penyelesaian tidak membutuhkan riwayat permanen pada MVP. Reload atau tutup browser tidak dijanjikan memulihkan timer. Jangan menyimpan mood, feedback, atau tulisan jurnal hanya untuk menyederhanakan pemulihan state.
+Keputusan 26 Oktober menambahkan riwayat otomatis lokal saat Selesai, maksimal 100 catatan, dengan kontrol hapus dan nonaktif. Reload atau tutup browser tidak dijanjikan memulihkan timer. Mood, feedback, dan tulisan jurnal tetap tidak dipersistenkan. Rincian serta status keenam fitur tambahan ada di [rencana fitur aplikasi](./docs/nudge-next-features.md).
 
 ## 10. Strategi pemeriksaan dan bukti
 

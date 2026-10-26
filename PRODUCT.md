@@ -16,7 +16,7 @@ Tanpa akun, sinkronisasi cloud, pengumpulan jurnal, atau analitik pribadi pada M
 
 ## Lingkup pekerjaan yang disetujui
 
-Revisi ini hanya mengubah landing `/`, komponennya, dan aset khusus landing. Jangan mengubah aplikasi `/app`, komponen bersama, stylesheet global, atau aset yang dipakai aplikasi. Pertahankan tautan masuk dan handoff durasi.
+Penambahan aplikasi 26 Oktober 2026 mencakup mulai cepat, energi opsional, koleksi bertema, alasan penolakan dalam sesi, riwayat lokal otomatis, dan respons C1. Alur biasa menjadi Mood, Tujuan, Energi, Waktu. Pertahankan landing serta handoff durasi. Rincian dan status ada di [rencana fitur aplikasi](./docs/nudge-next-features.md).
 
 ## Identitas yang dikonfirmasi
 
