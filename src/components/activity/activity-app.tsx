@@ -55,6 +55,7 @@ import {
   type RejectionReason,
 } from "@/lib/recommendation/feedback";
 import { useLocalData } from "./use-local-data";
+import { useHistory } from "./use-history";
 import { ReminderPanel } from "./reminder-panel";
 import { InstallGuide } from "../install-guide";
 import { SelectionFlow, type SelectionStep } from "./selection-flow";
@@ -102,6 +103,8 @@ export function ActivityApp({
   const rootRef = useRef<HTMLDivElement>(null);
   useSurfaceMotion(rootRef);
   const local = useLocalData();
+  const history = useHistory(local.setNotice);
+  const activeRun = useRef<string | null>(null);
   const suggestion = result?.kind === "suggestion" ? result.suggestion : null;
   const activity = suggestion?.activity;
   const previousActivity = useRef(activity?.id);
@@ -185,6 +188,7 @@ export function ActivityApp({
     setScreen("suggestion");
   }
   function reject() {
+    activeRun.current = null;
     setPendingRejection(activity ?? null);
     const next = {
       ...feedback,
@@ -214,6 +218,7 @@ export function ActivityApp({
     setScreen("suggestion");
   }
   function backToStart(message = "") {
+    activeRun.current = null;
     setPendingRejection(null);
     setCollectionId(null);
     setEntryMode("normal");
@@ -576,6 +581,7 @@ export function ActivityApp({
                     onClick={() => {
                       const time = Date.now();
                       setNow(time);
+                      activeRun.current = crypto.randomUUID();
                       setTimer(startTimer(suggestion.activity.minutes, time));
                       setPendingRejection(null);
                       setScreen("timer");
@@ -681,6 +687,10 @@ export function ActivityApp({
                 <button
                   className={`button ${timer.status === "elapsed" ? "primary" : "secondary"}`}
                   onClick={() => {
+                    if (activeRun.current) {
+                      history.record(activity, activeRun.current, Date.now());
+                      activeRun.current = null;
+                    }
                     setTimer(finishTimer(timer));
                     setScreen("complete");
                   }}
