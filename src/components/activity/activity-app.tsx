@@ -47,6 +47,8 @@ import {
 } from "@/lib/timer/timer";
 import { updateMood } from "@/lib/session/session";
 import { pickQuickActivity } from "@/lib/recommendation/quick";
+import { findCollection, type Collection } from "@/lib/activities/collections";
+import { CollectionFlow, CollectionPicker } from "./collection-flow";
 import { useLocalData } from "./use-local-data";
 import { ReminderPanel } from "./reminder-panel";
 import { InstallGuide } from "../install-guide";
@@ -82,6 +84,8 @@ export function ActivityApp({
     "normal" | "quick" | "collection" | "saved"
   >("normal");
   const [seenQuickIds, setSeenQuickIds] = useState<string[]>([]);
+  const [collectionId, setCollectionId] = useState<string | null>(null);
+  const selectedCollection = findCollection(collectionId);
   const [timer, setTimer] = useState<Timer | null>(null);
   const [now, setNow] = useState(0);
   const [formError, setFormError] = useState("");
@@ -130,7 +134,7 @@ export function ActivityApp({
 
   function getContext(): Context | null {
     return goal && minutes
-      ? { goal, minutes, mood, energy, place, tools }
+      ? { goal, minutes, mood, energy, place, tools, collectionId }
       : null;
   }
   function suggest(nextFeedback = feedback) {
@@ -146,6 +150,7 @@ export function ActivityApp({
     setScreen("suggestion");
   }
   function quickSuggest(nextFeedback = feedback) {
+    setCollectionId(null);
     const item = pickQuickActivity(seenQuickIds, nextFeedback.rejected);
     setEntryMode("quick");
     setFromFavorite(false);
@@ -184,6 +189,7 @@ export function ActivityApp({
     else suggest(next);
   }
   function openFavorite(item: Activity) {
+    setCollectionId(null);
     setEntryMode("saved");
     const favorite: Suggestion = {
       activity: item,
@@ -198,6 +204,7 @@ export function ActivityApp({
     setScreen("suggestion");
   }
   function backToStart(message = "") {
+    setCollectionId(null);
     setEntryMode("normal");
     setSelectionStep("mood");
     setScreen("choose");
@@ -209,6 +216,22 @@ export function ActivityApp({
     backToStart(
       "Kegiatan selesai. Kamu bisa memilih kegiatan berikutnya kapan saja.",
     );
+  }
+  function chooseCollection(collection: Collection) {
+    setCollectionId(collection.id);
+    setEntryMode("collection");
+    setGoal(collection.goal);
+    setMinutes(null);
+    setMood(null);
+    setEnergy(null);
+    setPlace("any");
+    setTools("any");
+    resetRejected();
+    setFormError("");
+    setSelectionStep("time");
+    setScreen("choose");
+    heading.current?.focus({ preventScroll: true });
+    window.scrollTo({ top: 0 });
   }
 
   return (
@@ -295,7 +318,11 @@ export function ActivityApp({
             <>
               <div className="app-intro selection-intro">
                 <div>
-                  <h1>Mau mulai dari apa?</h1>
+                  <h1>
+                    {selectedCollection
+                      ? selectedCollection.title
+                      : "Mau mulai dari apa?"}
+                  </h1>
                   <p className="muted">
                     Pilih yang terasa pas. Satu kegiatan kecil dulu.
                   </p>
@@ -325,45 +352,61 @@ export function ActivityApp({
                   <StepTrail />
                 </div>
               </div>
-              <SelectionFlow
-                step={selectionStep}
-                onStepChange={(next) => {
-                  setFormError("");
-                  setSelectionStep(next);
-                }}
-                mood={mood}
-                goal={goal}
-                energy={energy}
-                onEnergyChange={(value) => {
-                  setEnergy(value);
-                  resetRejected();
-                }}
-                minutes={minutes}
-                place={place}
-                tools={tools}
-                onMoodChange={(value) => {
-                  setMood(value);
-                  resetRejected();
-                }}
-                onGoalChange={(value) => {
-                  setGoal(value);
-                  resetRejected();
-                }}
-                onMinutesChange={(value) => {
-                  setMinutes(value);
-                  resetRejected();
-                }}
-                onPlaceChange={(value) => {
-                  setPlace(value);
-                  resetRejected();
-                }}
-                onToolsChange={(value) => {
-                  setTools(value);
-                  resetRejected();
-                }}
-                onSubmit={() => suggest()}
-                error={formError}
-              />
+              {selectedCollection ? (
+                <CollectionFlow
+                  collection={selectedCollection}
+                  minutes={minutes}
+                  onMinutes={(value) => {
+                    setMinutes(value);
+                    resetRejected();
+                  }}
+                  onSubmit={() => suggest()}
+                  onExit={() => backToStart()}
+                />
+              ) : (
+                <SelectionFlow
+                  step={selectionStep}
+                  onStepChange={(next) => {
+                    setFormError("");
+                    setSelectionStep(next);
+                  }}
+                  mood={mood}
+                  goal={goal}
+                  energy={energy}
+                  onEnergyChange={(value) => {
+                    setEnergy(value);
+                    resetRejected();
+                  }}
+                  minutes={minutes}
+                  place={place}
+                  tools={tools}
+                  onMoodChange={(value) => {
+                    setMood(value);
+                    resetRejected();
+                  }}
+                  onGoalChange={(value) => {
+                    setGoal(value);
+                    resetRejected();
+                  }}
+                  onMinutesChange={(value) => {
+                    setMinutes(value);
+                    resetRejected();
+                  }}
+                  onPlaceChange={(value) => {
+                    setPlace(value);
+                    resetRejected();
+                  }}
+                  onToolsChange={(value) => {
+                    setTools(value);
+                    resetRejected();
+                  }}
+                  onSubmit={() => suggest()}
+                  error={formError}
+                />
+              )}
+              {!selectedCollection && selectionStep === "mood" && (
+                <CollectionPicker onPick={chooseCollection} />
+              )}
             </>
           )}
           {screen === "suggestion" && (
