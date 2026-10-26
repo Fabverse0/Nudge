@@ -16,8 +16,8 @@ test("scene artwork decodes and decorative props never intercept input", async (
 }) => {
   await page.goto("/");
   for (const selector of [
-    ".scene-move .rig-shell",
-    ".scene-journal .rig-head",
+    ".scene-hero .hero-mascot-wave img",
+    ".scene-welcome img",
   ]) {
     const image = page.locator(selector);
     await image.scrollIntoViewIfNeeded();
@@ -29,10 +29,14 @@ test("scene artwork decodes and decorative props never intercept input", async (
       )
       .toBe(true);
   }
-  for (const trail of await page.locator(".scene-props").all()) {
-    await expect(trail).toHaveAttribute("aria-hidden", "true");
-    await expect(trail).toHaveCSS("pointer-events", "none");
-  }
+  await expect(page.locator(".hero-story-art")).toHaveAttribute(
+    "aria-hidden",
+    "true",
+  );
+  await expect(page.locator(".hero-journal-ink")).toHaveCSS(
+    "pointer-events",
+    "none",
+  );
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     expect(
@@ -48,7 +52,8 @@ test("landing loops only while visible and pauses scenes offscreen", async ({
 }) => {
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await page.goto("/");
-  const pace = page.locator(".scene-journal");
+  const pace = page.locator(".scene-hero");
+  await expect(pace).toHaveAttribute("data-art-ready", "true");
   await pace.scrollIntoViewIfNeeded();
   await expect(pace).toHaveAttribute("data-running", "true");
   const timings = await pace.evaluate((node) =>
@@ -62,15 +67,12 @@ test("landing loops only while visible and pauses scenes offscreen", async ({
   );
   expect(
     timings.some(
-      (timing) => timing.iterations === Infinity && timing.duration === 8000,
+      (timing) => timing.iterations === Infinity && timing.duration === 12000,
     ),
   ).toBe(true);
-  expect(
-    timings.every(
-      (timing) => timing.duration >= 6000 && timing.duration <= 10000,
-    ),
-  ).toBe(true);
-  await page.getByRole("heading", { level: 1 }).scrollIntoViewIfNeeded();
+  expect(timings.every((timing) => timing.duration === 12000)).toBe(true);
+  await page.locator(".scene-journal").scrollIntoViewIfNeeded();
+  await expect(pace).toHaveAttribute("data-running", "false");
   await expect
     .poll(() =>
       pace.evaluate(
