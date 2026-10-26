@@ -5,6 +5,7 @@ import {
   type Mood,
   type Place,
   type Energy,
+  type Tool,
 } from "../activities/catalog";
 import { findCollection } from "../activities/collections";
 
@@ -17,7 +18,12 @@ export type Context = {
   energy?: Energy | null;
   collectionId?: string | null;
 };
-export type Feedback = { rejected: string[]; liked: string[] };
+export type Feedback = {
+  rejected: string[];
+  liked: string[];
+  unavailableTools?: Tool[];
+  reasons?: Record<string, "tools" | "effort" | "seen">;
+};
 export type Suggestion = {
   activity: Activity;
   reasons: string[];
@@ -39,6 +45,9 @@ export function recommend(
     (a) =>
       a.goal === context.goal &&
       a.minutes <= context.minutes &&
+      !a.requiredTools.some((tool) =>
+        feedback.unavailableTools?.includes(tool),
+      ) &&
       (!collection || collection.activityIds.includes(a.id)),
   );
   if (!eligible.length) return { kind: "empty" };
