@@ -4,6 +4,7 @@ import {
   type Goal,
   type Mood,
   type Place,
+  type Energy,
 } from "../activities/catalog";
 
 export type Context = {
@@ -12,6 +13,7 @@ export type Context = {
   mood: Mood | null;
   place: Place | "any";
   tools: "any" | "none";
+  energy?: Energy | null;
 };
 export type Feedback = { rejected: string[]; liked: string[] };
 export type Suggestion = {
@@ -49,10 +51,14 @@ export function recommend(
     (activity) => activity.minutes === context.minutes,
   );
   const durationPool = exactDuration.length > 0 ? exactDuration : pool;
+  const energyPool = context.energy
+    ? durationPool.filter((activity) => activity.energy === context.energy)
+    : durationPool;
+  const rankedPool = energyPool.length ? energyPool : durationPool;
   const score = (a: Activity) =>
     (context.mood && a.moods.includes(context.mood) ? 2 : 0) +
     (feedback.liked.includes(a.id) ? 1 : 0);
-  const activity = [...durationPool].sort((a, b) => score(b) - score(a))[0];
+  const activity = [...rankedPool].sort((a, b) => score(b) - score(a))[0];
   const differences: string[] = [];
   if (context.place !== "any" && !activity.places.includes(context.place))
     differences.push(
@@ -65,6 +71,16 @@ export function recommend(
   const reasons = [
     `Sesuai tujuanmu dan cukup dalam waktu ${context.minutes} menit.`,
   ];
+  if (activity.minutes !== context.minutes)
+    reasons.push(
+      `Pilihan ${context.minutes} menit belum tersedia untuk konteks ini. Alternatif ini cukup ${activity.minutes} menit.`,
+    );
+  if (context.energy)
+    reasons.push(
+      activity.energy === context.energy
+        ? "Tingkat keterlibatannya mengikuti pilihan energimu."
+        : "Pilihan energi yang kamu minta belum tersedia untuk durasi ini. Periksa instruksinya sebelum mulai.",
+    );
   if (context.mood && activity.moods.includes(context.mood))
     reasons.push(
       `Dipilih sebagai kegiatan yang bisa dicoba saat merasa ${context.mood.toLowerCase()}. Mood bukan penilaian kesehatan.`,

@@ -10,6 +10,31 @@ const context: Context = {
   tools: "any",
 };
 describe("recommendations", () => {
+  it("prefers matching energy before mood and likes within the selected duration", () => {
+    const result = recommend(
+      { ...context, goal: "move", minutes: 5, energy: "light", mood: "Bosan" },
+      { rejected: [], liked: ["walk-5"] },
+    );
+    expect(result.kind).toBe("suggestion");
+    if (result.kind === "suggestion") {
+      expect(result.suggestion.activity.minutes).toBe(5);
+      expect(result.suggestion.activity.energy).toBe("light");
+    }
+  });
+  it("keeps exact duration ahead of energy and explains an unavailable preference", () => {
+    const ten = activities.find((a) => a.id === "walk-10")!;
+    const two = activities.find((a) => a.id === "stretch-2")!;
+    const result = recommend(
+      { ...context, goal: "move", minutes: 10, energy: "light" },
+      emptyFeedback(),
+      [two, ten],
+    );
+    expect(result.kind).toBe("suggestion");
+    if (result.kind === "suggestion") {
+      expect(result.suggestion.activity.id).toBe(ten.id);
+      expect(result.suggestion.reasons.join(" ")).toContain("belum tersedia");
+    }
+  });
   it("covers every goal and time without silently exceeding either", () => {
     for (const goal of ["reflect", "productive", "move"] as Goal[])
       for (const minutes of [2, 5, 10] as const) {

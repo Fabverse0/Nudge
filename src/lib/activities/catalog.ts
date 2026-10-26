@@ -17,6 +17,17 @@ export const goals = {
 } as const;
 
 export const moods = ["Lelah", "Bosan", "Gelisah", "Siap bergerak"] as const;
+export const energies = {
+  light: {
+    label: "Ringan dulu",
+    description: "Sedikit tenaga dan perhatian, tanpa banyak persiapan.",
+  },
+  engaged: {
+    label: "Siap agak aktif",
+    description: "Beri badan atau pikiran sedikit lebih banyak kegiatan.",
+  },
+} as const;
+export type Energy = keyof typeof energies;
 export type Mood = (typeof moods)[number];
 export type Goal = keyof typeof goals;
 export type Place = "indoor" | "outdoor";
@@ -26,6 +37,7 @@ export type Activity = {
   title: string;
   goal: Goal;
   minutes: 2 | 5 | 10;
+  energy: Energy;
   summary: string;
   steps: string[];
   places: Place[];
@@ -40,6 +52,7 @@ export const activities: Activity[] = [
     title: "Regangkan badan sebentar",
     goal: "move",
     minutes: 2,
+    energy: "light",
     summary: "Lepaskan layar. Beri ruang untuk bahu dan punggungmu.",
     steps: [
       "Berdiri atau tetap duduk dengan nyaman.",
@@ -56,6 +69,7 @@ export const activities: Activity[] = [
     title: "Jalan santai lima menit",
     goal: "move",
     minutes: 5,
+    energy: "engaged",
     summary: "Pindah suasana dengan langkah kecil di tempat yang aman.",
     steps: [
       "Pilih jalur aman di rumah atau dekat rumah.",
@@ -72,6 +86,7 @@ export const activities: Activity[] = [
     title: "Beri langkahmu sepuluh menit",
     goal: "move",
     minutes: 10,
+    energy: "engaged",
     summary: "Jalan santai atau bergerak ringan di rumah.",
     steps: [
       "Pilih tempat dan rute yang aman.",
@@ -88,6 +103,7 @@ export const activities: Activity[] = [
     title: "Kembalikan lima benda",
     goal: "productive",
     minutes: 2,
+    energy: "light",
     summary: "Mulai dari lima benda di dekatmu. Cukup itu dulu.",
     steps: [
       "Lihat sekeliling dan pilih lima benda yang tidak pada tempatnya.",
@@ -104,6 +120,7 @@ export const activities: Activity[] = [
     title: "Rapikan satu sudut meja",
     goal: "productive",
     minutes: 5,
+    energy: "engaged",
     summary: "Satu permukaan kecil, tanpa target beres semuanya.",
     steps: [
       "Pilih bagian kecil meja atau permukaan di dekatmu.",
@@ -120,6 +137,7 @@ export const activities: Activity[] = [
     title: "Siapkan kegiatan berikutnya",
     goal: "productive",
     minutes: 10,
+    energy: "engaged",
     summary: "Buat kegiatan setelah ini sedikit lebih mudah dimulai.",
     steps: [
       "Tentukan satu kegiatan yang ingin kamu lakukan setelah ini.",
@@ -136,6 +154,7 @@ export const activities: Activity[] = [
     title: "Minum dan tulis satu langkah",
     goal: "reflect",
     minutes: 2,
+    energy: "light",
     summary: "Jeda sebentar, lalu tulis hal kecil yang ingin dilakukan.",
     steps: [
       "Siapkan air minum dan media menulis di luar Nudge.",
@@ -152,6 +171,7 @@ export const activities: Activity[] = [
     title: "Journaling sebentar",
     goal: "reflect",
     minutes: 5,
+    energy: "engaged",
     summary: "Beri tempat untuk yang sedang memenuhi pikiranmu.",
     steps: [
       "Ambil kertas dan pena, atau media menulis pilihanmu di luar Nudge.",
@@ -168,6 +188,7 @@ export const activities: Activity[] = [
     title: "Tulis keadaanmu sekarang",
     goal: "reflect",
     minutes: 10,
+    energy: "engaged",
     summary: "Beberapa kalimat untuk menyapa diri sendiri.",
     steps: [
       "Siapkan media menulis di luar Nudge.",
@@ -184,6 +205,7 @@ export const activities: Activity[] = [
     title: "Istirahatkan pandangan",
     goal: "reflect",
     minutes: 2,
+    energy: "light",
     summary: "Jauhkan layar sebentar. Kamu tidak perlu alat apa pun.",
     steps: [
       "Letakkan perangkat dalam posisi aman.",
@@ -200,6 +222,7 @@ export const activities: Activity[] = [
     title: "Perhatikan sekitarmu",
     goal: "reflect",
     minutes: 5,
+    energy: "light",
     summary: "Lima menit mengamati, tanpa perlu mencatat.",
     steps: [
       "Letakkan layar dan cari posisi nyaman.",
@@ -216,6 +239,7 @@ export const activities: Activity[] = [
     title: "Jeda tanpa layar",
     goal: "reflect",
     minutes: 10,
+    energy: "light",
     summary: "Berdiam sebentar dan beri pikiran ruang.",
     steps: [
       "Cari tempat yang nyaman dan aman.",
@@ -232,6 +256,7 @@ export const activities: Activity[] = [
     title: "Gerakkan tangan dan bahu",
     goal: "move",
     minutes: 2,
+    energy: "light",
     summary: "Gerakan kecil yang bisa dilakukan sambil duduk.",
     steps: [
       "Duduk atau berdiri dengan nyaman.",
@@ -248,6 +273,7 @@ export const activities: Activity[] = [
     title: "Tentukan langkah pertama",
     goal: "productive",
     minutes: 2,
+    energy: "light",
     summary: "Pilih satu urusan dan buat langkah pertamanya terasa kecil.",
     steps: [
       "Pilih satu hal yang ingin kamu kerjakan.",
@@ -264,6 +290,7 @@ export const activities: Activity[] = [
     title: "Lipat satu pakaian",
     goal: "productive",
     minutes: 2,
+    energy: "light",
     summary: "Satu pakaian bersih yang belum sempat dilipat.",
     steps: [
       "Ambil satu pakaian bersih di dekatmu.",
@@ -280,6 +307,7 @@ export const activities: Activity[] = [
     title: "Cek barang bawaanmu",
     goal: "productive",
     minutes: 2,
+    energy: "light",
     summary:
       "Cari barang kecil yang sering membuatmu bolak-balik sebelum pergi.",
     steps: [
@@ -297,6 +325,7 @@ export const activities: Activity[] = [
     title: "Kumpulkan benda sejenis",
     goal: "productive",
     minutes: 2,
+    energy: "light",
     summary: "Satukan benda kecil yang tercecer, seperti pena atau penjepit.",
     steps: [
       "Pilih satu jenis benda kecil di dekatmu.",
@@ -313,6 +342,7 @@ export const activities: Activity[] = [
     title: "Urutkan tiga urusan kecil",
     goal: "productive",
     minutes: 2,
+    energy: "engaged",
     summary:
       "Tentukan mana yang ingin didahulukan, tanpa menyusun jadwal penuh.",
     steps: [
@@ -330,6 +360,7 @@ export const activities: Activity[] = [
     title: "Rapikan satu kantong",
     goal: "productive",
     minutes: 5,
+    energy: "light",
     summary: "Cukup satu kantong tas atau pakaian yang sedang kamu pakai.",
     steps: [
       "Pilih satu kantong dan keluarkan isinya di tempat yang aman.",
@@ -346,6 +377,7 @@ export const activities: Activity[] = [
     title: "Temukan pasangan barang",
     goal: "productive",
     minutes: 5,
+    energy: "light",
     summary: "Cocokkan kaus kaki, sepatu, atau benda lain yang berpasangan.",
     steps: [
       "Pilih satu kelompok barang berpasangan yang sudah ada di dekatmu.",
@@ -362,6 +394,7 @@ export const activities: Activity[] = [
     title: "Susun buku yang sedang dipakai",
     goal: "productive",
     minutes: 5,
+    energy: "engaged",
     summary: "Pisahkan bacaan yang masih kamu gunakan dari yang sudah selesai.",
     steps: [
       "Ambil beberapa buku atau bahan bacaan yang sedang berada di meja.",
@@ -378,6 +411,7 @@ export const activities: Activity[] = [
     title: "Tulis yang boleh menunggu",
     goal: "productive",
     minutes: 5,
+    energy: "light",
     summary:
       "Buat daftar pendek urusan yang tidak perlu kamu kerjakan sekarang.",
     steps: [
@@ -395,6 +429,7 @@ export const activities: Activity[] = [
     title: "Siapkan tempat untuk makan",
     goal: "productive",
     minutes: 5,
+    energy: "light",
     summary:
       "Beri ruang untuk makan nanti, tanpa perlu membereskan seluruh meja.",
     steps: [
@@ -412,6 +447,7 @@ export const activities: Activity[] = [
     title: "Rencanakan satu urusan minggu ini",
     goal: "productive",
     minutes: 10,
+    energy: "engaged",
     summary:
       "Ubah satu urusan yang masih mengambang menjadi rencana sederhana.",
     steps: [
@@ -429,6 +465,7 @@ export const activities: Activity[] = [
     title: "Cek satu jenis persediaan",
     goal: "productive",
     minutes: 10,
+    energy: "engaged",
     summary:
       "Lihat persediaan kecil, seperti alat tulis, agar tahu apa yang masih ada.",
     steps: [
@@ -446,6 +483,7 @@ export const activities: Activity[] = [
     title: "Pilih pakaian untuk nanti",
     goal: "productive",
     minutes: 10,
+    energy: "light",
     summary: "Siapkan satu set pakaian untuk kegiatan berikutnya.",
     steps: [
       "Ingat satu kegiatan yang akan kamu lakukan nanti atau besok.",
@@ -462,6 +500,7 @@ export const activities: Activity[] = [
     title: "Buat pengingat di kertas",
     goal: "productive",
     minutes: 10,
+    energy: "light",
     summary: "Satu catatan yang bisa kamu lihat tanpa membuka ponsel.",
     steps: [
       "Ambil kertas dan alat tulis di luar Nudge.",
@@ -478,6 +517,7 @@ export const activities: Activity[] = [
     title: "Bereskan satu bagian rak",
     goal: "productive",
     minutes: 10,
+    energy: "engaged",
     summary:
       "Pilih satu bagian yang mudah dijangkau, tanpa memindahkan barang berat.",
     steps: [
@@ -495,6 +535,7 @@ export const activities: Activity[] = [
     title: "Gerakkan pergelangan kaki",
     goal: "move",
     minutes: 2,
+    energy: "light",
     summary: "Gerakan kecil sambil duduk, dengan kaki tetap dekat lantai.",
     steps: [
       "Duduk dengan nyaman di tempat yang stabil dan letakkan kaki di lantai.",
@@ -511,6 +552,7 @@ export const activities: Activity[] = [
     title: "Melangkah di tempat",
     goal: "move",
     minutes: 2,
+    energy: "engaged",
     summary: "Beri kaki giliran bergerak tanpa perlu pergi jauh.",
     steps: [
       "Pilih tempat datar yang tidak terhalang barang. Kamu boleh tetap duduk di tempat yang stabil.",
@@ -527,6 +569,7 @@ export const activities: Activity[] = [
     title: "Tulis namamu di udara",
     goal: "move",
     minutes: 2,
+    energy: "engaged",
     summary: "Jadikan jari dan lenganmu pena imajiner.",
     steps: [
       "Duduk atau berdiri dengan nyaman dan pastikan ada ruang di depanmu.",
@@ -543,6 +586,7 @@ export const activities: Activity[] = [
     title: "Menari dengan gerakan sendiri",
     goal: "move",
     minutes: 5,
+    energy: "engaged",
     summary: "Tidak perlu hafal koreografi. Musik juga tidak wajib.",
     steps: [
       "Cari ruang datar yang cukup lapang dan letakkan ponsel.",
@@ -559,6 +603,7 @@ export const activities: Activity[] = [
     title: "Coba pola langkah sederhana",
     goal: "move",
     minutes: 5,
+    energy: "engaged",
     summary: "Susun langkah kecil ke samping dan kembali ke tempat semula.",
     steps: [
       "Pilih lantai datar yang tidak licin dan kosongkan area di sampingmu.",
@@ -575,6 +620,7 @@ export const activities: Activity[] = [
     title: "Jadi dirigen sebentar",
     goal: "move",
     minutes: 5,
+    energy: "engaged",
     summary: "Pimpin lagu imajiner dengan gerakan tanganmu.",
     steps: [
       "Duduk atau berdiri dengan nyaman, lalu bayangkan lagu yang kamu kenal.",
@@ -591,6 +637,7 @@ export const activities: Activity[] = [
     title: "Gerak ringan sambil duduk",
     goal: "move",
     minutes: 5,
+    energy: "light",
     summary:
       "Bergantian menggerakkan tangan, bahu, dan kaki dari tempat duduk.",
     steps: [
@@ -608,6 +655,7 @@ export const activities: Activity[] = [
     title: "Rangkai tiga gerakan pilihanmu",
     goal: "move",
     minutes: 10,
+    energy: "engaged",
     summary: "Buat rangkaian pendek dari gerakan ringan yang sudah kamu kenal.",
     steps: [
       "Pilih tiga gerakan yang nyaman, misalnya mengayun tangan, langkah di tempat, dan memutar bahu pelan.",
@@ -624,6 +672,7 @@ export const activities: Activity[] = [
     title: "Pantomim kegiatan sehari-hari",
     goal: "move",
     minutes: 10,
+    energy: "engaged",
     summary:
       "Peragakan kegiatan dengan benda imajiner, tanpa perlu alat sungguhan.",
     steps: [
@@ -641,6 +690,7 @@ export const activities: Activity[] = [
     title: "Tur santai dengan tiga perhentian",
     goal: "move",
     minutes: 10,
+    energy: "engaged",
     summary: "Beri jalan santaimu tujuan kecil yang dekat dan mudah dijangkau.",
     steps: [
       "Pilih tiga titik di jalur datar yang aman, seperti dekat pintu, jendela, atau tanaman.",
@@ -657,6 +707,7 @@ export const activities: Activity[] = [
     title: "Dengarkan suara di dekatmu",
     goal: "reflect",
     minutes: 2,
+    energy: "light",
     summary: "Ambil jeda dari gambar di layar dan dengarkan sekitar.",
     steps: [
       "Letakkan ponsel dan pilih posisi yang nyaman.",
@@ -673,6 +724,7 @@ export const activities: Activity[] = [
     title: "Cari satu warna di sekitarmu",
     goal: "reflect",
     minutes: 2,
+    energy: "light",
     summary: "Lihat tempat yang sama dengan satu warna sebagai petunjuk.",
     steps: [
       "Jauhkan pandangan dari layar dan pilih satu warna yang kamu sukai.",
@@ -689,6 +741,7 @@ export const activities: Activity[] = [
     title: "Ingat satu hal yang sudah cukup",
     goal: "reflect",
     minutes: 2,
+    energy: "light",
     summary: "Tidak semua hal perlu ditambah atau diperbaiki sekarang.",
     steps: [
       "Letakkan layar dan berhenti sebentar di posisi yang nyaman.",
@@ -705,6 +758,7 @@ export const activities: Activity[] = [
     title: "Jeda bersama air minum",
     goal: "reflect",
     minutes: 2,
+    energy: "light",
     summary: "Minum dengan santai tanpa menyelinginya dengan scrolling.",
     steps: [
       "Siapkan air minum dan letakkan ponsel di tempat yang aman.",
@@ -721,6 +775,7 @@ export const activities: Activity[] = [
     title: "Gambar satu benda tanpa menghapus",
     goal: "reflect",
     minutes: 5,
+    energy: "engaged",
     summary: "Buat sketsa benda dekatmu tanpa mengejar hasil yang mirip.",
     steps: [
       "Siapkan media menggambar di luar Nudge dan pilih satu benda sederhana di dekatmu.",
@@ -737,6 +792,7 @@ export const activities: Activity[] = [
     title: "Tulis satu pertanyaan untuk nanti",
     goal: "reflect",
     minutes: 5,
+    energy: "engaged",
     summary:
       "Catat rasa penasaranmu tanpa harus langsung mencari jawaban di layar.",
     steps: [
@@ -754,6 +810,7 @@ export const activities: Activity[] = [
     title: "Ingat satu momen kecil",
     goal: "reflect",
     minutes: 5,
+    energy: "light",
     summary: "Kunjungi lagi satu kejadian biasa dari harimu.",
     steps: [
       "Letakkan layar dan ingat satu kejadian sederhana hari ini atau kemarin.",
@@ -770,6 +827,7 @@ export const activities: Activity[] = [
     title: "Kenali tekstur di dekatmu",
     goal: "reflect",
     minutes: 5,
+    energy: "light",
     summary: "Perhatikan perbedaan permukaan benda yang biasa kamu lewati.",
     steps: [
       "Pilih beberapa benda bersih yang aman disentuh, seperti kain pakaian atau sampul buku. Hindari permukaan panas dan tajam.",
@@ -786,6 +844,7 @@ export const activities: Activity[] = [
     title: "Buat peta pikiran sederhana",
     goal: "reflect",
     minutes: 10,
+    energy: "engaged",
     summary: "Tuangkan satu topik ke beberapa cabang kecil di kertas.",
     steps: [
       "Di media menulis di luar Nudge, tulis satu topik di tengah halaman, seperti hobi atau hal yang ingin dipelajari.",
@@ -802,6 +861,7 @@ export const activities: Activity[] = [
     title: "Tulis cerita enam kalimat",
     goal: "reflect",
     minutes: 10,
+    energy: "engaged",
     summary: "Buat cerita pendek dari tiga benda yang terlihat di sekitarmu.",
     steps: [
       "Siapkan media menulis di luar Nudge, lalu pilih tiga benda di dekatmu sebagai bahan cerita.",
@@ -818,6 +878,7 @@ export const activities: Activity[] = [
     title: "Tulis surat untuk dirimu nanti",
     goal: "reflect",
     minutes: 10,
+    energy: "engaged",
     summary: "Beberapa kalimat untuk dirimu di waktu yang akan datang.",
     steps: [
       "Ambil media menulis di luar Nudge dan pilih kapan surat ini ingin kamu baca lagi.",
@@ -834,6 +895,7 @@ export const activities: Activity[] = [
     title: "Temukan cerita dari satu benda",
     goal: "reflect",
     minutes: 10,
+    energy: "light",
     summary:
       "Pilih benda dekatmu dan ingat bagaimana benda itu menjadi bagian harimu.",
     steps: [
