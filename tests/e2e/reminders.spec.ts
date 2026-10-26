@@ -1,6 +1,9 @@
 import { skipOptionalEnergy } from "./helpers/selection";
 import { expect, test, type Page } from "@playwright/test";
 
+// These scheduler probes count the Notification constructor; pwa.spec.ts covers showNotification.
+test.use({ serviceWorkers: "block" });
+
 async function verifyManualActivitySelection(page: Page) {
   await page.getByRole("button", { name: "Lewati", exact: true }).click();
   await page.getByRole("radio", { name: "Bergerak", exact: false }).check();
