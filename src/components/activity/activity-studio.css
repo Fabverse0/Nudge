@@ -19,6 +19,84 @@
 .app-studio .quick-entry {
   margin-top: 20px;
 }
+
+.app-studio .history-settings {
+  padding-block: 20px;
+  border-block: 1px solid var(--subtle);
+  margin-bottom: 24px;
+}
+.app-studio .history-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  min-height: 44px;
+}
+.app-studio .history-toggle input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--action);
+  flex-shrink: 0;
+}
+.app-studio .history-list {
+  list-style: none;
+  padding: 0;
+  margin-block: 16px 24px;
+}
+.app-studio .history-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 16px;
+  padding-block: 24px;
+  border-bottom: 1px solid var(--subtle);
+}
+.app-studio .history-row h2 {
+  font-size: 1.125rem;
+}
+.app-studio .history-description p {
+  margin-top: 8px;
+}
+.app-studio .history-description time {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+}
+.app-studio .history-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.app-studio .history-actions .button {
+  font-size: 0.875rem;
+  padding: 10px 16px;
+}
+.app-studio .history-confirm {
+  padding: 20px;
+  border-radius: 20px;
+  background: var(--sand);
+  margin-block: 20px;
+}
+.app-studio .history-confirm p {
+  margin-bottom: 16px;
+}
+.app-studio .history-panel > .field-hint {
+  margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+  .app-studio .history-actions {
+    grid-column: 2;
+  }
+  .app-studio .history-row {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .app-studio .app-nav .nav-button {
+    flex-basis: 40%;
+    padding-inline: 12px;
+  }
+}
 .app-studio .quick-entry p {
   margin-top: 8px;
 }

@@ -13,6 +13,7 @@ import {
   SmileyIcon,
   XIcon,
   ShuffleIcon,
+  ClockCounterClockwiseIcon,
 } from "@phosphor-icons/react";
 import { TurtleMascot } from "@/components/ui/turtle-mascot";
 import { StepTrail } from "@/components/ui/step-trail";
@@ -55,6 +56,7 @@ import {
   type RejectionReason,
 } from "@/lib/recommendation/feedback";
 import { useLocalData } from "./use-local-data";
+import { HistoryPanel } from "./history-panel";
 import { useHistory } from "./use-history";
 import { ReminderPanel } from "./reminder-panel";
 import { InstallGuide } from "../install-guide";
@@ -68,7 +70,13 @@ import {
 import "./activity-studio.css";
 
 type Screen =
-  "choose" | "suggestion" | "timer" | "complete" | "favorites" | "reminders";
+  | "choose"
+  | "suggestion"
+  | "timer"
+  | "complete"
+  | "history"
+  | "favorites"
+  | "reminders";
 export function ActivityApp({
   initialMinutes = null,
 }: {
@@ -85,7 +93,7 @@ export function ActivityApp({
   const [feedback, setFeedback] = useState<Feedback>(emptyFeedback);
   const [result, setResult] = useState<Recommendation | null>(null);
   const [liked, setLiked] = useState(false);
-  const [fromFavorite, setFromFavorite] = useState(false);
+  const [fromSavedActivity, setFromSavedActivity] = useState(false);
   const [entryMode, setEntryMode] = useState<
     "normal" | "quick" | "collection" | "saved"
   >("normal");
@@ -155,7 +163,7 @@ export function ActivityApp({
       return;
     }
     setFormError("");
-    setFromFavorite(false);
+    setFromSavedActivity(false);
     setResult(recommend(context, nextFeedback));
     setLiked(false);
     setScreen("suggestion");
@@ -164,7 +172,7 @@ export function ActivityApp({
     setCollectionId(null);
     const item = pickQuickActivity(seenQuickIds, nextFeedback.rejected);
     setEntryMode("quick");
-    setFromFavorite(false);
+    setFromSavedActivity(false);
     setLiked(false);
     setFormError("");
     if (item) {
@@ -201,19 +209,24 @@ export function ActivityApp({
     if (entryMode === "quick") quickSuggest(next);
     else suggest(next);
   }
-  function openFavorite(item: Activity) {
+  function openSavedActivity(
+    item: Activity,
+    source: "favorite" | "history" = "favorite",
+  ) {
     setPendingRejection(null);
     setCollectionId(null);
     setEntryMode("saved");
     const favorite: Suggestion = {
       activity: item,
       reasons: [
-        "Dibuka dari favoritmu. Periksa durasi, tempat, dan alat sebelum mulai; favorit tidak mengikuti filter saran saat ini.",
+        source === "history"
+          ? "Dibuka dari riwayatmu. Periksa durasi, tempat, dan alat sebelum mulai; riwayat tidak mengikuti filter saran saat ini."
+          : "Dibuka dari favoritmu. Periksa durasi, tempat, dan alat sebelum mulai; favorit tidak mengikuti filter saran saat ini.",
       ],
       differences: [],
     };
     setResult({ kind: "suggestion", suggestion: favorite });
-    setFromFavorite(true);
+    setFromSavedActivity(true);
     setLiked(false);
     setScreen("suggestion");
   }
@@ -297,6 +310,11 @@ export function ActivityApp({
                 icon: <BookmarkSimpleIcon size={20} />,
               },
               {
+                id: "history",
+                label: "Riwayat",
+                icon: <ClockCounterClockwiseIcon size={20} />,
+              },
+              {
                 id: "reminders",
                 label: "Pengingat",
                 icon: <BellIcon size={20} />,
@@ -356,6 +374,7 @@ export function ActivityApp({
                   timer: "Timer kegiatan",
                   complete: "Mood setelah kegiatan",
                   favorites: "Favorit",
+                  history: "Riwayat kegiatan",
                   reminders: "Pengaturan pengingat",
                 }[screen]
           }
@@ -547,7 +566,7 @@ export function ActivityApp({
                           <p key={reason}>{reason}</p>
                         ))}
                       </div>
-                      {!fromFavorite && (
+                      {!fromSavedActivity && (
                         <div className="feedback-row">
                           <span className="small">Saran ini terasa pas?</span>
                           <button
@@ -720,7 +739,7 @@ export function ActivityApp({
                 <button
                   onClick={() => {
                     const context = getContext();
-                    if (context && !fromFavorite) reject();
+                    if (context && !fromSavedActivity) reject();
                     else backToStart();
                   }}
                 >
@@ -797,7 +816,7 @@ export function ActivityApp({
                         </div>
                         <div>
                           <h2>
-                            <button onClick={() => openFavorite(item)}>
+                            <button onClick={() => openSavedActivity(item)}>
                               {item.title}
                             </button>
                           </h2>
@@ -839,6 +858,16 @@ export function ActivityApp({
                 Menghapus data browser juga dapat menghapus favoritmu.
               </p>
             </section>
+          )}
+          {screen === "history" && (
+            <HistoryPanel
+              state={history.state}
+              loaded={history.loaded}
+              onEnabled={history.setEnabled}
+              onRemove={history.remove}
+              onClear={history.clear}
+              onOpen={(item) => openSavedActivity(item, "history")}
+            />
           )}
           {screen === "reminders" &&
             (local.loaded ? (
