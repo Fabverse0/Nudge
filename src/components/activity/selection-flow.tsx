@@ -7,23 +7,33 @@ import {
   CheckCircleIcon,
   ClockIcon,
   SlidersHorizontalIcon,
+  LeafIcon,
+  LightningIcon,
 } from "@phosphor-icons/react";
 import {
   goals,
+  energies,
   moods,
   placeLabels,
   type Goal,
   type Mood,
+  type Energy,
 } from "@/lib/activities/catalog";
 import type { Context } from "@/lib/recommendation/recommend";
 import { ActivityArtwork, MoodIcon } from "./activity-primitives";
 
-export type SelectionStep = "mood" | "goal" | "time";
-const steps: SelectionStep[] = ["mood", "goal", "time"];
-const labels = { mood: "Mood", goal: "Tujuan", time: "Waktu" };
+export type SelectionStep = "mood" | "goal" | "energy" | "time";
+const steps: SelectionStep[] = ["mood", "goal", "energy", "time"];
+const labels = {
+  mood: "Mood",
+  goal: "Tujuan",
+  energy: "Energi",
+  time: "Waktu",
+};
 const questions = {
   mood: "Lagi merasa bagaimana?",
   goal: "Ingin melakukan apa?",
+  energy: "Ingin yang seringan apa?",
   time: "Ada waktu berapa lama?",
 };
 
@@ -32,11 +42,13 @@ type SelectionFlowProps = {
   onStepChange: (step: SelectionStep) => void;
   mood: Mood | null;
   goal: Goal | null;
+  energy: Energy | null;
   minutes: 2 | 5 | 10 | null;
   place: Context["place"];
   tools: Context["tools"];
   onMoodChange: (value: Mood | null) => void;
   onGoalChange: (value: Goal) => void;
+  onEnergyChange: (value: Energy | null) => void;
   onMinutesChange: (value: 2 | 5 | 10) => void;
   onPlaceChange: (value: Context["place"]) => void;
   onToolsChange: (value: Context["tools"]) => void;
@@ -56,7 +68,8 @@ function SelectionCheck() {
 }
 
 export function SelectionFlow(props: SelectionFlowProps) {
-  const { step, mood, goal, minutes, place, tools, onStepChange } = props;
+  const { step, mood, goal, energy, minutes, place, tools, onStepChange } =
+    props;
   const currentIndex = steps.indexOf(step);
   const activeFilters = [
     place !== "any" ? placeLabels[place] : null,
@@ -81,11 +94,14 @@ export function SelectionFlow(props: SelectionFlowProps) {
       ? mood !== null
       : step === "goal"
         ? goal !== null
-        : minutes !== null && goal !== null;
+        : step === "energy"
+          ? energy !== null
+          : minutes !== null && goal !== null;
   function advance() {
     if (!canContinue) return;
     if (step === "mood") changeStep("goal");
-    else if (step === "goal") changeStep("time");
+    else if (step === "goal") changeStep("energy");
+    else if (step === "energy") changeStep("time");
     else props.onSubmit();
   }
   return (
@@ -98,7 +114,7 @@ export function SelectionFlow(props: SelectionFlowProps) {
     >
       <div className="selection-progress">
         <p className="selection-progress-label">
-          Langkah {currentIndex + 1} dari 3
+          Langkah {currentIndex + 1} dari {steps.length}
         </p>
         <ol aria-label="Langkah pemilihan">
           {steps.map((item, index) => (
@@ -139,7 +155,9 @@ export function SelectionFlow(props: SelectionFlowProps) {
         <fieldset>
           <legend className="selection-question">
             {questions[step]}
-            {step === "mood" && <span className="optional">Opsional</span>}
+            {(step === "mood" || step === "energy") && (
+              <span className="optional">Opsional</span>
+            )}
           </legend>
           {step === "mood" && (
             <>
@@ -191,6 +209,36 @@ export function SelectionFlow(props: SelectionFlowProps) {
                 </label>
               ))}
             </div>
+          )}
+          {step === "energy" && (
+            <>
+              <div className="energy-options goal-options">
+                {(Object.keys(energies) as Energy[]).map((value) => (
+                  <label className="choice goal-choice" key={value}>
+                    <input
+                      type="radio"
+                      name="energy"
+                      checked={energy === value}
+                      onChange={() => props.onEnergyChange(value)}
+                    />
+                    {value === "light" ? (
+                      <LeafIcon size={32} aria-hidden="true" />
+                    ) : (
+                      <LightningIcon size={32} aria-hidden="true" />
+                    )}
+                    <span>
+                      <strong>{energies[value].label}</strong>
+                      <small>{energies[value].description}</small>
+                    </span>
+                    <SelectionCheck />
+                  </label>
+                ))}
+              </div>
+              <p className="field-hint">
+                Tentang tenaga dan perhatian yang ingin kamu pakai. Boleh
+                dilewati.
+              </p>
+            </>
           )}
           {step === "time" && (
             <div className="duration-options">
@@ -269,19 +317,26 @@ export function SelectionFlow(props: SelectionFlowProps) {
             ? "Pilih mood untuk lanjut, atau lewati langkah ini."
             : step === "goal"
               ? "Pilih satu tujuan untuk lanjut."
-              : !goal
-                ? "Kembali untuk memilih tujuan terlebih dahulu."
-                : "Pilih waktu yang kamu punya untuk mencari kegiatan."}
+              : step === "energy"
+                ? "Pilih energi untuk lanjut, atau lewati langkah ini."
+                : !goal
+                  ? "Kembali untuk memilih tujuan terlebih dahulu."
+                  : "Pilih waktu yang kamu punya untuk mencari kegiatan."}
         </p>
       )}
       <div className="selection-actions">
-        {step === "mood" ? (
+        {step === "mood" || step === "energy" ? (
           <button
             type="button"
             className="button secondary"
             onClick={() => {
-              props.onMoodChange(null);
-              changeStep("goal");
+              if (step === "mood") {
+                props.onMoodChange(null);
+                changeStep("goal");
+              } else {
+                props.onEnergyChange(null);
+                changeStep("time");
+              }
             }}
           >
             Lewati
@@ -290,9 +345,18 @@ export function SelectionFlow(props: SelectionFlowProps) {
           <button
             type="button"
             className="button secondary"
-            onClick={() => changeStep(step === "time" ? "goal" : "mood")}
+            onClick={() => changeStep(steps[currentIndex - 1])}
           >
             <ArrowLeftIcon size={18} aria-hidden="true" />
+            Kembali
+          </button>
+        )}
+        {step === "energy" && (
+          <button
+            type="button"
+            className="text-button"
+            onClick={() => changeStep("goal")}
+          >
             Kembali
           </button>
         )}

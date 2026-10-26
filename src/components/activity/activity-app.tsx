@@ -24,6 +24,7 @@ import {
   type Activity,
   type Goal,
   type Mood,
+  type Energy,
 } from "@/lib/activities/catalog";
 import {
   emptyFeedback,
@@ -67,6 +68,7 @@ export function ActivityApp({
   const [selectionStep, setSelectionStep] = useState<SelectionStep>("mood");
   const [mood, setMood] = useState<Mood | null>(null);
   const [goal, setGoal] = useState<Goal | null>(null);
+  const [energy, setEnergy] = useState<Energy | null>(null);
   const [minutes, setMinutes] = useState<2 | 5 | 10 | null>(initialMinutes);
   const [place, setPlace] = useState<Context["place"]>("any");
   const [tools, setTools] = useState<Context["tools"]>("any");
@@ -121,7 +123,9 @@ export function ActivityApp({
   }, [screen, timer?.status]);
 
   function getContext(): Context | null {
-    return goal && minutes ? { goal, minutes, mood, place, tools } : null;
+    return goal && minutes
+      ? { goal, minutes, mood, energy, place, tools }
+      : null;
   }
   function suggest(nextFeedback = feedback) {
     const context = getContext();
@@ -280,6 +284,11 @@ export function ActivityApp({
                 }}
                 mood={mood}
                 goal={goal}
+                energy={energy}
+                onEnergyChange={(value) => {
+                  setEnergy(value);
+                  resetRejected();
+                }}
                 minutes={minutes}
                 place={place}
                 tools={tools}
