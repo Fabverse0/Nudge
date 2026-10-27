@@ -194,11 +194,13 @@ test("C1 feedback plays once, stops offscreen and respects reduced motion while 
     ),
   ).toBe(0);
   await button(page, "Mulai kegiatan").click();
-  expect(
-    await page
-      .locator(".timer-screen")
-      .evaluate((element) => element.getAnimations({ subtree: true }).length),
-  ).toBe(0);
+  await expect
+    .poll(() =>
+      page
+        .locator(".timer-screen")
+        .evaluate((element) => element.getAnimations({ subtree: true }).length),
+    )
+    .toBe(0);
   await page.emulateMedia({ reducedMotion: "reduce" });
   await button(page, "Selesai").click();
   expect(
