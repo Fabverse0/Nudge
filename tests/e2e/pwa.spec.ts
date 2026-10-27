@@ -57,7 +57,10 @@ test("production activity flow has no hydration or browser errors", async ({
     if (message.type() === "error") errors.push(message.text());
   });
   await page.goto("/");
-  await page.locator(".hero-cta").click();
+  await page
+    .locator(".alive-hero")
+    .getByRole("link", { name: "Mulai kegiatan", exact: true })
+    .click();
   await expect(
     page.getByRole("heading", { name: "Mau mulai dari apa?" }),
   ).toBeVisible();
@@ -203,8 +206,10 @@ test("offline navigation explains the real limitation", async ({
   await page.goto("/app");
   await page.evaluate(() => navigator.serviceWorker.ready);
   await page.reload();
+  await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
   await context.setOffline(true);
-  await page.goto("/app");
+  const offlineResponse = await page.goto("/app?offline-check=1");
+  expect(offlineResponse?.fromServiceWorker()).toBe(true);
   await expect(
     page.getByRole("heading", { name: "Koneksi sedang terputus" }),
   ).toBeVisible();
