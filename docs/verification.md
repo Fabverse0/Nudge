@@ -1,5 +1,9 @@
 # Pemeriksaan implementasi Nudge
 
+## Enam penambahan fitur aplikasi, 27 Oktober 2026
+
+Pilihkan saja, langkah Energi opsional, tiga koleksi, alasan Kurang cocok, riwayat lokal, dan respons C1 selesai diimplementasikan. Empat puluh tes unit lulus. Suite awal menghasilkan 107/118 lulus, lalu kesebelas kegagalan harness lulus pada pemeriksaan ulang. Pemeriksaan akhir fitur/tampilan/PWA menghasilkan 38/42 lulus, kemudian keempat kasus tersisa lulus setelah asumsi tes diperbaiki. Format, ESLint, dan TypeScript lulus; build produksi akhir dipakai untuk pemeriksaan browser. Cakupan dan laporan tiap putaran dijelaskan dalam [bukti fitur aplikasi](./nudge-next-features.md#bukti), termasuk batas emulasi, advisory detector, serta pemeriksaan Android/pembaca layar yang masih terpisah.
+
 Revisi jam landing 24 Oktober 2026: build produksi berhasil; suite landing 31 lulus/1 dilewati. Ketiga pilihan durasi diperiksa secara visual. Lingkup, fallback, kritik, dan hasil Taste ada di [cerita jam](./time-story.md).
 
 Revisi ponsel landing 24 Oktober 2026: suite penuh 31 lulus/1 dilewati, kemudian pemeriksaan terfokus versi lintasan final 5 lulus/1 dilewati. Build produksi berhasil. Sumber, ukuran, screenshot, pengecualian Taste, dan batas bukti ada di [cerita ponsel](./phone-story.md). Aplikasi tidak termasuk perubahan ini.

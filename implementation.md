@@ -1,5 +1,9 @@
 # Rencana Implementasi Nudge
 
+## Penambahan fitur aplikasi, selesai 27 Oktober 2026
+
+Enam penambahan yang disetujui sudah diimplementasikan dan diperiksa: Pilihkan saja, Energi opsional, koleksi tematik, alasan Kurang cocok, riwayat lokal, serta respons C1. Commit dibuat bertahap untuk perubahan kecil. Status penerimaan dan bukti aktual ada pada [fitur aplikasi](./docs/nudge-next-features.md#bukti). Penyelesaian lingkup ini tidak menutup pemeriksaan perangkat Android, pembaca layar, atau publikasi yang sebelumnya ditunda.
+
 ## Pembaruan landing, 23 Oktober 2026
 
 Pembaruan redesign hero 24 Oktober: preview v6 menyambung gerak ponsel ke pose jurnal dari aset C1 utuh, lalu menampilkan dua guratan kecil. Pengguna perlu meninjau cuplikan sebelum integrasi hero. Referensi, reproduksi, bukti, dan keterbatasan ada di [hasil pengembangan hero](./docs/hero-redesign.md). Hero aktif dan aplikasi belum diubah. Tidak ada instalasi atau push.

@@ -20,7 +20,7 @@ Disetujui pengguna 26 Oktober 2026. Implementasi bertahap, setiap perubahan keci
 - [x] Alasan penolakan dalam sesi dan panel opsional.
 - [x] Penyimpanan, pencatatan, dan layar riwayat lokal.
 - [x] Respons maskot dan penyesuaian responsif.
-- [ ] Unit, browser, lint, format, typecheck, build, audit visual dan aksesibilitas.
+- [x] Unit, browser, lint, format, typecheck, build, audit visual dan aksesibilitas otomatis untuk lingkup fitur ini.
 
 ## Pemeriksaan penerimaan
 
@@ -30,4 +30,17 @@ Periksa 320/390/768 px dan desktop, keyboard/fokus, teks besar, reduced motion, 
 
 ## Bukti
 
-Pemeriksaan awal: 40 tes unit lulus. Suite produksi awal memeriksa 118 skenario desktop/emulasi ponsel: 107 lulus, 11 perlu penyesuaian harness (placeholder loading Next, mock Notification yang harus terpisah dari service worker, serta selector aset landing lama). Seluruh 22 skenario fitur baru pada putaran itu lulus. Pemeriksaan ulang harness, gerak C1, serta CSS akhir masih berjalan; status akhir dicatat setelah hasil tersedia.
+Pemeriksaan akhir 27 Oktober 2026:
+
+- Unit: 40 tes dalam 12 file lulus. Cakupan meliputi energi, prioritas durasi, mulai cepat, koleksi, alasan penolakan, batas alat, validasi/batas/deduplikasi riwayat.
+- Suite produksi awal: 107 dari 118 skenario lulus. Sebelas kegagalan berasal dari asumsi harness tentang placeholder loading Next, mock Notification yang harus terpisah dari service worker, dan selector aset landing lama. Kesebelasnya lulus pada pemeriksaan ulang dengan `--last-failed --workers=1`.
+- Pemeriksaan akhir `app-features.spec.ts`, `app-expressive.spec.ts`, dan `pwa.spec.ts`: 38 dari 42 skenario desktop/emulasi ponsel lulus pada putaran pertama. Empat kasus tersisa lulus saat diperiksa ulang setelah tes menunggu transisi klik selesai, memakai tombol landing aktual, dan memastikan controller service worker serta URL baru untuk navigasi offline. Ini bukti beberapa putaran terfokus, bukan satu putaran penuh tanpa kegagalan.
+- Seluruh 24 kasus fitur baru, 10 kasus tampilan ekspresif, dan 8 kasus PWA akhirnya memiliki hasil lulus. Cakupan mencakup maju/mundur empat langkah, kedua Lewati, variasi mulai cepat, durasi 10 menit, alternatif koleksi, alasan setelah pergantian, persistensi/sinkronisasi riwayat, storage gagal, kegiatan yang hilang, dan penghapusan. Waktu habis/Berhenti/Ganti tidak mencatat penyelesaian.
+- Axe tidak menemukan pelanggaran pada permukaan baru yang diperiksa. Alur yang diperiksa tidak menghasilkan console/page error atau hydration error. Ukuran 320/390/768/1440 px diperiksa; suite regresi awal juga memeriksa pembesaran CSS 200%.
+- Respons C1 sekali selesai, offscreen, reduced motion, dan timer statis lulus di kedua proyek. Probe browser tambahan mensimulasikan dokumen tersembunyi: `data-motion-allowed=false`, nol animasi maskot berjalan, dan kembali aktif setelah visibility dipulihkan.
+- Format, TypeScript, dan ESLint lulus. File generator `next-env.d.ts` dikecualikan dari Prettier. Build produksi webpack dengan BUILD_ID `A-CPQoJ2wt4bRf73J2fXc` dibuat setelah CSS terakhir dan dipakai untuk pemeriksaan browser akhir.
+- Audit visual meninjau pembuka/koleksi, Energi, dan riwayat pada 390 px serta hasil desktop. Detector Impeccable mencatat 13 advisory token pada CSS aplikasi yang sudah ada (8 ukuran huruf, 5 radius), tanpa severity error/warning. Nilai baru mengikuti Design Read di DESIGN.md; hasil ini tidak diklaim sebagai nol advisory.
+
+Laporan JSON lokal: `.impeccable/review/next-features-production.json`, `next-features-rerun.json`, `next-features-final.json`, `next-features-final-rerun.json`, dan `next-features-detect.json`. Screenshot akhir: `features-home-390-desktop.png`, `app-expressive-energy-390-desktop.png`, serta `features-history-390-final.png` pada direktori yang sama. Artefak pemeriksaan lokal ini tidak disertakan dalam Git.
+
+Lingkup enam penambahan fitur selesai. Instalasi/peluncuran ikon dan notifikasi pada Android fisik, pembaca layar nyata, serta publikasi HTTPS tetap mengikuti pekerjaan MVP yang sebelumnya ditunda. Hasil browser di atas tidak menggantikan pemeriksaan tersebut.
