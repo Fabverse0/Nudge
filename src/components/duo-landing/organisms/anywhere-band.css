@@ -1,0 +1,227 @@
+.anywhere-band {
+  position: relative;
+  padding-top: clamp(56px, 8vw, 96px);
+  background: var(--dl-blue-sky);
+  scroll-margin-top: 80px;
+}
+
+.anywhere-band__inner {
+  display: grid;
+  justify-items: center;
+  gap: clamp(24px, 4vw, 40px);
+  text-align: center;
+}
+
+.anywhere-band__title {
+  margin: 0;
+  max-width: 14ch;
+  color: var(--dl-green-dark);
+  font-size: clamp(2rem, 1.2rem + 3.4vw, 3.5rem);
+  line-height: 1.05;
+  font-weight: 900;
+}
+
+.anywhere-band__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  transition-delay: 120ms;
+}
+
+.anywhere-band__scene {
+  margin-top: clamp(32px, 5vw, 56px);
+  transition-delay: 220ms;
+}
+
+/* Store-style badge: dark rounded slab with an icon and two lines */
+.anywhere-badge-wrap {
+  position: relative;
+}
+
+.anywhere-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 232px;
+  min-height: 64px;
+  padding: 10px 22px 10px 16px;
+  border: 0;
+  border-radius: var(--dl-radius);
+  background: var(--dl-ink-strong);
+  color: var(--dl-white);
+  box-shadow: 0 5px 0 #050d0d;
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 90ms ease,
+    box-shadow 90ms ease,
+    background-color 150ms ease;
+}
+.anywhere-badge:hover {
+  background: #22393a;
+}
+.anywhere-badge:hover .anywhere-badge__icon {
+  animation: dl-badge-wiggle 500ms var(--dl-bounce);
+}
+.anywhere-badge:active {
+  transform: translateY(5px);
+  box-shadow: 0 0 0 #050d0d;
+}
+.anywhere-badge:focus-visible {
+  outline: 3px solid var(--dl-blue-edge);
+  outline-offset: 4px;
+}
+
+.anywhere-badge__icon {
+  flex: none;
+  width: 34px;
+  height: 34px;
+}
+
+.anywhere-badge__text {
+  display: grid;
+  line-height: 1.15;
+}
+.anywhere-badge__small {
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0.85;
+}
+.anywhere-badge__big {
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Install popover */
+.anywhere-pop {
+  position: absolute;
+  z-index: 20;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  width: min(320px, calc(100vw - 32px));
+  padding: 20px;
+  border: 2px solid var(--dl-line);
+  border-radius: var(--dl-radius-lg);
+  background: var(--dl-white);
+  box-shadow: 0 6px 0 var(--dl-line-edge);
+  color: var(--dl-ink);
+  text-align: left;
+  translate: -50% 0;
+  animation: dl-pop-in 260ms var(--dl-bounce);
+}
+.anywhere-pop[hidden] {
+  display: none;
+}
+.anywhere-pop::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  margin-top: -8px;
+  border-right: 2px solid var(--dl-line);
+  border-bottom: 2px solid var(--dl-line);
+  background: var(--dl-white);
+  translate: -50% 0;
+  rotate: 45deg;
+}
+.anywhere-pop:focus-visible {
+  outline: 3px solid var(--dl-blue-edge);
+  outline-offset: 3px;
+}
+
+.anywhere-pop__title {
+  margin: 0 0 12px;
+  color: var(--dl-green-dark);
+  font-size: 1.1rem;
+  font-weight: 900;
+}
+
+.anywhere-pop__steps {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.anywhere-pop__steps li {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: 10px;
+  align-items: start;
+}
+.anywhere-pop__num {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--dl-green-tint);
+  color: var(--dl-green-edge);
+  font-weight: 900;
+}
+
+.anywhere-pop__close {
+  width: 100%;
+  min-height: 44px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--dl-green);
+  color: var(--dl-white);
+  box-shadow: 0 4px 0 var(--dl-green-edge);
+  font: inherit;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.anywhere-pop__close:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+.anywhere-pop__close:focus-visible {
+  outline: 3px solid var(--dl-blue-edge);
+  outline-offset: 3px;
+}
+
+@keyframes dl-badge-wiggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  30% {
+    transform: rotate(-14deg) scale(1.1);
+  }
+  60% {
+    transform: rotate(10deg) scale(1.1);
+  }
+}
+
+@keyframes dl-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 520px) {
+  .anywhere-badge {
+    width: min(100%, 300px);
+  }
+  .anywhere-badge-wrap {
+    width: min(100%, 300px);
+  }
+}
