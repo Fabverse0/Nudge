@@ -1,0 +1,129 @@
+.scene-night {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+
+.scene-night__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.scene-night__halo {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dl-night-breathe 6s ease-in-out infinite;
+}
+.scene-night__glow {
+  animation: dl-night-flicker 4s ease-in-out infinite;
+}
+
+.scene-night__star {
+  position: absolute;
+  height: auto;
+  animation: dl-night-twinkle 3.4s ease-in-out infinite;
+}
+
+.scene-night__turtle {
+  position: absolute;
+  left: 34%;
+  top: 22%;
+  width: 34%;
+  animation: dl-night-rock 5s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+.scene-night__turtle svg,
+.scene-night__sari svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.scene-night__z {
+  position: absolute;
+  right: 0;
+  top: 4%;
+  color: var(--dl-white);
+  font-weight: 900;
+  font-size: clamp(0.9rem, 0.6rem + 1vw, 1.4rem);
+  opacity: 0;
+  animation: dl-night-z 3.6s ease-out infinite;
+}
+.scene-night__z--2 {
+  animation-delay: -1.2s;
+  font-size: clamp(1.1rem, 0.7rem + 1.2vw, 1.7rem);
+}
+.scene-night__z--3 {
+  animation-delay: -2.4s;
+  font-size: clamp(0.8rem, 0.5rem + 0.8vw, 1.2rem);
+}
+
+.scene-night__sari {
+  position: absolute;
+  left: 56%;
+  bottom: 4%;
+  width: 28%;
+}
+
+@keyframes dl-night-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes dl-night-flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 0.8;
+  }
+  55% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes dl-night-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+  }
+  50% {
+    opacity: 0.35;
+    transform: translateY(-8px) scale(0.75) rotate(20deg);
+  }
+}
+
+@keyframes dl-night-rock {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes dl-night-z {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.6);
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(28px, -48px) scale(1.2);
+  }
+}
