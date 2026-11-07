@@ -1,0 +1,100 @@
+/* Splash hero: art on top for phones, side by side from 1024px. */
+.dlh {
+  position: relative;
+  padding: 24px 0 56px;
+  background: var(--dl-white);
+}
+
+.dlh-inner {
+  width: min(100% - 32px, var(--dl-max));
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.dlh-art {
+  width: min(100%, 360px);
+}
+
+.dlh-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+  animation: dlh-rise 700ms var(--dl-ease) 250ms both;
+}
+
+.dlh .dlh-title {
+  margin: 0;
+  color: var(--dl-ink-strong);
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.dlh-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  animation: dlh-rise 700ms var(--dl-ease) 420ms both;
+}
+
+.dlh-actions .dl-btn {
+  width: min(100%, 330px);
+}
+
+@media (min-width: 640px) {
+  .dlh-art {
+    width: min(100%, 420px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .dlh {
+    display: flex;
+    align-items: center;
+    min-height: min(calc(100vh - 70px), 720px);
+    min-height: min(calc(100svh - 70px), 720px);
+    padding: 32px 0;
+  }
+
+  .dlh-inner {
+    flex-direction: row;
+    justify-content: center;
+    gap: 56px;
+  }
+
+  .dlh-art {
+    flex: 0 0 480px;
+    width: 480px;
+  }
+
+  .dlh-copy {
+    flex: 1 1 auto;
+    gap: 40px;
+  }
+
+  .dlh .dlh-title {
+    font-size: 2rem;
+  }
+}
+
+@keyframes dlh-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
