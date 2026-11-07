@@ -1,0 +1,210 @@
+.scene-challenge {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 5 / 4;
+  margin-inline: auto;
+}
+
+.scene-challenge__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Countdown card */
+.scene-challenge__card {
+  position: absolute;
+  left: 50%;
+  top: 2%;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: 30%;
+  padding: 12px 10px 10px;
+  border: 2px solid var(--dl-line);
+  border-radius: var(--dl-radius-lg);
+  background: var(--dl-white);
+  box-shadow: 0 6px 0 var(--dl-line-edge);
+  translate: -50% 0;
+  container-type: inline-size;
+  animation: dl-challenge-float 3.6s ease-in-out infinite;
+}
+.scene-challenge__ring {
+  width: 100%;
+  height: auto;
+  transform: rotate(-90deg);
+}
+.scene-challenge__progress {
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: 0;
+  animation: dl-challenge-ring 6s linear infinite;
+}
+.scene-challenge__time {
+  position: absolute;
+  inset: 12px 10px auto;
+  display: grid;
+  place-content: center;
+  aspect-ratio: 1;
+  text-align: center;
+}
+.scene-challenge__digits {
+  color: var(--dl-ink-strong);
+  font-size: 21cqi;
+  font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  animation: dl-challenge-tick 1s steps(1) infinite;
+}
+.scene-challenge__unit {
+  color: var(--dl-muted);
+  font-size: max(0.6rem, 8cqi);
+  font-weight: 800;
+}
+.scene-challenge__tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--dl-green-tint);
+  color: var(--dl-green-edge);
+  font-size: max(0.55rem, 7.5cqi);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* High five burst between the two friends */
+.scene-challenge__burst {
+  position: absolute;
+  left: 44%;
+  bottom: 40%;
+  width: 12%;
+  height: auto;
+  transform-origin: center;
+  animation: dl-challenge-burst 2.4s var(--dl-bounce) infinite;
+}
+
+.scene-challenge__tono,
+.scene-challenge__turtle {
+  position: absolute;
+  bottom: 3%;
+}
+.scene-challenge__tono svg,
+.scene-challenge__turtle svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.scene-challenge__tono {
+  left: 18%;
+  width: 22%;
+  animation: dl-challenge-lean-right 2.4s var(--dl-ease) infinite;
+}
+.scene-challenge__turtle {
+  right: 14%;
+  width: 30%;
+  bottom: 2%;
+  animation: dl-challenge-lean-left 2.4s var(--dl-ease) infinite;
+}
+
+.scene-challenge__confetti {
+  position: absolute;
+  top: 30%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  opacity: 0;
+  animation: dl-challenge-confetti 3.2s ease-in infinite;
+}
+.scene-challenge__confetti--bar {
+  width: 6px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+@keyframes dl-challenge-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes dl-challenge-ring {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 100;
+  }
+}
+
+@keyframes dl-challenge-tick {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes dl-challenge-burst {
+  0%,
+  35% {
+    opacity: 0;
+    transform: scale(0.2) rotate(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15) rotate(20deg);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1) rotate(30deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.6) rotate(45deg);
+  }
+}
+
+@keyframes dl-challenge-lean-right {
+  0%,
+  30%,
+  100% {
+    transform: translateX(0);
+  }
+  45%,
+  60% {
+    transform: translateX(10%) rotate(4deg);
+  }
+}
+
+@keyframes dl-challenge-lean-left {
+  0%,
+  30%,
+  100% {
+    transform: translateX(0);
+  }
+  45%,
+  60% {
+    transform: translateX(-8%) rotate(-4deg);
+  }
+}
+
+@keyframes dl-challenge-confetti {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0);
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(160px) rotate(260deg);
+  }
+}

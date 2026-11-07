@@ -1,0 +1,77 @@
+.challenge-band {
+  padding-block: clamp(64px, 9vw, 112px);
+  background: var(--dl-white);
+  scroll-margin-top: 80px;
+}
+
+.challenge-band__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 72px);
+}
+
+.challenge-band__copy {
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+  transition-delay: 150ms;
+}
+.challenge-band__copy .dl-title,
+.challenge-band__copy .dl-lead {
+  margin: 0;
+}
+.challenge-band__copy .dl-lead strong {
+  color: var(--dl-green-dark);
+  font-weight: 900;
+}
+
+.challenge-band__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+.challenge-band__facts li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px 8px 8px;
+  border: 2px solid var(--dl-line);
+  border-radius: 999px;
+  box-shadow: 0 3px 0 var(--dl-line);
+  color: var(--dl-ink);
+  font-size: 0.9rem;
+  font-weight: 800;
+  transition: transform 220ms var(--dl-bounce);
+}
+.challenge-band__facts li:hover {
+  transform: translateY(-3px) rotate(-2deg);
+}
+.challenge-band__fact-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--dl-cream);
+}
+.challenge-band__fact-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 760px) {
+  .challenge-band__inner {
+    grid-template-columns: 1fr;
+  }
+  .challenge-band__copy {
+    justify-items: center;
+    text-align: center;
+  }
+  .challenge-band__facts {
+    justify-content: center;
+  }
+}
