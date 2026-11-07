@@ -101,8 +101,9 @@
 .scene-hills__walker--dewi {
   left: 56%;
 }
+/* Raka stays left of the footer's peeking turtle (right edge of the ground) */
 .scene-hills__walker--raka {
-  left: 75%;
+  left: 71%;
   animation: dl-hills-bob 3s ease-in-out infinite;
 }
 
@@ -162,15 +163,15 @@
 
 @media (max-width: 520px) {
   .scene-hills__walker--bima {
-    left: 6%;
+    left: 4%;
   }
   .scene-hills__walker--turtle {
-    left: 26%;
+    left: 20%;
   }
   .scene-hills__walker--dewi {
-    left: 54%;
+    left: 44%;
   }
   .scene-hills__walker--raka {
-    left: 76%;
+    left: 60%;
   }
 }

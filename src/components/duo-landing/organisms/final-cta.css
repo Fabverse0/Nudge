@@ -44,7 +44,9 @@
 }
 
 .final-cta .scene-hills {
+  display: block;
   margin-top: clamp(8px, 2vw, 24px);
+  margin-bottom: 0;
 }
 
 @keyframes dl-final-nudge {

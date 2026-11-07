@@ -1,18 +1,24 @@
+/* Flush under the hills: the ground band and the footer share one green. */
 .dl-footer {
   position: relative;
-  margin-top: 96px;
+  z-index: 2;
+  margin-top: -1px;
   padding: 72px 0 40px;
   background: var(--dl-green);
   color: var(--dl-white);
 }
 
-/* Turtle peeking over the top edge: only the top of the figure shows */
+/*
+ * Turtle peeking up from the footer's top edge over the hills' ground band.
+ * Ground and footer share one green, so the clip reads as the turtle rising
+ * out of the grass. The footer's z-index keeps it above the hills scene.
+ */
 .dl-footer__peek {
   position: absolute;
   bottom: 100%;
-  right: clamp(24px, 12vw, 180px);
+  right: clamp(24px, 10vw, 150px);
   width: 150px;
-  height: 92px;
+  height: 104px;
   overflow: hidden;
   pointer-events: none;
 }
@@ -141,12 +147,12 @@
     gap: 28px 16px;
   }
   .dl-footer__peek {
-    right: 24px;
-    width: 120px;
-    height: 74px;
+    right: 12px;
+    width: 88px;
+    height: 62px;
   }
   .dl-footer__turtle {
-    width: 120px;
+    width: 88px;
   }
 }
 
