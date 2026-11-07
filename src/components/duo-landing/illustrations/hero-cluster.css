@@ -24,10 +24,18 @@
   will-change: transform;
 }
 
-/* Layer 2: staggered bouncy pop-in */
+/*
+ * Layer 2: staggered bouncy pop-in. Max --pop (340ms) + 540ms keeps the
+ * whole cluster visible within ~900ms. The one-shot pop runs from first
+ * paint: it is exempt from the offscreen pause in tokens.css, which would
+ * otherwise hold it until hydration adds `is-playing`.
+ */
 .hc-pop {
   position: relative;
-  animation: hc-pop 700ms var(--dl-bounce) var(--pop) both;
+  animation: hc-pop 540ms var(--dl-bounce) var(--pop) both;
+}
+.dl .hc.hc .hc-pop {
+  animation-play-state: running !important;
 }
 
 /* Layer 3: own looping float with a slight tilt */
@@ -58,7 +66,7 @@
   pointer-events: none;
 }
 .hc-item--blob .hc-pop {
-  animation-duration: 900ms;
+  animation-duration: 640ms;
 }
 .hc-blob {
   aspect-ratio: 1;

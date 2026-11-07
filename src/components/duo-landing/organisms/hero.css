@@ -26,7 +26,7 @@
   width: 100%;
   max-width: 480px;
   text-align: center;
-  animation: dlh-rise 700ms var(--dl-ease) 250ms both;
+  animation: dlh-rise 560ms var(--dl-ease) 120ms both;
 }
 
 .dlh .dlh-title {
@@ -45,7 +45,7 @@
   align-items: center;
   gap: 16px;
   width: 100%;
-  animation: dlh-rise 700ms var(--dl-ease) 420ms both;
+  animation: dlh-rise 560ms var(--dl-ease) 240ms both;
 }
 
 .dlh-actions .dl-btn {
