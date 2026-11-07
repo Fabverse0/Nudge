@@ -1,0 +1,150 @@
+.scene-cloud {
+  display: block;
+  pointer-events: none;
+}
+
+.scene-anywhere {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Keeps the geometry of the 1000x300 strip; phones see the middle crop. */
+.scene-anywhere__frame {
+  position: relative;
+  width: max(100%, 640px);
+  aspect-ratio: 1000 / 300;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scene-anywhere__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.scene-anywhere__lit {
+  animation: dl-anywhere-window 5s ease-in-out infinite;
+}
+.scene-anywhere__lit:nth-of-type(2n) {
+  animation-delay: -2.2s;
+}
+
+.scene-anywhere__cloud {
+  position: absolute;
+  width: 11%;
+  left: -14%;
+  animation: dl-anywhere-drift 38s linear infinite;
+}
+.scene-anywhere__cloud--a {
+  top: 4%;
+}
+.scene-anywhere__cloud--b {
+  top: 18%;
+  width: 8%;
+  animation-duration: 52s;
+  animation-delay: -20s;
+}
+.scene-anywhere__cloud--c {
+  top: 8%;
+  width: 13%;
+  animation-duration: 64s;
+  animation-delay: -44s;
+}
+
+.scene-anywhere__actor {
+  position: absolute;
+  bottom: 12.7%;
+}
+.scene-anywhere__actor svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.scene-anywhere__actor--lina {
+  left: 25%;
+  width: 10%;
+  animation: dl-anywhere-stroll 9s ease-in-out infinite;
+}
+.scene-anywhere__actor--turtle {
+  left: 41%;
+  width: 13%;
+  bottom: 11.5%;
+  animation: dl-anywhere-stroll 9s ease-in-out infinite;
+  animation-delay: -0.6s;
+}
+.scene-anywhere__actor--tono {
+  left: 60.5%;
+  width: 10%;
+}
+
+.scene-anywhere__chip {
+  position: absolute;
+  top: -14%;
+  left: 50%;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--dl-white);
+  color: var(--dl-green-dark);
+  box-shadow: 0 3px 0 #b9d3e6;
+  font-size: clamp(0.6rem, 0.45rem + 0.5vw, 0.8rem);
+  font-weight: 900;
+  white-space: nowrap;
+  translate: -50% 0;
+  animation: dl-anywhere-chip 2.8s var(--dl-ease) infinite;
+}
+.scene-anywhere__chip svg {
+  width: 10px;
+  height: auto;
+  color: var(--dl-green);
+}
+.scene-anywhere__chip--b {
+  animation-delay: -1.4s;
+}
+
+@keyframes dl-anywhere-drift {
+  from {
+    left: -16%;
+  }
+  to {
+    left: 104%;
+  }
+}
+
+@keyframes dl-anywhere-stroll {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(28%);
+  }
+}
+
+@keyframes dl-anywhere-chip {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(3deg);
+  }
+}
+
+@keyframes dl-anywhere-window {
+  0%,
+  60%,
+  100% {
+    fill: #ffffff;
+  }
+  70%,
+  90% {
+    fill: #ffc94a;
+  }
+}
