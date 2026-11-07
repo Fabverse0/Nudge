@@ -1,0 +1,264 @@
+/* Row 3 art: "tetap termotivasi". Coordinates follow the 400x360 props viewBox. */
+.smv {
+  position: relative;
+  width: min(100%, 440px);
+  aspect-ratio: 400 / 360;
+  margin-inline: auto;
+}
+
+.smv-props {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.smv-turtle,
+.smv-human {
+  position: absolute;
+  transition: transform 400ms var(--dl-bounce);
+}
+.smv-turtle {
+  left: 3%;
+  bottom: 5%;
+  width: 48%;
+}
+.smv-human {
+  left: 58%;
+  bottom: 6%;
+  width: 29%;
+}
+.smv-turtle :where(svg),
+.smv-human :where(svg) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.smv:hover .smv-turtle {
+  transform: rotate(-4deg) translateY(-4px);
+}
+.smv:hover .smv-human {
+  transform: rotate(4deg);
+}
+
+/* Bell swings from its hanger; clapper counter-swings; waves blink */
+.smv-bell {
+  transform-box: view-box;
+  transform-origin: 105px 24px;
+  animation: smv-swing 2.4s var(--dl-ease) infinite;
+}
+.smv-clapper {
+  transform-box: view-box;
+  transform-origin: 105px 110px;
+  animation: smv-clap 2.4s var(--dl-ease) infinite;
+}
+.smv-waves path {
+  fill: none;
+  stroke: #ffc94a;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+.smv-waves {
+  animation: smv-wave 2.4s ease-out infinite;
+}
+.smv-waves--right {
+  animation-delay: 0.3s;
+}
+.smv:hover .smv-bell,
+.smv:hover .smv-clapper,
+.smv:hover .smv-waves {
+  animation-duration: 1.2s;
+}
+
+@keyframes smv-swing {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+  8% {
+    transform: rotate(16deg);
+  }
+  20% {
+    transform: rotate(-14deg);
+  }
+  32% {
+    transform: rotate(9deg);
+  }
+  44% {
+    transform: rotate(-5deg);
+  }
+  52% {
+    transform: rotate(2deg);
+  }
+}
+@keyframes smv-clap {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+  8% {
+    transform: rotate(-18deg);
+  }
+  20% {
+    transform: rotate(16deg);
+  }
+  32% {
+    transform: rotate(-10deg);
+  }
+  44% {
+    transform: rotate(6deg);
+  }
+}
+@keyframes smv-wave {
+  0%,
+  55%,
+  100% {
+    opacity: 0;
+  }
+  10%,
+  40% {
+    opacity: 1;
+  }
+}
+
+/* Heart pulse + expanding ring */
+.smv-heart {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: smv-pulse 1.6s var(--dl-bounce) infinite;
+}
+.smv-heart-ring circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: smv-ring 1.6s ease-out infinite;
+}
+@keyframes smv-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.18);
+  }
+  28% {
+    transform: scale(0.96);
+  }
+  42% {
+    transform: scale(1.08);
+  }
+  60% {
+    transform: scale(1);
+  }
+}
+@keyframes smv-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.7;
+  }
+  70%,
+  100% {
+    transform: scale(1.25);
+    opacity: 0;
+  }
+}
+
+/* Calendar: checks pop in one by one, then reset */
+.smv-calendar {
+  animation: smv-float 4s ease-in-out infinite;
+}
+.smv-check {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  animation: smv-check 6s var(--dl-bounce) infinite;
+  animation-delay: calc(var(--i, 0) * 0.45s);
+}
+@keyframes smv-check {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  6% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+  10%,
+  70% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  78%,
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+@keyframes smv-float {
+  0%,
+  100% {
+    transform: translate(256px, 30px) rotate(0deg);
+  }
+  50% {
+    transform: translate(256px, 22px) rotate(2deg);
+  }
+}
+
+/* Sparkles twinkle */
+.smv-sparkle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: smv-twinkle 2.8s ease-in-out infinite;
+}
+@keyframes smv-twinkle {
+  0%,
+  100% {
+    transform: scale(0.35) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+/* Shadow under the jumping human breathes with the hop */
+.smv-shadow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: smv-shadow 1.2s ease-in-out infinite;
+}
+@keyframes smv-shadow {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleX(0.7);
+    opacity: 0.6;
+  }
+}
+
+.smv-blob {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: smv-breathe 7s ease-in-out infinite;
+}
+@keyframes smv-breathe {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.03) rotate(-2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smv-check {
+    transform: none;
+  }
+}
