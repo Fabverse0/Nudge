@@ -1,0 +1,220 @@
+.dl-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--dl-white);
+  border-bottom: 2px solid var(--dl-line);
+}
+
+.dl-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: min(100% - 32px, 1120px);
+  height: 70px;
+  margin-inline: auto;
+}
+
+.dl-header__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 12px;
+  color: var(--dl-green);
+  text-decoration: none;
+}
+.dl-header__logo:focus-visible {
+  outline: 3px solid var(--dl-blue-edge);
+  outline-offset: 4px;
+}
+
+.dl-header__mark {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  transform-origin: 50% 80%;
+  transition: transform 300ms var(--dl-bounce);
+}
+.dl-header__logo:hover .dl-header__mark {
+  animation: dl-header-wiggle 600ms var(--dl-ease);
+}
+
+.dl-header__word {
+  font-size: clamp(1.75rem, 1.5rem + 1vw, 2rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.dl-header__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Site language pill */
+.dl-header__lang {
+  position: relative;
+}
+
+.dl-header__lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--dl-muted);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+.dl-header__lang-btn:hover,
+.dl-header__lang-btn[aria-expanded="true"] {
+  background: #f2f4f4;
+  color: var(--dl-ink);
+}
+.dl-header__lang-btn:focus-visible {
+  outline: 3px solid var(--dl-blue-edge);
+  outline-offset: 2px;
+}
+
+.dl-header__caret {
+  width: 12px;
+  height: 8px;
+  transition: transform 200ms var(--dl-ease);
+}
+.dl-header__lang-btn[aria-expanded="true"] .dl-header__caret {
+  transform: rotate(180deg);
+}
+
+.dl-header__menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 220px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  background: var(--dl-white);
+  border: 2px solid var(--dl-line);
+  border-radius: var(--dl-radius);
+  box-shadow: 0 8px 0 rgb(0 0 0 / 0.04);
+  transform-origin: top right;
+  animation: dl-header-pop 220ms var(--dl-bounce);
+}
+
+.dl-header__menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--dl-green-tint);
+  color: var(--dl-green-dark);
+  font: inherit;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+}
+.dl-header__menu-item:focus-visible {
+  outline: 3px solid var(--dl-blue-edge);
+  outline-offset: 2px;
+}
+
+.dl-header__flag {
+  width: 28px;
+  height: 20px;
+  flex: none;
+  border-radius: 5px;
+  background: linear-gradient(#e23b3b 0 50%, #ffffff 50% 100%);
+  box-shadow: inset 0 0 0 1.5px rgb(0 0 0 / 0.08);
+}
+
+.dl-header__check {
+  width: 16px;
+  height: 12px;
+  margin-left: auto;
+  color: var(--dl-green);
+}
+
+/* Scroll-revealed CTA */
+.dl-header__cta {
+  display: flex;
+  max-width: 0;
+  opacity: 0;
+  transform: translateY(-10px) scale(0.92);
+  pointer-events: none;
+  transition:
+    max-width 360ms var(--dl-ease),
+    opacity 240ms ease,
+    transform 360ms var(--dl-bounce);
+}
+.dl-header.is-scrolled .dl-header__cta {
+  max-width: 220px;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  /* leave room for the 3D edge */
+  padding-bottom: 4px;
+}
+.dl-header__cta .dl-btn {
+  min-height: 44px;
+  padding: 10px 20px;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .dl-header__lang-label {
+    display: none;
+  }
+  .dl-header.is-scrolled .dl-header__lang {
+    display: none;
+  }
+}
+
+@media (max-width: 360px) {
+  .dl-header__mark {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+@keyframes dl-header-wiggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-12deg) scale(1.06);
+  }
+  55% {
+    transform: rotate(9deg) scale(1.06);
+  }
+  80% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes dl-header-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
