@@ -1,0 +1,330 @@
+/* Scene: "gratis. seru. ringan." phone + timer ring + stretching human.
+ * One 4s beat per activity: tap MULAI, ring + bar fill, ring closes, confetti, swap card. */
+.sf {
+  --sf-beat: 4s;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 480 / 440;
+}
+
+.sf-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.sf-svg * {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.sf-text {
+  font-family: inherit;
+  font-weight: 900;
+}
+.sf-text--title {
+  fill: #182b2a;
+  font-size: 17px;
+}
+.sf-text--chip {
+  fill: #fff;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.sf-text--btn {
+  fill: #fff;
+  font-size: 17px;
+  letter-spacing: 0.1em;
+}
+
+.sf-human {
+  position: absolute;
+  left: 64%;
+  bottom: 3%;
+  width: 33%;
+}
+.sf-human > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- floating + hover ---- */
+.sf-phone-float {
+  animation: sf-float 3.6s ease-in-out infinite;
+}
+.sf-phone {
+  transition: transform 420ms var(--dl-bounce);
+}
+.sf:hover .sf-phone {
+  transform: rotate(-3deg) scale(1.02);
+}
+.sf-ring-float {
+  animation: sf-float 2.8s ease-in-out -1.2s infinite;
+}
+.sf:hover .sf-ring-float {
+  animation-name: sf-wiggle;
+  animation-duration: 0.6s;
+}
+
+@keyframes sf-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes sf-wiggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-8deg);
+  }
+  75% {
+    transform: rotate(8deg);
+  }
+}
+
+.sf-sparkle {
+  animation: sf-twinkle 2.6s ease-in-out infinite both;
+}
+@keyframes sf-twinkle {
+  0%,
+  100% {
+    transform: scale(0.4) rotate(0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+/* ---- the 4s beat ---- */
+.sf-btn {
+  animation: sf-press var(--sf-beat) var(--dl-ease) infinite;
+}
+@keyframes sf-press {
+  0%,
+  8%,
+  100% {
+    transform: translateY(0);
+  }
+  3% {
+    transform: translateY(6px);
+  }
+}
+
+.sf-tap {
+  opacity: 0;
+  animation: sf-tap var(--sf-beat) ease-out infinite;
+}
+@keyframes sf-tap {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  2% {
+    opacity: 0.75;
+  }
+  12%,
+  100% {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+
+.sf-progress {
+  transform-origin: left center;
+  animation: sf-bar var(--sf-beat) linear infinite;
+}
+@keyframes sf-bar {
+  0%,
+  6% {
+    transform: scaleX(0);
+  }
+  60%,
+  94% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(0);
+  }
+}
+
+.sf-ring {
+  stroke-dashoffset: 227;
+  animation: sf-ring var(--sf-beat) linear infinite;
+}
+@keyframes sf-ring {
+  0%,
+  6% {
+    stroke-dashoffset: 227;
+    opacity: 1;
+  }
+  60%,
+  92% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  98% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: 227;
+    opacity: 0;
+  }
+}
+
+.sf-svg .sf-hand {
+  transform-box: view-box;
+  transform-origin: 92px 132px;
+  animation: sf-hand var(--sf-beat) linear infinite;
+}
+@keyframes sf-hand {
+  0%,
+  6% {
+    transform: rotate(0);
+    opacity: 1;
+  }
+  58% {
+    transform: rotate(360deg);
+    opacity: 1;
+  }
+  62%,
+  96% {
+    transform: rotate(360deg) scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.sf-check {
+  transform: scale(0);
+  animation: sf-check var(--sf-beat) var(--dl-bounce) infinite;
+}
+@keyframes sf-check {
+  0%,
+  58% {
+    transform: scale(0);
+  }
+  68% {
+    transform: scale(1.3);
+  }
+  74%,
+  92% {
+    transform: scale(1);
+  }
+  98%,
+  100% {
+    transform: scale(0);
+  }
+}
+
+.sf-ring-pop {
+  animation: sf-pop var(--sf-beat) var(--dl-ease) infinite;
+}
+@keyframes sf-pop {
+  0%,
+  58%,
+  100% {
+    transform: scale(1);
+  }
+  64% {
+    transform: scale(1.14) rotate(-4deg);
+  }
+  72% {
+    transform: scale(1);
+  }
+}
+
+.sf-confetti {
+  opacity: 0;
+  animation: sf-confetti var(--sf-beat) ease-out infinite;
+}
+@keyframes sf-confetti {
+  0%,
+  58% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.3) rotate(0);
+  }
+  62% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+    transform: translate(var(--dx), var(--dy)) scale(1) rotate(var(--rot));
+  }
+  92%,
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), calc(var(--dy) + 18px)) scale(0.8)
+      rotate(var(--rot));
+  }
+}
+
+/* Card swaps every beat: 3 activities over 3 beats */
+.sf-act {
+  opacity: 0;
+  animation: sf-act calc(var(--sf-beat) * 3) var(--dl-ease) infinite both;
+}
+@keyframes sf-act {
+  0% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.92);
+  }
+  3% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  31% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  33.3%,
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.96);
+  }
+}
+
+.sf-dot {
+  opacity: 0;
+  animation: sf-dot calc(var(--sf-beat) * 3) linear infinite both;
+}
+@keyframes sf-dot {
+  0%,
+  33% {
+    opacity: 1;
+  }
+  33.4%,
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Reduced motion: show the first card, a full ring and the check, still */
+@media (prefers-reduced-motion: reduce) {
+  .sf-act--0,
+  .sf-dot--0 {
+    opacity: 1;
+  }
+  .sf-ring {
+    stroke-dashoffset: 0;
+  }
+  .sf-svg .sf-hand {
+    opacity: 0;
+  }
+  .sf-check {
+    transform: none;
+  }
+}
