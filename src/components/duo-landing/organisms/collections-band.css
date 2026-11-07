@@ -1,0 +1,215 @@
+.collections-band {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(64px, 9vw, 112px);
+  background: linear-gradient(
+    160deg,
+    var(--dl-purple-deep) 0%,
+    #1d2a52 55%,
+    var(--dl-night) 100%
+  );
+  color: var(--dl-white);
+  isolation: isolate;
+  scroll-margin-top: 80px;
+}
+
+.collections-band__sky {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.collections-band__dot {
+  position: absolute;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 6px rgb(255 255 255 / 0.8);
+  animation: dl-collections-twinkle 3s ease-in-out infinite;
+}
+
+.collections-band__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 72px);
+}
+
+.collections-band__copy {
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+}
+
+.collections-band__pill {
+  display: inline-flex;
+  padding: 6px 14px;
+  border: 2px solid rgb(255 255 255 / 0.18);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.08);
+}
+.collections-band__pill-text {
+  background: linear-gradient(
+    90deg,
+    var(--dl-sun),
+    var(--dl-pink),
+    var(--dl-purple),
+    var(--dl-blue),
+    var(--dl-green)
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  animation: dl-collections-sheen 6s linear infinite;
+}
+
+.collections-band__title {
+  margin: 0;
+  color: var(--dl-white);
+  font-size: clamp(2rem, 1.3rem + 2.8vw, 3.25rem);
+  line-height: 1.08;
+  text-transform: lowercase;
+}
+
+.collections-band__lead {
+  margin: 0;
+  max-width: 46ch;
+  color: rgb(255 255 255 / 0.78);
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.collections-band__list {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  margin: 4px 0 8px;
+  padding: 0;
+  list-style: none;
+}
+.collections-band__item {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 2px solid rgb(255 255 255 / 0.12);
+  border-radius: var(--dl-radius);
+  background: rgb(255 255 255 / 0.06);
+  transition:
+    transform 200ms var(--dl-bounce),
+    background-color 200ms ease,
+    border-color 200ms ease;
+}
+.collections-band__item:hover {
+  transform: translateX(6px) rotate(-0.6deg);
+  background: rgb(255 255 255 / 0.12);
+  border-color: rgb(255 255 255 / 0.28);
+}
+.collections-band__item:hover .collections-band__icon {
+  animation: dl-collections-hop 500ms var(--dl-bounce);
+}
+.collections-band__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.1);
+}
+.collections-band__icon svg {
+  width: 28px;
+  height: 28px;
+}
+.collections-band__item-text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.collections-band__item-text strong {
+  font-weight: 900;
+}
+.collections-band__item-text span {
+  color: rgb(255 255 255 / 0.65);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.collections-band__mins {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+.collections-band__item--sun .collections-band__mins {
+  background: rgb(255 201 74 / 0.18);
+  color: var(--dl-sun);
+}
+.collections-band__item--green .collections-band__mins {
+  background: rgb(69 178 157 / 0.22);
+  color: #7fdcc8;
+}
+.collections-band__item--purple .collections-band__mins {
+  background: rgb(169 139 219 / 0.22);
+  color: #cdb8f2;
+}
+
+.collections-band__art {
+  transition-delay: 150ms;
+}
+
+@keyframes dl-collections-twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes dl-collections-sheen {
+  to {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes dl-collections-hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-6px) rotate(-8deg);
+  }
+}
+
+/* Duolingo stacks the art above the copy on phones */
+@media (max-width: 760px) {
+  .collections-band__inner {
+    grid-template-columns: 1fr;
+  }
+  .collections-band__art {
+    order: -1;
+  }
+  .collections-band__art .scene-night {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 400px) {
+  .collections-band__item {
+    grid-template-columns: 40px 1fr;
+  }
+  .collections-band__mins {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
