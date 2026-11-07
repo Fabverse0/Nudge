@@ -1,0 +1,321 @@
+/* Scene: "didukung riset sederhana" clipboard checklist + chart, thinking turtle, writing human.
+ * One 7s cycle: rows tick one by one, bars grow, the idea bulb lights up, then it resets. */
+.ss {
+  --ss-cycle: 7s;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 480 / 440;
+}
+
+.ss-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.ss-svg * {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ss-label {
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 16px;
+  fill: #6f7f7d;
+  animation: ss-label var(--ss-cycle) linear infinite both;
+}
+
+.ss-turtle {
+  position: absolute;
+  left: -2%;
+  bottom: 2%;
+  width: 36%;
+}
+.ss-human {
+  position: absolute;
+  right: -1%;
+  bottom: 2%;
+  width: 29%;
+}
+.ss-turtle > svg,
+.ss-human > svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ---- float + hover ---- */
+.ss-board-float {
+  animation: ss-float 4.2s ease-in-out infinite;
+}
+.ss-board {
+  transition: transform 420ms var(--dl-bounce);
+}
+.ss:hover .ss-board {
+  transform: rotate(2.5deg) scale(1.02);
+}
+.ss-bulb-float {
+  animation: ss-float 3s ease-in-out -0.8s infinite;
+}
+.ss:hover .ss-bulb-float {
+  animation-name: ss-wiggle;
+  animation-duration: 0.6s;
+}
+
+@keyframes ss-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes ss-wiggle {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+.ss-sparkle {
+  animation: ss-twinkle 2.8s ease-in-out infinite both;
+}
+@keyframes ss-twinkle {
+  0%,
+  100% {
+    transform: scale(0.4) rotate(0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+.ss-thought {
+  animation: ss-thought 2.4s ease-in-out infinite both;
+}
+@keyframes ss-thought {
+  0%,
+  100% {
+    transform: scale(0.85);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* ---- checklist ---- */
+.ss-box {
+  transform: scale(0);
+  animation: ss-box var(--ss-cycle) var(--dl-bounce) infinite both;
+}
+@keyframes ss-box {
+  0%,
+  8% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  14% {
+    transform: scale(1.2);
+  }
+  18%,
+  78% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  86%,
+  100% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+}
+
+.ss-tick {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: ss-tick var(--ss-cycle) var(--dl-ease) infinite both;
+}
+@keyframes ss-tick {
+  0%,
+  12% {
+    stroke-dashoffset: 30;
+    opacity: 1;
+  }
+  20%,
+  78% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  86%,
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes ss-label {
+  0%,
+  12% {
+    fill: #6f7f7d;
+  }
+  18%,
+  78% {
+    fill: #182b2a;
+  }
+  86%,
+  100% {
+    fill: #6f7f7d;
+  }
+}
+
+/* ---- chart ---- */
+.ss-bar {
+  transform-origin: center bottom;
+  transform: scaleY(0);
+  animation: ss-bar var(--ss-cycle) var(--dl-bounce) infinite both;
+}
+@keyframes ss-bar {
+  0%,
+  40% {
+    transform: scaleY(0);
+  }
+  50% {
+    transform: scaleY(1.1);
+  }
+  55%,
+  82% {
+    transform: scaleY(1);
+  }
+  90%,
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+.ss-star {
+  transform: scale(0);
+  animation: ss-star var(--ss-cycle) var(--dl-bounce) infinite both;
+}
+@keyframes ss-star {
+  0%,
+  54% {
+    transform: scale(0) rotate(0);
+  }
+  62% {
+    transform: scale(1.3) rotate(90deg);
+  }
+  68%,
+  82% {
+    transform: scale(1) rotate(90deg);
+  }
+  90%,
+  100% {
+    transform: scale(0) rotate(180deg);
+  }
+}
+
+/* ---- idea bulb ---- */
+.ss-bulb {
+  fill: #fff6d9;
+  stroke: #f0dc9c;
+  stroke-width: 3;
+  animation: ss-bulb var(--ss-cycle) ease-in-out infinite both;
+}
+@keyframes ss-bulb {
+  0%,
+  36% {
+    fill: #fff6d9;
+  }
+  44%,
+  84% {
+    fill: #ffc94a;
+  }
+  92%,
+  100% {
+    fill: #fff6d9;
+  }
+}
+
+.ss-glow {
+  opacity: 0;
+  animation: ss-glow var(--ss-cycle) ease-in-out infinite both;
+}
+@keyframes ss-glow {
+  0%,
+  36% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  46% {
+    opacity: 0.45;
+    transform: scale(1.12);
+  }
+  60% {
+    opacity: 0.25;
+    transform: scale(0.95);
+  }
+  72% {
+    opacity: 0.4;
+    transform: scale(1.06);
+  }
+  88%,
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+.ss-rays {
+  opacity: 0;
+  transform-box: view-box;
+  transform-origin: 72px 160px;
+  animation: ss-rays var(--ss-cycle) var(--dl-bounce) infinite both;
+}
+@keyframes ss-rays {
+  0%,
+  38% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  46%,
+  82% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  90%,
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+/* Reduced motion: finished checklist, full chart, lit bulb */
+@media (prefers-reduced-motion: reduce) {
+  .ss-box,
+  .ss-bar,
+  .ss-star {
+    transform: none;
+  }
+  .ss-tick {
+    stroke-dashoffset: 0;
+  }
+  .ss-bulb {
+    fill: #ffc94a;
+  }
+  .ss-rays {
+    opacity: 1;
+    transform: none;
+  }
+  .ss-glow {
+    opacity: 0.3;
+  }
+}
