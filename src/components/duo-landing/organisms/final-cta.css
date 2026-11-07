@@ -1,0 +1,62 @@
+.final-cta {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(72px, 11vw, 140px);
+  background: linear-gradient(
+    180deg,
+    var(--dl-white) 0%,
+    var(--dl-white) 30%,
+    var(--dl-blue-sky) 100%
+  );
+}
+
+.final-cta__inner {
+  display: grid;
+  justify-items: center;
+  gap: clamp(28px, 4vw, 40px);
+  text-align: center;
+}
+
+.final-cta__title {
+  margin: 0;
+  max-width: 15ch;
+  color: var(--dl-green);
+  font-size: clamp(2.25rem, 1.2rem + 4.4vw, 4rem);
+  line-height: 1.04;
+  font-weight: 900;
+  text-transform: lowercase;
+}
+
+.final-cta__action {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  transition-delay: 140ms;
+}
+
+/* Gentle pulse invites the final tap without stealing focus styles */
+.final-cta__action .dl-btn {
+  animation: dl-final-nudge 2.8s var(--dl-ease) infinite;
+}
+.final-cta__action .dl-btn:hover,
+.final-cta__action .dl-btn:focus-visible {
+  animation: none;
+}
+
+.final-cta .scene-hills {
+  margin-top: clamp(8px, 2vw, 24px);
+}
+
+@keyframes dl-final-nudge {
+  0%,
+  70%,
+  100% {
+    scale: 1;
+  }
+  80% {
+    scale: 1.05;
+  }
+  90% {
+    scale: 0.98;
+  }
+}
