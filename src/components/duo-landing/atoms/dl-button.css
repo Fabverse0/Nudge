@@ -1,0 +1,72 @@
+.dl-btn {
+  --face: var(--dl-green);
+  --edge: var(--dl-green-edge);
+  --text: var(--dl-white);
+  --border: transparent;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border: 2px solid var(--border);
+  border-radius: var(--dl-radius);
+  background: var(--face);
+  color: var(--text);
+  box-shadow: 0 4px 0 var(--edge);
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    filter 120ms ease,
+    transform 80ms ease,
+    box-shadow 80ms ease;
+}
+.dl-btn:hover {
+  filter: brightness(1.06);
+}
+.dl-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--edge);
+}
+.dl-btn:focus-visible {
+  outline: 3px solid var(--dl-blue-edge);
+  outline-offset: 4px;
+}
+.dl-btn--lg {
+  min-height: 54px;
+  width: min(100%, 330px);
+  font-size: 1rem;
+}
+.dl-btn--secondary {
+  --face: var(--dl-white);
+  --edge: var(--dl-line-edge);
+  --text: var(--dl-green);
+  --border: var(--dl-line-edge);
+}
+.dl-btn--secondary:hover {
+  filter: none;
+  background: #f7f7f7;
+}
+.dl-btn--ghost {
+  --face: transparent;
+  --edge: rgb(255 255 255 / 0.5);
+  --text: var(--dl-white);
+  --border: rgb(255 255 255 / 0.5);
+}
+.dl-btn--sun {
+  --face: var(--dl-sun);
+  --edge: var(--dl-sun-edge);
+  --text: var(--dl-ink-strong);
+}
+.dl-btn--white {
+  --face: var(--dl-white);
+  --edge: #c7d7e6;
+  --text: var(--dl-green-dark);
+}
