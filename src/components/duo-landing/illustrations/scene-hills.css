@@ -1,0 +1,176 @@
+.scene-hills {
+  position: relative;
+  width: 100%;
+  height: clamp(280px, 34vw, 460px);
+  overflow: hidden;
+}
+
+.scene-hills__sun {
+  position: absolute;
+  top: 4%;
+  right: 8%;
+  width: clamp(64px, 9vw, 120px);
+  height: auto;
+  animation: dl-hills-bob 4s ease-in-out infinite;
+}
+.scene-hills__rays {
+  transform-box: view-box;
+  transform-origin: 60px 60px;
+  animation: dl-hills-spin 24s linear infinite;
+}
+
+.scene-hills__cloud {
+  position: absolute;
+  width: clamp(80px, 12vw, 160px);
+  animation: dl-hills-cloud 46s linear infinite;
+}
+.scene-hills__cloud--a {
+  top: 6%;
+}
+.scene-hills__cloud--b {
+  top: 22%;
+  width: clamp(60px, 8vw, 110px);
+  animation-duration: 64s;
+  animation-delay: -30s;
+}
+
+/* Drifting hill layers: 200% wide, loop by half */
+.scene-hills__layer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;
+  animation: dl-hills-drift linear infinite;
+}
+.scene-hills__layer svg,
+.scene-hills__front svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.scene-hills__layer--back {
+  height: 78%;
+  animation-duration: 140s;
+}
+.scene-hills__layer--mid {
+  height: 58%;
+  animation-duration: 90s;
+}
+
+.scene-hills__tree {
+  position: absolute;
+  bottom: 32%;
+  height: auto;
+  transform-origin: 50% 100%;
+  animation: dl-hills-sway 3.8s ease-in-out infinite;
+}
+.scene-hills__tree--a .scene-hills__leaf {
+  fill: #2f8a78;
+}
+.scene-hills__tree--b .scene-hills__leaf {
+  fill: #5fbfa6;
+}
+
+.scene-hills__front {
+  position: absolute;
+  inset: auto 0 0;
+  height: 40%;
+}
+
+.scene-hills__walker {
+  position: absolute;
+  bottom: 16%;
+  width: clamp(52px, 6.5vw, 92px);
+}
+.scene-hills__walker svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.scene-hills__walker--bima {
+  left: 16%;
+  animation: dl-hills-stroll 10s ease-in-out infinite;
+}
+.scene-hills__walker--turtle {
+  left: 33%;
+  bottom: 14%;
+  width: clamp(70px, 9vw, 124px);
+  animation: dl-hills-stroll 10s ease-in-out infinite;
+  animation-delay: -0.5s;
+}
+.scene-hills__walker--dewi {
+  left: 56%;
+}
+.scene-hills__walker--raka {
+  left: 75%;
+  animation: dl-hills-bob 3s ease-in-out infinite;
+}
+
+@keyframes dl-hills-drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes dl-hills-cloud {
+  from {
+    left: -20%;
+  }
+  to {
+    left: 110%;
+  }
+}
+
+@keyframes dl-hills-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dl-hills-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes dl-hills-sway {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes dl-hills-stroll {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(40%);
+  }
+}
+
+@media (max-width: 520px) {
+  .scene-hills__walker--bima {
+    left: 6%;
+  }
+  .scene-hills__walker--turtle {
+    left: 26%;
+  }
+  .scene-hills__walker--dewi {
+    left: 54%;
+  }
+  .scene-hills__walker--raka {
+    left: 76%;
+  }
+}
