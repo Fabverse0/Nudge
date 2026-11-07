@@ -1,0 +1,343 @@
+/* Row 4 art: "disesuaikan denganmu". Stage coordinates follow the 400x320 backdrop viewBox. */
+.spr {
+  width: min(100%, 440px);
+  margin-inline: auto;
+  display: grid;
+  gap: 14px;
+}
+
+.spr-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 400 / 320;
+}
+
+.spr-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.spr-blob {
+  fill: var(--spr-mood-tint, #e3f4ef);
+  transition: fill 400ms var(--dl-ease);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spr-breathe 7s ease-in-out infinite;
+}
+@keyframes spr-breathe {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.03) rotate(2deg);
+  }
+}
+
+.spr-beanbag {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: spr-squish 3s ease-in-out infinite;
+}
+@keyframes spr-squish {
+  0%,
+  100% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.025, 0.97);
+  }
+}
+
+.spr-plant {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: spr-sway 4s ease-in-out infinite;
+}
+@keyframes spr-sway {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+.spr-sparkle {
+  fill: var(--spr-mood, #ffc94a);
+  transition: fill 400ms var(--dl-ease);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spr-twinkle 2.6s ease-in-out infinite;
+}
+@keyframes spr-twinkle {
+  0%,
+  100% {
+    transform: scale(0.35) rotate(0deg);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1) rotate(45deg);
+    opacity: 1;
+  }
+}
+
+.spr-turtle,
+.spr-human {
+  position: absolute;
+}
+.spr-turtle {
+  left: 6%;
+  bottom: 3%;
+  width: 40%;
+}
+.spr-human {
+  left: 62%;
+  bottom: 9%;
+  width: 28%;
+}
+.spr-turtle :where(svg),
+.spr-human :where(svg) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.spr-hop {
+  transform-origin: 50% 100%;
+  animation: spr-hop 560ms var(--dl-bounce);
+}
+@keyframes spr-hop {
+  0% {
+    transform: translateY(0) scale(1, 1);
+  }
+  20% {
+    transform: translateY(0) scale(1.08, 0.9);
+  }
+  50% {
+    transform: translateY(-14%) scale(0.96, 1.05);
+  }
+  80% {
+    transform: translateY(0) scale(1.04, 0.96);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+/* Speech bubble held above the turtle */
+.spr-bubble {
+  position: absolute;
+  left: 2%;
+  top: 0;
+  width: 56%;
+  min-width: 150px;
+  padding: 10px 12px 12px;
+  background: var(--dl-white);
+  border: 2px solid var(--dl-line);
+  border-bottom-width: 5px;
+  border-radius: var(--dl-radius);
+  z-index: 2;
+}
+.spr-bubble::after {
+  content: "";
+  position: absolute;
+  left: 30%;
+  bottom: -14px;
+  width: 18px;
+  height: 18px;
+  background: var(--dl-white);
+  border-right: 2px solid var(--dl-line);
+  border-bottom: 4px solid var(--dl-line);
+  border-bottom-right-radius: 4px;
+  transform: rotate(45deg);
+}
+
+.spr-bubble-pop {
+  transform-origin: 30% 100%;
+  animation: spr-pop 520ms var(--dl-bounce);
+}
+@keyframes spr-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6) translateY(8px);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.spr-bubble p {
+  margin: 0;
+}
+.spr-bubble-kicker {
+  font-size: 0.6875rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dl-muted);
+}
+.spr-bubble-text {
+  margin-top: 2px;
+  font-size: clamp(0.875rem, 0.8rem + 0.4vw, 1.0625rem);
+  line-height: 1.25;
+  font-weight: 900;
+  color: var(--dl-ink-strong);
+  text-wrap: balance;
+}
+.spr-bubble-tag {
+  display: inline-block;
+  margin-top: 6px !important;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: var(--dl-green-ink);
+  background: var(--spr-mood-tint, var(--dl-green-tint));
+  transition: background-color 300ms var(--dl-ease);
+}
+
+.spr-swap {
+  display: block;
+  margin-top: 8px;
+  padding: 5px 10px;
+  font: inherit;
+  font-size: 0.6875rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dl-blue-edge);
+  background: var(--dl-white);
+  border: 2px solid var(--dl-line);
+  border-bottom-width: 4px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition:
+    transform 120ms var(--dl-ease),
+    border-color 160ms var(--dl-ease),
+    background-color 160ms var(--dl-ease);
+}
+.spr-swap:hover {
+  background: var(--dl-blue-sky);
+}
+.spr-swap:active {
+  transform: translateY(2px);
+  border-bottom-width: 2px;
+  margin-bottom: 2px;
+}
+.spr-swap:focus-visible,
+.spr-mood:focus-visible {
+  outline: 3px solid var(--dl-blue);
+  outline-offset: 3px;
+}
+
+/* Mood buttons */
+.spr-moods {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(6px, 2vw, 12px);
+}
+
+.spr-mood {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 10px 4px 8px;
+  font: inherit;
+  color: var(--dl-ink);
+  background: var(--dl-white);
+  border: 2px solid var(--dl-line);
+  border-bottom-width: 5px;
+  border-radius: var(--dl-radius);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 140ms var(--dl-ease),
+    background-color 200ms var(--dl-ease),
+    border-color 200ms var(--dl-ease);
+}
+.spr-mood:hover {
+  background: #f7f7f7;
+}
+.spr-mood:hover .spr-face {
+  animation: spr-wiggle 500ms var(--dl-ease);
+}
+.spr-mood:active {
+  transform: translateY(3px);
+  border-bottom-width: 2px;
+  margin-bottom: 3px;
+}
+.spr-mood[aria-pressed="true"] {
+  background: var(--c-tint);
+  border-color: var(--c);
+  border-bottom-color: var(--c-edge);
+}
+.spr-mood[aria-pressed="true"] .spr-face {
+  animation: spr-bounce 1.6s var(--dl-bounce) infinite;
+}
+
+.spr-face {
+  display: block;
+  width: clamp(36px, 10vw, 54px);
+  height: auto;
+  overflow: visible;
+}
+
+.spr-mood-label {
+  font-size: clamp(0.6875rem, 0.62rem + 0.3vw, 0.8125rem);
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+}
+.spr-mood[aria-pressed="true"] .spr-mood-label {
+  color: var(--dl-ink-strong);
+}
+
+@keyframes spr-wiggle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+}
+@keyframes spr-bounce {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  15% {
+    transform: translateY(-6px) scale(1.06);
+  }
+  30% {
+    transform: translateY(0) scale(0.97, 1.03);
+  }
+  42% {
+    transform: translateY(-2px) scale(1);
+  }
+}
+
+@media (max-width: 380px) {
+  .spr-bubble {
+    width: 62%;
+    padding: 8px 10px 10px;
+  }
+}
