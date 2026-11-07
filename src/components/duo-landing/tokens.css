@@ -1,0 +1,114 @@
+/*
+ * Duolingo-style landing tokens, re-themed to the Nudge palette.
+ * Everything is scoped under .dl so the /app surface is untouched.
+ */
+.dl {
+  /* Brand: vivid sage replaces Duolingo green, deep sage is the 3D edge */
+  --dl-green: #45b29d;
+  --dl-green-edge: #2f8a78;
+  --dl-green-dark: #315f5e;
+  --dl-green-ink: #1f4d4c;
+  --dl-green-tint: #e3f4ef;
+
+  /* Secondary families (Nudge periwinkle + sand + playful accents) */
+  --dl-blue: #7eaddb;
+  --dl-blue-edge: #5a8cbd;
+  --dl-blue-sky: #ddf0fb;
+  --dl-sand: #e6d4be;
+  --dl-sand-edge: #c9ae8a;
+  --dl-cream: #faf8f4;
+  --dl-coral: #ff8a65;
+  --dl-coral-edge: #e0663f;
+  --dl-sun: #ffc94a;
+  --dl-sun-edge: #e0a91c;
+  --dl-pink: #f49ac1;
+  --dl-purple: #a98bdb;
+  --dl-purple-deep: #2b2147;
+  --dl-night: #13233a;
+
+  /* Neutrals (Duolingo-like greys) */
+  --dl-ink: #3c4b4a;
+  --dl-ink-strong: #182b2a;
+  --dl-muted: #6f7f7d;
+  --dl-line: #e5e5e5;
+  --dl-line-edge: #d4d4d4;
+  --dl-white: #ffffff;
+
+  --dl-radius: 16px;
+  --dl-radius-lg: 24px;
+  --dl-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dl-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dl-max: 988px;
+
+  font-family: "Nunito Variable", "Nunito", ui-rounded, system-ui, sans-serif;
+  color: var(--dl-ink);
+  background: var(--dl-white);
+  overflow-x: clip;
+}
+
+.dl *,
+.dl *::before,
+.dl *::after {
+  box-sizing: border-box;
+}
+
+.dl h1,
+.dl h2,
+.dl h3 {
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* Shared section heading in Duolingo's lowercase green style */
+.dl-title {
+  color: var(--dl-green);
+  font-size: clamp(2rem, 1.4rem + 2.4vw, 3rem);
+  line-height: 1.1;
+  font-weight: 900;
+  text-transform: lowercase;
+}
+
+.dl-lead {
+  color: var(--dl-muted);
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.dl-container {
+  width: min(100% - 32px, var(--dl-max));
+  margin-inline: auto;
+}
+
+/* Reveal-on-scroll utility (driven by useReveal) */
+.dl-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 600ms var(--dl-ease),
+    transform 600ms var(--dl-ease);
+}
+.dl-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Illustration loops pause when the scene is offscreen */
+.dl [data-dl-scene]:not(.is-playing) * {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dl-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .dl *,
+  .dl *::before,
+  .dl *::after {
+    animation: none !important;
+    transition-duration: 0ms !important;
+  }
+}
