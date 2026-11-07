@@ -1,0 +1,247 @@
+/* Hero collage: layered floating characters and props. */
+.hc {
+  --px: 0;
+  --py: 0;
+  position: relative;
+  width: min(100%, 480px);
+  aspect-ratio: 480 / 460;
+  margin-inline: auto;
+  user-select: none;
+}
+
+.hc-item {
+  position: absolute;
+}
+
+/* Layer 1: pointer parallax, stronger for nearer layers */
+.hc-par {
+  transform: translate3d(
+    calc(var(--px) * var(--depth) * -18px),
+    calc(var(--py) * var(--depth) * -12px),
+    0
+  );
+  transition: transform 700ms var(--dl-ease);
+  will-change: transform;
+}
+
+/* Layer 2: staggered bouncy pop-in */
+.hc-pop {
+  position: relative;
+  animation: hc-pop 700ms var(--dl-bounce) var(--pop) both;
+}
+
+/* Layer 3: own looping float with a slight tilt */
+.hc-float {
+  animation: hc-float var(--dur) ease-in-out var(--delay) infinite alternate;
+}
+
+/* Layer 4: hover wiggle */
+.hc-wig {
+  transform-origin: 50% 80%;
+}
+.hc-item:hover .hc-wig {
+  animation: hc-wiggle 650ms var(--dl-bounce);
+}
+
+.hc-wig > svg,
+.hc-wig > span {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.hc-item--spark .hc-float {
+  animation-name: hc-twinkle;
+}
+
+.hc-item--blob {
+  pointer-events: none;
+}
+.hc-item--blob .hc-pop {
+  animation-duration: 900ms;
+}
+.hc-blob {
+  aspect-ratio: 1;
+  border-radius: 46% 54% 52% 48% / 50% 44% 56% 50%;
+}
+.hc-blob--green {
+  background: var(--dl-green-tint);
+}
+.hc-blob--sky {
+  background: var(--dl-blue-sky);
+  opacity: 0.8;
+}
+
+/* Ground shadow under the turtle breathes with its float */
+.hc-shadow {
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  bottom: -2%;
+  height: 7%;
+  border-radius: 50%;
+  background: rgb(24 43 42 / 0.12);
+  animation: hc-shadow var(--dur) ease-in-out var(--delay) infinite alternate;
+}
+
+.hc-turtle .hc-wig {
+  transform-origin: 50% 90%;
+}
+.hc-turtle:hover .hc-wig {
+  animation: hc-boing 700ms var(--dl-bounce);
+}
+
+/* Prop internals */
+.hc .hp-ring {
+  transform-origin: 50% 55%;
+  animation: hp-ring 2.8s ease-in-out infinite;
+}
+.hc .hp-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hp-pulse 2.2s ease-in-out infinite;
+}
+.hc .hp-leaves {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: hp-sway 3.6s ease-in-out infinite alternate;
+}
+.hc .hp-bubble {
+  animation: hp-bubble 2.4s ease-in infinite;
+}
+.hc .hp-bubble--2 {
+  animation-delay: -1.2s;
+}
+
+@keyframes hc-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hc-float {
+  from {
+    transform: translateY(0) rotate(calc(var(--rot) * -0.5));
+  }
+  to {
+    transform: translateY(calc(var(--amp) * -1)) rotate(calc(var(--rot) * 0.5));
+  }
+}
+
+@keyframes hc-twinkle {
+  from {
+    transform: scale(0.7) rotate(0deg);
+    opacity: 0.55;
+  }
+  to {
+    transform: translateY(calc(var(--amp) * -1)) scale(1.1) rotate(var(--rot));
+    opacity: 1;
+  }
+}
+
+@keyframes hc-wiggle {
+  0%,
+  100% {
+    transform: none;
+  }
+  25% {
+    transform: rotate(-9deg) scale(1.06);
+  }
+  50% {
+    transform: rotate(7deg) scale(1.06);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+}
+
+@keyframes hc-boing {
+  0%,
+  100% {
+    transform: none;
+  }
+  30% {
+    transform: scale(1.08, 0.92);
+  }
+  55% {
+    transform: translateY(-6%) scale(0.96, 1.05);
+  }
+  80% {
+    transform: scale(1.02, 0.98);
+  }
+}
+
+@keyframes hc-shadow {
+  from {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  to {
+    transform: scaleX(0.8);
+    opacity: 0.6;
+  }
+}
+
+@keyframes hp-ring {
+  0%,
+  70%,
+  100% {
+    transform: rotate(0deg);
+  }
+  74% {
+    transform: rotate(-8deg);
+  }
+  78% {
+    transform: rotate(8deg);
+  }
+  82% {
+    transform: rotate(-6deg);
+  }
+  86% {
+    transform: rotate(6deg);
+  }
+  90% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes hp-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes hp-sway {
+  from {
+    transform: rotate(-5deg);
+  }
+  to {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes hp-bubble {
+  from {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hc-par {
+    transform: none;
+  }
+}
