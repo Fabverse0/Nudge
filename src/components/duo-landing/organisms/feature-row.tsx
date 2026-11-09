@@ -30,7 +30,11 @@ export function FeatureRow({ id, title, body, art, reverse = false }: Props) {
       aria-labelledby={headingId}
     >
       <div className="dl-container dl-feature__inner">
-        <div className="dl-feature__art dl-reveal">{art}</div>
+        <div
+          className={`dl-feature__art dl-reveal ${reverse ? "dl-reveal--left" : "dl-reveal--right"}`}
+        >
+          {art}
+        </div>
         <div className="dl-feature__text">
           <h2 id={headingId} className="dl-title dl-feature__title dl-reveal">
             {title}
