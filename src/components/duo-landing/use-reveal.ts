@@ -25,7 +25,7 @@ export function useReveal() {
           }
         }
       },
-      { threshold: 0.15 },
+      { threshold: 0.15, rootMargin: "0px 0px -6% 0px" },
     );
     const sceneObserver = new IntersectionObserver(
       (entries) => {
