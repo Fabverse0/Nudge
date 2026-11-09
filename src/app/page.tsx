@@ -1,3 +1,4 @@
+import { BackToTop } from "@/components/duo-landing/atoms/back-to-top";
 import { AnywhereBand } from "@/components/duo-landing/organisms/anywhere-band";
 import { CategoryStrip } from "@/components/duo-landing/organisms/category-strip";
 import { ChallengeBand } from "@/components/duo-landing/organisms/challenge-band";
@@ -26,6 +27,7 @@ export default function HomePage() {
         <FinalCta />
       </main>
       <SiteFooter />
+      <BackToTop />
       <RevealRoot />
     </div>
   );
