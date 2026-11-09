@@ -120,3 +120,8 @@
     transform: none;
   }
 }
+
+/* Anchor jumps (#fitur, #koleksi ...) must not hide under the sticky header */
+.dl [id] {
+  scroll-margin-top: 84px;
+}
