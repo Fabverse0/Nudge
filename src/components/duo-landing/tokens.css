@@ -134,3 +134,13 @@
   outline-offset: 3px;
   border-radius: 12px;
 }
+
+/* Side entrances only where the layout is two columns */
+@media (min-width: 880px) {
+  .dl-reveal--left {
+    transform: translateX(-36px);
+  }
+  .dl-reveal--right {
+    transform: translateX(36px);
+  }
+}
