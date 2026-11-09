@@ -144,3 +144,7 @@
     transform: translateX(36px);
   }
 }
+
+.dl-lead {
+  max-width: 52ch;
+}
