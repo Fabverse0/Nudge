@@ -218,3 +218,10 @@
     transform: none;
   }
 }
+
+.dl-header {
+  transition: box-shadow 200ms ease;
+}
+.dl-header.is-scrolled {
+  box-shadow: 0 6px 16px rgb(24 43 42 / 0.07);
+}
