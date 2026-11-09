@@ -112,3 +112,11 @@
     transition-duration: 0ms !important;
   }
 }
+
+/* Without JavaScript nothing would ever add .is-visible */
+@media (scripting: none) {
+  .dl-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
