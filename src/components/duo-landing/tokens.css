@@ -125,3 +125,12 @@
 .dl [id] {
   scroll-margin-top: 84px;
 }
+
+/* One keyboard focus ring for every interactive element in the landing */
+.dl a:focus-visible,
+.dl button:focus-visible,
+.dl [role="button"]:focus-visible {
+  outline: 3px solid var(--dl-blue-edge);
+  outline-offset: 3px;
+  border-radius: 12px;
+}
