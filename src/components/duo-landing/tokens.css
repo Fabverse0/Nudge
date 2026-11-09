@@ -148,3 +148,10 @@
 .dl-lead {
   max-width: 52ch;
 }
+
+.dl {
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
