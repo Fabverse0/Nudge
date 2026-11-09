@@ -70,3 +70,9 @@
   --edge: #c7d7e6;
   --text: var(--dl-green-dark);
 }
+
+/* Snappier taps on touch screens */
+.dl-btn {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
