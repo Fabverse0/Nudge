@@ -162,3 +162,7 @@
     transform: none;
   }
 }
+
+.dl-cats__list {
+  scroll-padding-inline: 24px;
+}
