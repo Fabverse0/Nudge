@@ -225,3 +225,7 @@
 .dl-header.is-scrolled {
   box-shadow: 0 6px 16px rgb(24 43 42 / 0.07);
 }
+
+.dl-header {
+  padding-top: env(safe-area-inset-top, 0px);
+}
