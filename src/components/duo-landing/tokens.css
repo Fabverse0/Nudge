@@ -132,7 +132,6 @@
 .dl [role="button"]:focus-visible {
   outline: 3px solid var(--dl-blue-edge);
   outline-offset: 3px;
-  border-radius: 12px;
 }
 
 /* Side entrances only where the layout is two columns */
